@@ -237,7 +237,7 @@ function Feed(view){
   const items = [];
   const per = D.map(d => { const r = rts(d); const h = highlight(d); const pick = [h, r[Math.floor(r.length * .6)]].filter((x, i, a) => x && a.indexOf(x) === i); return pick.map(c => ({d, c})); });
   for (let i = 0; i < 3; i++) per.forEach(list => list[i] && items.push(list[i]));
-  let muted = true;
+  let muted = false;  // 默认开声音；浏览器不让有声自动播放时先静音播，第一次点画面就打开
   view.innerHTML = `<div class="feed" id="feed">${items.map(({d, c}, k) => { const h = hisLine(d, c);
     return `<section class="fitem" data-k="${k}"><img src="${esc(c.poster)}" alt=""><video playsinline loop muted preload="none" data-src="${esc(c.clip)}" poster="${esc(c.poster)}"></video>
     <div class="f-info"><div class="who">@${esc(L(d.title))}</div>
@@ -251,13 +251,13 @@ function Feed(view){
       <button data-scenes="${d.id}">${ICON.list}<span>${T('scenes')}</span></button>
       <button data-share="${d.id}">${ICON.shareF}<span>${T('share')}</span></button></div></section>`; }).join('')}</div>
     <div class="feed-top"><span>${T('tabHome')}</span><b>${T('tabFeed')}</b></div>
-    <button class="iconbtn mute-btn" id="muteBtn">${ICON.mute}</button>`;
+`;
   const feed = $('#feed'), vids = $$('video', feed);
   const io = new IntersectionObserver(es => es.forEach(e => { const v = $('video', e.target);
-    if (e.isIntersecting){ if (!v.src) v.src = v.dataset.src; v.muted = muted; v.play().catch(() => {}); } else v.pause(); }), {root: feed, threshold: .6});
+    if (e.isIntersecting){ if (!v.src) v.src = v.dataset.src; v.muted = muted; v.play().catch(() => { muted = true; v.muted = true; v.play().catch(() => {}); }); } else v.pause(); }), {root: feed, threshold: .6});
   $$('.fitem', feed).forEach(s => io.observe(s));
-  $('#muteBtn').onclick = () => { muted = !muted; vids.forEach(v => v.muted = muted); $('#muteBtn').innerHTML = muted ? ICON.mute : ICON.sound; };
   feed.onclick = e => {
+    if (muted){ muted = false; vids.forEach(v => v.muted = false); if (!e.target.closest('button')) return; }
     const b = e.target.closest('button'); if (!b){ const v = e.target.closest('.fitem') && $('video', e.target.closest('.fitem')); if (v){ v.paused ? v.play() : v.pause(); } return; }
     if (b.dataset.from) location.hash = `#/play/${b.dataset.id}?from=${b.dataset.from}`;
     else if (b.dataset.go) location.hash = '#/d/' + b.dataset.go;

@@ -160,7 +160,6 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .rail .on.save svg{fill:var(--gold)}
 .rail .av{width:46px;height:46px;border-radius:50%;border:2px solid #fff;overflow:hidden;margin-bottom:4px}
 .rail .av img{width:100%;height:100%;object-fit:cover}
-.mute-btn{position:absolute;top:calc(56px + var(--safe-t));right:14px;z-index:5}
 
 /* 详情 */
 .detail{position:relative;min-height:100%}
