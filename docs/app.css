@@ -361,3 +361,16 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 #toast{position:absolute;left:50%;top:calc(70px + var(--safe-t));transform:translateX(-50%);z-index:50;padding:10px 16px;border-radius:20px;background:rgba(40,32,46,.95);font-size:13px;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.4)}
 .fade-in{animation:fin .35s ease}
 @keyframes fin{from{opacity:0;transform:translateY(8px)}}
+
+/* 实时播放器 */
+.player video.lv{opacity:0}
+.player video.lv.on{opacity:1}
+.livestat{display:flex;align-items:center;gap:6px;margin:8px 4px 0 52px;font-size:11px;color:#dccfdd;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.livestat:empty{display:none}
+.livestat i{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2);flex:none}
+.livestat i.bad{background:var(--live);box-shadow:0 0 0 3px rgba(255,77,109,.2)}
+.opt small{display:block;font-size:12px;color:var(--mute);margin-top:3px}
+.tapstart{position:absolute;inset:0;margin:auto;width:150px;height:150px;border-radius:50%;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);font-size:13px}
+.tapstart svg{width:36px;height:36px;fill:#fff;margin-left:5px}
+.btn.live{background:linear-gradient(135deg,#ff6b81,#e8364f);color:#fff}
+.d-cta .btn.ghost.txt{flex:none;width:auto;padding:0 16px;font-size:14px}

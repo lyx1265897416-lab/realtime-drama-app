@@ -7,65 +7,259 @@
       "id": "magnus-open",
       "genre": "romance",
       "name": "Magnus",
-      "title": {"zh": "午夜车库 · 开放式", "en": "Midnight Garage: Open Live"},
-      "lead": {"zh": "Magnus · 狼人 Alpha", "en": "Magnus · Werewolf Alpha"},
-      "hook": {"zh": "十分钟后他就要订婚了，却在车库扣住了你的手腕。之后每一幕，都由你说的话实时生成。", "en": "He gets engaged in ten minutes, yet he's holding your wrist in the garage. Every scene after this is generated live from what you say."},
+      "title": {
+        "zh": "午夜车库 · 开放式",
+        "en": "Midnight Garage: Open Live"
+      },
+      "lead": {
+        "zh": "Magnus · 狼人 Alpha",
+        "en": "Magnus · Werewolf Alpha"
+      },
+      "hook": {
+        "zh": "十分钟后他就要订婚了，却在车库扣住了你的手腕。之后每一幕，都由你说的话实时生成。",
+        "en": "He gets engaged in ten minutes, yet he's holding your wrist in the garage. Every scene after this is generated live from what you say."
+      },
       "kind": "open",
       "pov": "first",
-      "tags": [{"zh": "狼人", "en": "Werewolf"}, {"zh": "命定之番", "en": "Fated mate"}, {"zh": "订婚前夜", "en": "Engagement night"}, {"zh": "第一视角", "en": "First person"}],
+      "tags": [
+        {
+          "zh": "狼人",
+          "en": "Werewolf"
+        },
+        {
+          "zh": "命定之番",
+          "en": "Fated mate"
+        },
+        {
+          "zh": "订婚前夜",
+          "en": "Engagement night"
+        },
+        {
+          "zh": "第一视角",
+          "en": "First person"
+        }
+      ],
       "accent": "#c9a227",
       "cover_round": 7,
-      "badge": {"zh": "热门", "en": "Hot"},
-      "source": {"log": "magnus-open", "film": "MD-C · 完整成片 · 5+10", "group": "MD-C · 5+10"},
-      "live_hint": {"zh": "本机中转 8890 / 8897（开放式第一视角）", "en": "Local relay (open, first person)"}
+      "badge": {
+        "zh": "热门",
+        "en": "Hot"
+      },
+      "source": {
+        "log": "magnus-open",
+        "film": "MD-C · 完整成片 · 5+10",
+        "group": "MD-C · 5+10"
+      },
+      "live_hint": {
+        "zh": "本机中转 8890 / 8897（开放式第一视角）",
+        "en": "Local relay (open, first person)"
+      }
     },
     {
       "id": "magnus-third",
       "genre": "romance",
       "name": "Magnus",
-      "title": {"zh": "午夜车库 · 旁观视角", "en": "Midnight Garage: Third Person"},
-      "lead": {"zh": "Magnus & 她", "en": "Magnus & Her"},
-      "hook": {"zh": "同一个夜晚，换你站在一旁看：画面里同时有 Magnus 和她。你替她说话，他接着演。", "en": "Same night, but you watch from beside them, Magnus and her both in frame. You speak for her; he answers."},
+      "title": {
+        "zh": "午夜车库 · 旁观视角",
+        "en": "Midnight Garage: Third Person"
+      },
+      "lead": {
+        "zh": "Magnus & 她",
+        "en": "Magnus & Her"
+      },
+      "hook": {
+        "zh": "同一个夜晚，换你站在一旁看：画面里同时有 Magnus 和她。你替她说话，他接着演。",
+        "en": "Same night, but you watch from beside them, Magnus and her both in frame. You speak for her; he answers."
+      },
       "kind": "open",
       "pov": "third",
-      "tags": [{"zh": "狼人", "en": "Werewolf"}, {"zh": "双人同框", "en": "Two-shot"}, {"zh": "豪车", "en": "Maybach"}, {"zh": "第三视角", "en": "Third person"}],
+      "tags": [
+        {
+          "zh": "狼人",
+          "en": "Werewolf"
+        },
+        {
+          "zh": "双人同框",
+          "en": "Two-shot"
+        },
+        {
+          "zh": "豪车",
+          "en": "Maybach"
+        },
+        {
+          "zh": "第三视角",
+          "en": "Third person"
+        }
+      ],
       "accent": "#8f6bd8",
       "cover_round": 10,
-      "badge": {"zh": "新", "en": "New"},
-      "source": {"log": "magnus-third", "film": "MD-C · 完整成片 · 5+10", "group": "MD-C · 5+10"},
-      "live_hint": {"zh": "公网中转 8895（第三视角）", "en": "Public relay (third person)"}
+      "badge": {
+        "zh": "新",
+        "en": "New"
+      },
+      "source": {
+        "log": "magnus-third",
+        "film": "MD-C · 完整成片 · 5+10",
+        "group": "MD-C · 5+10"
+      },
+      "live_hint": {
+        "zh": "公网中转 8895（第三视角）",
+        "en": "Public relay (third person)"
+      },
+      "live": {
+        "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ec51421aed9f46aa9f6d60b4134629bc/OPEN.mp4",
+        "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/913679e6f19346218debbe6398571a46/IDLE0.mp4",
+        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
+        "lines": "magnus",
+        "post": "json",
+        "open_cues": [
+          {
+            "s": 10.9,
+            "e": 11.95,
+            "zh": "别动。",
+            "en": "Don't move.",
+            "who": "Magnus"
+          },
+          {
+            "s": 16.3,
+            "e": 17.3,
+            "zh": "告诉我……",
+            "en": "Tell me...",
+            "who": "Magnus"
+          },
+          {
+            "s": 17.7,
+            "e": 19.1,
+            "zh": "你到底是从哪里来的？",
+            "en": "Where did you come from?",
+            "who": "Magnus"
+          }
+        ]
+      }
     },
     {
       "id": "mii-open",
       "genre": "cozy",
       "name": "Mii",
       "name_zh": "咪",
-      "title": {"zh": "今天不要上班，咪养你 · 开放式", "en": "No Work Today, Mii's Got You: Open Live"},
-      "lead": {"zh": "咪 · 三个月大的小奶猫", "en": "Mii · a 3-month-old kitten"},
-      "hook": {"zh": "休假日的早上，小奶猫咪决定今天由它来照顾你。去厨房、去公园、去电影院，你说去哪就去哪。", "en": "On your day off, little Mii decides it's taking care of you today. Kitchen, park, cinema: wherever you say."},
+      "title": {
+        "zh": "今天不要上班，咪养你 · 开放式",
+        "en": "No Work Today, Mii's Got You: Open Live"
+      },
+      "lead": {
+        "zh": "咪 · 三个月大的小奶猫",
+        "en": "Mii · a 3-month-old kitten"
+      },
+      "hook": {
+        "zh": "休假日的早上，小奶猫咪决定今天由它来照顾你。去厨房、去公园、去电影院，你说去哪就去哪。",
+        "en": "On your day off, little Mii decides it's taking care of you today. Kitchen, park, cinema: wherever you say."
+      },
       "kind": "open",
       "pov": "first",
-      "tags": [{"zh": "治愈", "en": "Cozy"}, {"zh": "小奶猫", "en": "Kitten"}, {"zh": "日常", "en": "Slice of life"}, {"zh": "主人视角", "en": "Owner POV"}],
+      "tags": [
+        {
+          "zh": "治愈",
+          "en": "Cozy"
+        },
+        {
+          "zh": "小奶猫",
+          "en": "Kitten"
+        },
+        {
+          "zh": "日常",
+          "en": "Slice of life"
+        },
+        {
+          "zh": "主人视角",
+          "en": "Owner POV"
+        }
+      ],
       "accent": "#e8a25a",
       "cover_round": 8,
-      "badge": {"zh": "治愈", "en": "Cozy"},
-      "source": {"log": "mii-open", "film": "完整成片 · v4.5 · 5+10", "group": "v4.5"},
-      "live_hint": {"zh": "公网隧道 8896（咪开放式）", "en": "Public tunnel (Mii open)"}
+      "badge": {
+        "zh": "治愈",
+        "en": "Cozy"
+      },
+      "source": {
+        "log": "mii-open",
+        "film": "完整成片 · v4.5 · 5+10",
+        "group": "v4.5"
+      },
+      "live_hint": {
+        "zh": "公网隧道 8896（咪开放式）",
+        "en": "Public tunnel (Mii open)"
+      },
+      "live": {
+        "open": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/OPEN.mp4",
+        "idle": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/IDLE0.mp4",
+        "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
+        "lines": "dub",
+        "post": "text",
+        "open_cues": [
+          {
+            "s": 7.9,
+            "e": 11.22,
+            "zh": "今天不要上班，咪养你。",
+            "en": "No work today. I'll take care of you.",
+            "who": "Mii"
+          },
+          {
+            "s": 17.98,
+            "e": 21.46,
+            "zh": "啊对，今天休假。我忘关闹钟啦。",
+            "en": "Oh, right. It's my day off. I forgot the alarm.",
+            "who": "you"
+          }
+        ]
+      }
     },
     {
       "id": "magnus-preset",
       "genre": "romance",
       "name": "Magnus",
-      "title": {"zh": "午夜车库", "en": "Midnight Garage"},
-      "lead": {"zh": "Magnus · 狼人 Alpha", "en": "Magnus · Werewolf Alpha"},
-      "hook": {"zh": "7 集预制剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。", "en": "7 pre-made episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."},
+      "title": {
+        "zh": "午夜车库",
+        "en": "Midnight Garage"
+      },
+      "lead": {
+        "zh": "Magnus · 狼人 Alpha",
+        "en": "Magnus · Werewolf Alpha"
+      },
+      "hook": {
+        "zh": "7 集预制剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
+        "en": "7 pre-made episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
+      },
       "kind": "preset",
       "pov": "first",
-      "tags": [{"zh": "狼人", "en": "Werewolf"}, {"zh": "多结局", "en": "Multiple endings"}, {"zh": "7 集", "en": "7 episodes"}, {"zh": "第一视角", "en": "First person"}],
+      "tags": [
+        {
+          "zh": "狼人",
+          "en": "Werewolf"
+        },
+        {
+          "zh": "多结局",
+          "en": "Multiple endings"
+        },
+        {
+          "zh": "7 集",
+          "en": "7 episodes"
+        },
+        {
+          "zh": "第一视角",
+          "en": "First person"
+        }
+      ],
       "accent": "#d4a017",
       "cover": "film/magnus-full-5-10.jpg",
-      "badge": {"zh": "完结", "en": "Complete"},
-      "source": {"log": "magnus-preset", "film": "完整成片 · 5+10", "group": "人工体验整轮 · 5+10"},
+      "badge": {
+        "zh": "完结",
+        "en": "Complete"
+      },
+      "source": {
+        "log": "magnus-preset",
+        "film": "完整成片 · 5+10",
+        "group": "人工体验整轮 · 5+10"
+      },
       "series_url": "https://lyx1265897416-lab.github.io/magnus-midnight-garage-series/"
     },
     {
@@ -73,16 +267,49 @@
       "genre": "cozy",
       "name": "Mii",
       "name_zh": "咪",
-      "title": {"zh": "今天不要上班，咪养你", "en": "No Work Today, Mii's Got You"},
-      "lead": {"zh": "咪 · 三个月大的小奶猫", "en": "Mii · a 3-month-old kitten"},
-      "hook": {"zh": "10 集预制日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。", "en": "10 pre-made episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."},
+      "title": {
+        "zh": "今天不要上班，咪养你",
+        "en": "No Work Today, Mii's Got You"
+      },
+      "lead": {
+        "zh": "咪 · 三个月大的小奶猫",
+        "en": "Mii · a 3-month-old kitten"
+      },
+      "hook": {
+        "zh": "10 集预制日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
+        "en": "10 pre-made episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
+      },
       "kind": "preset",
       "pov": "first",
-      "tags": [{"zh": "治愈", "en": "Cozy"}, {"zh": "小奶猫", "en": "Kitten"}, {"zh": "10 集", "en": "10 episodes"}, {"zh": "主人视角", "en": "Owner POV"}],
+      "tags": [
+        {
+          "zh": "治愈",
+          "en": "Cozy"
+        },
+        {
+          "zh": "小奶猫",
+          "en": "Kitten"
+        },
+        {
+          "zh": "10 集",
+          "en": "10 episodes"
+        },
+        {
+          "zh": "主人视角",
+          "en": "Owner POV"
+        }
+      ],
       "accent": "#f0b46b",
       "cover_local": "covers/mii.jpg",
-      "badge": {"zh": "完结", "en": "Complete"},
-      "source": {"log": "mii", "film": "完整成片 · 5+10", "group": "按新版宠物 PE · 5+10"},
+      "badge": {
+        "zh": "完结",
+        "en": "Complete"
+      },
+      "source": {
+        "log": "mii",
+        "film": "完整成片 · 5+10",
+        "group": "按新版宠物 PE · 5+10"
+      },
       "series_url": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/"
     }
   ]

@@ -12,10 +12,16 @@ const KEY = 'unscripted.v1';
 let S = {progress: {}, liked: {}, saved: {}, settings: {lang: 'auto', subs: 'both', live: {}}};
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); S.settings = Object.assign({lang: 'auto', subs: 'both', live: {}}, S.settings); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+save();
 
 // ---------- 语言 ----------
 const Q = new URLSearchParams(location.search);
 if (Q.get('lang')) S.settings.lang = Q.get('lang').startsWith('zh') ? 'zh' : 'en';
+// 测试链接带实时配置：?live=mii-open~https://xxx.trycloudflare.com~口令,magnus-third~…（存到本机后从地址栏去掉，免得截图或转发带出口令）
+if (Q.get('live')){
+  Q.get('live').split(',').forEach(x => { const [id, api, k] = x.split('~'); if (id && api && k) S.settings.live[id] = {api: api.replace(/\/$/, ''), k}; });
+  save(); Q.delete('live'); try { history.replaceState(null, '', location.pathname + (Q.toString() ? '?' + Q : '') + location.hash); } catch (e) {}
+}
 const lang = () => S.settings.lang === 'auto' ? (/^zh/i.test(navigator.language || '') ? 'zh' : 'en') : S.settings.lang;
 const L = o => o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.zh || o.en || '');
 const I = {
@@ -64,7 +70,13 @@ const I = {
   pov: ['视角', 'POV'], gen: ['生成方式', 'Generation'], tested: ['测试时间', 'Tested'], liveSt: ['实时', 'Live'], liveOn: ['已配置', 'Configured'], liveOff: ['未配置 · 预览回放', 'Not set · preview replay'],
   series: ['原版互动剧集', 'Original series'], soundOn: ['点一下画面打开声音', 'Tap to turn sound on'],
   fromHere: ['从这一幕开始互动', 'Play from this scene'], fromStart: ['从头开始', 'From the start'],
-  hisLine: ['他回', 'He said'], playing: ['正在播放', 'Now playing'], tapPause: ['轻点画面暂停 · 右侧可看幕表和事件簿', 'Tap to pause · scenes and story log on the right'],
+  hisLine: ['他回', 'He said'],
+  liveStart: ['实时开玩', 'Play live'], previewBtn: ['预览回放', 'Preview'], liveConn: ['实时生成已连接', 'Live generation connected'], liveOff2: ['实时中转没连上，先用预览回放', 'Live relay offline, using preview replay'],
+  liveBadKey: ['实时口令不对，请用最新的测试链接打开', 'Wrong live key, open the latest test link'], tapStart: ['点一下开始', 'Tap to start'],
+  lStep1: ['读懂你的话，导演层在写下一幕', 'Reading you, writing the next scene'], lStep1o: ['读取这个选项预先写好的分镜', 'Loading the storyboard for this choice'],
+  lStep2: ['两段视频同时生成 · 5s + 10s · 已完成 {n}/2', 'Rendering both parts · 5s + 10s · {n}/2 ready'], lStep3: ['第 1 段好了，按第 2 段出片时间倒推开播', 'Part 1 ready, timing the start so both play through'],
+  liveWaited: ['实时生成 · 已等 {s} 秒', 'Live · {s}s so far'], liveFail: ['这一幕没生成出来：{e}，可以再说一次', 'This scene failed: {e}. Try again'], lowBal: ['Vivix 余额不足，这一幕没生成', 'Vivix balance low, scene not generated'],
+  liveDone: ['第 {n} 幕 · 发送到开播 {s} 秒', 'Scene {n} · {s}s from send to play'], restart: ['重新开始', 'Restart'], liveTag: ['实时', 'Live'], busyGen: ['上一幕还在生成', 'Still generating the last scene'], playing: ['正在播放', 'Now playing'], tapPause: ['轻点画面暂停 · 右侧可看幕表和事件簿', 'Tap to pause · scenes and story log on the right'],
 };
 const T = (k, vars) => { let s = (I[k] || [k, k])[lang() === 'zh' ? 0 : 1]; if (vars) for (const v in vars) s = s.replaceAll('{' + v + '}', vars[v]); return s; };
 const applyStatic = () => { document.documentElement.lang = lang() === 'zh' ? 'zh-CN' : 'en'; $$('[data-i18n]').forEach(el => el.textContent = T(el.dataset.i18n)); };
@@ -86,6 +98,7 @@ const ICON = {
   sound: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>',
   mute: '<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>',
   chev: '<svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>',
+  restart: '<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9V4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   live: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M7.2 16.8a6.8 6.8 0 0 1 0-9.6M16.8 7.2a6.8 6.8 0 0 1 0 9.6M4.4 19.6a10.7 10.7 0 0 1 0-15.2M19.6 4.4a10.7 10.7 0 0 1 0 15.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
 };
 let toastT;
@@ -96,7 +109,11 @@ const hisLine = (d, ch) => d.cues.find(c => c.s >= (ch.resume || ch.start) - .1 
 const kindPill = d => d.kind === 'open' ? `<span class="pill live">LIVE</span>` : `<span class="pill gold">${T('preset')}</span>`;
 const nm = d => lang() === 'zh' && d.name_zh ? d.name_zh : d.name;
 const progOf = id => S.progress[id];
-const liveUrl = id => (S.settings.live || {})[id];
+const parseLive = v => { if (!v) return null; if (typeof v === 'object') return v.api && v.k ? v : null;
+  try { const u = new URL(v); const k = u.searchParams.get('k'); return k ? {api: (u.searchParams.get('api') || u.origin).replace(/\/$/, ''), k, url: v} : null; } catch (e) { return null; } };
+const liveCfg = id => parseLive((S.settings.live || {})[id]);
+const liveUrl = id => { const c = liveCfg(id); return c && (c.url || `${c.api}/?k=${encodeURIComponent(c.k)}`); };  // 没接进 APP 的剧：嵌入它自己的实时页
+const liveNative = d => !!(d.live && liveCfg(d.id));
 function shareLink(d){ const u = location.origin + location.pathname + '#/d/' + d.id; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast(T('copied')), () => toast(u)); }
 function toggleSave(d){ S.saved[d.id] = S.saved[d.id] ? 0 : Date.now(); if (!S.saved[d.id]) delete S.saved[d.id]; save(); toast(T(S.saved[d.id] ? 'savedT' : 'unsavedT')); return !!S.saved[d.id]; }
 function toggleLike(d){ S.liked[d.id] = !S.liked[d.id]; if (!S.liked[d.id]) delete S.liked[d.id]; save(); return !!S.liked[d.id]; }
@@ -125,9 +142,14 @@ function scenesSheet(d, onPick){
 const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n"><img src="${esc(d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
 const epLabel = c => /Opening|开场/.test(c.label) ? T('opening') : lang() === 'en' ? c.label.replace(/第\s*(\d+)\s*集/, 'Episode $1') : c.label;
 const fmtDur = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+function liveLogHtml(d){
+  const items = (progOf(d.id) || {}).live || [];
+  return items.map(x => `<div class="log-item"><small>${T('liveTag')} · ${T('scene', {n: x.n})} · ${new Date(x.at).toLocaleString(lang() === 'zh' ? 'zh-CN' : 'en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</small><div><span class="y">${esc(x.text)}</span></div>${x.en ? `<div class="h">“${esc(x.en)}”</div>` : ''}${x.zh && lang() === 'zh' ? `<div class="h2">${esc(x.zh)}</div>` : ''}</div>`).join('');
+}
 function logSheet(d, onRewind){
   const p = progOf(d.id) || {}, items = p.log || [];
-  const body = items.length ? `<div class="log">${items.map(x => {
+  if (!items.length && (p.live || []).length) return sheet(T('log'), esc(L(d.title)), `<div class="log">${liveLogHtml(d)}</div>`);
+  const body = items.length ? `<div class="log">${liveLogHtml(d)}${items.map(x => {
     const c = d.chapters[x.i], h = hisLine(d, c);
     return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})} · ${new Date(x.at).toLocaleString(lang() === 'zh' ? 'zh-CN' : 'en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${h.zh && lang() === 'zh' ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}${onRewind ? `<button data-i="${x.i}">↺ ${T('backTo')}</button>` : ''}</div>`;
   }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
@@ -149,7 +171,7 @@ function route(){
   if (parts[0] === 'library') return Library(view);
   if (parts[0] === 'me') return Me(view);
   if (parts[0] === 'd' && byId[parts[1]]) return Detail(view, byId[parts[1]]);
-  if (parts[0] === 'play' && byId[parts[1]]) return Player(view, byId[parts[1]], q);
+  if (parts[0] === 'play' && byId[parts[1]]) return q.get('live') === '1' && liveNative(byId[parts[1]]) ? LivePlayer(view, byId[parts[1]]) : Player(view, byId[parts[1]], q);
   if (parts[0] === 'live' && byId[parts[1]]) return Live(view, byId[parts[1]]);
   return Home(view);
 }
@@ -260,15 +282,21 @@ function Detail(view, d){
       <p class="d-hook">${esc(L(d.hook))}</p><div class="d-tags">${d.tags.map(t => `<span>#${esc(L(t))}</span>`).join('')}</div></div>
     <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${T('scenes')}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
     <div class="d-pane" id="pane"></div>
-    <div class="d-cta"><button class="btn gold" id="go">${ICON.play}${resumeN ? T('resume', {n: resumeN}) : T('start')}</button>
+    <div class="d-cta">${liveNative(d) ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
       <button class="btn ghost" id="saveBtn" title="${T('saveL')}" style="color:${S.saved[d.id] ? 'var(--gold)' : 'inherit'}">${ICON.mark}</button>
-      ${liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
+      ${!d.live && liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
   $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/');
   $('#shareBtn').onclick = () => shareLink(d);
   const top = $('.d-top'); view.onscroll = () => top.classList.toggle('solid', view.scrollTop > 330); onLeave(() => view.onscroll = null);
   $('#go').onclick = () => location.hash = `#/play/${d.id}${resumeN ? '?resume=1' : ''}`;
   $('#saveBtn').onclick = () => { const on = toggleSave(d); $('#saveBtn').style.color = on ? 'var(--gold)' : 'inherit'; };
   if ($('#liveBtn')) $('#liveBtn').onclick = () => location.hash = '#/live/' + d.id;
+  if ($('#goLive')){
+    $('#goLive').onclick = () => location.hash = `#/play/${d.id}?live=1`;
+    const c = liveCfg(d.id);  // 先探一下中转：没开就提示，主按钮退回预览回放
+    fetch(`${c.api}/api/ping?k=${encodeURIComponent(c.k)}`).then(r => r.json()).then(j => { if (!j.ok){ toast(T('liveBadKey')); $('#goLive').disabled = true; $('#goLive').style.opacity = .45; } })
+      .catch(() => { toast(T('liveOff2')); const b = $('#goLive'); if (b){ b.disabled = true; b.style.opacity = .45; } });
+  }
   const pane = $('#pane');
   const show = t => {
     $$('#dtabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
@@ -280,7 +308,7 @@ function Detail(view, d){
       $$('.scene', pane).forEach(el => el.onclick = () => location.hash = `#/play/${d.id}?from=${el.dataset.i}`);
     } else if (t === 'log'){
       const items = (p && p.log) || [];
-      pane.innerHTML = items.length ? `<div class="log">${items.map(x => { const c = d.chapters[x.i], h = hisLine(d, c); return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${lang() === 'zh' && h.zh ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}<button data-i="${x.i}">↺ ${T('backTo')}</button></div>`; }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
+      pane.innerHTML = items.length || (p && (p.live || []).length) ? `<div class="log">${liveLogHtml(d)}${items.map(x => { const c = d.chapters[x.i], h = hisLine(d, c); return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${lang() === 'zh' && h.zh ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}<button data-i="${x.i}">↺ ${T('backTo')}</button></div>`; }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
       $$('.log-item button', pane).forEach(b => b.onclick = () => location.hash = `#/play/${d.id}?from=${b.dataset.i}`);
     } else {
       const face = (r[0] && r[0].poster) || d.cover;
@@ -291,7 +319,7 @@ function Detail(view, d){
         <button class="btn ghost" id="liveBtn2" style="height:40px;font-size:13.5px">${ICON.live}${T('live')}</button>
         ${d.series_url ? `<a class="btn ghost" href="${esc(d.series_url)}" target="_blank" rel="noopener" style="height:40px;font-size:13.5px">${T('series')} ↗</a>` : ''}</div>`;
       $('#watchBtn').onclick = () => location.hash = `#/play/${d.id}?watch=1`;
-      $('#liveBtn2').onclick = () => liveUrl(d.id) ? location.hash = '#/live/' + d.id : toast(T('liveNone'));
+      $('#liveBtn2').onclick = () => liveNative(d) ? location.hash = `#/play/${d.id}?live=1` : liveUrl(d.id) ? location.hash = '#/live/' + d.id : toast(T('liveNone'));
     }
   };
   $('#dtabs').onclick = e => { const b = e.target.closest('button'); if (b) show(b.dataset.t); };
@@ -422,6 +450,167 @@ function Player(view, d, q){
     else { v.currentTime = c.start; play(); } };
   if (v.readyState >= 1) startAt(); else v.addEventListener('loadedmetadata', startAt, {once: true});
   onLeave(() => { cancelAnimationFrame(raf); waitTimer.forEach(clearTimeout); v.pause(); v.removeAttribute('src'); v.load(); });
+}
+
+// ---------- 实时播放器（直接调这部剧的中转：开场 → 选项/输入 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播） ----------
+function LivePlayer(view, d){
+  document.body.classList.add('notabs', 'noscroll');
+  const C = liveCfg(d.id), LV = d.live, API = C.api, K = C.k, MODE = '5+10';
+  const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(new URL(API).hostname);
+  const P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
+  view.innerHTML = `<div class="player" id="pl">
+    <video class="lv on" playsinline preload="auto" poster="${esc(d.cover)}"></video><video class="lv" playsinline preload="auto"></video><video class="lv" playsinline preload="auto"></video>
+    <div class="p-shade"></div><div class="p-tap" id="tap"></div>
+    <div class="p-top"><div class="p-title"><button class="iconbtn" id="back">${ICON.back}</button><div><b>${esc(L(d.title))}</b><span id="chLabel">${T('opening')}</span></div><span class="pill live p-mode">${T('liveTag')}</span></div>
+      <div class="livestat" id="stat"></div></div>
+    <div class="rail p-rail"><button class="like${S.liked[d.id] ? ' on' : ''}" id="rLike">${ICON.heart}<span>${T('liked')}</span></button>
+      <button id="rLog">${ICON.book}<span>${T('log')}</span></button><button id="rRe">${ICON.restart}<span>${T('restart')}</span></button>
+      <button id="rCC">${ICON.cc}<span>${S.settings.subs === 'en' ? 'EN' : (lang() === 'zh' ? '中/EN' : 'EN/中')}</span></button></div>
+    <div class="subs" id="subs"></div><div class="wait" id="wait"></div><div class="choice" id="choice"></div>
+    <button class="tapstart" id="tapStart" hidden>${ICON.play}<span>${T('tapStart')}</span></button></div>`;
+  const pl = $('#pl'), subs = $('#subs'), choice = $('#choice'), wait = $('#wait'), stat = $('#stat');
+  const pool = $$('video.lv', pl); let front = pool[0];
+  let sid = null, next = null, round = 0, busy = false, run = 0, alive = true;
+  const setMode = m => { pl.classList.toggle('choosing', m === 'choose'); pl.classList.toggle('waiting', m === 'wait'); };
+  const setStat = h => { stat.innerHTML = h; };
+  const show = el => { const old = front; front = el; el.classList.add('on'); const retire = () => { if (old !== front){ old.classList.remove('on'); old.pause(); } }; requestAnimationFrame(retire); setTimeout(retire, 60); };
+  const spare = () => pool.find(v => v !== front && !v.dataset.keep) || pool.find(v => v !== front);
+  const load = (el, src, loop) => { el.loop = !!loop; el.muted = !!loop; el.dataset.src = src; el.src = src; el.load(); };
+  const abs = u => u && u.startsWith('/') ? API + u : u;
+  const music = new Audio(LV.wait); music.loop = true; music.volume = 0; let mTarget = 0;
+  const mTick = setInterval(() => { const dv = mTarget - music.volume; if (Math.abs(dv) > .01) music.volume = Math.max(0, Math.min(1, music.volume + Math.sign(dv) * .03)); if (!mTarget && music.volume < .02 && !music.paused) music.pause(); }, 50);
+  const waitMusic = on => { mTarget = on ? .3 : 0; if (on && music.paused) music.play().catch(() => {}); };
+  const AUD = {}; const preAudio = u => { u = abs(u); if (u && !AUD[u]){ const a = new Audio(); a.preload = 'auto'; a.src = u; AUD[u] = a; } return AUD[u]; };
+  function showSub(c, who){
+    if (!c){ subs.innerHTML = ''; return; }
+    subs.className = 'subs' + (who === 'you' ? ' you' : '') + (S.settings.subs === 'en' ? ' lang-en' : '');
+    subs.innerHTML = `<div class="who">${esc(who === 'you' ? T('you') : nm(d))}</div>${c.en ? `<div class="en">${esc(c.en)}</div>` : ''}${c.zh ? `<div class="zh">${esc(c.zh)}</div>` : ''}`;
+  }
+  async function api(path, body){  // text/plain：不触发跨域预检，隧道少一个来回
+    const r = await fetch(API + path, {method: body ? 'POST' : 'GET', headers: body ? {'Content-Type': 'text/plain'} : {}, body: body ? JSON.stringify(Object.assign({k: K}, body)) : undefined});
+    const j = await r.json(); if (!r.ok) throw Object.assign(new Error(j.err || r.status), {code: r.status}); return j;
+  }
+  fetch(`${API}/api/ping?k=${encodeURIComponent(K)}`).then(r => r.json()).then(j => setStat(!j.ok ? `<i class="bad"></i>${T('liveBadKey')}` : `<i></i>${T('liveConn')} · ${esc(j.model)} · ${esc(MODE)}`))
+    .catch(() => setStat(`<i class="bad"></i>${T('liveOff2')}`));
+
+  // 开场：预制开场片 → 待机循环 → 第一个选择点
+  const ov = pool[1], idle = pool[2];
+  load(ov, LV.open); load(idle, LV.idle, true);
+  const startSession = () => api('/api/session', {mode: MODE}).then(j => { sid = j.sid; next = j.next; round = 0; });
+  function playOpening(){
+    run++; busy = false; setMode('play'); showSub(null); $('#chLabel').textContent = T('opening');
+    ov.currentTime = 0; ov.muted = false; ov.loop = false;
+    ov.play().then(() => { show(ov); $('#tapStart').hidden = true; }).catch(() => { $('#tapStart').hidden = false; });
+    ov.ontimeupdate = () => { const t = ov.currentTime, c = LV.open_cues.find(q => t >= q.s && t <= q.e); showSub(c || null, c && (c.who === 'you' ? 'you' : 'him')); };
+    ov.onended = () => { ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); openChoice(); };
+  }
+  $('#tapStart').onclick = () => { $('#tapStart').hidden = true; music.play().then(() => { if (!mTarget) music.pause(); }).catch(() => {}); playOpening(); };
+  startSession().catch(e => setStat(`<i class="bad"></i>${esc(e.message)}`));
+  playOpening();
+
+  // 选择点：导演层给的两个选项 + 输入框 + 灵感
+  const optText = o => lang() === 'zh' ? `${esc(o.zh || o.en)}${o.en && o.zh ? `<small>${esc(o.en)}</small>` : ''}` : esc(o.en || o.zh);
+  async function openChoice(){
+    const my = run; setMode('choose'); waitMusic(true);
+    for (let i = 0; i < 150 && !next && alive; i++) await new Promise(r => setTimeout(r, 100));
+    if (my !== run || !alive) return;
+    $('#chLabel').textContent = T('scene', {n: round + 1}) + ' · LIVE';
+    const ideas = rts(d).map(x => L(x.said)).filter(Boolean).sort(() => Math.random() - .5).slice(0, 3);
+    const cue = next && next.cue ? (lang() === 'zh' ? next.cue.zh || next.cue.en : next.cue.en) : T('waitsYou', {name: nm(d)});
+    choice.innerHTML = `<div class="cue"><b>${T('scene', {n: round + 1})} · ${T('yourTurn')}</b>${esc(cue)}</div>
+      ${next ? ['A', 'B'].filter(k => next[k]).map(k => `<button class="opt" data-k="${k}"><i>${k}</i>${optText(next[k])}</button>`).join('') : ''}
+      <form class="say" id="sayF"><div class="inbox"><input id="sayIn" maxlength="120" autocomplete="off" placeholder="${esc(T('sayPh', {name: nm(d)}))}"><button type="button" class="bulb" id="bulb" title="${T('ideas')}">${ICON.bulb}</button></div><button class="send" type="submit">${ICON.send}</button></form>
+      <div class="ideas" id="ideas" hidden>${ideas.map(x => `<button data-say="${esc(x)}"><small>${T('ideaOther')}</small>${esc(x)}</button>`).join('')}</div>`;
+    requestAnimationFrame(() => { choice.classList.add('show'); subs.style.bottom = (choice.offsetHeight + 8) + 'px'; });
+    $('#bulb').onclick = () => { $('#ideas').hidden = !$('#ideas').hidden; subs.style.bottom = (choice.offsetHeight + 8) + 'px'; };
+    $$('.opt', choice).forEach(b => b.onclick = () => liveRound('option', b.dataset.k, next[b.dataset.k]));
+    $$('[data-say]', choice).forEach(b => b.onclick = () => liveRound('free', null, {zh: b.dataset.say, en: b.dataset.say}));
+    $('#sayF').onsubmit = e => { e.preventDefault(); const t = $('#sayIn').value.trim(); if (t) liveRound('free', null, {zh: t, en: t}); else $('#sayIn').focus(); };
+  }
+  const closeChoice = () => { choice.classList.remove('show'); subs.style.bottom = ''; };
+
+  // 一幕：发出去 → 等导演层和两段生成 → 第 1 段按第 2 段预计出片倒推开播 → 两段接着播 → 下一个选择点
+  async function liveRound(kind, ch, said){
+    if (busy) return; busy = true; const my = ++run, t0 = Date.now(); let r = null, rid = null, polling = true;
+    const text = lang() === 'en' ? (said.en || said.zh) : (said.zh || said.en);
+    closeChoice(); setMode('wait'); waitMusic(true); showSub(null);
+    wait.innerHTML = `<div class="bubble">${esc(text)}</div><h4>${T(d.genre === 'cozy' ? 'thinkCozy' : 'thinkRom', {name: nm(d)})}</h4><div class="dots"><i></i><i></i><i></i></div>
+      <div class="steps" id="steps"><div><i></i>${T(kind === 'option' ? 'lStep1o' : 'lStep1')}</div><div><i></i><span id="s2">${T('lStep2', {n: 0})}</span></div><div><i></i>${T('lStep3')}</div></div>
+      <div class="meta"><span id="lwT"></span></div>`;
+    const st = $$('#steps div', wait); const mark = n => st.forEach((el, k) => { el.className = k < n ? 'ok' : k === n ? 'now' : ''; });
+    const V = [spare()]; V[0].dataset.keep = 1; V.push(spare()); delete V[0].dataset.keep;
+    const segErr = () => r && r.segs && r.segs.some(s => s.status === 'error');
+    const tick = setInterval(() => { if (my !== run) return clearInterval(tick); $('#lwT', wait) && ($('#lwT', wait).textContent = T('liveWaited', {s: ((Date.now() - t0) / 1000).toFixed(1)}));
+      const n = r && r.segs ? r.segs.filter(s => s.url).length : 0; $('#s2', wait) && ($('#s2', wait).textContent = T('lStep2', {n}));
+      mark(!r || r.status === 'submitted' ? 0 : r.segs && r.segs[0] && r.segs[0].url ? 2 : 1); }, 100);
+    const fail = msg => { clearInterval(tick); polling = false; busy = false; toast(msg); setMode('play'); if (my === run) openChoice(); };
+    try { rid = (await api('/api/round', {sid, kind, choice: ch, input: kind === 'free' ? said.zh : undefined})).id; }
+    catch (e){ return fail(e.code === 429 ? T('busyGen') : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
+    (async () => { while (polling && alive){  // 上一次返回后再发下一次（隧道每次 1 秒多，定时器会把请求堆起来）
+      try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
+      if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u) load(V[i], u); });  // 一到就预载
+      if (r && Array.isArray(r.lines)) r.lines.forEach(l => l.audio && preAudio(l.audio));  // 咪的配音也一出来就预载
+      await new Promise(res => setTimeout(res, LOCAL ? 500 : 1200)); } })();
+    const M = LOCAL ? 1.5 : 3.0;  // 轮询、隧道延迟和第 2 段缓冲的余量（秒）
+    const seg1Ok = () => r && r.segs && r.segs[0] && r.segs[0].url && V[0].dataset.src === abs(r.segs[0].url) && V[0].readyState >= 3;
+    const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = V[0].duration || r.segs[0].dur || 5; return s2.eta_left != null && s2.eta_left <= d1 - M; };
+    const dub = LV.lines === 'dub'; let vidAt = 0;
+    const aud = k => !(r.lines || []).some(l => l.seg === k && !l.audio && !l.audio_err);
+    const voiced = () => !dub || (aud(1) && aud(2)) || (vidAt && Date.now() - vidAt > 6000);  // 配音晚到超过 6 秒就先播画面
+    await new Promise(res => (function f(){ if (my !== run || !alive) return; if ((r && r.status === 'error') || segErr() || (seg1Ok() && seg2Soon() && (vidAt = vidAt || Date.now()) && voiced())) res(); else setTimeout(f, 100); })());
+    if (my !== run || !alive){ polling = false; clearInterval(tick); return; }
+    if (r.status === 'error' || segErr()){ const low = (r.segs || []).some(s => s.err_code === 10005);
+      if (rid) api(`/api/round/${rid}/view`, {end_at: Date.now()}).catch(() => {});
+      return fail(low ? T('lowBal') : T('liveFail', {e: (r.segs || []).map(s => s.err).filter(Boolean)[0] || r.err || '—'})); }
+    clearInterval(tick); mark(3);
+    const view = {play_at: Date.now(), seg2_eta: r.segs[1] ? r.segs[1].eta_left : null};
+    setMode('play'); waitMusic(false);
+    await play(0); view.seg1_end = Date.now();
+    if (r.segs.length > 1){
+      const ok2 = () => segErr() || (r.segs[1].url && V[1].dataset.src === abs(r.segs[1].url) && V[1].readyState >= 3);
+      if (!ok2()){ waitMusic(true); while (!ok2() && my === run && alive) await new Promise(res => setTimeout(res, 100)); waitMusic(false); }  // 第 2 段还没到：停在第 1 段最后一帧
+      view.stall = (Date.now() - view.seg1_end) / 1000;
+      if (my === run && !segErr()) await play(1);
+    } else view.stall = 0;
+    polling = false; view.end_at = Date.now();
+    if (rid) api(`/api/round/${rid}/view`, view).catch(() => {});
+    if (my !== run || !alive) return;
+    const first = his();
+    P.live.push({n: round + 1, text, en: first.en, zh: first.zh, at: Date.now()}); P.at = Date.now(); save();
+    toast(T('liveDone', {n: round + 1, s: ((view.play_at - t0) / 1000).toFixed(1)}));
+    busy = false; round++; next = r.next || next; openChoice();
+
+    function his(){ if (dub){ const l = (r.lines || [])[0] || {}; return {en: l.en, zh: l.zh}; } return {en: ((r.lines || {}).seg1 || [])[0], zh: ((r.zh || {}).seg1 || [])[0]}; }
+    function play(i){ return new Promise(res => {
+      const v = V[i]; v.currentTime = 0; v.muted = false; v.loop = false; let done = false;
+      const end = () => { if (done) return; done = true; v.ontimeupdate = null; if (cur) cur.onended = null; showSub(null); res(); };
+      let cur = null;
+      if (dub){  // 咪的台词是另配的声音（画面里咪不开口）：第 1 段 0.4 秒起、第 2 段 1 秒起逐句播，句间 0.4 秒
+        const Ls = (r.lines || []).filter(l => l.seg === i + 1); let k = -1, nextAt = i === 0 ? 0.4 : 1.0; v.volume = 0.6;
+        const say = () => { k++; if (k >= Ls.length){ cur = null; return; } const l = (r.lines || []).find(x => x.seg === Ls[k].seg && x.en === Ls[k].en) || Ls[k]; showSub({en: l.en, zh: l.zh}, 'him');
+          if (l.audio){ cur = preAudio(l.audio); cur.currentTime = 0; cur.onended = () => { showSub(null); nextAt = v.currentTime + 0.4; cur = null; }; cur.play().catch(() => { cur = null; nextAt = v.currentTime + 2.2; }); }
+          else { cur = null; nextAt = v.currentTime + 2.4; } };
+        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = v.duration || r.segs[i].seconds;
+          if (!cur && k < Ls.length - 1 && v.currentTime >= Math.max(nextAt, Ls[k + 1].at || 0)) say();
+          if (dd && v.currentTime >= dd - 0.06) end(); };
+      } else {  // Magnus 原声：台词按时长均分，第 2 段前 2 秒是静止承接
+        v.volume = 1; const Lns = ((r.lines || {})['seg' + (i + 1)] || []).filter(Boolean), Z = ((r.zh || {})['seg' + (i + 1)] || []).filter(Boolean), off = i === 1 ? 2 : 0;
+        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = v.duration || r.segs[i].seconds;
+          if (Lns.length){ const t = Math.max(0, v.currentTime - off), k = Math.min(Lns.length - 1, Math.floor(t / (dd - off) * Lns.length)); showSub({en: Lns[k], zh: Z[k] || ''}, 'him'); }
+          if (dd && v.currentTime >= dd - 0.06) end(); };
+      }
+      v.onended = end; v.onerror = end;
+      v.play().then(() => show(v)).catch(() => { v.muted = true; v.play().then(() => show(v)).catch(end); });
+    }); }
+  }
+
+  $('#tap').onclick = () => { if (front.muted && !front.loop){ front.muted = false; } };
+  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
+  $('#rLike').onclick = () => $('#rLike').classList.toggle('on', toggleLike(d));
+  $('#rLog').onclick = () => logSheet(d, i => location.hash = `#/play/${d.id}?from=${i}`);
+  $('#rRe').onclick = () => { closeChoice(); next = null; startSession().catch(() => {}); load(idle, LV.idle, true); playOpening(); };
+  $('#rCC').onclick = () => { S.settings.subs = S.settings.subs === 'en' ? 'both' : 'en'; save(); $('#rCC span').textContent = S.settings.subs === 'en' ? 'EN' : (lang() === 'zh' ? '中/EN' : 'EN/中'); };
+  onLeave(() => { alive = false; run++; clearInterval(mTick); music.pause(); Object.values(AUD).forEach(a => a.pause()); pool.forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); }); });
 }
 
 // ---------- 实时开玩（嵌入这部剧自己的实时播放页） ----------

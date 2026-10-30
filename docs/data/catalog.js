@@ -639,6 +639,36 @@ window.CATALOG = {
     "zh": "公网中转 8895（第三视角）",
     "en": "Public relay (third person)"
    },
+   "live": {
+    "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ec51421aed9f46aa9f6d60b4134629bc/OPEN.mp4",
+    "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/913679e6f19346218debbe6398571a46/IDLE0.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
+    "lines": "magnus",
+    "post": "json",
+    "open_cues": [
+     {
+      "s": 10.9,
+      "e": 11.95,
+      "zh": "别动。",
+      "en": "Don't move.",
+      "who": "Magnus"
+     },
+     {
+      "s": 16.3,
+      "e": 17.3,
+      "zh": "告诉我……",
+      "en": "Tell me...",
+      "who": "Magnus"
+     },
+     {
+      "s": 17.7,
+      "e": 19.1,
+      "zh": "你到底是从哪里来的？",
+      "en": "Where did you come from?",
+      "who": "Magnus"
+     }
+    ]
+   },
    "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/magnus-third-L2111588e6.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-third-md-c-full-5-10.mp4",
@@ -1259,6 +1289,29 @@ window.CATALOG = {
    "live_hint": {
     "zh": "公网隧道 8896（咪开放式）",
     "en": "Public tunnel (Mii open)"
+   },
+   "live": {
+    "open": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/OPEN.mp4",
+    "idle": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/IDLE0.mp4",
+    "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
+    "lines": "dub",
+    "post": "text",
+    "open_cues": [
+     {
+      "s": 7.9,
+      "e": 11.22,
+      "zh": "今天不要上班，咪养你。",
+      "en": "No work today. I'll take care of you.",
+      "who": "Mii"
+     },
+     {
+      "s": 17.98,
+      "e": 21.46,
+      "zh": "啊对，今天休假。我忘关闹钟啦。",
+      "en": "Oh, right. It's my day off. I forgot the alarm.",
+      "who": "you"
+     }
+    ]
    },
    "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2201493d0.jpg",
    "film": {
