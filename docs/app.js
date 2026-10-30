@@ -832,7 +832,7 @@ function Actor(view, id){
   const go = (k, f) => { const b = $(k); if (b) b.onclick = f; };
   go('#aEdit', () => location.hash = '#/char/' + a.id);
   go('#aUse', () => pickDrama(a));
-  go('#aSign', () => { const id = newChar({origin: 'lib', from: a.id, face: a.face, look: a.look || '', style: a.style}); toast(Z('签下了！给 TA 取个名字吧', 'Signed! Give them a name')); location.hash = '#/char/' + id; });
+  go('#aSign', () => { const id = newChar({origin: 'lib', from: a.id, face: a.face, look: a.look || '', style: a.style, gender: a.gender === 'female' ? Z('女', 'Female') : a.gender === 'male' ? Z('男', 'Male') : ''}); toast(Z('签下了！给 TA 取个名字吧', 'Signed! Give them a name')); location.hash = '#/char/' + id; });
   go('#aLead', () => pickDrama(a));
   go('#aHire', () => { location.hash = '#/stage/new?cast=' + encodeURIComponent(a.id); });
 }
