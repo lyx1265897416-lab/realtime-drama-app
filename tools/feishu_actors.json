@@ -27,8 +27,8 @@
   },
   {
     "slug": "heroine-rafael",
-    "name": "六年室友",
-    "name_en": "The Roommate",
+    "name": "Nora Ellis",
+    "name_en": "Nora Ellis",
     "gender": "female",
     "price": 120,
     "role": "《这次，不是演的》女主",
@@ -98,29 +98,6 @@
     "style": "otome"
   },
   {
-    "slug": "owner",
-    "name": "咪的主人",
-    "name_en": "Mii's Human",
-    "gender": "female",
-    "price": 120,
-    "role": "《今天不要上班，咪养你》女主",
-    "role_en": "Lead of No Work Today",
-    "personality": [
-      "刚忙完一个项目",
-      "被一只小猫照顾"
-    ],
-    "bio": "刚结束一个忙碌的项目，今天请好了假，却忘了关工作日闹钟。可以把今天整个交给咪，也可以随时伸手帮它、抱它、改主意。",
-    "tags": [
-      "可当化身",
-      "治愈",
-      "日常"
-    ],
-    "credits": [
-      "今天不要上班，咪养你"
-    ],
-    "style": "cozy"
-  },
-  {
     "slug": "maya",
     "name": "Maya Collins",
     "name_en": "Maya Collins",
@@ -186,27 +163,5 @@
       "这次，不是演的"
     ],
     "style": "real"
-  },
-  {
-    "slug": "vael",
-    "name": "Vael",
-    "name_en": "Vael",
-    "gender": "male",
-    "price": 60,
-    "role": "王庭执事",
-    "role_en": "Steward of the Night Court",
-    "personality": [
-      "冷静",
-      "守程序"
-    ],
-    "bio": "奉命回收“逃走的王子”，持独立公务通行许可，能白天到诊所、正常投递纸信。习惯把人列成待归还事项，但守程序，最后会为自己的做法道歉。",
-    "tags": [
-      "对手",
-      "奇幻"
-    ],
-    "credits": [
-      "借来一晚，九次心动"
-    ],
-    "style": "otome"
   }
 ]

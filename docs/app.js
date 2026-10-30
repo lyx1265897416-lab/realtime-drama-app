@@ -820,7 +820,7 @@ function Actor(view, id){
     <div class="d-head" style="margin-top:-40px"><div class="pills">${isMine ? `<span class="pill gold">${Z('我的角色', 'My character')}</span>` : rookie ? `<span class="pill">${Z('新人待签', 'New face')}</span>` : `<span class="pill gold">${a.owner_uid ? Z('玩家原创', 'Player-made') : Z('签约演员', 'Signed')}</span>`}${(a.tags || []).slice(0, 3).map(t => `<span class="pill">${esc(t)}</span>`).join('')}</div>
       <h1>${esc(a.name)}</h1><div class="lead">${esc([a.age, a.role].filter(Boolean).join(' · '))}</div>
       <div class="d-stats"><div><b>${rookie ? Z('免费', 'Free') : a.price ? '★' + a.price : Z('免费', 'Free')}</b><span>${rookie ? Z('签约', 'to sign') : Z('片酬 / 场', 'per scene')}</span></div><div><b>${a.hires || 0}</b><span>${Z('被雇用', 'Hired')}</span></div><div><b>${credits.length}</b><span>${Z('出演作品', 'Credits')}</span></div></div>
-      ${a.bio ? `<p class="d-hook">${esc(a.bio)}</p>` : rookie ? `<p class="d-hook">${Z('只有一张脸，还没有名字、性格和来历。签下 TA，由你来写 TA 的一切，再带 TA 去串场、上架接戏。', 'Just a face for now. Sign them and write everything else.')}</p>` : ''}
+      ${a.bio ? `<p class="d-hook">${esc(a.bio)}</p>` : rookie ? `<p class="d-hook">${Z('只有一张脸和一个艺名，还没有性格和来历。签下 TA，由你来写 TA 的一切，再带 TA 去串场、上架接戏。', 'Just a face and a stage name. Sign them and write everything else.')}</p>` : ''}
       ${(a.personality || []).length ? `<div class="d-tags">${a.personality.map(t => `<span>${esc(t)}</span>`).join('')}</div>` : ''}
       ${a.look ? `<p class="note" style="margin-top:12px">${esc(a.look)}</p>` : ''}
       ${credits.length ? `<div class="list-h" style="margin:20px 0 8px">${Z('演出履历', 'Credits')}</div><div class="d-tags">${credits.map(c => `<span>${esc(c)}</span>`).join('')}</div>` : ''}
@@ -832,7 +832,7 @@ function Actor(view, id){
   const go = (k, f) => { const b = $(k); if (b) b.onclick = f; };
   go('#aEdit', () => location.hash = '#/char/' + a.id);
   go('#aUse', () => pickDrama(a));
-  go('#aSign', () => { const id = newChar({origin: 'lib', from: a.id, face: a.face, look: a.look || '', style: a.style, gender: a.gender === 'female' ? Z('女', 'Female') : a.gender === 'male' ? Z('男', 'Male') : ''}); toast(Z('签下了！给 TA 取个名字吧', 'Signed! Give them a name')); location.hash = '#/char/' + id; });
+  go('#aSign', () => { const id = newChar({origin: 'lib', from: a.id, name: a.name, face: a.face, look: a.look || '', style: a.style, gender: a.gender === 'female' ? Z('女', 'Female') : a.gender === 'male' ? Z('男', 'Male') : ''}); toast(Z('签下了！名字可以改，其余由你来写', 'Signed! Rename them if you like')); location.hash = '#/char/' + id; });
   go('#aLead', () => pickDrama(a));
   go('#aHire', () => { location.hash = '#/stage/new?cast=' + encodeURIComponent(a.id); });
 }
