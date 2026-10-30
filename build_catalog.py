@@ -57,6 +57,12 @@ def parse_vtt(path):
     return cues
 
 
+def rename(c):  # 剧名已改为「与狼为伍」，成片字幕里的旧片名卡跟着换
+    for k in ('zh', 'en'):
+        c[k] = c[k].replace('午夜车库', '与狼为伍').replace('Midnight Garage', 'Running with Wolves')
+    return c
+
+
 def pick(items, needle, key='title'):
     for x in items:
         if needle in x.get(key, ''):
@@ -129,7 +135,7 @@ def build(d, log):
     out.update({
         'cover': cover,
         'film': {'video': BASE + film['video'], 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
-        'cues': [{k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')} for c in cues if not c['input']],
+        'cues': [rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}) for c in cues if not c['input']],
         'chapters': chapters,
         'rounds': len(rts),
         'episodes': sum(1 for c in chapters if c['kind'] == 'ep' and c['label'] not in ('Opening', '开场')),

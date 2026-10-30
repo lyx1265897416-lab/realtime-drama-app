@@ -6,8 +6,8 @@ window.CATALOG = {
    "genre": "romance",
    "name": "Magnus",
    "title": {
-    "zh": "午夜车库 · 开放式",
-    "en": "Midnight Garage: Open Live"
+    "zh": "与狼为伍 · 开放式",
+    "en": "Running with Wolves: Open Live"
    },
    "lead": {
     "zh": "Magnus · 狼人 Alpha",
@@ -598,8 +598,8 @@ window.CATALOG = {
    "genre": "romance",
    "name": "Magnus",
    "title": {
-    "zh": "午夜车库 · 旁观视角",
-    "en": "Midnight Garage: Third Person"
+    "zh": "与狼为伍 · 旁观视角",
+    "en": "Running with Wolves: Third Person"
    },
    "lead": {
     "zh": "Magnus & 她",
@@ -1890,8 +1890,8 @@ window.CATALOG = {
    "genre": "romance",
    "name": "Magnus",
    "title": {
-    "zh": "午夜车库",
-    "en": "Midnight Garage"
+    "zh": "与狼为伍",
+    "en": "Running with Wolves"
    },
    "lead": {
     "zh": "Magnus · 狼人 Alpha",
@@ -1938,8 +1938,8 @@ window.CATALOG = {
     {
      "s": 0.0,
      "e": 2.5,
-     "zh": "第 1 集 · 午夜车库",
-     "en": "Episode 1 · Midnight Garage",
+     "zh": "第 1 集 · 与狼为伍",
+     "en": "Episode 1 · Running with Wolves",
      "who": null
     },
     {
