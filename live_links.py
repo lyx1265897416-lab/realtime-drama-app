@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 APP = 'https://lyx1265897416-lab.github.io/realtime-drama-app/'
 RELAYS = {  # 剧 id: (中转目录, 隧道日志或地址文件, 本机端口)
     'mii-open': (ROOT / 'projects/mii-takes-care-of-you/实时开放-vivix', 'tunnel.log', 8896),
-    'magnus-third': (ROOT / 'output/magnus-third-live-v1', 'logs/tunnel.log', 8894),
+    'magnus-third': (ROOT / 'output/magnus-third-live-v1', 'logs/tunnel-app.log', 8893),  # APP 专用实例，和其他会话的 8894/8895 分开
     'studio': (ROOT / 'projects/realtime-drama-app/studio', 'tunnel.log', 8860),  # 创作服务：演员表、钱包、自由剧场
 }
 local = '--local' in sys.argv
