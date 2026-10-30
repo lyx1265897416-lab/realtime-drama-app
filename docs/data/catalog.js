@@ -1317,10 +1317,10 @@ window.CATALOG = {
    },
    "cover": "covers/mii-open.jpg",
    "film": {
-    "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-v45-5-10.mp4",
-    "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-v45-5-10.jpg",
-    "duration": 269.2,
-    "mode": "5+10"
+    "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.mp4",
+    "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.jpg",
+    "duration": 1512.6,
+    "mode": "5+15"
    },
    "cues": [
     {
@@ -1339,261 +1339,1388 @@ window.CATALOG = {
     },
     {
      "s": 26.24,
-     "e": 27.25,
-     "zh": "啵，亲一口，送到。",
-     "en": "Mwah. One kiss. Delivered.",
+     "e": 29.34,
+     "zh": "跳舞？咪天生就会。",
+     "en": "Dance? Mii was born ready.",
      "who": null
     },
     {
-     "s": 38.0,
-     "e": 44.46,
-     "zh": "这只要朝这里。咪本来就知道。",
-     "en": "This one faces here. Mii knew.",
+     "s": 38.74,
+     "e": 39.99,
+     "zh": "哒哒～咪跳完了。",
+     "en": "Ta-da. Mii danced.",
      "who": null
     },
     {
-     "s": 43.84,
-     "e": 45.21,
-     "zh": "穿上拖鞋，跟咪来。",
-     "en": "Slippers on. Follow Mii.",
+     "s": 42.44,
+     "e": 46.5,
+     "zh": "现在做早餐。咪说了算。",
+     "en": "Now breakfast. Mii's in charge.",
      "who": null
     },
     {
-     "s": 52.2,
-     "e": 56.54,
-     "zh": "厨房准备好了。咪上岗。",
-     "en": "Kitchen ready. Mii is on duty.",
+     "s": 48.81,
+     "e": 52.58,
+     "zh": "电影？咪来找最好的座位。",
+     "en": "Movie? Mii will find the best seat.",
      "who": null
     },
     {
-     "s": 61.44,
-     "e": 62.88,
-     "zh": "吐司抹果酱，咪来。",
-     "en": "Jam toast. Mii's on it.",
+     "s": 61.31,
+     "e": 64.07,
+     "zh": "你看，一只小海龟。",
+     "en": "Look. A tiny turtle.",
      "who": null
     },
     {
-     "s": 73.2,
-     "e": 77.95,
-     "zh": "咪试了下果酱。不是故意的。",
-     "en": "Mii tested the jam. Not on purpose.",
+     "s": 65.01,
+     "e": 67.39,
+     "zh": "咪喜欢这个座位。",
+     "en": "Mii likes this seat.",
      "who": null
     },
     {
-     "s": 79.04,
-     "e": 81.56,
-     "zh": "给你。咪的特制吐司。",
-     "en": "Here. Mii's special toast.",
+     "s": 71.38,
+     "e": 75.56,
+     "zh": "骑马？咪会骑。大概。",
+     "en": "Horse? Mii can ride. Probably.",
      "who": null
     },
     {
-     "s": 87.4,
-     "e": 89.92,
-     "zh": "咔嚓……",
-     "en": "Crunch...",
+     "s": 80.18,
+     "e": 82.65,
+     "zh": "抓紧了，小马。咪来掌舵。",
+     "en": "Hold on, horse. Mii steers.",
      "who": null
     },
     {
-     "s": 90.8,
-     "e": 93.3,
-     "zh": "味道怎么样？咪再做一份。",
-     "en": "How is it? Mii will make another.",
+     "s": 87.58,
+     "e": 90.22,
+     "zh": "我们做到了。咪是骑手。",
+     "en": "We did it. Mii is a rider.",
      "who": null
     },
     {
-     "s": 96.64,
-     "e": 97.98,
-     "zh": "要出去玩？咪准备好了！",
-     "en": "Out to play? Mii is ready!",
+     "s": 93.95,
+     "e": 97.48,
+     "zh": "太小了？咪也想要速度。",
+     "en": "Too small? Mii wants speed too.",
      "who": null
     },
     {
-     "s": 106.7,
-     "e": 108.38,
-     "zh": "钥匙放进去了。咪准备好了。",
-     "en": "Keys in. Mii is ready.",
+     "s": 102.75,
+     "e": 110.17,
+     "zh": "咪要飞起来啦，马马快点！",
+     "en": "Faster, horse! Mii is flying!",
      "who": null
     },
     {
-     "s": 109.2,
-     "e": 113.98,
-     "zh": "我们出去玩吧！",
-     "en": "Let's go play!",
+     "s": 110.57,
+     "e": 112.23,
+     "zh": "哇哦。咪差点摔了。是差一点。",
+     "en": "Whoa. Mii almost fell. Almost.",
      "who": null
     },
     {
-     "s": 114.24,
-     "e": 115.66,
-     "zh": "去公园？咪准备好了！",
-     "en": "Out to the park? Mii is ready!",
+     "s": 116.52,
+     "e": 120.91,
+     "zh": "栅栏？咪才不怕。就一点点。",
+     "en": "Fence? Mii is not scared. Much.",
      "who": null
     },
     {
-     "s": 122.6,
-     "e": 126.42,
-     "zh": "我们到了。Mii会去追的！",
-     "en": "We're here. Mii will chase it!",
+     "s": 125.32,
+     "e": 126.69,
+     "zh": "跳呀，马马！咪在飞！",
+     "en": "Jump, horse! Mii is flying!",
      "who": null
     },
     {
-     "s": 126.82,
-     "e": 129.12,
-     "zh": "抓到了！咪好快！",
-     "en": "Got it! Mii is fast!",
+     "s": 132.72,
+     "e": 138.22,
+     "zh": "我们跳过去了。咪没有闭眼睛。",
+     "en": "We cleared it. Mii did not close eyes.",
      "who": null
     },
     {
-     "s": 131.84,
-     "e": 133.42,
-     "zh": "谢谢！看电影时间到。咪最爱看电影了！",
-     "en": "Thank you! Movie time. Mii loves movies!",
+     "s": 139.09,
+     "e": 145.04,
+     "zh": "被夸啦？咪收下了。接下来练骑射。",
+     "en": "Praised? Mii will allow it. Archery next.",
      "who": null
     },
     {
-     "s": 139.4,
-     "e": 144.58,
-     "zh": "我们到了。最好的位子。",
-     "en": "We made it. Best seats.",
+     "s": 147.89,
+     "e": 153.99,
+     "zh": "稳住，马马。咪要瞄准了。",
+     "en": "Steady, horse. Mii aims.",
      "who": null
     },
     {
-     "s": 144.98,
-     "e": 149.2,
-     "zh": "嘘，要开始了。",
-     "en": "Shh. It's starting.",
+     "s": 155.29,
+     "e": 157.11,
+     "zh": "两次尝试，然后正中靶心。咪很棒。",
+     "en": "Two tries. Then bullseye. Mii is good.",
      "who": null
     },
     {
-     "s": 149.44,
-     "e": 151.31,
-     "zh": "靠过来？好，咪来了。",
-     "en": "Closer? Okay. Mii is coming.",
+     "s": 161.66,
+     "e": 166.92,
+     "zh": "滑雪？咪会滑。姿势还特别优雅。",
+     "en": "Snow? Mii will slide. Very elegantly.",
      "who": null
     },
     {
-     "s": 157.8,
-     "e": 161.9,
-     "zh": "暖暖的。咪很舒服。",
-     "en": "Warm. Mii is comfy.",
+     "s": 170.46,
+     "e": 175.4,
+     "zh": "哇！咪好快！",
+     "en": "Wheee! Mii is fast!",
      "who": null
     },
     {
-     "s": 167.04,
-     "e": 170.06,
-     "zh": "嗯。就是那里。",
-     "en": "Mmm. Right there.",
+     "s": 177.86,
+     "e": 179.54,
+     "zh": "哇。咪停住了。是故意的。",
+     "en": "Whoa. Mii stopped. On purpose.",
      "who": null
     },
     {
-     "s": 175.4,
-     "e": 176.82,
-     "zh": "咪想起来了。该做午饭啦！",
-     "en": "Mii remembers. Lunch time!",
+     "s": 184.23,
+     "e": 190.59,
+     "zh": "被夸了？下一个翻跟头。咪才不怕。也没多怕。",
+     "en": "Praised? Flip next. Mii is not scared. Much.",
      "who": null
     },
     {
-     "s": 184.64,
-     "e": 186.01,
-     "zh": "拍照？好。咪最好看的这一面。",
-     "en": "Photo? Okay. Mii's best side.",
+     "s": 192.23,
+     "e": 195.01,
+     "zh": "哇！咪在飞！",
+     "en": "Wheee! Mii is flying!",
      "who": null
     },
     {
-     "s": 189.7,
-     "e": 194.4,
-     "zh": "笑一个，茄子！咔嚓！",
-     "en": "Say cheese. Click!",
+     "s": 201.23,
+     "e": 204.01,
+     "zh": "翻完了。咪一点都没晃。",
+     "en": "Flip done. Mii did not wobble.",
      "who": null
     },
     {
-     "s": 194.8,
-     "e": 198.88,
-     "zh": "咪说：笑一个。咔嚓！",
-     "en": "Pretty. Now lunch. Mii goes first.",
+     "s": 206.8,
+     "e": 209.87,
+     "zh": "两周？咪翻成双倍。",
+     "en": "Two flips? Mii will double it.",
      "who": null
     },
     {
-     "s": 202.24,
-     "e": 206.8,
-     "zh": "不累。咪被抱着。回家！",
-     "en": "Not tired. Mii is carried. Home!",
+     "s": 215.6,
+     "e": 219.63,
+     "zh": "哇！咪在飞！",
+     "en": "Wheee! Mii is flying!",
      "who": null
     },
     {
-     "s": 212.3,
-     "e": 218.3,
-     "zh": "咪试了下果酱。不是故意的。",
-     "en": "Mii tested the jam. Not on purpose.",
+     "s": 223.0,
+     "e": 226.0,
+     "zh": "两周。咪晕了。开心地晕。",
+     "en": "Two flips. Mii is dizzy. Happy dizzy.",
      "who": null
     },
     {
-     "s": 218.7,
-     "e": 222.18,
-     "zh": "酱粘住了。第二回合。咪听话。",
-     "en": "The sauce stuck. Round two. Mii listens.",
+     "s": 229.37,
+     "e": 234.65,
+     "zh": "跳伞？咪会掉下去。很优雅地。",
+     "en": "Skydive? Mii will fall. Gracefully.",
      "who": null
     },
     {
-     "s": 219.84,
-     "e": 221.26,
-     "zh": "谢谢你。第二回合，咪这次听话。",
-     "en": "Thank you. Round two. Mii listens.",
+     "s": 234.37,
+     "e": 237.08,
+     "zh": "呜——咪在往下掉！",
+     "en": "Wheee! Mii is falling!",
      "who": null
     },
     {
-     "s": 228.2,
-     "e": 232.21,
-     "zh": "做好了。咪觉得这也算颠锅。",
-     "en": "Done. Mii counts this as tossing.",
+     "s": 245.57,
+     "e": 249.7,
+     "zh": "落地了。咪没有尖叫。差不多。",
+     "en": "Landed. Mii did not scream. Much.",
      "who": null
     },
     {
-     "s": 232.61,
-     "e": 236.04,
-     "zh": "要尝尝吗？",
-     "en": "Taste it?",
+     "s": 251.94,
+     "e": 256.79,
+     "zh": "又夸咪啦。下一个是水？咪来潜水。",
+     "en": "Praised again. Water next? Mii will dive.",
      "who": null
     },
     {
-     "s": 237.44,
-     "e": 242.17,
-     "zh": "谢谢你！先吃饭，然后看路灯。",
-     "en": "Thank you! Dinner first, then lamps.",
+     "s": 260.74,
+     "e": 261.99,
+     "zh": "咪冒泡泡啦！咪在游泳！",
+     "en": "Bubbles! Mii is swimming!",
      "who": null
     },
     {
-     "s": 247.5,
-     "e": 249.37,
-     "zh": "做好啦。给你的小碗。",
-     "en": "Done. Tiny bowl for you.",
+     "s": 268.14,
+     "e": 273.32,
+     "zh": "鱼朋友。咪是潜水员。",
+     "en": "Fish friend. Mii is a diver.",
      "who": null
     },
     {
-     "s": 250.0,
-     "e": 253.1,
-     "zh": "晚上散步。咪带路。",
-     "en": "Night walk later. Mii will lead.",
+     "s": 274.51,
+     "e": 278.9,
+     "zh": "跟着小鱼吗？咪已经在去了。",
+     "en": "Follow the fish? Mii is already going.",
      "who": null
     },
     {
-     "s": 255.04,
-     "e": 260.54,
-     "zh": "好香！咪也坐下。先去餐桌。",
-     "en": "Yum! Mii sits too. Table first.",
+     "s": 283.31,
+     "e": 286.55,
+     "zh": "挤进来了。咪很柔软。",
+     "en": "Squeezing in. Mii is flexible.",
      "who": null
     },
     {
-     "s": 265.1,
-     "e": 267.24,
-     "zh": "小小一口。咪吹了两遍。",
-     "en": "Tiny bite. Mii blew on it twice.",
+     "s": 290.71,
+     "e": 293.64,
+     "zh": "有扇秘密小门。要来看看吗？",
+     "en": "A secret door. Come see?",
      "who": null
     },
     {
-     "s": 267.64,
-     "e": 271.0,
-     "zh": "一起吃。然后看路灯！",
-     "en": "Eat together. Then lamps!",
+     "s": 297.08,
+     "e": 301.5,
+     "zh": "鲨鱼？咪很勇敢。差不多。",
+     "en": "Shark? Mii is brave. Mostly.",
+     "who": null
+    },
+    {
+     "s": 305.88,
+     "e": 309.6,
+     "zh": "咪抓紧鲨鱼，我来掌舵！",
+     "en": "Hold on, shark. Mii steers!",
+     "who": null
+    },
+    {
+     "s": 313.28,
+     "e": 317.48,
+     "zh": "咪掌舵了。一点点。主要是鲨鱼。",
+     "en": "Mii steered. A little. Mostly shark.",
+     "who": null
+    },
+    {
+     "s": 319.65,
+     "e": 323.39,
+     "zh": "比赛？咪会赢。大概。",
+     "en": "Race? Mii will win. Probably.",
+     "who": null
+    },
+    {
+     "s": 328.45,
+     "e": 331.26,
+     "zh": "咪领先啦！",
+     "en": "Wheee! Mii is ahead!",
+     "who": null
+    },
+    {
+     "s": 335.85,
+     "e": 339.91,
+     "zh": "鲨鱼作弊。它尾巴太长。",
+     "en": "Shark cheated. Its tail is long.",
+     "who": null
+    },
+    {
+     "s": 342.22,
+     "e": 347.04,
+     "zh": "美人鱼？咪会闪闪发光。湿湿的。",
+     "en": "Mermaid? Mii will sparkle. Wetly.",
+     "who": null
+    },
+    {
+     "s": 350.22,
+     "e": 352.55,
+     "zh": "你看，咪有尾巴了。",
+     "en": "Look. Mii has a tail.",
+     "who": null
+    },
+    {
+     "s": 356.22,
+     "e": 358.74,
+     "zh": "表演结束。请鼓掌。",
+     "en": "Show done. Clap, please.",
+     "who": null
+    },
+    {
+     "s": 364.79,
+     "e": 369.42,
+     "zh": "滑冰？咪会滑。很优雅地滑。",
+     "en": "Skating? Mii will glide. Elegantly.",
+     "who": null
+    },
+    {
+     "s": 372.79,
+     "e": 375.43,
+     "zh": "咪在滑！",
+     "en": "Wheee! Mii is gliding!",
+     "who": null
+    },
+    {
+     "s": 381.79,
+     "e": 385.58,
+     "zh": "滑完了。咪没摔。还没。",
+     "en": "Glided. Mii did not fall. Yet.",
+     "who": null
+    },
+    {
+     "s": 387.36,
+     "e": 391.56,
+     "zh": "攀岩？咪有爪子，正合适。",
+     "en": "Climbing? Mii has claws. Perfect.",
+     "who": null
+    },
+    {
+     "s": 396.16,
+     "e": 399.47,
+     "zh": "咱们上去啦。咪在爬！",
+     "en": "Up we go. Mii is climbing!",
+     "who": null
+    },
+    {
+     "s": 403.56,
+     "e": 407.3,
+     "zh": "敲响了。咪没怕。没怎么怕。",
+     "en": "Rang it. Mii was not scared. Much.",
+     "who": null
+    },
+    {
+     "s": 409.93,
+     "e": 413.89,
+     "zh": "荡下去？咪最爱帅气退场。",
+     "en": "Swing down? Mii loves a dramatic exit.",
+     "who": null
+    },
+    {
+     "s": 414.93,
+     "e": 417.69,
+     "zh": "哇！咪在荡！",
+     "en": "Wheee! Mii is swinging!",
+     "who": null
+    },
+    {
+     "s": 426.13,
+     "e": 429.13,
+     "zh": "落地了。那个晃是咪故意的。",
+     "en": "Landed. Mii meant that wobble.",
+     "who": null
+    },
+    {
+     "s": 432.5,
+     "e": 437.56,
+     "zh": "蹦极？咪会弹起来。很勇敢地。也许。",
+     "en": "Bungee? Mii will bounce. Bravely. Maybe.",
+     "who": null
+    },
+    {
+     "s": 440.5,
+     "e": 443.45,
+     "zh": "咪在下落！",
+     "en": "Wheee! Mii is falling!",
+     "who": null
+    },
+    {
+     "s": 446.5,
+     "e": 449.76,
+     "zh": "挂住了。咪是故意挂的。",
+     "en": "Hanging. Mii meant to hang.",
+     "who": null
+    },
+    {
+     "s": 455.07,
+     "e": 459.89,
+     "zh": "花？咪荡过去。要荡得很帅。",
+     "en": "Flower? Mii will swing over. Dramatically.",
+     "who": null
+    },
+    {
+     "s": 460.07,
+     "e": 463.33,
+     "zh": "呼——咪在荡！",
+     "en": "Wheee! Mii is swinging!",
+     "who": null
+    },
+    {
+     "s": 471.27,
+     "e": 473.55,
+     "zh": "摘到了。咪摘的。很温柔。",
+     "en": "Got it. Mii picked it. Gently.",
+     "who": null
+    },
+    {
+     "s": 477.64,
+     "e": 481.84,
+     "zh": "冲浪？咪会骑浪的。先倒着来。",
+     "en": "Surf? Mii will ride it. Upside down, first.",
+     "who": null
+    },
+    {
+     "s": 485.64,
+     "e": 488.47,
+     "zh": "哇咿！咪在冲浪！",
+     "en": "Wheee! Mii is surfing!",
+     "who": null
+    },
+    {
+     "s": 494.64,
+     "e": 498.67,
+     "zh": "晃了一下。咪是故意的。大概。",
+     "en": "Wobble. Mii planned that. Mostly.",
+     "who": null
+    },
+    {
+     "s": 500.21,
+     "e": 504.17,
+     "zh": "赛车？咪不会刹车。不太会。",
+     "en": "Racing? Mii will not brake. Much.",
+     "who": null
+    },
+    {
+     "s": 509.01,
+     "e": 511.39,
+     "zh": "咪冲啊冲啊！咪在开赛车！",
+     "en": "Go, go, go! Mii is racing!",
+     "who": null
+    },
+    {
+     "s": 516.41,
+     "e": 519.58,
+     "zh": "到终点了。咪没撞车。还没。",
+     "en": "Finished. Mii did not crash. Yet.",
+     "who": null
+    },
+    {
+     "s": 522.78,
+     "e": 526.09,
+     "zh": "给咪加油？那咪一定要赢。",
+     "en": "Cheering for Mii? Then Mii must win.",
+     "who": null
+    },
+    {
+     "s": 527.78,
+     "e": 530.85,
+     "zh": "准备好了。咪听到你在加油。",
+     "en": "Ready. Mii hears you cheering.",
+     "who": null
+    },
+    {
+     "s": 538.98,
+     "e": 541.67,
+     "zh": "第一名。咪听到你了。",
+     "en": "First place. Mii heard you.",
+     "who": null
+    },
+    {
+     "s": 545.35,
+     "e": 549.77,
+     "zh": "摩托车？咪会压弯。很帅地压。",
+     "en": "Motorbike? Mii will lean. Stylishly.",
+     "who": null
+    },
+    {
+     "s": 554.15,
+     "e": 555.28,
+     "zh": "哇咿！咪在压弯！",
+     "en": "Wheee! Mii is leaning!",
+     "who": null
+    },
+    {
+     "s": 561.55,
+     "e": 567.72,
+     "zh": "赢了。咪只晃了两下。",
+     "en": "Won. Mii only wobbled. Twice.",
+     "who": null
+    },
+    {
+     "s": 567.92,
+     "e": 573.44,
+     "zh": "开飞机？咪来起飞。很平稳的。",
+     "en": "Fly a plane? Mii will take off. Smoothly.",
+     "who": null
+    },
+    {
+     "s": 575.92,
+     "e": 578.99,
+     "zh": "咪在飞啦！",
+     "en": "Wheee! Mii is flying!",
+     "who": null
+    },
+    {
+     "s": 584.92,
+     "e": 588.45,
+     "zh": "降落了。咪没怎么弹。",
+     "en": "Landed. Mii did not bounce. Much.",
+     "who": null
+    },
+    {
+     "s": 590.49,
+     "e": 593.8,
+     "zh": "特技？咪连眼睛都不会眨。",
+     "en": "Stunts? Mii will not even blink.",
+     "who": null
+    },
+    {
+     "s": 595.49,
+     "e": 596.67,
+     "zh": "咿呀！咪在飞！",
+     "en": "Wheee! Mii is flying!",
+     "who": null
+    },
+    {
+     "s": 606.69,
+     "e": 611.51,
+     "zh": "特技完成。咪是飞行员。",
+     "en": "Stunts done. Mii is a pilot.",
+     "who": null
+    },
+    {
+     "s": 613.06,
+     "e": 617.45,
+     "zh": "火箭？咪要飞得很远很远。",
+     "en": "Rocket? Mii will go very, very far.",
+     "who": null
+    },
+    {
+     "s": 618.06,
+     "e": 620.94,
+     "zh": "倒数。咪很镇定。",
+     "en": "Countdown. Mii is calm.",
+     "who": null
+    },
+    {
+     "s": 625.56,
+     "e": 628.44,
+     "zh": "太空。咪在飘。",
+     "en": "Space. Mii is floating.",
+     "who": null
+    },
+    {
+     "s": 635.63,
+     "e": 640.89,
+     "zh": "在太空里走路？咪会飘。很骄傲地飘。",
+     "en": "Walk in space? Mii will float. Proudly.",
+     "who": null
+    },
+    {
+     "s": 644.43,
+     "e": 647.21,
+     "zh": "这星球好弹。咪喜欢。",
+     "en": "Bouncy. Mii likes this planet.",
+     "who": null
+    },
+    {
+     "s": 651.83,
+     "e": 655.05,
+     "zh": "走完一圈。咪没有飘走。",
+     "en": "One lap. Mii did not drift away.",
+     "who": null
+    },
+    {
+     "s": 658.2,
+     "e": 662.83,
+     "zh": "火星？咪会小心检查有没有外星人。",
+     "en": "Mars? Mii will check for aliens. Carefully.",
+     "who": null
+    },
+    {
+     "s": 667.0,
+     "e": 670.1,
+     "zh": "你好？你是外星人吗？",
+     "en": "Hello? Are you an alien?",
+     "who": null
+    },
+    {
+     "s": 670.7,
+     "e": 672.26,
+     "zh": "你好，咪。",
+     "en": "Hi, Mii.",
+     "who": null
+    },
+    {
+     "s": 680.77,
+     "e": 684.97,
+     "zh": "教跳舞？咪是很棒的老师。",
+     "en": "Teach dancing? Mii is a great teacher.",
+     "who": null
+    },
+    {
+     "s": 685.77,
+     "e": 688.12,
+     "zh": "一二。像这样扭。",
+     "en": "One, two. Wiggle like this.",
+     "who": null
+    },
+    {
+     "s": 696.97,
+     "e": 702.78,
+     "zh": "看，外星人学会了。是咪教的。",
+     "en": "Look. Alien learned. Mii taught.",
+     "who": null
+    },
+    {
+     "s": 703.34,
+     "e": 706.44,
+     "zh": "证明？咪有最好的证据。",
+     "en": "Proof? Mii has the best proof.",
+     "who": null
+    },
+    {
+     "s": 712.14,
+     "e": 714.66,
+     "zh": "看，真正的外星人。是咪发现的。",
+     "en": "Look. A real alien. Mii found it.",
+     "who": null
+    },
+    {
+     "s": 719.54,
+     "e": 724.51,
+     "zh": "证明了。咪是了不起的探险家。",
+     "en": "Proven. Mii is a great explorer.",
+     "who": null
+    },
+    {
+     "s": 725.91,
+     "e": 731.41,
+     "zh": "教骑车？咪会很耐心。非常耐心。",
+     "en": "Teach biking? Mii will be patient. Very.",
+     "who": null
+    },
+    {
+     "s": 730.91,
+     "e": 732.33,
+     "zh": "扶好车。咪来推。",
+     "en": "Hold the bike. Mii pushes.",
+     "who": null
+    },
+    {
+     "s": 742.11,
+     "e": 747.32,
+     "zh": "外星人学得真快。是咪教得好。",
+     "en": "Aliens learn fast. Mii taught well.",
+     "who": null
+    },
+    {
+     "s": 748.48,
+     "e": 752.68,
+     "zh": "电影？咪就是明星。当然啦。",
+     "en": "Movie? Mii is a star. Obviously.",
+     "who": null
+    },
+    {
+     "s": 757.28,
+     "e": 760.45,
+     "zh": "拿着吧。咪来保护它。",
+     "en": "Take it. Mii will protect it.",
+     "who": null
+    },
+    {
+     "s": 764.68,
+     "e": 766.19,
+     "zh": "收工。咪演得完美。",
+     "en": "Cut. Mii nailed it.",
+     "who": null
+    },
+    {
+     "s": 771.05,
+     "e": 776.55,
+     "zh": "颁奖？咪收下。很谦虚的。差不多。",
+     "en": "Award? Mii accepts. Humbly. Sort of.",
+     "who": null
+    },
+    {
+     "s": 779.85,
+     "e": 781.84,
+     "zh": "最佳搭档。",
+     "en": "Best partner.",
+     "who": null
+    },
+    {
+     "s": 787.25,
+     "e": 790.35,
+     "zh": "咪赢了。咪在发光。",
+     "en": "We won. Mii is shining.",
+     "who": null
+    },
+    {
+     "s": 793.62,
+     "e": 798.44,
+     "zh": "巨星？咪早就准备好了。红毯请。",
+     "en": "Superstar? Mii has been ready. Red carpet, please.",
+     "who": null
+    },
+    {
+     "s": 802.42,
+     "e": 806.14,
+     "zh": "大家笑一笑，这是我的好看的一面。",
+     "en": "Smile, everyone. This is my good side.",
+     "who": null
+    },
+    {
+     "s": 809.82,
+     "e": 812.27,
+     "zh": "谢谢。Mii很谦虚的。勉强算吧。",
+     "en": "Thank you. Mii is humble. Barely.",
+     "who": null
+    },
+    {
+     "s": 816.19,
+     "e": 820.82,
+     "zh": "签名吗？咪有一只很高级的爪子。",
+     "en": "Autograph? Mii has a very fancy paw.",
+     "who": null
+    },
+    {
+     "s": 824.99,
+     "e": 825.97,
+     "zh": "哎呀。这是……艺术线条。",
+     "en": "Oops. That is a… artistic line.",
+     "who": null
+    },
+    {
+     "s": 832.39,
+     "e": 838.7,
+     "zh": "签好啦。咪好有名。",
+     "en": "Signed. Mii is very famous.",
+     "who": null
+    },
+    {
+     "s": 838.76,
+     "e": 842.29,
+     "zh": "要宣布吗？咪会宣布得很隆重。",
+     "en": "Announcement? Mii will make it grand.",
+     "who": null
+    },
+    {
+     "s": 843.76,
+     "e": 849.57,
+     "zh": "大家听好，咪要搬去火星住了。",
+     "en": "Everyone. Mii is moving to Mars.",
+     "who": null
+    },
+    {
+     "s": 851.26,
+     "e": 853.18,
+     "zh": "这是地图。很有艺术感。",
+     "en": "This is the map. Very artistic.",
+     "who": null
+    },
+    {
+     "s": 861.33,
+     "e": 865.53,
+     "zh": "盖房子吗？咪早就挑好位置了。",
+     "en": "Build a house? Mii has the perfect spot.",
+     "who": null
+    },
+    {
+     "s": 870.13,
+     "e": 874.31,
+     "zh": "这块地很平。咪批准了。",
+     "en": "This spot is flat. Mii approves.",
+     "who": null
+    },
+    {
+     "s": 877.53,
+     "e": 879.55,
+     "zh": "房子盖好了。咪是房东了。",
+     "en": "House done. Mii is a landlord.",
+     "who": null
+    },
+    {
+     "s": 883.9,
+     "e": 887.67,
+     "zh": "太小了？咪这回想大点。",
+     "en": "Too small? Mii thinks big now.",
+     "who": null
+    },
+    {
+     "s": 892.7,
+     "e": 894.76,
+     "zh": "咪来盖大的。",
+     "en": "Mii builds the big one.",
+     "who": null
+    },
+    {
+     "s": 900.1,
+     "e": 903.15,
+     "zh": "别墅好了。咪是大地主。",
+     "en": "Villa done. Mii is a landlord.",
+     "who": null
+    },
+    {
+     "s": 906.47,
+     "e": 910.86,
+     "zh": "花园？咪会让它开花。想办法。",
+     "en": "Garden? Mii will make it bloom. Somehow.",
+     "who": null
+    },
+    {
+     "s": 915.27,
+     "e": 917.43,
+     "zh": "咪说这土是红的。花会适应的。",
+     "en": "This soil is red. Flowers will adapt.",
+     "who": null
+    },
+    {
+     "s": 922.67,
+     "e": 928.67,
+     "zh": "花园好了。咪是园丁。",
+     "en": "Garden done. Mii is a gardener.",
+     "who": null
+    },
+    {
+     "s": 929.04,
+     "e": 933.0,
+     "zh": "泳池？咪会挖，咪会倒水。",
+     "en": "Pool? Mii can dig. Mii can pour.",
+     "who": null
+    },
+    {
+     "s": 937.84,
+     "e": 940.94,
+     "zh": "边先砌好。咪是建筑师。",
+     "en": "Edges first. Mii is a builder.",
+     "who": null
+    },
+    {
+     "s": 951.61,
+     "e": 955.81,
+     "zh": "太小？太脏？咪来搞定。",
+     "en": "Too small? Too dirty? Mii will fix it.",
+     "who": null
+    },
+    {
+     "s": 960.41,
+     "e": 961.49,
+     "zh": "更大。咪挖得像专业的。",
+     "en": "Bigger. Mii digs like a pro.",
+     "who": null
+    },
+    {
+     "s": 967.81,
+     "e": 972.92,
+     "zh": "清水。大泳池。好了。",
+     "en": "Clean water. Big pool. Done.",
+     "who": null
+    },
+    {
+     "s": 974.18,
+     "e": 978.57,
+     "zh": "邀请外星人？咪来当主人。很气派。",
+     "en": "Invite the alien? Mii will host. Fancy.",
+     "who": null
+    },
+    {
+     "s": 979.18,
+     "e": 981.82,
+     "zh": "欢迎。这是咪的别墅。",
+     "en": "Welcome. This is Mii's villa.",
+     "who": null
+    },
+    {
+     "s": 986.68,
+     "e": 988.86,
+     "zh": "好棒的房子，咪。",
+     "en": "Nice house, Mii.",
+     "who": null
+    },
+    {
+     "s": 996.75,
+     "e": 1001.57,
+     "zh": "去参观你的房子？咪很好奇。非常好奇。",
+     "en": "Visit your house? Mii is curious. Very.",
+     "who": null
+    },
+    {
+     "s": 1004.75,
+     "e": 1006.12,
+     "zh": "软软的。咪批准了。",
+     "en": "Soft. Mii approves.",
+     "who": null
+    },
+    {
+     "s": 1010.75,
+     "e": 1016.7,
+     "zh": "你的房子真好，外星人。咪想住下来。",
+     "en": "Nice house, alien. Mii wants to stay.",
+     "who": null
+    },
+    {
+     "s": 1019.32,
+     "e": 1024.14,
+     "zh": "外星餐？咪很勇敢。大部分时候。",
+     "en": "Alien food? Mii is brave. Mostly.",
+     "who": null
+    },
+    {
+     "s": 1028.12,
+     "e": 1031.17,
+     "zh": "外星人：尝尝，很好吃。",
+     "en": "Try it. Very tasty.",
+     "who": null
+    },
+    {
+     "s": 1035.52,
+     "e": 1040.34,
+     "zh": "好奇怪。但好吃。咪认可。",
+     "en": "Strange. But good. Mii approves.",
+     "who": null
+    },
+    {
+     "s": 1041.89,
+     "e": 1045.66,
+     "zh": "轮到你尝了。咪来做地球菜。",
+     "en": "Your turn to taste. Mii will cook Earth food.",
+     "who": null
+    },
+    {
+     "s": 1050.69,
+     "e": 1056.07,
+     "zh": "地球菜。米线和青菜。",
+     "en": "Earth food. Noodles and greens.",
+     "who": null
+    },
+    {
+     "s": 1058.09,
+     "e": 1059.6,
+     "zh": "做好了。咪做的。好吃吗？",
+     "en": "Done. Mii cooked. Is it good?",
+     "who": null
+    },
+    {
+     "s": 1064.46,
+     "e": 1068.68,
+     "zh": "评分的话，咪会赢。很公平的。",
+     "en": "Judge us? Mii will win. Fairly.",
+     "who": null
+    },
+    {
+     "s": 1073.26,
+     "e": 1076.62,
+     "zh": "咪的面。完美。大概。",
+     "en": "Mii's noodles. Perfect. Probably.",
+     "who": null
+    },
+    {
+     "s": 1080.66,
+     "e": 1083.88,
+     "zh": "给我们打分。要诚实。一点点。",
+     "en": "Score us. Be honest. A little.",
+     "who": null
+    },
+    {
+     "s": 1087.03,
+     "e": 1091.23,
+     "zh": "输了？那咪就去学。快快学。",
+     "en": "Lost? Then Mii will learn. Fast.",
+     "who": null
+    },
+    {
+     "s": 1092.03,
+     "e": 1095.1,
+     "zh": "把发光的球放进去，然后等一等。",
+     "en": "Put the glowing ball in. Then wait.",
+     "who": null
+    },
+    {
+     "s": 1095.83,
+     "e": 1099.79,
+     "zh": "咪在学。咪在搅。",
+     "en": "Mii is learning. Mii is stirring.",
+     "who": null
+    },
+    {
+     "s": 1109.6,
+     "e": 1113.99,
+     "zh": "修仙？咪得先告别一下。",
+     "en": "Cultivate? Mii must say goodbye first.",
+     "who": null
+    },
+    {
+     "s": 1118.4,
+     "e": 1122.1,
+     "zh": "吸气。咪感觉到能量了。",
+     "en": "Breathe in. Mii feels the energy.",
+     "who": null
+    },
+    {
+     "s": 1125.8,
+     "e": 1129.83,
+     "zh": "漂起来了。咪现在是修仙者了。",
+     "en": "Floated. Mii is a cultivator now.",
+     "who": null
+    },
+    {
+     "s": 1132.17,
+     "e": 1137.86,
+     "zh": "御剑飞行？咪会飘起来。很优雅地。",
+     "en": "Sword flying? Mii will float. Gracefully.",
+     "who": null
+    },
+    {
+     "s": 1140.17,
+     "e": 1142.93,
+     "zh": "起来吧，剑！咪在飞！",
+     "en": "Up, sword! Mii is flying!",
+     "who": null
+    },
+    {
+     "s": 1146.17,
+     "e": 1149.15,
+     "zh": "降落了。咪是故意晃的。",
+     "en": "Landed. Mii meant that wobble.",
+     "who": null
+    },
+    {
+     "s": 1154.74,
+     "e": 1160.0,
+     "zh": "师父？咪会认真学的。",
+     "en": "Master? Mii will study. Very seriously.",
+     "who": null
+    },
+    {
+     "s": 1159.74,
+     "e": 1161.78,
+     "zh": "咪是来学习的。",
+     "en": "Mii is here to learn.",
+     "who": null
+    },
+    {
+     "s": 1163.54,
+     "e": 1165.53,
+     "zh": "用心把它托起来。",
+     "en": "Lift it with your heart.",
+     "who": null
+    },
+    {
+     "s": 1177.31,
+     "e": 1181.94,
+     "zh": "最厉害的仙术？咪准备好了。大概吧。",
+     "en": "Strongest spell? Mii is ready. Mostly.",
+     "who": null
+    },
+    {
+     "s": 1186.11,
+     "e": 1187.67,
+     "zh": "咪来引动天空。",
+     "en": "Gather the sky. Mii commands.",
+     "who": null
+    },
+    {
+     "s": 1193.51,
+     "e": 1196.63,
+     "zh": "咪就是故意的。",
+     "en": "Mii meant to do that.",
+     "who": null
+    },
+    {
+     "s": 1199.88,
+     "e": 1204.27,
+     "zh": "魔法学校？咪得先道别。",
+     "en": "Magic school? Mii must say goodbye first.",
+     "who": null
+    },
+    {
+     "s": 1208.68,
+     "e": 1212.64,
+     "zh": "漂起来吧，羽毛。咪下令。",
+     "en": "Float, feather. Mii commands.",
+     "who": null
+    },
+    {
+     "s": 1222.45,
+     "e": 1228.14,
+     "zh": "扫帚？咪会飞。飞出窗外。一点都不怕。",
+     "en": "Broom? Mii will fly. Out the window. Fearlessly.",
+     "who": null
+    },
+    {
+     "s": 1231.25,
+     "e": 1234.44,
+     "zh": "咪在飞！",
+     "en": "Wheee! Mii is flying!",
+     "who": null
+    },
+    {
+     "s": 1238.65,
+     "e": 1242.49,
+     "zh": "降落了。咪只晃了一下。",
+     "en": "Landed. Mii only wobbled once.",
+     "who": null
+    },
+    {
+     "s": 1245.02,
+     "e": 1249.2,
+     "zh": "哈利？咪会赢他。很有礼貌地赢。",
+     "en": "Harry? Mii will beat him. Politely.",
+     "who": null
+    },
+    {
+     "s": 1253.82,
+     "e": 1257.56,
+     "zh": "咪准备好了，冲！咪好快！",
+     "en": "Ready, go! Mii is fast!",
+     "who": null
+    },
+    {
+     "s": 1261.22,
+     "e": 1264.72,
+     "zh": "赢了。只赢了一根胡须。",
+     "en": "Won. By one whisker.",
+     "who": null
+    },
+    {
+     "s": 1267.59,
+     "e": 1271.98,
+     "zh": "你的朋友们？咪想认识新朋友。",
+     "en": "Your friends? Mii wants new friends.",
+     "who": null
+    },
+    {
+     "s": 1276.39,
+     "e": 1279.46,
+     "zh": "这是罗恩，这是赫敏。",
+     "en": "This is Ron. This is Hermione.",
+     "who": null
+    },
+    {
+     "s": 1280.09,
+     "e": 1283.83,
+     "zh": "幸会。我是咪。",
+     "en": "Nice to meet you. Mii is Mii.",
+     "who": null
+    },
+    {
+     "s": 1290.16,
+     "e": 1294.5,
+     "zh": "比赛？咪请大家一起。很有礼貌地。",
+     "en": "Race? Mii invites everyone. Politely.",
+     "who": null
+    },
+    {
+     "s": 1295.16,
+     "e": 1296.91,
+     "zh": "准备，开始！",
+     "en": "Ready, go!",
+     "who": null
+    },
+    {
+     "s": 1306.36,
+     "e": 1310.7,
+     "zh": "第二名。是咪让他赢的。大部分是。",
+     "en": "Second. Mii let him win. Mostly.",
+     "who": null
+    },
+    {
+     "s": 1309.23,
+     "e": 1311.73,
+     "zh": "现在去找Daenerys Targaryen学骑龙",
+     "en": "",
+     "who": "you"
+    },
+    {
+     "s": 1312.73,
+     "e": 1316.91,
+     "zh": "龙？咪会骑的。很勇敢地骑。",
+     "en": "Dragon? Mii will ride it. Bravely.",
+     "who": null
+    },
+    {
+     "s": 1317.73,
+     "e": 1321.47,
+     "zh": "抓紧龙颈，别松手。",
+     "en": "Hold the neck. Do not let go.",
+     "who": null
+    },
+    {
+     "s": 1325.23,
+     "e": 1328.73,
+     "zh": "呜呼！咪在骑龙啦！",
+     "en": "Wheee! Mii is riding a dragon!",
+     "who": null
+    },
+    {
+     "s": 1335.3,
+     "e": 1340.8,
+     "zh": "天上？咪要飞得很高很高。",
+     "en": "Sky? Mii will fly high. Very high.",
+     "who": null
+    },
+    {
+     "s": 1340.3,
+     "e": 1343.78,
+     "zh": "到这里了。咪在云上面。",
+     "en": "Up here. Mii is above the clouds.",
+     "who": null
+    },
+    {
+     "s": 1351.5,
+     "e": 1354.57,
+     "zh": "无牙仔喜欢咪。咪早就知道。",
+     "en": "Toothless likes Mii. Mii knew it.",
+     "who": null
+    },
+    {
+     "s": 1357.87,
+     "e": 1362.24,
+     "zh": "换龙吗？咪要跳过去了。小心地。",
+     "en": "Switch dragons? Mii will jump. Carefully.",
+     "who": null
+    },
+    {
+     "s": 1370.37,
+     "e": 1373.87,
+     "zh": "抓紧，无牙仔。咪上来了。",
+     "en": "Hold on, Toothless. Mii is aboard.",
+     "who": null
+    },
+    {
+     "s": 1374.27,
+     "e": 1376.89,
+     "zh": "晃了一下。咪是故意的。",
+     "en": "Wobble. Mii meant that.",
+     "who": null
+    },
+    {
+     "s": 1376.94,
+     "e": 1379.44,
+     "zh": "现在你骑着无牙仔找到了 Elon Reeve Musk",
+     "en": "",
+     "who": "you"
+    },
+    {
+     "s": 1380.44,
+     "e": 1384.4,
+     "zh": "找埃隆？咪这就去找到他。",
+     "en": "Find Elon? Mii will track him down.",
+     "who": null
+    },
+    {
+     "s": 1389.24,
+     "e": 1393.61,
+     "zh": "你好。咪是骑龙来的。",
+     "en": "Hello. Mii came by dragon.",
+     "who": null
+    },
+    {
+     "s": 1394.01,
+     "e": 1396.87,
+     "zh": "好酷的龙。欢迎，咪。",
+     "en": "Cool dragon. Welcome, Mii.",
+     "who": null
+    },
+    {
+     "s": 1403.01,
+     "e": 1408.05,
+     "zh": "全部？咪的计划很大。非常大。",
+     "en": "Everything? Mii has big plans. Very big.",
+     "who": null
+    },
+    {
+     "s": 1408.01,
+     "e": 1410.46,
+     "zh": "说定了。都是你的，咪。",
+     "en": "Deal. All yours, Mii.",
+     "who": null
+    },
+    {
+     "s": 1419.21,
+     "e": 1423.82,
+     "zh": "太重了。但都是咪的。差不多。",
+     "en": "Heavy. But Mii owns it. Mostly.",
+     "who": null
+    },
+    {
+     "s": 1425.58,
+     "e": 1430.38,
+     "zh": "巡视？咪得去看看自己的产业。要快。",
+     "en": "Inspect? Mii must check the empire. Quickly.",
+     "who": null
+    },
+    {
+     "s": 1434.38,
+     "e": 1437.69,
+     "zh": "上去啦。咪是大老板。",
+     "en": "Up we go. Mii is the boss.",
+     "who": null
+    },
+    {
+     "s": 1441.78,
+     "e": 1446.41,
+     "zh": "巡视完了。咪很满意。大部分满意。",
+     "en": "Inspected. Mii approves. Mostly.",
+     "who": null
+    },
+    {
+     "s": 1448.15,
+     "e": 1453.24,
+     "zh": "竞选？咪会赢。靠演讲。",
+     "en": "Election? Mii will win. With speeches.",
+     "who": null
+    },
+    {
+     "s": 1456.95,
+     "e": 1461.34,
+     "zh": "大家投咪。每人都有小鱼！",
+     "en": "Vote for Mii. Free fish for everyone.",
+     "who": null
+    },
+    {
+     "s": 1461.74,
+     "e": 1464.16,
+     "zh": "咪是个厉害的对手。",
+     "en": "Mii is a tough opponent.",
+     "who": null
+    },
+    {
+     "s": 1470.72,
+     "e": 1475.57,
+     "zh": "辩论？咪有好多观点。小小的观点。",
+     "en": "Debate? Mii has many points. Tiny ones.",
+     "who": null
+    },
+    {
+     "s": 1479.52,
+     "e": 1483.65,
+     "zh": "免费小鱼，人人都有。这就是咪的观点。",
+     "en": "Free fish for everyone. That is my point.",
+     "who": null
+    },
+    {
+     "s": 1486.92,
+     "e": 1490.28,
+     "zh": "咪是故意晃的。战术性的。",
+     "en": "Mii meant to wobble. Strategic.",
+     "who": null
+    },
+    {
+     "s": 1493.29,
+     "e": 1499.22,
+     "zh": "赢了？咪要发言。要很隆重。",
+     "en": "Won? Mii will speak. Gloriously.",
+     "who": null
+    },
+    {
+     "s": 1502.09,
+     "e": 1503.43,
+     "zh": "公民们。人人有免费小鱼。永远。",
+     "en": "Citizens. Free fish for everyone. Forever.",
+     "who": null
+    },
+    {
+     "s": 1509.49,
+     "e": 1516.33,
+     "zh": "Mii是会长。请再大声点鼓掌。",
+     "en": "Mii is president. Please clap louder.",
      "who": null
     }
    ],
@@ -1608,285 +2735,1325 @@ window.CATALOG = {
      "kind": "rt",
      "label": "第 1 轮",
      "start": 25.24,
-     "end": 42.84,
+     "end": 47.81,
      "pause": 22.69,
      "resume": 25.24,
      "said": {
-      "zh": "乖宝过来，给我亲一口",
-      "en": "Come here, baby, give me a kiss."
+      "zh": "先给我跳个舞吧",
+      "en": "Dance for me first."
      },
      "options": [],
-     "wait": 109.8,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O213710a4f.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O213710a4f.jpg",
-     "beat": "【主镜头】咪从腿边往前挪两小步，上半身前探，把粉鼻子凑到镜头前轻轻碰一下，马上坐回原位，尾巴轻摆，慢慢眨眼"
+     "wait": 19.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O030939235.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O030939235.jpg",
+     "beat": "【主镜头】咪坐在被子上正对镜头，两只耳朵竖起，胡须抖了抖，尾巴轻轻摆一下，前爪在被子上踩了两下，眼睛亮亮的看着镜头"
     },
     {
      "kind": "rt",
      "label": "第 2 轮",
-     "start": 42.84,
-     "end": 60.44,
-     "pause": 40.29,
-     "resume": 42.84,
+     "start": 47.81,
+     "end": 70.38,
+     "pause": 45.26,
+     "resume": 47.81,
      "said": {
-      "zh": "穿上拖鞋，跟咪去厨房",
-      "en": "Put on your slippers and follow Mii to the kitchen."
+      "zh": "我们去看电影吧",
+      "en": "Let's go watch a movie."
      },
      "options": [
-      "穿上拖鞋，跟咪去厨房",
-      "伸手摸摸咪的头夸它"
+      "让咪去烤吐司",
+      "伸手摸摸咪的头"
      ],
-     "wait": 30.9,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O21393879a.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O21393879a.jpg",
-     "beat": "【主镜头】一双光脚（浅蓝色睡裤裤脚）从画面上方走进来，一只一只踩进拖鞋，穿着拖鞋走出画面"
+     "wait": 21.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0310374a9.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0310374a9.jpg",
+     "beat": "【主镜头】咪坐在被子上，耳朵竖起，歪头看向镜头，尾巴尖轻轻摆了两下，然后坐回原位"
     },
     {
      "kind": "rt",
      "label": "第 3 轮",
-     "start": 60.44,
-     "end": 78.04,
-     "pause": 57.89,
-     "resume": 60.44,
+     "start": 70.38,
+     "end": 92.95,
+     "pause": 67.83,
+     "resume": 70.38,
      "said": {
-      "zh": "让咪把吐司抹上果酱",
-      "en": "Let Mii spread jam on the toast."
+      "zh": "我们去骑马吧",
+      "en": "Let's go horseback riding"
      },
      "options": [
-      "让咪把吐司抹上果酱",
-      "让咪表演一个小绝活"
+      "伸手轻轻摸摸咪的头",
+      "让咪去买爆米花"
      ],
-     "wait": 106.5,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214125ce4.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214125ce4.jpg",
-     "beat": "【主镜头】咪坐在台面对面，前爪搭着台面，耳朵竖起，点点头，看向镜头"
+     "wait": 26.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0311407e5.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0311407e5.jpg",
+     "beat": "【主镜头】咪坐在镜头右手边座位上，耳朵竖起，胡须抖动，前爪轻轻拍了拍扶手，又坐回原位，看向镜头"
     },
     {
      "kind": "rt",
      "label": "第 4 轮",
-     "start": 78.04,
-     "end": 95.64,
-     "pause": 75.49,
-     "resume": 78.04,
+     "start": 92.95,
+     "end": 115.52,
+     "pause": 90.4,
+     "resume": 92.95,
      "said": {
-      "zh": "好吧，我尝尝咪抹的爪印吐司",
-      "en": "Okay, let me try the paw-print toast Mii spread."
+      "zh": "这匹马太小了，换一匹大马，跑快一点",
+      "en": "This horse is too small. Get a bigger one that runs faster."
      },
      "options": [
-      "咬一口爪印吐司",
-      "摸摸咪的头安慰它"
+      "让咪骑着小马跳过栅栏",
+      "伸手摸摸小马的鼻子"
      ],
-     "wait": 198.2,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214340365.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214340365.jpg",
-     "beat": "【中景】咪两只前爪搭在台面上，耳朵竖起，粉鼻子轻轻抖，用鼻尖把白盘子往镜头方向推一点点，再坐稳看着镜头"
+     "wait": 21.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031303d7c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031303d7c.jpg",
+     "beat": "【主镜头】第三人称全景，咪跨坐在小马背上，前爪握缰绳，耳朵往后压了一下又竖起，尾巴轻摆，小马在原地低头甩了甩耳朵"
     },
     {
      "kind": "rt",
      "label": "第 5 轮",
-     "start": 95.64,
-     "end": 113.24,
-     "pause": 93.09,
-     "resume": 95.64,
+     "start": 115.52,
+     "end": 138.09,
+     "pause": 112.97,
+     "resume": 115.52,
      "said": {
-      "zh": "不吃啦，咪我们出门去玩好不好",
-      "en": "I'm full, Mii. Shall we go out and play?"
+      "zh": "让大马跳过木栅栏",
+      "en": "Make the horse jump over the wooden fence."
      },
      "options": [
-      "带咪下楼去超市买新果酱",
-      "让咪表演扭屁股逗你开心"
+      "让大马跳过木栅栏",
+      "伸手摸摸咪的头"
      ],
-     "wait": 103.4,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214848c52.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O214848c52.jpg",
-     "beat": "【主镜头】咪耳朵一下竖起，胡须抖动，前爪在台面上轻轻踩两下，随后从台面后面往下一跳，身影沉到台面后看不见，台面上只剩盘子和果酱罐"
+     "wait": 25.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031403a43.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031403a43.jpg",
+     "beat": "【主镜头】咪跨坐在栗色大马背上，前爪握着缰绳，耳朵竖起，尾巴轻摆，朝木栅栏的方向稳稳坐着，大马原地踏了踏蹄"
     },
     {
      "kind": "rt",
      "label": "第 6 轮",
-     "start": 113.24,
-     "end": 130.84,
-     "pause": 110.69,
-     "resume": 113.24,
+     "start": 138.09,
+     "end": 160.66,
+     "pause": 135.54,
+     "resume": 138.09,
      "said": {
-      "zh": "咪，我们去公园追球玩好不好",
-      "en": "Mii, shall we go to the park and chase the ball?"
+      "zh": "太厉害啦，再练习一下骑射吧",
+      "en": "Amazing! Practice some mounted archery next."
      },
      "options": [
-      "我们去公园玩吧",
-      "先去楼下小超市逛逛"
+      "伸手摸摸咪的头夸它",
+      "让咪骑马去森林里探险"
      ],
-     "wait": 213.5,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O21524398a.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O21524398a.jpg",
-     "beat": "【主镜头】咪的耳朵竖起，尾巴轻摆，背着小包的身体前倾，随后在原位小跑出画面左侧，玄关留下空地毯和木门"
+     "wait": 27.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031502e01.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O031502e01.jpg",
+     "beat": "【主镜头】咪跨坐在大马背上，前爪握着缰绳，耳朵竖起，胸口挺得高高的，尾巴轻轻左右摆，慢慢眨眼，得意地原地小幅点头"
     },
     {
      "kind": "rt",
      "label": "第 7 轮",
-     "start": 130.84,
-     "end": 148.44,
-     "pause": 128.29,
-     "resume": 130.84,
+     "start": 160.66,
+     "end": 183.23,
+     "pause": 158.11,
+     "resume": 160.66,
      "said": {
-      "zh": "咪真棒！不玩球啦，我们去电影院看电影吧",
-      "en": "Great job, Mii! No more ball games. Let's go see a movie at the cinema."
+      "zh": "不错，我们现在去滑雪吧",
+      "en": "Nice, let's go skiing now."
      },
      "options": [
-      "伸手摸摸咪的头夸它",
-      "把球扔远，再追一次"
+      "让咪边跑边射移动的靶",
+      "伸手摸摸咪的头夸它"
      ],
-     "wait": 141.0,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O215702f80.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O215702f80.jpg",
-     "beat": "【主镜头】咪两只前爪按着红球，被夸后耳朵竖起，尾巴轻摆，用头蹭一下球，松开爪，在原位小跑出画面左侧，画面里只剩草地和小红球"
+     "wait": 23.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03161917a.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03161917a.jpg",
+     "beat": "【主镜头】咪骑在大马背上，小木弓挂在爪边，耳朵竖起，胡须抖了抖，尾巴兴奋地轻摆一下，身体前倾又坐回原位"
     },
     {
      "kind": "rt",
      "label": "第 8 轮",
-     "start": 148.44,
-     "end": 166.04,
-     "pause": 145.89,
-     "resume": 148.44,
+     "start": 183.23,
+     "end": 205.8,
+     "pause": 180.68,
+     "resume": 183.23,
      "said": {
-      "zh": "让咪靠过来一起看",
-      "en": "Let Mii come closer and watch together."
+      "zh": "不错，再滑个单板，去跳台空翻",
+      "en": "Nice. Now try a snowboard and do a flip off the jump."
      },
      "options": [
-      "让咪靠过来一起看",
-      "让咪去买爆米花"
+      "让咪从高处跳台飞起来",
+      "一起堆个大雪人"
      ],
-     "wait": 35.3,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2201493d0.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2201493d0.jpg",
-     "beat": "【主镜头】咪耳朵竖起，身体往镜头这边前倾一点，慢慢眨眼，再坐回右边座椅原位，尾巴轻摆"
+     "wait": 21.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0317503c2.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0317503c2.jpg",
+     "beat": "【主镜头】咪后腿站着，前爪握着雪杖，胸口挺起，耳朵竖起，尾巴轻轻摆了一下，慢慢眨眼，得意地扬起下巴"
     },
     {
      "kind": "rt",
      "label": "第 9 轮",
-     "start": 166.04,
-     "end": 183.64,
-     "pause": 163.49,
-     "resume": 166.04,
+     "start": 205.8,
+     "end": 228.37,
+     "pause": 203.25,
+     "resume": 205.8,
      "said": {
-      "zh": "伸手轻轻摸摸咪的头",
-      "en": "Reach out and gently pat Mii's head."
+      "zh": "让咪连翻两周",
+      "en": "Have Mi do two flips in a row."
      },
      "options": [
-      "伸手轻轻摸摸咪的头",
-      "看完电影，带咪走出影厅"
+      "让咪连翻两周",
+      "伸手摸摸咪的头"
      ],
-     "wait": 39.0,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220253dd8.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220253dd8.jpg",
-     "beat": "【近景】那只手从画面正下方伸进来，轻轻摸咪的头顶"
+     "wait": 27.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0320141f9.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0320141f9.jpg",
+     "beat": "【主镜头】咪站在单板上，胸口小围兜轻晃，耳朵竖起，尾巴蓬松地摆了一下，前爪握拳似的收紧，看向跳台，胡须抖动"
     },
     {
      "kind": "rt",
      "label": "第 10 轮",
-     "start": 183.64,
-     "end": 201.24,
-     "pause": 181.09,
-     "resume": 183.64,
+     "start": 228.37,
+     "end": 250.94,
+     "pause": 225.82,
+     "resume": 228.37,
      "said": {
-      "zh": "咪等等，我们先拍张合照再回去做饭",
-      "en": "Wait, Mii. Let's take a photo together first, then go back and cook."
+      "zh": "我们去跳伞吧",
+      "en": "Let's go skydiving"
      },
      "options": [
-      "起身跟咪去厨房看它做饭",
-      "让咪做过桥米线给我"
+      "让咪在跳台上翻三周",
+      "让咪滑下坡堆个雪人"
      ],
-     "wait": 25.8,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220354043.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220354043.jpg",
-     "beat": "【主镜头】咪还在右手边座椅上，耳朵竖起，听到合照尾巴轻摆，往镜头这边挪近一点点，再坐回原位"
+     "wait": 25.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032216e38.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032216e38.jpg",
+     "beat": "【主镜头】咪站在单板上，晕乎乎地晃了一下，耳朵竖起，尾巴轻摆，前爪举起比一个向上指的动作，最后回到原来的站姿"
     },
     {
      "kind": "rt",
      "label": "第 11 轮",
-     "start": 201.24,
-     "end": 218.84,
-     "pause": 198.69,
-     "resume": 201.24,
+     "start": 250.94,
+     "end": 273.51,
+     "pause": 248.39,
+     "resume": 250.94,
      "said": {
-      "zh": "好啦好啦回家，路上抱着你走，咪累不累",
-      "en": "Okay, okay, let's go home. I'll carry you on the way. Are you tired, Mii?"
+      "zh": "真棒！我们去潜水吧",
+      "en": "Great! Let's go diving."
      },
      "options": [
-      "让咪先去厨房开工",
-      "伸手让咪跳上来带路"
+      "让咪表演空中摆造型",
+      "伸手摸摸咪的头"
      ],
-     "wait": 201.8,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220512140.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220512140.jpg",
-     "beat": "【主镜头】那双手从画面下方伸进来，把咪托起一下又放回座椅，咪眯眼蹭袖口，耳朵轻抖"
+     "wait": 23.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032325bc7.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032325bc7.jpg",
+     "beat": "【主镜头】咪站在草地上，红白降落伞铺在身后，耳朵竖起，尾巴轻轻摇摆，胡须抖了抖，得意地挺起胸"
     },
     {
      "kind": "rt",
      "label": "第 12 轮",
-     "start": 218.84,
-     "end": 236.44,
-     "pause": 216.29,
-     "resume": 218.84,
+     "start": 273.51,
+     "end": 296.08,
+     "pause": 270.96,
+     "resume": 273.51,
      "said": {
-      "zh": "鼓励咪：再来一次",
-      "en": "Encourage Mii: Try again."
+      "zh": "跟着小黄鱼游进珊瑚丛",
+      "en": "Follow the little yellow fish into the coral reef."
      },
      "options": [
-      "鼓励咪：再来一次",
-      "伸手帮咪擦锅"
+      "跟着小黄鱼游进珊瑚丛",
+      "让咪潜到海底找宝箱"
      ],
-     "wait": 247.9,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220922c12.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O220922c12.jpg",
-     "beat": "【中景】咪耳朵从耷拉慢慢竖起，尾巴轻摆，认真点头，身体前倾又坐回台面后原位"
+     "wait": 20.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032426a4c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032426a4c.jpg",
+     "beat": "【主镜头】咪在水中直立，潜水镜后的大眼睛盯着珊瑚丛，耳朵竖起，尾巴轻摆，朝珊瑚丛点点头，随后回到原位"
     },
     {
      "kind": "rt",
      "label": "第 13 轮",
-     "start": 236.44,
-     "end": 254.04,
-     "pause": 233.89,
-     "resume": 236.44,
+     "start": 296.08,
+     "end": 318.65,
+     "pause": 293.53,
+     "resume": 296.08,
      "said": {
-      "zh": "咪好棒！吃完饭我们去夜里散步看路灯好不好",
-      "en": "Good job, Mii! After dinner, shall we take a night walk and look at the streetlights?"
+      "zh": "去骑大鲨鱼",
+      "en": "Go ride the giant shark."
      },
      "options": [
-      "去餐桌，让咪喂我一口",
-      "摸摸咪，夸它真厉害"
+      "让咪游进珊瑚洞里",
+      "叫咪去追一只大海龟"
      ],
-     "wait": 215.4,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2215269e3.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2215269e3.jpg",
-     "beat": "【中景】咪耳朵竖起，尾巴轻摆，慢慢眨眼，前爪搭在台面上，粉鼻子微微抖动，开心地蹭了蹭台面边"
+     "wait": 22.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032516058.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032516058.jpg",
+     "beat": "【主镜头】咪在珊瑚丛前，戴着潜水镜，耳朵竖起，胡须抖一抖，两只前爪在水里划一小圈，尾巴轻摆，再回到原位"
     },
     {
      "kind": "rt",
      "label": "第 14 轮",
-     "start": 254.04,
-     "end": 269.2,
-     "pause": 251.49,
-     "resume": 254.04,
+     "start": 318.65,
+     "end": 341.22,
+     "pause": 316.1,
+     "resume": 318.65,
      "said": {
-      "zh": "好香呀！咪也坐下一起吃，吃完带你去看路灯",
-      "en": "It smells so good! Mii, sit down and eat with me. After this, I'll take you to see the streetlights."
+      "zh": "让咪和鲨鱼赛跑",
+      "en": "Have Mi race the shark."
      },
      "options": [
-      "端到餐桌，一起吃饭",
-      "摸摸咪，说要早点出发"
+      "让鲨鱼带咪去深海",
+      "让咪和鲨鱼赛跑"
      ],
-     "wait": 354.8,
-     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O221947bcd.mp4",
-     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O221947bcd.jpg",
-     "beat": "【主镜头】咪耳朵竖起，鼻尖抽动闻米线香，尾巴轻摆，眼睛眯起来，然后从台面后往下一跳，身影沉下去看不见，台面上只剩盘子、罐和小锅"
+     "wait": 20.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03264031b.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03264031b.jpg",
+     "beat": "【主镜头】咪跨坐在鲨鱼背上，两只前爪握着背鳍，耳朵竖起，胡须抖了抖，尾巴轻摆，水中气泡升起"
+    },
+    {
+     "kind": "rt",
+     "label": "第 15 轮",
+     "start": 341.22,
+     "end": 363.79,
+     "pause": 338.67,
+     "resume": 341.22,
+     "said": {
+      "zh": "你扮演美人鱼来个海底表演吧",
+      "en": "Play a mermaid and put on an underwater show."
+     },
+     "options": [
+      "让咪抓住鲨鱼尾巴再比一次",
+      "带咪去找沉船探险"
+     ],
+     "wait": 20.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032743fff.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O032743fff.jpg",
+     "beat": "【主镜头】咪在水里喘着气，听到美人鱼三个字，耳朵竖起，胡须抖动，用前爪摸了摸脚蹼，再坐正面向镜头"
+    },
+    {
+     "kind": "rt",
+     "label": "第 16 轮",
+     "start": 363.79,
+     "end": 386.36,
+     "pause": 361.24,
+     "resume": 363.79,
+     "said": {
+      "zh": "我们去滑冰吧",
+      "en": "Let's go ice skating"
+     },
+     "options": [
+      "伸手给咪鼓掌",
+      "让咪唱一首海底歌"
+     ],
+     "wait": 24.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033010938.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033010938.jpg",
+     "beat": "【主镜头】咪站在海底沙地中央，潜水镜后的圆眼睛亮起来，耳朵竖起，尾巴轻轻摆，前爪在胸前拍了一下，又站回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 17 轮",
+     "start": 386.36,
+     "end": 408.93,
+     "pause": 383.81,
+     "resume": 386.36,
+     "said": {
+      "zh": "我们去玩攀岩吧",
+      "en": "Let's go rock climbing."
+     },
+     "options": [
+      "让咪表演冰上旋转",
+      "伸手拉着咪滑一圈"
+     ],
+     "wait": 22.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033148d5e.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033148d5e.jpg",
+     "beat": "【主镜头】咪站在冰面中央偏左，面朝镜头，竖起耳朵，尾巴轻轻一摆，前爪在身前抬起比划一个向上爬的动作，慢慢眨一下眼，然后回到原来的站姿"
+    },
+    {
+     "kind": "rt",
+     "label": "第 18 轮",
+     "start": 408.93,
+     "end": 431.5,
+     "pause": 406.38,
+     "resume": 408.93,
+     "said": {
+      "zh": "让咪从顶端荡下来",
+      "en": "Have Mi swing down from the top."
+     },
+     "options": [
+      "让咪不系绳徒手更高爬",
+      "让咪从顶端荡下来"
+     ],
+     "wait": 23.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033250b83.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033250b83.jpg",
+     "beat": "【主镜头】咪挂在岩壁顶端铜铃旁，前爪抓着岩点，耳朵朝前竖起，尾巴轻轻摆了一下，胡须抖动，看向镜头"
+    },
+    {
+     "kind": "rt",
+     "label": "第 19 轮",
+     "start": 431.5,
+     "end": 454.07,
+     "pause": 428.95,
+     "resume": 431.5,
+     "said": {
+      "zh": "去玩蹦极",
+      "en": "Go bungee jumping."
+     },
+     "options": [
+      "去玩蹦极",
+      "让咪去冲浪"
+     ],
+     "wait": 24.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0334169ec.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0334169ec.jpg",
+     "beat": "【主镜头】咪站在岩壁底部沙地偏左，面朝镜头，耳朵竖起，尾巴轻摆，前爪抬起往上比划了一下，眼睛慢慢眨一下，再放下前爪站回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 20 轮",
+     "start": 454.07,
+     "end": 476.64,
+     "pause": 451.52,
+     "resume": 454.07,
+     "said": {
+      "zh": "让咪荡到对岸摘朵花",
+      "en": "Have Mi swing to the other side and pick a flower."
+     },
+     "options": [
+      "让咪荡到对岸摘朵花",
+      "让咪再蹦一次，翻个跟头"
+     ],
+     "wait": 18.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033501dda.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033501dda.jpg",
+     "beat": "【主镜头】咪倒挂在峡谷半空，橙色弹力绳系在腰间，耳朵朝下抖了抖，尾巴轻轻摆动，身体微微晃着"
+    },
+    {
+     "kind": "rt",
+     "label": "第 21 轮",
+     "start": 476.64,
+     "end": 499.21,
+     "pause": 474.09,
+     "resume": 476.64,
+     "said": {
+      "zh": "我们去玩冲浪吧",
+      "en": "Let's go surfing."
+     },
+     "options": [
+      "让咪把花插在头盔上",
+      "让咪荡到对岸再摘一朵"
+     ],
+     "wait": 20.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033549304.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033549304.jpg",
+     "beat": "【主镜头】咪倒挂在半空，抱着小黄花，耳朵竖起，尾巴轻轻晃了晃，慢慢眨了一下眼"
+    },
+    {
+     "kind": "rt",
+     "label": "第 22 轮",
+     "start": 499.21,
+     "end": 521.78,
+     "pause": 496.66,
+     "resume": 499.21,
+     "said": {
+      "zh": "我们去玩赛车吧",
+      "en": "Let's go car racing."
+     },
+     "options": [
+      "让咪冲更大的浪",
+      "让咪在浪上表演花式动作"
+     ],
+     "wait": 24.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03370130a.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03370130a.jpg",
+     "beat": "【主镜头】咪站在冲浪板上，耳朵竖起，尾巴轻轻摆动，小头盔下的大眼睛亮亮的，身体微微前倾，像已经听到了引擎声，然后站稳回到原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 23 轮",
+     "start": 521.78,
+     "end": 544.35,
+     "pause": 519.23,
+     "resume": 521.78,
+     "said": {
+      "zh": "你去参加赛车比赛，我会给你加油的",
+      "en": "Go enter the car race, I'll cheer for you."
+     },
+     "options": [
+      "让咪再跑一圈，开到最快",
+      "在赛道上放个小坡道让咪飞过去"
+     ],
+     "wait": 21.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033828fb0.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033828fb0.jpg",
+     "beat": "【主镜头】咪坐在红色小赛车里，戴着小头盔，前爪握着方向盘，耳朵竖起，尾巴轻轻摆了一下，胸口挺起来，眼睛亮亮地眨了一下"
+    },
+    {
+     "kind": "rt",
+     "label": "第 24 轮",
+     "start": 544.35,
+     "end": 566.92,
+     "pause": 541.8,
+     "resume": 544.35,
+     "said": {
+      "zh": "再去参加摩托车比赛",
+      "en": "Next, go enter the motorcycle race."
+     },
+     "options": [
+      "给咪戴上冠军奖牌",
+      "让咪和小狗车手再赛一场"
+     ],
+     "wait": 27.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033941708.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O033941708.jpg",
+     "beat": "【主镜头】咪坐在红色小赛车里，耳朵竖起，前爪在方向盘上轻拍两下，尾巴轻轻摆动"
+    },
+    {
+     "kind": "rt",
+     "label": "第 25 轮",
+     "start": 566.92,
+     "end": 589.49,
+     "pause": 564.37,
+     "resume": 566.92,
+     "said": {
+      "zh": "我们去开飞机吧",
+      "en": "Let's go fly a plane."
+     },
+     "options": [
+      "让咪骑摩托飞跃坡道",
+      "请小狗们给咪颁奖"
+     ],
+     "wait": 19.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034052cc7.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034052cc7.jpg",
+     "beat": "【主镜头】咪跨坐在红色小摩托上，耳朵竖起，尾巴轻轻摆动，前爪抬起比了个起飞的手势，然后放回车把，回到首帧姿势"
+    },
+    {
+     "kind": "rt",
+     "label": "第 26 轮",
+     "start": 589.49,
+     "end": 612.06,
+     "pause": 586.94,
+     "resume": 589.49,
+     "said": {
+      "zh": "让咪开飞机表演特技",
+      "en": "Have Mi fly a plane and perform stunts."
+     },
+     "options": [
+      "让咪开飞机表演特技",
+      "坐上飞机一起去云上兜风"
+     ],
+     "wait": 20.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034152f5a.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034152f5a.jpg",
+     "beat": "【主镜头】咪坐在驾驶舱里，两只前爪握着操纵杆，耳朵竖起，胡须抖了抖，尾巴在座椅后轻摆，护目镜拉下盖住眼睛，然后坐稳"
+    },
+    {
+     "kind": "rt",
+     "label": "第 27 轮",
+     "start": 612.06,
+     "end": 634.63,
+     "pause": 609.51,
+     "resume": 612.06,
+     "said": {
+      "zh": "我们去开火箭吧，飞出外太空",
+      "en": "Let's fly a rocket into outer space."
+     },
+     "options": [
+      "让咪载小狗飞一圈",
+      "让咪跳出飞机去跳伞"
+     ],
+     "wait": 34.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034942c8f.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O034942c8f.jpg",
+     "beat": "【主镜头】咪坐在飞机驾驶舱里，耳朵竖起，胡须抖了抖，前爪在操纵杆上轻轻拍了两下，尾巴在舱边轻摆，然后坐好看着前方"
+    },
+    {
+     "kind": "rt",
+     "label": "第 28 轮",
+     "start": 634.63,
+     "end": 657.2,
+     "pause": 632.08,
+     "resume": 634.63,
+     "said": {
+      "zh": "让咪在太空里走一圈",
+      "en": "Have Mi take a walk in space."
+     },
+     "options": [
+      "让咪降落到小星球上",
+      "让咪在太空里走一圈"
+     ],
+     "wait": 24.1,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035057310.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035057310.jpg",
+     "beat": "【主镜头】第三人称低机位，咪戴着飞行头盔坐在火箭舱口，前爪握着操纵杆，耳朵竖起，尾巴轻摆，慢慢眨一下眼"
+    },
+    {
+     "kind": "rt",
+     "label": "第 29 轮",
+     "start": 657.2,
+     "end": 679.77,
+     "pause": 654.65,
+     "resume": 657.2,
+     "said": {
+      "zh": "去火星看看那里有外星人吗",
+      "en": "Go to Mars and see if there are aliens there."
+     },
+     "options": [
+      "让咪在星球上插一面小旗",
+      "让咪跳起来在太空里翻跟头"
+     ],
+     "wait": 22.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0352017f8.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0352017f8.jpg",
+     "beat": "【主镜头】咪站在小星球上，竖起耳朵，尾巴轻轻摆，慢慢眨眼后挺起小胸脯，再回到原位站好"
+    },
+    {
+     "kind": "rt",
+     "label": "第 30 轮",
+     "start": 679.77,
+     "end": 702.34,
+     "pause": 677.22,
+     "resume": 679.77,
+     "said": {
+      "zh": "让咪教外星人跳舞",
+      "en": "Have Mi teach the alien to dance."
+     },
+     "options": [
+      "跟外星人去红山丘看看",
+      "让咪教外星人跳舞"
+     ],
+     "wait": 22.5,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035304b59.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035304b59.jpg",
+     "beat": "【主镜头】咪站在画面中央偏左，耳朵竖起，胡须轻抖，尾巴轻摆，朝岩石旁的小外星人歪了歪头，再慢慢眨一下眼，抬起一只前爪拍拍自己的胸口"
+    },
+    {
+     "kind": "rt",
+     "label": "第 31 轮",
+     "start": 702.34,
+     "end": 724.91,
+     "pause": 699.79,
+     "resume": 702.34,
+     "said": {
+      "zh": "带外星人回地球，向大家证明你的重大发现",
+      "en": "Bring the alien back to Earth and prove your great discovery to everyone."
+     },
+     "options": [
+      "让外星人带咪去红山丘",
+      "让咪和外星人比赛跳高"
+     ],
+     "wait": 20.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035428cfd.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O035428cfd.jpg",
+     "beat": "【主镜头】咪站在火星沙地中央偏左，挺起胸脯，耳朵竖起，胡须抖动，抬一只前爪拍拍旁边的小外星人，再把爪放下，坐回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 32 轮",
+     "start": 724.91,
+     "end": 747.48,
+     "pause": 722.36,
+     "resume": 724.91,
+     "said": {
+      "zh": "让咪教外星人骑自行车",
+      "en": "Have Mi teach the alien to ride a bicycle."
+     },
+     "options": [
+      "带外星人逛公园小路",
+      "让咪教外星人骑自行车"
+     ],
+     "wait": 21.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03570129c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03570129c.jpg",
+     "beat": "【主镜头】咪站在草坪中央偏右，耳朵竖起，尾巴轻轻摆动，胸一挺，朝小外星人慢慢眨眼，小外星人天线晃了晃"
+    },
+    {
+     "kind": "rt",
+     "label": "第 33 轮",
+     "start": 747.48,
+     "end": 770.05,
+     "pause": 744.93,
+     "resume": 747.48,
+     "said": {
+      "zh": "你们俩去演电影吧",
+      "en": "You two should go act in a movie."
+     },
+     "options": [
+      "让咪和外星人比赛骑一圈",
+      "让咪骑车表演单轮特技"
+     ],
+     "wait": 22.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03575814c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O03575814c.jpg",
+     "beat": "【主镜头】咪骑在红色小自行车上，耳朵竖起，尾巴轻轻一摆，眼睛亮亮地看着前方，慢慢眨眼后回到原位坐好"
+    },
+    {
+     "kind": "rt",
+     "label": "第 34 轮",
+     "start": 770.05,
+     "end": 792.62,
+     "pause": 767.5,
+     "resume": 770.05,
+     "said": {
+      "zh": "给咪和外星人颁奖",
+      "en": "Give Mi and the alien an award."
+     },
+     "options": [
+      "让咪和外星人演打怪兽",
+      "给咪和外星人颁奖"
+     ],
+     "wait": 20.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0359027c2.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0359027c2.jpg",
+     "beat": "【主镜头】咪抱着发光黄色小球，前爪握着小木剑，耳朵竖起，胡须抖了抖，身体前倾又坐正"
+    },
+    {
+     "kind": "rt",
+     "label": "第 35 轮",
+     "start": 792.62,
+     "end": 815.19,
+     "pause": 790.07,
+     "resume": 792.62,
+     "said": {
+      "zh": "你已经是国际巨星了，去走红毯",
+      "en": "You're already an international star, go walk the red carpet."
+     },
+     "options": [
+      "让咪和外星人上台领奖演讲",
+      "让他们戴着奖牌去跳庆功舞"
+     ],
+     "wait": 25.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0400084ff.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0400084ff.jpg",
+     "beat": "【主镜头】咪站在片场草垫上，胸前挂着金奖牌，挺起奶白色胸口，下巴抬高，尾巴竖起轻摆，慢慢眨眼，得意地等着"
+    },
+    {
+     "kind": "rt",
+     "label": "第 36 轮",
+     "start": 815.19,
+     "end": 837.76,
+     "pause": 812.64,
+     "resume": 815.19,
+     "said": {
+      "zh": "让咪给粉丝签名",
+      "en": "Have Mi sign autographs for fans."
+     },
+     "options": [
+      "让咪上台领影后大奖",
+      "让咪给粉丝签名"
+     ],
+     "wait": 24.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0401344c1.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0401344c1.jpg",
+     "beat": "【主镜头】咪站在红毯中央偏右，面朝画面里侧，耳朵竖起，尾巴轻轻摆动，前爪抬起挥了一下，慢慢眨眼，又回到原来的站姿。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 37 轮",
+     "start": 837.76,
+     "end": 860.33,
+     "pause": 835.21,
+     "resume": 837.76,
+     "said": {
+      "zh": "你告诉大家你以后要去火星生活了",
+      "en": "Tell everyone you'll be living on Mars from now on."
+     },
+     "options": [
+      "让咪走进大剧院门廊",
+      "让咪给粉丝来段签名舞"
+     ],
+     "wait": 29.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0403241df.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0403241df.jpg",
+     "beat": "【主镜头】咪站在红毯中央偏右，沾着红印泥的前爪抬到胸前，耳朵竖起，胡须抖了抖，尾巴轻轻一摆，随后放下爪子，回到原来的站姿"
+    },
+    {
+     "kind": "rt",
+     "label": "第 38 轮",
+     "start": 860.33,
+     "end": 882.9,
+     "pause": 857.78,
+     "resume": 860.33,
+     "said": {
+      "zh": "让咪去火星挑一块地盖房子",
+      "en": "Have Mi pick a plot on Mars and build a house."
+     },
+     "options": [
+      "让咪去火星挑一块地盖房子",
+      "伸手给咪的爪子按个红印"
+     ],
+     "wait": 20.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040431a9a.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040431a9a.jpg",
+     "beat": "【主镜头】咪站在红毯中央偏右，沾着红印泥的前爪抬起一点，耳朵竖起，尾巴轻轻摆了一下，认真点头"
+    },
+    {
+     "kind": "rt",
+     "label": "第 39 轮",
+     "start": 882.9,
+     "end": 905.47,
+     "pause": 880.35,
+     "resume": 882.9,
+     "said": {
+      "zh": "这个房子太小了，要盖一个豪华大别墅",
+      "en": "This house is too small, build a luxury villa."
+     },
+     "options": [
+      "让咪给小房子装上窗户",
+      "请小外星人来参观新家"
+     ],
+     "wait": 21.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040535a96.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040535a96.jpg",
+     "beat": "【主镜头】咪站在小房子旁，耳朵往后压了一下，尾巴慢慢摆，用前爪拍拍小房子的墙，又抬头望望，点点头，回到原位站好"
+    },
+    {
+     "kind": "rt",
+     "label": "第 40 轮",
+     "start": 905.47,
+     "end": 928.04,
+     "pause": 902.92,
+     "resume": 905.47,
+     "said": {
+      "zh": "让咪给别墅装个大花园",
+      "en": "Have Mi add a big garden to the villa."
+     },
+     "options": [
+      "让咪给别墅装个大花园",
+      "请小外星人来参观别墅"
+     ],
+     "wait": 20.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040631660.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040631660.jpg",
+     "beat": "【主镜头】咪站在别墅台阶前，面朝画面里侧，耳朵竖起，尾巴轻轻摆动，抬起一只前爪指向别墅前的空沙地，眨眨眼"
+    },
+    {
+     "kind": "rt",
+     "label": "第 41 轮",
+     "start": 928.04,
+     "end": 950.61,
+     "pause": 925.49,
+     "resume": 928.04,
+     "said": {
+      "zh": "让咪在花园里建个小游泳池",
+      "en": "Have Mi build a small swimming pool in the garden."
+     },
+     "options": [
+      "让咪邀请小外星人来做客",
+      "让咪在花园里建个小游泳池"
+     ],
+     "wait": 25.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0407154b4.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0407154b4.jpg",
+     "beat": "【主镜头】咪握着小水壶站在花圃边，耳朵竖起，尾巴轻摆，胸口挺一挺，慢慢眨眼，再回到原来的站姿"
+    },
+    {
+     "kind": "rt",
+     "label": "第 42 轮",
+     "start": 950.61,
+     "end": 973.18,
+     "pause": 948.06,
+     "resume": 950.61,
+     "said": {
+      "zh": "这个泳池也太小了，而且水好脏",
+      "en": "This pool is too small, and the water is so dirty."
+     },
+     "options": [
+      "让咪下水游一圈",
+      "邀请外星人来泳池派对"
+     ],
+     "wait": 24.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040905d17.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O040905d17.jpg",
+     "beat": "【主镜头】咪坐在池边，抱着小水壶，耳朵往后压了一下，低头看了看池水，再抬头看镜头，尾巴尖轻轻摆动"
+    },
+    {
+     "kind": "rt",
+     "label": "第 43 轮",
+     "start": 973.18,
+     "end": 995.75,
+     "pause": 970.63,
+     "resume": 973.18,
+     "said": {
+      "zh": "你去请你的外星人朋友来参观新家，看他如何评价",
+      "en": "Invite your alien friend to see the new home and hear what he thinks."
+     },
+     "options": [
+      "让咪下水游一圈",
+      "让咪从跳板跳水"
+     ],
+     "wait": 25.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04112634f.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04112634f.jpg",
+     "beat": "【主镜头】咪坐在池边，耳朵竖起，尾巴轻轻一摆，前爪拍了一下沙地，胸口挺起来，再坐回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 44 轮",
+     "start": 995.75,
+     "end": 1018.32,
+     "pause": 993.2,
+     "resume": 995.75,
+     "said": {
+      "zh": "到我们去参观外星人的房子了",
+      "en": "Now let's go visit the aliens' house."
+     },
+     "options": [
+      "请外星人一起去泳池游泳",
+      "伸手摸摸咪的头夸夸它"
+     ],
+     "wait": 19.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041240bae.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041240bae.jpg",
+     "beat": "【主镜头】咪坐在别墅门前，耳朵竖起，尾巴轻轻摆动，歪头看向身旁的小外星人，然后慢慢眨眼，回到原来的坐姿"
+    },
+    {
+     "kind": "rt",
+     "label": "第 45 轮",
+     "start": 1018.32,
+     "end": 1040.89,
+     "pause": 1015.77,
+     "resume": 1018.32,
+     "said": {
+      "zh": "让外星人做外星餐给你吃",
+      "en": "Have the alien cook you an alien meal."
+     },
+     "options": [
+      "让外星人带咪看它的星空屋顶",
+      "让咪和外星人玩发光球游戏"
+     ],
+     "wait": 22.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0413508c2.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0413508c2.jpg",
+     "beat": "【主镜头】咪坐在圆沙发上，两只前爪抱着发光小球，耳朵竖起，胡须轻抖，朝小外星人歪了歪头，再坐正"
+    },
+    {
+     "kind": "rt",
+     "label": "第 46 轮",
+     "start": 1040.89,
+     "end": 1063.46,
+     "pause": 1038.34,
+     "resume": 1040.89,
+     "said": {
+      "zh": "让咪也给外星人做地球菜",
+      "en": "Have Mi cook Earth dishes for the alien too."
+     },
+     "options": [
+      "让咪也给外星人做地球菜",
+      "和外星人举碗干杯"
+     ],
+     "wait": 23.1,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0414515b3.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0414515b3.jpg",
+     "beat": "【主镜头】咪坐在圆沙发上，双爪捧着半碗紫色汤，耳朵竖起，胡须抖了抖，把碗稳稳抱住，朝小外星人点点头，再坐回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 47 轮",
+     "start": 1063.46,
+     "end": 1086.03,
+     "pause": 1060.91,
+     "resume": 1063.46,
+     "said": {
+      "zh": "你两切磋厨艺，让我来品鉴打分",
+      "en": "You two compete in cooking, and I'll taste and score."
+     },
+     "options": [
+      "让外星人给咪的米线打分",
+      "让咪教外星人用爪卷米线"
+     ],
+     "wait": 42.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04155427e.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04155427e.jpg",
+     "beat": "【主镜头】咪站在小屋地垫上，耳朵竖起，尾巴轻轻一摆，胸挺起来，看向镜头，像接下了战书"
+    },
+    {
+     "kind": "rt",
+     "label": "第 48 轮",
+     "start": 1086.03,
+     "end": 1108.6,
+     "pause": 1083.48,
+     "resume": 1086.03,
+     "said": {
+      "zh": "我觉得外星人的好吃，咪和他学习一下厨艺回去做给地球人吃",
+      "en": "I think alien food tastes great. Mi should learn cooking from him and make it for Earthlings."
+     },
+     "options": [
+      "先尝咪的面，再给它打分",
+      "宣布冠军，颁给咪一朵小红花"
+     ],
+     "wait": 22.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041743777.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041743777.jpg",
+     "beat": "【主镜头】咪站在灶台后，耳朵先往后压一下，又慢慢竖起，鼻子抬高，一只前爪按在胸前围兜上，眯眼点头"
+    },
+    {
+     "kind": "rt",
+     "label": "第 49 轮",
+     "start": 1108.6,
+     "end": 1131.17,
+     "pause": 1106.05,
+     "resume": 1108.6,
+     "said": {
+      "zh": "现在你和外星人告别，你要去修仙了",
+      "en": "Now say goodbye to the alien, you're off to cultivate immortality."
+     },
+     "options": [
+      "让咪把新面端回给地球人尝",
+      "让外星人给咪加一道新菜"
+     ],
+     "wait": 40.4,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041900b9e.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O041900b9e.jpg",
+     "beat": "【主镜头】咪站在小木凳上，一只前爪举起向小外星人挥动，尾巴轻轻摆，耳朵微微后压，依依不舍"
+    },
+    {
+     "kind": "rt",
+     "label": "第 50 轮",
+     "start": 1131.17,
+     "end": 1153.74,
+     "pause": 1128.62,
+     "resume": 1131.17,
+     "said": {
+      "zh": "让咪御剑飞到云海上",
+      "en": "Have Mi fly on a sword above the sea of clouds."
+     },
+     "options": [
+      "让咪御剑飞到云海上",
+      "让咪向山中老仙人拜师"
+     ],
+     "wait": 30.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042018c9b.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042018c9b.jpg",
+     "beat": "【主镜头】咪盘腿坐在青石台中央，两只前爪合在胸前，耳朵竖起，胡须轻抖，慢慢眨眼，尾巴在身后轻摆一下"
+    },
+    {
+     "kind": "rt",
+     "label": "第 51 轮",
+     "start": 1153.74,
+     "end": 1176.31,
+     "pause": 1151.19,
+     "resume": 1153.74,
+     "said": {
+      "zh": "你去拜师学习仙术",
+      "en": "Go find a master to learn immortal arts."
+     },
+     "options": [
+      "让咪在云海上练剑",
+      "摸摸头夸咪飞得好"
+     ],
+     "wait": 30.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042215695.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042215695.jpg",
+     "beat": "【主镜头】咪盘腿坐在石台中央，耳朵竖起，胡须抖了抖，两只前爪在胸前轻轻合拢，认真地点了点头，最后回到原来的坐姿"
+    },
+    {
+     "kind": "rt",
+     "label": "第 52 轮",
+     "start": 1176.31,
+     "end": 1198.88,
+     "pause": 1173.76,
+     "resume": 1176.31,
+     "said": {
+      "zh": "你要学习最厉害的仙术",
+      "en": "You'll learn the most powerful immortal arts."
+     },
+     "options": [
+      "让咪学着召一道小闪电",
+      "让咪和师父比试仙术"
+     ],
+     "wait": 43.5,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042356466.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042356466.jpg",
+     "beat": "【主镜头】咪在蒲团上坐直，耳朵竖起，两只前爪合在胸前，认真地对白须仙人点头，尾巴尖轻轻摆动"
+    },
+    {
+     "kind": "rt",
+     "label": "第 53 轮",
+     "start": 1198.88,
+     "end": 1221.45,
+     "pause": 1196.33,
+     "resume": 1198.88,
+     "said": {
+      "zh": "现在去霍格沃兹学习魔法",
+      "en": "Now go study magic at Hogwarts."
+     },
+     "options": [
+      "让咪学会飞天遁地",
+      "让咪变出一百只分身"
+     ],
+     "wait": 27.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0425216fa.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0425216fa.jpg",
+     "beat": "【主镜头】咪坐在蒲团上，耳朵竖起，胡须抖动，朝师父点头，圆圆的前爪合在胸前行礼，然后坐好，尾巴轻摆"
+    },
+    {
+     "kind": "rt",
+     "label": "第 54 轮",
+     "start": 1221.45,
+     "end": 1244.02,
+     "pause": 1218.9,
+     "resume": 1221.45,
+     "said": {
+      "zh": "让咪骑扫帚飞出窗外",
+      "en": "Have Mi ride a broom out the window."
+     },
+     "options": [
+      "让咪骑扫帚飞出窗外",
+      "让咪用魔杖变一只小青蛙"
+     ],
+     "wait": 30.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0426278e3.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0426278e3.jpg",
+     "beat": "【主镜头】咪坐在高木凳上，前爪握着小魔杖，耳朵竖起，胡须抖了抖，兴奋地往前倾了一点，再坐回原位"
+    },
+    {
+     "kind": "rt",
+     "label": "第 55 轮",
+     "start": 1244.02,
+     "end": 1266.59,
+     "pause": 1241.47,
+     "resume": 1244.02,
+     "said": {
+      "zh": "和哈利波特比拼骑扫帚",
+      "en": "Race Harry Potter on broomsticks."
+     },
+     "options": [
+      "让咪骑扫帚打魁地奇",
+      "让咪骑扫帚表演空中翻转"
+     ],
+     "wait": 27.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042739a54.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042739a54.jpg",
+     "beat": "【主镜头】咪骑着扫帚悬在原地，两只前爪握紧扫帚柄，耳朵竖起，尾巴蓬松地翘起，胡须抖了抖，一副不服输的样子"
+    },
+    {
+     "kind": "rt",
+     "label": "第 56 轮",
+     "start": 1266.59,
+     "end": 1289.16,
+     "pause": 1264.04,
+     "resume": 1266.59,
+     "said": {
+      "zh": "让哈利波特给你介绍他其他朋友",
+      "en": "Ask Harry Potter to introduce you to his other friends."
+     },
+     "options": [
+      "让咪和哈利玩抢金色飞贼",
+      "让咪邀请哈利去飞过云海"
+     ],
+     "wait": 25.5,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042900582.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O042900582.jpg",
+     "beat": "【主镜头】咪骑在小扫帚上悬在终点旗杆旁，耳朵竖起，胡须抖动，朝哈利波特的方向歪了歪头，尾巴轻轻摆动"
+    },
+    {
+     "kind": "rt",
+     "label": "第 57 轮",
+     "start": 1289.16,
+     "end": 1311.73,
+     "pause": 1286.61,
+     "resume": 1289.16,
+     "said": {
+      "zh": "让咪请大家去飞行比赛",
+      "en": "Have Mi invite everyone to a flying competition."
+     },
+     "options": [
+      "让大家教咪一个魔法",
+      "让咪请大家去飞行比赛"
+     ],
+     "wait": 36.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04300836c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O04300836c.jpg",
+     "beat": "【主镜头】咪站在画面右侧，竖起耳朵，一只前爪朝三人伸出去邀请，尾巴轻轻摆动，然后回到原位站好"
+    },
+    {
+     "kind": "rt",
+     "label": "第 58 轮",
+     "start": 1311.73,
+     "end": 1334.3,
+     "pause": 1311.73,
+     "resume": 1311.73,
+     "said": {
+      "zh": "现在去找Daenerys Targaryen学骑龙",
+      "en": "现在去找Daenerys Targaryen学骑龙"
+     },
+     "options": [
+      "让咪向罗恩再挑战一局",
+      "请赫敏教咪一个飞行小窍门"
+     ],
+     "wait": 27.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043234f68.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043234f68.jpg",
+     "beat": "【主镜头】咪站在草地上，竖起耳朵，尾巴轻轻摆动，抬起一只前爪向三位朋友挥了挥，再放回原位。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 59 轮",
+     "start": 1334.3,
+     "end": 1356.87,
+     "pause": 1331.75,
+     "resume": 1334.3,
+     "said": {
+      "zh": "你骑到天上然后遇到了无牙仔",
+      "en": "You ride up into the sky and meet Toothless."
+     },
+     "options": [
+      "让咪骑龙飞进云层里",
+      "让咪给小龙喂点吃的"
+     ],
+     "wait": 22.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043414a73.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043414a73.jpg",
+     "beat": "【主镜头】咪坐在小绿龙背上，两只前爪握着皮绳，耳朵竖起，胡须轻抖，尾巴轻轻摆动，望向前方天空"
+    },
+    {
+     "kind": "rt",
+     "label": "第 60 轮",
+     "start": 1356.87,
+     "end": 1379.44,
+     "pause": 1354.32,
+     "resume": 1356.87,
+     "said": {
+      "zh": "让咪换骑到无牙仔背上",
+      "en": "Have Mi switch to riding on Toothless's back."
+     },
+     "options": [
+      "让咪和无牙仔比赛飞行",
+      "让咪换骑到无牙仔背上"
+     ],
+     "wait": 25.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043523ad4.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043523ad4.jpg",
+     "beat": "【主镜头】咪坐在小绿龙背上，前爪握皮绳，耳朵竖起，歪头看向并排飞行的无牙仔，尾巴轻轻摆了一下，然后坐正"
+    },
+    {
+     "kind": "rt",
+     "label": "第 61 轮",
+     "start": 1379.44,
+     "end": 1402.01,
+     "pause": 1379.44,
+     "resume": 1379.44,
+     "said": {
+      "zh": "现在你骑着无牙仔找到了 Elon Reeve Musk",
+      "en": "现在你骑着无牙仔找到了 Elon Reeve Musk"
+     },
+     "options": [
+      "让无牙仔钻进云团里",
+      "和小绿龙来一场龙飞比赛"
+     ],
+     "wait": 25.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043740bbf.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043740bbf.jpg",
+     "beat": "【主镜头】咪坐在无牙仔背上，两只前爪抓着龙颈，耳朵竖起，胡须轻抖，慢慢眨一下眼。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 62 轮",
+     "start": 1402.01,
+     "end": 1424.58,
+     "pause": 1399.46,
+     "resume": 1402.01,
+     "said": {
+      "zh": "让马斯克把所有产业送你",
+      "en": "Have Musk give you all his businesses."
+     },
+     "options": [
+      "让马斯克带咪坐火箭",
+      "让咪向马斯克推销无牙仔"
+     ],
+     "wait": 22.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043858d76.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O043858d76.jpg",
+     "beat": "【主镜头】咪坐在无牙仔背上，耳朵竖起，胡须抖了抖，歪头看向马斯克，前爪轻轻拍了拍龙颈，尾巴得意地摆一下，然后坐稳回到原来的姿势"
+    },
+    {
+     "kind": "rt",
+     "label": "第 63 轮",
+     "start": 1424.58,
+     "end": 1447.15,
+     "pause": 1422.03,
+     "resume": 1424.58,
+     "said": {
+      "zh": "让咪开着自家火箭去巡视",
+      "en": "Have Mi fly around inspecting in his own rocket."
+     },
+     "options": [
+      "让咪开着自家火箭去巡视",
+      "让咪给无牙仔发工资"
+     ],
+     "wait": 33.9,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O044011f83.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O044011f83.jpg",
+     "beat": "【主镜头】咪坐在无牙仔背上，前爪压着纸卷，耳朵竖起，尾巴轻摆，挺起胸看向镜头，再坐稳"
+    },
+    {
+     "kind": "rt",
+     "label": "第 64 轮",
+     "start": 1447.15,
+     "end": 1469.72,
+     "pause": 1444.6,
+     "resume": 1447.15,
+     "said": {
+      "zh": "现在去和特朗普竞选美国总统",
+      "en": "Now go run against Trump for U.S. president."
+     },
+     "options": [
+      "让咪召开员工大会",
+      "让咪开火箭去月球建分公司"
+     ],
+     "wait": 26.8,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O044135cb7.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O044135cb7.jpg",
+     "beat": "【主镜头】咪坐在舱口小座椅上，耳朵竖起，挺起胸，前爪抓着操纵杆，尾巴轻轻摆动"
+    },
+    {
+     "kind": "rt",
+     "label": "第 65 轮",
+     "start": 1469.72,
+     "end": 1492.29,
+     "pause": 1467.17,
+     "resume": 1469.72,
+     "said": {
+      "zh": "让咪和特朗普来一场辩论",
+      "en": "Have Mi hold a debate with Trump."
+     },
+     "options": [
+      "让咪宣布当选后发表就职演说",
+      "让咪和特朗普来一场辩论"
+     ],
+     "wait": 29.1,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0443299c7.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0443299c7.jpg",
+     "beat": "【主镜头】咪站在左边矮讲台后的小木凳上，只露出头和前爪，耳朵竖起，尾巴轻摆，前爪在讲台上拍了一下，胸前围兜口袋的蓝色小鱼看得见"
+    },
+    {
+     "kind": "rt",
+     "label": "第 66 轮",
+     "start": 1492.29,
+     "end": 1512.6,
+     "pause": 1489.74,
+     "resume": 1492.29,
+     "said": {
+      "zh": "咪成功竞选，发表总统宣言",
+      "en": "Mi wins the election and gives the presidential speech."
+     },
+     "options": [
+      "让咪向全场发表获胜感言",
+      "让咪和特朗普掰手腕定胜负"
+     ],
+     "wait": 20.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0444425bf.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O0444425bf.jpg",
+     "beat": "【主镜头】咪站在左边矮讲台后的小木凳上，只露出头和前爪，听到成功的消息后耳朵竖起，尾巴轻摆，胸前围兜口袋上的蓝色小鱼看得见，慢慢眨眼，台下人群举着红白蓝小彩旗，"
     }
    ],
    "opening": "openings/mii-open.mp4",
-   "rounds": 14,
+   "rounds": 66,
    "episodes": 0,
-   "wait_median": 141.0,
-   "tested": "2026-10-28 21:37–22:27"
+   "wait_median": 24.1,
+   "tested": "2026-10-30 03:09–04:45"
   },
   {
    "id": "magnus-preset",
