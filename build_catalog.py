@@ -7,7 +7,7 @@
 - 卡片 → 每一轮她说了什么、他回了什么、下一轮选项、当时的真实等待时间、精彩片段视频
 用法：python3 build_catalog.py（输出 docs/data/catalog.js，GitHub Pages 从 docs/ 发布）
 """
-import json, re, sys
+import json, re, subprocess, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -137,6 +137,7 @@ def build(d, log):
         'film': {'video': BASE + film['video'], 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
         'cues': [rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}) for c in cues if not c['input']],
         'chapters': chapters,
+        'opening': cut_opening(d, film, rts[0]['pause']),
         'rounds': len(rts),
         'episodes': sum(1 for c in chapters if c['kind'] == 'ep' and c['label'] not in ('Opening', '开场')),
         'wait_median': waits[len(waits) // 2] if waits else None,
@@ -144,6 +145,17 @@ def build(d, log):
     })
     print(f"  {d['id']}: {len(chapters)} 段 · {len(rts)} 个实时轮次 · 成片 {film['duration']}s")
     return out
+
+
+def cut_opening(d, film, end):
+    """剧场轮播用的开场片段：成片开头到第一个选择点，静音、540 宽，放 docs/openings/。已有就不重剪。"""
+    out = HERE / 'docs' / 'openings' / f"{d['id']}.mp4"
+    if not out.exists():
+        out.parent.mkdir(parents=True, exist_ok=True)
+        ff = HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'
+        subprocess.run([str(ff), '-y', '-loglevel', 'error', '-i', str(LOG / film['video']), '-t', f'{end:.2f}', '-an', '-vf', 'scale=540:-2',
+                        '-c:v', 'libx264', '-preset', 'medium', '-crf', '25', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(out)], check=True)
+    return f"openings/{d['id']}.mp4"
 
 
 def main():

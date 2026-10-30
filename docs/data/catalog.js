@@ -1,5 +1,5 @@
 window.CATALOG = {
- "updated": "2026-10-29",
+ "updated": "2026-10-30",
  "dramas": [
   {
    "id": "magnus-open",
@@ -588,6 +588,7 @@ window.CATALOG = {
      "beat": "近景，固定｜他看着镜头，下颌松开一点，一只手仍按在身侧，点头。"
     }
    ],
+   "opening": "openings/magnus-open.mp4",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 108.5,
@@ -1238,6 +1239,7 @@ window.CATALOG = {
      "beat": "近景，固定｜他望着远处松林，转头看她，下颌绷紧。"
     }
    ],
+   "opening": "openings/magnus-third.mp4",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 96.5,
@@ -1880,6 +1882,7 @@ window.CATALOG = {
      "beat": "【主镜头】咪耳朵竖起，鼻尖抽动闻米线香，尾巴轻摆，眼睛眯起来，然后从台面后往下一跳，身影沉下去看不见，台面上只剩盘子、罐和小锅"
     }
    ],
+   "opening": "openings/mii-open.mp4",
    "rounds": 14,
    "episodes": 0,
    "wait_median": 141.0,
@@ -2620,6 +2623,7 @@ window.CATALOG = {
      "beat": "他放下手里的手机，转过来看着镜头，神情很平静。"
     }
    ],
+   "opening": "openings/magnus-preset.mp4",
    "rounds": 8,
    "episodes": 7,
    "wait_median": 59.8,
@@ -3647,6 +3651,7 @@ window.CATALOG = {
      "beat": "小猫趴在被子边上听完，耳朵竖起来，认真地点了点头，把两只圆圆的前爪抬起来在被子上轻轻点了点，像在热身。"
     }
    ],
+   "opening": "openings/mii.mp4",
    "rounds": 11,
    "episodes": 10,
    "wait_median": 29.7,

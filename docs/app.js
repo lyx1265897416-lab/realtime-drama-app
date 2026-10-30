@@ -191,11 +191,11 @@ function Home(view){
   view.innerHTML = `
   <header class="topbar"><div class="brand">Unscripted<small>${lang() === 'zh' ? '即兴剧场' : 'LIVE DRAMA'}</small></div>
     <button class="iconbtn" id="langBtn" title="Language">${ICON.globe}</button></header>
-  <section class="hero" id="hero"><div class="hero-track">${heroes.map(d => { const h = highlight(d); return `
-    <div class="hero-slide" data-id="${d.id}"><img src="${esc(d.cover)}" alt=""><video muted playsinline loop preload="none" data-src="${esc(h && h.clip || '')}"></video>
+  <section class="hero" id="hero"><div class="hero-track">${heroes.map(d => `
+    <div class="hero-slide" data-id="${d.id}"><img src="${esc(d.cover)}" alt=""><video muted playsinline preload="none" data-src="${esc(d.opening)}"></video>
       <div class="hero-info"><div class="pills">${kindPill(d)}<span class="pill">${esc(L(d.badge))}</span></div>
         <h3>${esc(L(d.title))}</h3><div class="lead">${esc(L(d.lead))}</div><p>${esc(L(d.hook))}</p>
-        <button class="btn gold" data-play="${d.id}">${ICON.play}${T('start')}</button></div></div>`; }).join('')}</div>
+        <button class="btn gold" data-play="${d.id}">${ICON.play}${T('start')}</button></div></div>`).join('')}</div>
     <div class="hero-dots">${heroes.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div></section>
   ${going.length ? `<section class="sec"><div class="sec-h"><div><h2>${T('continue')}</h2><p>${T('continueSub')}</p></div></div>
     <div class="scroller">${going.map(d => { const p = progOf(d.id), last = (p.log || []).slice(-1)[0]; const pct = Math.round(100 * (p.done || []).length / d.rounds);
@@ -227,8 +227,8 @@ function Home(view){
   const hero = $('#hero'), track = $('.hero-track', hero), slides = $$('.hero-slide', hero), dots = $$('.hero-dots i', hero);
   let k = 0, timer;
   const go = n => { k = (n + slides.length) % slides.length; track.style.transform = `translateX(${-100 * k}%)`; dots.forEach((d, i) => d.classList.toggle('on', i === k));
-    slides.forEach((s, i) => { const v = $('video', s); if (i === k && v.dataset.src){ if (!v.src) { v.src = v.dataset.src; v.oncanplay = () => v.classList.add('ready'); } v.play().catch(() => {}); } else v.pause(); });
-    clearTimeout(timer); timer = setTimeout(() => go(k + 1), 7000); };
+    slides.forEach((s, i) => { const v = $('video', s); if (i === k && v.dataset.src){ if (!v.src) { v.src = v.dataset.src; v.oncanplay = () => v.classList.add('ready'); } v.onended = () => go(k + 1); v.currentTime = 0; v.play().catch(() => {}); } else v.pause(); });
+    clearTimeout(timer); timer = setTimeout(() => { const v = $('video', slides[k]); if (v.paused || v.readyState < 2) go(k + 1); }, 10000); };  // 开场播完才切下一部；10 秒还没播起来就先跳过
   let x0 = null, dragged = false;
   hero.addEventListener('pointerdown', e => { x0 = e.clientX; dragged = false; });
   hero.addEventListener('pointerup', e => { if (x0 == null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40){ dragged = true; go(k + (dx < 0 ? 1 : -1)); } });
