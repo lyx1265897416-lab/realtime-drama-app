@@ -19,10 +19,10 @@
 
 ## 实时开玩（APP 内直接生成）
 
-- 咪开放式（8896）和第三视角（8895，`MAG_PUBLIC=1`）已接进 APP 播放器：开场 → 中转给的 A/B 选项 + 输入框 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播；咪的配音另播；每幕回报 `/api/round/<id>/view`
+- 咪开放式（8896）和第三视角（8895）已接进 APP 播放器：开场 → 中转给的 A/B 选项 + 输入框 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播；咪的配音另播；每幕回报 `/api/round/<id>/view`
 - 测试链接：`python3 live_links.py` 打印中英两条（链接里带 `?live=剧id~隧道地址~口令`，APP 存到本机后从地址栏去掉）；隧道重开地址会变，重跑脚本发新链接
 - 第三视角中转的跨域白名单加了 Pages 和 localhost:8850（`mag_third_relay.py` 的 ORIGINS，改前备份 `mag_third_relay.before-app.py`）；咪的中转本来就允许任意来源
-- 隧道：`.media-runtime/cloudflared/cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:<端口>`，日志写到各自目录的 tunnel.log；这台 Mac 要开着
+- 中转和隧道都由 launchd 托管（../../tools/realtime-relays/README.md）；这台 Mac 要开着
 
 ## 预览回放与实时开玩
 
@@ -34,7 +34,7 @@
 方案见 [角色与演员表方案.md](角色与演员表方案.md)。
 
 - 创作服务 `studio/studio_server.py`（8860，口令 studio/token.txt，数据 studio/data/，不进仓库）：AI 补全、提炼设定、定妆照、剧照、自由剧场写戏、上架、雇佣、星票钱包。模型走 OpenRouter
-- 启动：`cd studio && nohup python3 -u studio_server.py "$(cat token.txt)" 8860 >> studio.log 2>&1 &`；隧道日志写到 studio/tunnel.log，`live_links.py` 会读
+- 由 launchd 托管（com.vicky.realtime.studio、studio-tunnel，见 ../../tools/realtime-relays/README.md）。改完代码或演员表：`launchctl kickstart -k gui/$(id -u)/com.vicky.realtime.studio`；只重启服务时隧道地址不变，隧道重启或电脑重启后重跑 `live_links.py` 发新链接
 - 演员种子：`python3 tools/seed_actors.py` 从 Vicky 资产库选角（`PICK` / `ROOKIE_GROUPS`），人设补充在 `tools/actor_bios.json`，图片引用资产库线上地址
 - 串场：实时中转的 `/api/session` 接受可选的 `persona`（角色卡文本），导演层收到后按卡演；不带时行为不变
 

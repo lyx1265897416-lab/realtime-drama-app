@@ -15,7 +15,7 @@ APP 是 GitHub Pages 上的静态页，需要模型和共享数据的功能都�
 星票只是测试币，没有任何真钱流转。数据存在 studio/data/。
 用法：python3 studio_server.py <口令> [端口，默认 8860]
 """
-import base64, json, re, sys, threading, time, uuid
+import base64, json, os, re, sys, threading, time, uuid
 import urllib.request as U
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -76,6 +76,7 @@ def move(uid, d, what):
 
 
 def key():
+    if os.environ.get('OPENROUTER_API_KEY'): return os.environ['OPENROUTER_API_KEY']  # launchd 托管时读不到“文档”目录
     for line in open(KEYFILE, encoding='utf-8'):
         k, _, v = line.strip().partition('=')
         if k == 'OPENROUTER_API_KEY' and v.strip(): return v.strip().strip('"\'')
