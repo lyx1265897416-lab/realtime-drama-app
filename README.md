@@ -29,6 +29,15 @@
 - 没填实时链接时，选择点之后播的是测试时那一轮的真实生成结果；如果你说的和测试时不同，画面开头会注明当时的输入
 - 「我的 → 实时链接」填入某部剧的实时测试链接（含口令，只存在本机浏览器），详情页出现红色实时按钮，在 APP 里嵌入那部剧自己的实时播放页
 
+## 角色、演员表与自由剧场
+
+方案见 [角色与演员表方案.md](角色与演员表方案.md)。
+
+- 创作服务 `studio/studio_server.py`（8860，口令 studio/token.txt，数据 studio/data/，不进仓库）：AI 补全、提炼设定、定妆照、剧照、自由剧场写戏、上架、雇佣、星票钱包。模型走 OpenRouter
+- 启动：`cd studio && nohup python3 -u studio_server.py "$(cat token.txt)" 8860 >> studio.log 2>&1 &`；隧道日志写到 studio/tunnel.log，`live_links.py` 会读
+- 演员种子：`python3 tools/seed_actors.py` 从 Vicky 资产库选角（`PICK` / `ROOKIE_GROUPS`），人设补充在 `tools/actor_bios.json`，图片引用资产库线上地址
+- 串场：实时中转的 `/api/session` 接受可选的 `persona`（角色卡文本），导演层收到后按卡演；不带时行为不变
+
 ## 加新剧
 
 1. 先把新剧的测试结果进测试记录页（`realtime-drama-test-log` 的 `dramas/<id>.json`，要有完整成片 films 和测试组 groups）

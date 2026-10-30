@@ -9,9 +9,11 @@ const DATA = window.CATALOG, D = DATA.dramas, byId = Object.fromEntries(D.map(d 
 
 // ---------- 本地存档（取不到也能正常用） ----------
 const KEY = 'unscripted.v1';
-let S = {progress: {}, liked: {}, saved: {}, settings: {lang: 'auto', subs: 'both', live: {}}};
+let S = {progress: {}, liked: {}, saved: {}, chars: {}, stages: {}, casting: {}, settings: {lang: 'auto', subs: 'both', live: {}}};
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); S.settings = Object.assign({lang: 'auto', subs: 'both', live: {}}, S.settings); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+S.uid = S.uid || 'u' + Math.random().toString(36).slice(2, 12) + Date.now().toString(36);  // 演员表、钱包用的匿名身份
+S.nick = S.nick || '旅人' + S.uid.slice(-4);
 save();
 
 // ---------- 语言 ----------
@@ -25,7 +27,7 @@ if (Q.get('live')){
 const lang = () => S.settings.lang === 'auto' ? (/^zh/i.test(navigator.language || '') ? 'zh' : 'en') : S.settings.lang;
 const L = o => o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.zh || o.en || '');
 const I = {
-  tabHome: ['剧场', 'Theater'], tabFeed: ['推荐', 'For You'], tabLib: ['在追', 'My List'], tabMe: ['我的', 'Me'],
+  tabHome: ['剧场', 'Theater'], tabFeed: ['推荐', 'For You'], tabCast: ['演员表', 'Cast'], tabLib: ['在追', 'My List'], tabMe: ['我的', 'Me'],
   deskNote: ['实时 AI 互动剧集合 · 网页预览版。每部剧只有开场是预制的（或预制剧情 + 选择点），之后你点选项或直接打字，他就会接着你的话演下去。', 'A home for live AI interactive dramas, web preview. Only the opening is pre-made; after that you pick or type, and the story is generated around what you said.'],
   deskLi1: ['没连实时中转时，互动走「预览回放」：播放测试时真实生成的那一幕', 'Without a live relay, scenes replay real generations from testing'],
   deskLi2: ['在「我的 → 实时链接」填入测试链接，就能在 APP 里直接实时开玩', 'Paste a test link in Me → Live links to play live in-app'],
@@ -165,11 +167,15 @@ function route(){
   const h = location.hash.replace(/^#\/?/, ''); const [path, qs] = h.split('?'); const parts = path.split('/'); const q = new URLSearchParams(qs || '');
   document.body.className = '';
   const view = $('#view'); view.scrollTop = 0;
-  const tab = {'': 'home', feed: 'feed', library: 'library', me: 'me'}[parts[0]] || '';
+  const tab = {'': 'home', feed: 'feed', cast: 'cast', library: 'library', me: 'me'}[parts[0]] || '';
   $$('#tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === tab));
   if (parts[0] === 'feed') return Feed(view);
   if (parts[0] === 'library') return Library(view);
   if (parts[0] === 'me') return Me(view);
+  if (parts[0] === 'cast') return Cast(view);
+  if (parts[0] === 'actor') return Actor(view, decodeURIComponent(parts[1] || ''));
+  if (parts[0] === 'char') return Editor(view, parts[1] || 'new');
+  if (parts[0] === 'stage') return parts[1] === 'new' ? StageNew(view, q) : parts[1] ? StagePlay(view, parts[1]) : Stages(view);
   if (parts[0] === 'd' && byId[parts[1]]) return Detail(view, byId[parts[1]]);
   if (parts[0] === 'play' && byId[parts[1]]) return q.get('live') === '1' && liveNative(byId[parts[1]]) ? LivePlayer(view, byId[parts[1]]) : Player(view, byId[parts[1]], q);
   if (parts[0] === 'live' && byId[parts[1]]) return Live(view, byId[parts[1]]);
@@ -198,6 +204,7 @@ function Home(view){
     <div class="scroller">${D.filter(d => d.kind === 'open').map(pcard).join('')}</div></section>
   <section class="sec"><div class="sec-h"><div><h2>${T('shelfPreset')}</h2><p>${T('shelfPresetSub')}</p></div></div>
     <div class="scroller">${D.filter(d => d.kind === 'preset').map(pcard).join('')}</div></section>
+  <section class="sec"><div class="castbanner" data-go-cast><div class="avs">${ACT.slice(0, 4).map(a => `<img src="${esc(a.face)}" alt="">`).join('')}</div><div><b>${Z('带上你的角色串场', 'Bring your own character')}</b><span>${Z('创建或签下一个角色，带 TA 演任何一部剧；也能上架让别人雇 TA', 'Create or sign a character, take them into any drama, or list them for hire')}</span></div><span class="go">›</span></div></section>
   <section class="sec"><div class="how"><h3>${T('howT')}</h3><p>${T('howS')}</p><ol>
     <li><i>1</i><div>${T('how1')}<small>${T('how1s')}</small></div></li><li><i>2</i><div>${T('how2')}<small>${T('how2s')}</small></div></li><li><i>3</i><div>${T('how3')}<small>${T('how3s')}</small></div></li></ol></div></section>
   <section class="sec"><div class="sec-h"><h2>${T('rank')}</h2></div><div class="rank">${D.map((d, i) => `
@@ -210,6 +217,7 @@ function Home(view){
   fill('all');
   $('#chips').onclick = e => { const b = e.target.closest('.chip'); if (!b) return; $$('.chip').forEach(x => x.classList.toggle('on', x === b)); fill(b.dataset.f); };
   view.onclick = e => {
+    if (e.target.closest('[data-go-cast]')){ location.hash = '#/cast'; return; }
     const p = e.target.closest('[data-play]'); if (p){ e.stopPropagation(); location.hash = '#/play/' + p.dataset.play; return; }
     const c = e.target.closest('[data-cont]'); if (c){ location.hash = '#/play/' + c.dataset.id + '?resume=1'; return; }
     const card = e.target.closest('[data-id]'); if (card) location.hash = '#/d/' + card.dataset.id;
@@ -282,6 +290,7 @@ function Detail(view, d){
       <p class="d-hook">${esc(L(d.hook))}</p><div class="d-tags">${d.tags.map(t => `<span>#${esc(L(t))}</span>`).join('')}</div></div>
     <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${T('scenes')}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
     <div class="d-pane" id="pane"></div>
+    ${d.kind === 'open' ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<span><small>${Z('出演身份', 'Playing as')}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></span><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
     <div class="d-cta">${liveNative(d) ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
       <button class="btn ghost" id="saveBtn" title="${T('saveL')}" style="color:${S.saved[d.id] ? 'var(--gold)' : 'inherit'}">${ICON.mark}</button>
       ${!d.live && liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
@@ -291,6 +300,7 @@ function Detail(view, d){
   $('#go').onclick = () => location.hash = `#/play/${d.id}${resumeN ? '?resume=1' : ''}`;
   $('#saveBtn').onclick = () => { const on = toggleSave(d); $('#saveBtn').style.color = on ? 'var(--gold)' : 'inherit'; };
   if ($('#liveBtn')) $('#liveBtn').onclick = () => location.hash = '#/live/' + d.id;
+  if ($('#castRow')) $('#castRow').onclick = () => personaSheet(d.id, L(d.title), () => route());
   if ($('#goLive')){
     $('#goLive').onclick = () => location.hash = `#/play/${d.id}?live=1`;
     const c = liveCfg(d.id);  // 先探一下中转：没开就提示，主按钮退回预览回放
@@ -360,7 +370,7 @@ function Player(view, d, q){
   function showSub(c){
     if (!c){ subs.innerHTML = ''; return; }
     subs.className = 'subs' + (c.who === 'you' ? ' you' : '') + (subsMode() === 'en' ? ' lang-en' : '');
-    const who = c.who === 'you' ? T('you') : nm(d);
+    const who = c.who === 'you' ? (castingOf(d.id) ? castingOf(d.id).name : T('you')) : nm(d);
     subs.innerHTML = `<div class="who">${esc(who)}</div>${c.en ? `<div class="en">${esc(c.en)}</div>` : ''}${c.zh ? `<div class="zh">${esc(c.zh)}</div>` : ''}`;
   }
   let note = null;  // 预览回放说明，播放这一幕开头几秒显示
@@ -461,7 +471,7 @@ function LivePlayer(view, d){
   view.innerHTML = `<div class="player" id="pl">
     <video class="lv on" playsinline preload="auto" poster="${esc(d.cover)}"></video><video class="lv" playsinline preload="auto"></video><video class="lv" playsinline preload="auto"></video>
     <div class="p-shade"></div><div class="p-tap" id="tap"></div>
-    <div class="p-top"><div class="p-title"><button class="iconbtn" id="back">${ICON.back}</button><div><b>${esc(L(d.title))}</b><span id="chLabel">${T('opening')}</span></div><span class="pill live p-mode">${T('liveTag')}</span></div>
+    <div class="p-top"><div class="p-title"><button class="iconbtn" id="back">${ICON.back}</button><div><b>${esc(L(d.title))}</b><span id="chLabel">${T('opening')}</span></div>${castingOf(d.id) ? `<span class="asme">${avatar(castingOf(d.id))}${esc(castingOf(d.id).name)}</span>` : ''}<span class="pill live p-mode">${T('liveTag')}</span></div>
       <div class="livestat" id="stat"></div></div>
     <div class="rail p-rail"><button class="like${S.liked[d.id] ? ' on' : ''}" id="rLike">${ICON.heart}<span>${T('liked')}</span></button>
       <button id="rLog">${ICON.book}<span>${T('log')}</span></button><button id="rRe">${ICON.restart}<span>${T('restart')}</span></button>
@@ -484,7 +494,7 @@ function LivePlayer(view, d){
   function showSub(c, who){
     if (!c){ subs.innerHTML = ''; return; }
     subs.className = 'subs' + (who === 'you' ? ' you' : '') + (S.settings.subs === 'en' ? ' lang-en' : '');
-    subs.innerHTML = `<div class="who">${esc(who === 'you' ? T('you') : nm(d))}</div>${c.en ? `<div class="en">${esc(c.en)}</div>` : ''}${c.zh ? `<div class="zh">${esc(c.zh)}</div>` : ''}`;
+    subs.innerHTML = `<div class="who">${esc(who === 'you' ? youName : nm(d))}</div>${c.en ? `<div class="en">${esc(c.en)}</div>` : ''}${c.zh ? `<div class="zh">${esc(c.zh)}</div>` : ''}`;
   }
   async function api(path, body){  // text/plain：不触发跨域预检，隧道少一个来回
     const r = await fetch(API + path, {method: body ? 'POST' : 'GET', headers: body ? {'Content-Type': 'text/plain'} : {}, body: body ? JSON.stringify(Object.assign({k: K}, body)) : undefined});
@@ -496,7 +506,8 @@ function LivePlayer(view, d){
   // 开场：预制开场片 → 待机循环 → 第一个选择点
   const ov = pool[1], idle = pool[2];
   load(ov, LV.open); load(idle, LV.idle, true);
-  const startSession = () => api('/api/session', {mode: MODE}).then(j => { sid = j.sid; next = j.next; round = 0; });
+  const persona = castingOf(d.id), youName = persona ? persona.name : T('you');
+  const startSession = () => api('/api/session', Object.assign({mode: MODE}, persona ? {persona: cardText(persona)} : {})).then(j => { sid = j.sid; next = j.next; round = 0; });
   function playOpening(){
     run++; busy = false; setMode('play'); showSub(null); $('#chLabel').textContent = T('opening');
     ov.currentTime = 0; ov.muted = false; ov.loop = false;
@@ -577,9 +588,11 @@ function LivePlayer(view, d){
     if (my !== run || !alive) return;
     const first = his();
     P.live.push({n: round + 1, text, en: first.en, zh: first.zh, at: Date.now()}); P.at = Date.now(); save();
+    afterScene(L(d.title), text, his2(), (S.casting || {})[d.id] && String(S.casting[d.id]).startsWith('c.') ? S.casting[d.id] : null);
     toast(T('liveDone', {n: round + 1, s: ((view.play_at - t0) / 1000).toFixed(1)}));
     busy = false; round++; next = r.next || next; openChoice();
 
+    function his2(){ if (dub) return (r.lines || []).map(l => ({who: nm(d), en: l.en, zh: l.zh})); const E = [].concat((r.lines || {}).seg1 || [], (r.lines || {}).seg2 || []), Zh = [].concat((r.zh || {}).seg1 || [], (r.zh || {}).seg2 || []); return E.filter(Boolean).map((e, i) => ({who: nm(d), en: e, zh: Zh[i] || ''})); }
     function his(){ if (dub){ const l = (r.lines || [])[0] || {}; return {en: l.en, zh: l.zh}; } return {en: ((r.lines || {}).seg1 || [])[0], zh: ((r.zh || {}).seg1 || [])[0]}; }
     function play(i){ return new Promise(res => {
       const v = V[i]; v.currentTime = 0; v.muted = false; v.loop = false; let done = false;
@@ -645,7 +658,11 @@ function Me(view){
   const scenes = D.reduce((n, d) => n + ((progOf(d.id) || {}).done || []).length, 0);
   const chev = ICON.chev.replace('<svg', '<svg');
   view.innerHTML = `<div class="page-h"><h1>${T('tabMe')}</h1></div>
-    <div class="me-card"><div class="av">U</div><div><b>${T('meName')}</b><p>${T('meSub')}</p></div></div>
+    <div class="me-card"><div class="av">${esc(S.nick.slice(0, 1))}</div><div style="flex:1"><b id="nick">${esc(S.nick)} ✎</b><p>${T('meSub')}</p></div>${walletPill()}</div>
+    <div class="list-h">${Z('我的角色', 'My characters')}</div>
+    <div class="scroller mychars">${mine().map(c => `<div class="mychar" data-go="#/actor/${c.id}">${avatar(toActor(c))}<b>${esc(c.name)}</b><small>${esc(c.job || '')}${(c.listing || {}).mid ? ' · ' + Z('已上架', 'Listed') : ''}</small></div>`).join('')}<div class="mychar add" data-go="#/char/new"><span class="av blank">＋</span><b>${Z('新建', 'New')}</b></div></div>
+    ${S.blank && (S.blank.pending || []).length ? `<div class="list" style="margin-top:12px"><div class="li" id="blankGrow"><span>${Z(`空白的你长出了 ${S.blank.pending.length} 条设定`, `${S.blank.pending.length} details grew while playing blank`)}</span><em>${Z('存成角色', 'Save')}</em>${chev}</div></div>` : ''}
+    <div class="list" style="margin-top:12px"><div class="li" data-go="#/stage"><span>🎭 ${Z('我的自由剧场', 'My free-stage plays')}</span><em>${Object.keys(S.stages || {}).length}</em>${chev}</div><div class="li" data-go-wallet><span>★ ${Z('星票钱包与片酬收入', 'Stars & earnings')}</span><em data-wallet>${S.wallet ? S.wallet.balance : '—'}</em>${chev}</div></div>
     <div class="me-stats"><div><b>${said}</b><span>${T('stSaid')}</span></div><div><b>${scenes}</b><span>${T('stScenes')}</span></div><div><b>${Object.keys(S.saved).length}</b><span>${T('stSaved')}</span></div></div>
     <div class="list-h">${T('myLog')}</div>
     <div class="list">${D.map(d => `<div class="li" data-log="${d.id}"><span>${esc(L(d.title))}</span><em>${((progOf(d.id) || {}).log || []).length}</em>${chev}</div>`).join('')}</div>
@@ -656,17 +673,326 @@ function Me(view){
     <div class="list"><div class="li" id="mLive"><span>${T('liveL')}</span><em>${Object.values(S.settings.live || {}).filter(Boolean).length}/${D.length}</em>${chev}</div>
       <div class="li" id="mAbout"><span>${T('aboutL')}</span>${chev}</div>
       <div class="li" id="mClear"><span style="color:var(--rose)">${T('clearL')}</span></div></div>`;
+  $$('[data-go]', view).forEach(el => el.onclick = () => location.hash = el.dataset.go);
+  if ($('#blankGrow')) $('#blankGrow').onclick = () => growSheet(null);
+  $('#nick').onclick = () => { const n = prompt(Z('你的昵称（上架演员时显示）', 'Your nickname'), S.nick); if (n && n.trim()){ S.nick = n.trim().slice(0, 20); save(); if (studio()) sapi('/api/me', {}).catch(() => {}); route(); } };
   $$('[data-log]').forEach(el => el.onclick = () => { const d = byId[el.dataset.log]; logSheet(d, i => location.hash = `#/play/${d.id}?from=${i}`); });
   $('#mLang').onclick = () => { const order = ['auto', 'zh', 'en']; S.settings.lang = order[(order.indexOf(S.settings.lang) + 1) % 3]; save(); applyStatic(); route(); };
   $('#mSubs').onclick = () => { S.settings.subs = S.settings.subs === 'en' ? 'both' : 'en'; save(); route(); };
   $('#mClear').onclick = () => { if (!confirm(T('clearL') + '?')) return; S.progress = {}; S.liked = {}; S.saved = {}; save(); toast(T('cleared')); route(); };
-  $('#mLive').onclick = () => sheet(T('liveL'), '', `<p class="note" style="margin:10px 0 16px">${T('liveHelp')}</p>${D.map(d => `<div class="field"><label>${esc(L(d.title))}</label>${d.live_hint ? `<small>${esc(L(d.live_hint))}</small>` : ''}<input data-live="${d.id}" value="${esc(liveUrl(d.id) || '')}" placeholder="https://…" spellcheck="false"></div>`).join('')}<button class="btn gold" id="liveSave" style="width:100%">${T('saveBtn')}</button>`,
+  $('#mLive').onclick = () => sheet(T('liveL'), '', `<p class="note" style="margin:10px 0 16px">${T('liveHelp')}</p><div class="field"><label>${Z('创作服务（演员表 / 钱包 / 自由剧场）', 'Studio (cast, wallet, free stage)')}</label><input data-live="studio" value="${esc(liveUrl('studio') || '')}" placeholder="https://…?k=…" spellcheck="false"></div>${D.map(d => `<div class="field"><label>${esc(L(d.title))}</label>${d.live_hint ? `<small>${esc(L(d.live_hint))}</small>` : ''}<input data-live="${d.id}" value="${esc(liveUrl(d.id) || '')}" placeholder="https://…" spellcheck="false"></div>`).join('')}<button class="btn gold" id="liveSave" style="width:100%">${T('saveBtn')}</button>`,
     (sh, close) => $('#liveSave', sh).onclick = () => { $$('[data-live]', sh).forEach(i => { const u = i.value.trim(); if (u) S.settings.live[i.dataset.live] = u; else delete S.settings.live[i.dataset.live]; }); save(); close(); toast(T('liveSaved')); route(); });
   $('#mAbout').onclick = () => sheet(T('aboutL'), '', lang() === 'zh'
-    ? `<div class="note"><p>这是「实时 AI 互动剧」聚合 APP 的网页预览版，目前收录 ${D.length} 部剧。</p><p><b>预览回放</b>：剧集里的每一幕都来自真实测试时的实时生成（Vivix W1，测试记录页公开托管）。你在选择点说什么都可以，等待动画之后播放的是测试时那一轮的真实结果；画面开头会注明当时的输入。</p><p><b>实时开玩</b>：在「实时链接」里填入某部剧的实时测试链接后，详情页会出现红色的实时按钮，在 APP 里直接打开那部剧自己的实时播放页。</p><p><b>加新剧</b>：在项目的 <code>catalog.json</code> 里追加一条（标题、简介、对应测试记录里的成片和测试组），运行 <code>python3 build_catalog.py</code> 后推送即可。</p><p>数据更新于 ${esc(DATA.updated)}。</p></div>`
+    ? `<div class="note"><p>这是「实时 AI 互动剧」聚合 APP 的网页预览版，目前收录 ${D.length} 部剧。</p><p><b>预览回放</b>：剧集里的每一幕都来自真实测试时的实时生成（Vivix W1，测试记录页公开托管）。你在选择点说什么都可以，等待动画之后播放的是测试时那一轮的真实结果；画面开头会注明当时的输入。</p><p><b>实时开玩</b>：在「实时链接」里填入某部剧的实时测试链接后，详情页会出现红色的实时按钮，在 APP 里直接打开那部剧自己的实时播放页。</p><p><b>加新剧</b>：在项目的 <code>catalog.json</code> 里追加一条（标题、简介、对应测试记录里的成片和测试组），运行 <code>python3 build_catalog.py</code> 后推送即可。</p><p><b>星票</b>：演员表、雇佣和生成功能用的是测试币，不涉及真钱。</p><p>数据更新于 ${esc(DATA.updated)}。</p></div>`
     : `<div class="note"><p>A web preview of a home for live AI interactive dramas, with ${D.length} titles so far.</p><p><b>Preview replay</b>: every scene is a real live generation from testing (Vivix W1). Say anything at a choice point; after the wait animation you see the real result from that test round, with the original input noted on screen.</p><p><b>Play live</b>: paste a drama's live test link in Live links and a red live button appears on its page.</p><p><b>Adding a drama</b>: add one entry to <code>catalog.json</code>, run <code>python3 build_catalog.py</code>, and push.</p><p>Data updated ${esc(DATA.updated)}.</p></div>`);
+}
+
+// ==================== 角色 · 演员表 · 自由剧场 · 星票 ====================
+// 你的角色（c.*）存在本机；演员表 = Vicky 资产库演员（lib.*，docs/data/actors.js）+ 玩家上架的演员（u.*，创作服务共享）。
+// 需要模型或共享数据的（AI 补全、生成定妆照/剧照、自由剧场写戏、上架、雇佣、钱包）走创作服务：链接里 ?live=studio~地址~口令。
+const Z = (zh, en) => lang() === 'zh' ? zh : en;
+const ACT = window.ACTORS || [];
+const studio = () => parseLive((S.settings.live || {}).studio);
+const imgUrl = u => u && u.startsWith('/img/') && studio() ? studio().api + u : u || '';
+async function sapi(path, body){
+  const c = studio(); if (!c) throw new Error(Z('创作服务没连上：请用带创作服务的测试链接打开', 'Studio offline: open the test link that includes the studio'));
+  const r = await fetch(c.api + path + (body ? '' : (path.includes('?') ? '&' : '?') + 'k=' + encodeURIComponent(c.k)), {method: body ? 'POST' : 'GET', headers: body ? {'Content-Type': 'text/plain'} : {},
+    body: body ? JSON.stringify(Object.assign({k: c.k, uid: S.uid, nick: S.nick}, body)) : undefined});
+  const j = await r.json(); if (j.wallet){ S.wallet = j.wallet; save(); refreshWallet(); }
+  if (!r.ok) throw Object.assign(new Error(j.err || r.status), {code: r.status}); return j;
+}
+const refreshWallet = () => $$('[data-wallet]').forEach(el => el.textContent = S.wallet ? S.wallet.balance : '—');
+const walletPill = () => `<button class="wallet" data-go-wallet>★ <b data-wallet>${S.wallet ? S.wallet.balance : '—'}</b></button>`;
+let market = [];
+const loadMarket = () => studio() ? sapi('/api/market').then(j => { market = j.actors || []; return market; }).catch(() => market) : Promise.resolve(market);
+const FIELDS = [['name', '名字', 'Name'], ['age', '年龄', 'Age'], ['gender', '性别', 'Gender'], ['job', '职业 / 身份', 'Occupation'], ['look', '外形', 'Look'],
+  ['personality', '性格（逗号分隔）', 'Personality (comma separated)'], ['voice', '说话方式', 'Voice'], ['likes', '喜好', 'Likes'], ['backstory', '来历', 'Backstory'],
+  ['world', '世界观', 'World'], ['secret', '秘密', 'Secret'], ['goal', '想要的东西', 'Goal']];
+const mine = () => Object.values(S.chars || {}).sort((a, b) => b.created - a.created);
+const toActor = c => ({id: c.id, name: c.name || Z('未命名角色', 'Untitled'), role: c.job || '', face: c.face, body: c.face, tags: [], personality: arrOf(c.personality), bio: c.backstory || '',
+  age: c.age, look: c.look, owner: S.nick, mine: true, price: (c.listing || {}).price || 0, src: c});
+const arrOf = v => Array.isArray(v) ? v : String(v || '').split(/[,，、]/).map(x => x.trim()).filter(Boolean);
+function actorById(id){
+  if (!id) return null;
+  if (id.startsWith('c.')) return S.chars[id] ? toActor(S.chars[id]) : null;
+  return ACT.find(a => a.id === id) || market.find(a => a.id === id) || null;
+}
+function cardText(a){  // 交给实时导演层 / 创作服务的角色卡
+  if (!a) return '';
+  const c = a.src || a, out = [];
+  FIELDS.forEach(([k, zh]) => { const v = k === 'personality' ? arrOf(c[k]).join('、') : c[k]; if (v) out.push(`${zh.split('（')[0]}：${v}`); });
+  if (!c.job && a.role) out.push('身份：' + a.role); if (!c.backstory && a.bio) out.push('来历：' + a.bio);
+  (c.memories || []).slice(-5).forEach(m => out.push(`演出记忆（${m.drama}）：${m.text}`));
+  return out.join('\n');
+}
+function studioCard(a){ const c = a.src || a; const o = {name: c.name || a.name, face: imgUrl(a.face)}; FIELDS.forEach(([k]) => { if (c[k]) o[k] = c[k]; });
+  if (!o.job && a.role) o.job = a.role; if (!o.backstory && a.bio) o.backstory = a.bio; if (!o.personality && a.personality) o.personality = a.personality; o.memories = c.memories || []; return o; }
+// 串场身份：每部剧记住你用哪个身份进（空白 = 无设定的你）
+const castingOf = id => actorById((S.casting || {})[id]);
+function avatar(a, cls = 'av'){ return a && a.face ? `<img class="${cls}" src="${esc(imgUrl(a.face))}" alt="">` : `<span class="${cls} blank">${esc((a && a.name || '?').slice(0, 1))}</span>`; }
+function personaSheet(dramaId, title, onDone){
+  const cur = (S.casting || {})[dramaId] || '';
+  const opts = [{id: '', name: Z('空白的你', 'Blank you'), sub: Z('无设定，你说什么就是什么；演着演着长出来的设定可以存成角色', 'No preset. What you say becomes who you are')}]
+    .concat(mine().map(c => ({id: c.id, name: c.name || Z('未命名角色', 'Untitled'), sub: [c.age, c.job].filter(Boolean).join(' · '), a: toActor(c)})));
+  sheet(Z('以谁的身份进入', 'Enter as'), esc(title), `<div class="plist">${opts.map(o => `<button class="prow${o.id === cur ? ' on' : ''}" data-p="${o.id}">${o.a ? avatar(o.a) : '<span class="av blank">∅</span>'}<span><b>${esc(o.name)}</b><small>${esc(o.sub || '')}</small></span></button>`).join('')}
+    <button class="prow add" data-new>＋<span><b>${Z('新建角色', 'New character')}</b><small>${Z('或去演员表签一个新人来培养', 'Or sign a new face from the cast')}</small></span></button></div>`,
+    (sh, close) => { $$('[data-p]', sh).forEach(b => b.onclick = () => { S.casting = S.casting || {}; S.casting[dramaId] = b.dataset.p; save(); close(); onDone && onDone(); });
+      $('[data-new]', sh).onclick = () => { close(); location.hash = '#/char/new'; }; });
+}
+// 演完一幕：记进角色的演出记忆，再请创作服务提炼新设定，玩家点采纳才写进卡
+function afterScene(dramaTitle, said, lines, personaId){
+  const c = personaId && S.chars[personaId];
+  const target = c || (S.blank = S.blank || {growth: [], memories: []});
+  const first = (lines || [])[0];
+  target.memories = (target.memories || []).concat([{drama: dramaTitle, text: `说「${said}」${first ? `，对方回「${first.zh || first.en}」` : ''}`, at: Date.now()}]).slice(-30);
+  if (c){ c.credits = c.credits || {}; c.credits[dramaTitle] = (c.credits[dramaTitle] || 0) + 1; }
+  save();
+  if (!studio()) return;
+  sapi('/api/grow', {card: studioCard(c ? toActor(c) : {name: Z('空白的你', 'Blank you'), src: target}), drama: dramaTitle, said, scene: lines}).then(j => {
+    const g = (j.grow || []).filter(x => x && x.field && x.value); if (!g.length) return;
+    target.pending = (target.pending || []).concat(g.map(x => Object.assign(x, {drama: dramaTitle, at: Date.now()}))).slice(-12); save();
+    growToast(g, personaId);
+  }).catch(() => {});
+}
+function growToast(g, personaId){
+  const host = document.querySelector('.player') || $('#app'); const el = document.createElement('div'); el.className = 'growtoast fade-in';
+  el.innerHTML = `<b>✦ ${Z('从这一幕长出的设定', 'New from this scene')}</b>${g.slice(0, 3).map(x => `<span>${esc(fieldName(x.field))}：${esc(String(x.value).slice(0, 40))}</span>`).join('')}<button>${Z('去采纳', 'Review')}</button>`;
+  host.appendChild(el); $('button', el).onclick = () => { el.remove(); growSheet(personaId); }; setTimeout(() => el.remove(), 9000);
+}
+const fieldName = f => (FIELDS.find(x => x[0] === f) || [f, f === 'memories' ? '演出记忆' : f, f])[lang() === 'zh' ? 1 : 2].split('（')[0];
+function growSheet(personaId){
+  const c = personaId ? S.chars[personaId] : S.blank; if (!c) return;
+  const p = c.pending || [];
+  sheet(Z('待采纳的设定', 'Suggested details'), esc(personaId ? c.name : Z('空白的你', 'Blank you')), p.length ? `<div class="glist">${p.map((x, i) => `<div class="gitem"><div><small>${esc(fieldName(x.field))} · ${esc(x.drama || '')}</small><p>${esc(x.value)}</p>${x.why ? `<em>${esc(x.why)}</em>` : ''}</div><button class="btn gold sm" data-ok="${i}">${Z('采纳', 'Keep')}</button><button class="btn ghost sm" data-no="${i}">${Z('忽略', 'Skip')}</button></div>`).join('')}</div>
+    ${personaId ? '' : `<button class="btn gold" id="saveBlank" style="width:100%;margin-top:14px">${Z('把这些存成我的角色', 'Save as my character')}</button>`}` : `<div class="empty">${Z('还没有新设定。用这个身份演几幕就会长出来。', 'Nothing yet. Play a few scenes.')}</div>`,
+    (sh, close) => {
+      const apply = (i, keep) => { const x = c.pending[i]; c.pending.splice(i, 1);
+        if (keep){ c.growth = (c.growth || []).concat([x]); if (x.field === 'memories') c.memories = (c.memories || []).concat([{drama: x.drama, text: x.value, at: Date.now()}]);
+          else if (x.field === 'personality') c.personality = [...new Set(arrOf(c.personality).concat(arrOf(x.value)))];
+          else c[x.field] = x.value; }
+        save(); close(); growSheet(personaId); };
+      $$('[data-ok]', sh).forEach(b => b.onclick = () => apply(+b.dataset.ok, true)); $$('[data-no]', sh).forEach(b => b.onclick = () => apply(+b.dataset.no, false));
+      const sb = $('#saveBlank', sh); if (sb) sb.onclick = () => { const id = newChar(Object.assign({}, ...p.filter(x => x.field !== 'memories').map(x => ({[x.field]: x.value})), {memories: c.memories || []})); S.blank = null; save(); close(); location.hash = '#/char/' + id; };
+    });
+}
+function newChar(init){ const id = 'c.' + Math.random().toString(36).slice(2, 10); S.chars[id] = Object.assign({id, created: Date.now(), origin: 'custom', personality: [], memories: [], growth: [], pending: [], credits: {}}, init); save(); return id; }
+function walletSheet(){
+  const w = S.wallet;
+  sheet(Z('星票钱包', 'Star wallet'), Z('测试币，不涉及真钱', 'Test currency, no real money'), w ? `<div class="wtop"><div><small>${Z('余额', 'Balance')}</small><b>★ ${w.balance}</b></div><div><small>${Z('演员片酬收入', 'Actor earnings')}</small><b>★ ${w.earned}</b></div></div>
+    <button class="btn gold" id="topup" style="width:100%;margin:12px 0">${Z('领取 300 体验星票', 'Claim 300 test stars')}</button>
+    <div class="ledger">${(w.ledger || []).map(x => `<div><span>${esc(x.what)}</span><b class="${x.d > 0 ? 'in' : ''}">${x.d > 0 ? '+' : ''}${x.d}</b></div>`).join('')}</div>
+    <p class="note">${Z('价格：生成定妆照 80 · 生成剧照 30 · 雇演员按演员定的片酬（主人拿 70%，平台 30%）· AI 补全设定和写戏免费', 'Prices: portrait 80 · scene still 30 · hiring = the actor’s fee (owner gets 70%) · AI assist and scene writing free')}</p>`
+    : `<div class="empty">${Z('创作服务没连上，钱包暂时看不到。', 'Studio offline.')}</div>`, (sh, close) => { const b = $('#topup', sh); if (b) b.onclick = () => sapi('/api/topup', {}).then(() => { close(); walletSheet(); toast('+300 ★'); }).catch(e => toast(e.message)); });
+}
+document.addEventListener('click', e => { if (e.target.closest('[data-go-wallet]')){ e.stopPropagation(); walletSheet(); } }, true);
+const castCard = a => `<div class="acard" data-actor="${esc(a.id)}"><div class="pic"><img src="${esc(imgUrl(a.face))}" alt="" loading="lazy">
+  ${a.mine ? `<span class="pill gold">${Z('我的', 'Mine')}</span>` : a.tier === 'rookie' ? `<span class="pill">${Z('新人待签', 'New face')}</span>` : a.owner_uid ? `<span class="pill">${Z('玩家原创', 'Player-made')}</span>` : `<span class="pill gold">${Z('签约', 'Signed')}</span>`}
+  <div class="meta">${a.tier === 'rookie' ? Z('免费签下', 'Free to sign') : a.price ? `★ ${a.price} / ${Z('场', 'scene')}` : Z('免费', 'Free')}${a.hires ? ` · ${Z('被雇', 'hired')} ${a.hires}` : ''}</div></div>
+  <b>${esc(a.name)}</b><span>${esc(a.role || (a.owner ? '@' + a.owner : ''))}</span></div>`;
+
+function Cast(view){
+  let seg = 'all';
+  const draw = () => {
+    const pool = seg === 'mine' ? mine().map(toActor) : seg === 'star' ? ACT.filter(a => a.tier === 'star') : seg === 'rookie' ? ACT.filter(a => a.tier === 'rookie') : seg === 'player' ? market
+      : [...mine().map(toActor), ...ACT.filter(a => a.tier === 'star'), ...market, ...ACT.filter(a => a.tier === 'rookie')];
+    $('#castGrid').innerHTML = pool.length ? pool.map(castCard).join('') : `<div class="empty" style="grid-column:1/-1">${seg === 'player' ? Z('还没有玩家上架演员。去创建你的角色，上架后别人就能雇 TA。', 'No player actors yet.') : Z('这里还是空的。', 'Nothing here yet.')}</div>`;
+  };
+  view.innerHTML = `<div class="page-h row" style="justify-content:space-between"><div><h1>${Z('演员表', 'Cast')}</h1><p>${Z('选一个角色带进任何一部剧，或雇来给你搭戏', 'Take a character into any drama, or hire one for yours')}</p></div>${walletPill()}</div>
+    <div class="castcta"><button data-go="#/char/new"><b>＋ ${Z('创建我的角色', 'Create my character')}</b><small>${Z('名字、职业、世界观都由你写，AI 帮你补全', 'You write it, AI fills the gaps')}</small></button>
+      <button data-go="#/stage"><b>🎭 ${Z('自由剧场', 'Free stage')}</b><small>${Z('自己写开场，雇演员来演', 'Your premise, hired actors')}</small></button></div>
+    <div class="chips" id="cseg" style="margin-top:16px">${[['all', '全部', 'All'], ['star', '签约明星', 'Signed'], ['rookie', '新人待签', 'New faces'], ['player', '玩家原创', 'Player-made'], ['mine', '我的', 'Mine']].map(([k, zh, en], i) => `<button class="chip${i ? '' : ' on'}" data-s="${k}">${Z(zh, en)}</button>`).join('')}</div>
+    <div class="grid" id="castGrid" style="margin-top:14px"></div>
+    <p class="note" style="padding:18px 18px 0">${Z('签约明星和新人来自 Vicky 资产库；玩家原创是其他玩家培养后上架的角色。', 'Signed actors and new faces come from Vicky’s asset library; player-made actors are listed by other players.')}</p>`;
+  $('#cseg').onclick = e => { const b = e.target.closest('.chip'); if (!b) return; seg = b.dataset.s; $$('#cseg .chip').forEach(x => x.classList.toggle('on', x === b)); draw(); };
+  view.onclick = e => { const g = e.target.closest('[data-go]'); if (g){ location.hash = g.dataset.go; return; } const a = e.target.closest('[data-actor]'); if (a) location.hash = '#/actor/' + encodeURIComponent(a.dataset.actor); };
+  onLeave(() => view.onclick = null);
+  draw(); loadMarket().then(draw);
+}
+
+function Actor(view, id){
+  document.body.classList.add('notabs');
+  const a = actorById(id);
+  if (!a){ view.innerHTML = `<div class="empty">${Z('找不到这个演员', 'Actor not found')}</div>`; loadMarket().then(() => actorById(id) && route()); return; }
+  const isMine = !!a.mine, rookie = a.tier === 'rookie', listed = isMine && (a.src.listing || {}).on;
+  const credits = isMine ? Object.entries(a.src.credits || {}).map(([k, n]) => `${k} × ${n}`) : (a.credits || []);
+  view.innerHTML = `<div class="detail fade-in"><div class="d-bg actor"><img src="${esc(imgUrl(a.body || a.face))}" alt=""></div>
+    <div class="d-top"><button class="iconbtn" id="back">${ICON.back}</button>${walletPill()}</div>
+    <div class="d-head" style="margin-top:-40px"><div class="pills">${isMine ? `<span class="pill gold">${Z('我的角色', 'My character')}</span>` : rookie ? `<span class="pill">${Z('新人待签', 'New face')}</span>` : `<span class="pill gold">${a.owner_uid ? Z('玩家原创', 'Player-made') : Z('签约演员', 'Signed')}</span>`}${(a.tags || []).slice(0, 3).map(t => `<span class="pill">${esc(t)}</span>`).join('')}</div>
+      <h1>${esc(a.name)}</h1><div class="lead">${esc([a.age, a.role].filter(Boolean).join(' · '))}</div>
+      <div class="d-stats"><div><b>${rookie ? Z('免费', 'Free') : a.price ? '★' + a.price : Z('免费', 'Free')}</b><span>${rookie ? Z('签约', 'to sign') : Z('片酬 / 场', 'per scene')}</span></div><div><b>${a.hires || 0}</b><span>${Z('被雇用', 'Hired')}</span></div><div><b>${credits.length}</b><span>${Z('出演作品', 'Credits')}</span></div></div>
+      ${a.bio ? `<p class="d-hook">${esc(a.bio)}</p>` : rookie ? `<p class="d-hook">${Z('只有一张脸，还没有名字、性格和来历。签下 TA，由你来写 TA 的一切，再带 TA 去串场、上架接戏。', 'Just a face for now. Sign them and write everything else.')}</p>` : ''}
+      ${(a.personality || []).length ? `<div class="d-tags">${a.personality.map(t => `<span>${esc(t)}</span>`).join('')}</div>` : ''}
+      ${a.look ? `<p class="note" style="margin-top:12px">${esc(a.look)}</p>` : ''}
+      ${credits.length ? `<div class="list-h" style="margin:20px 0 8px">${Z('演出履历', 'Credits')}</div><div class="d-tags">${credits.map(c => `<span>${esc(c)}</span>`).join('')}</div>` : ''}
+      ${a.owner && !isMine ? `<p class="note" style="margin-top:14px">${Z('所属', 'Owner')}：${esc(a.owner)}</p>` : ''}</div>
+    <div class="d-cta" style="margin-top:20px">${isMine ? `<button class="btn gold" id="aUse">${ICON.play}${Z('带 TA 去串场', 'Take into a drama')}</button><button class="btn ghost txt" id="aEdit">${Z('编辑', 'Edit')}</button>`
+      : rookie ? `<button class="btn gold" id="aSign">${Z('签下 TA，开始培养', 'Sign & develop')}</button>`
+      : `<button class="btn gold" id="aLead">${Z('扮演 TA', 'Play as')}${a.price ? ' · ★' + a.price : ''}</button><button class="btn ghost txt" id="aHire">${Z('雇来搭戏', 'Hire')}</button>`}</div></div>`;
+  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/cast');
+  const go = (k, f) => { const b = $(k); if (b) b.onclick = f; };
+  go('#aEdit', () => location.hash = '#/char/' + a.id);
+  go('#aUse', () => pickDrama(a));
+  go('#aSign', () => { const id = newChar({origin: 'lib', from: a.id, face: a.face, look: a.look || '', style: a.style}); toast(Z('签下了！给 TA 取个名字吧', 'Signed! Give them a name')); location.hash = '#/char/' + id; });
+  go('#aLead', () => pickDrama(a));
+  go('#aHire', () => { location.hash = '#/stage/new?cast=' + encodeURIComponent(a.id); });
+}
+// 带着某个角色去哪部剧：实时剧（导演层收到角色卡）或自由剧场
+function pickDrama(a){
+  const live = D.filter(d => liveNative(d)), others = D.filter(d => !liveNative(d) && d.kind === 'open');
+  sheet(Z('带 TA 去哪', 'Where to'), esc(a.name), `<div class="plist">
+    <button class="prow" data-stage>${avatar(a)}<span><b>🎭 ${Z('自由剧场', 'Free stage')}</b><small>${Z('自己写开场，可以再雇别的演员搭戏', 'Your own premise, hire co-stars')}</small></span></button>
+    ${live.map(d => `<button class="prow" data-d="${d.id}"><img class="av" src="${esc(d.cover)}" alt=""><span><b>${esc(L(d.title))} <span class="pill live">LIVE</span></b><small>${Z('角色卡交给导演层：名字、身份、性格按你的设定演；画面外形仍是剧里原来的', 'Card goes to the director; visuals stay as in the drama')}</small></span></button>`).join('')}
+    ${others.map(d => `<button class="prow" data-d="${d.id}" data-preview><img class="av" src="${esc(d.cover)}" alt=""><span><b>${esc(L(d.title))}</b><small>${Z('预览回放：只换称呼，剧情不会按角色变', 'Preview: name only')}</small></span></button>`).join('')}</div>`,
+    (sh, close) => {
+      const ensure = () => a.mine || !a.price ? Promise.resolve() : sapi('/api/hire', {actor: {id: a.id}, purpose: 'lead'}).then(j => toast(Z(`已付片酬 ★${j.paid}`, `Paid ★${j.paid}`)));
+      $('[data-stage]', sh).onclick = () => { close(); location.hash = '#/stage/new?persona=' + encodeURIComponent(a.id); };
+      $$('[data-d]', sh).forEach(b => b.onclick = () => ensure().then(() => { S.casting = S.casting || {}; S.casting[b.dataset.d] = a.id; save(); close(); location.hash = `#/play/${b.dataset.d}${b.dataset.preview == null ? '?live=1' : ''}`; }).catch(e => toast(e.message)));
+    });
+}
+
+function Editor(view, id){
+  document.body.classList.add('notabs');
+  const isNew = id === 'new', c = isNew ? {personality: [], memories: [], growth: [], pending: []} : S.chars[id];
+  if (!c){ location.replace('#/cast'); return; }
+  const lst = c.listing || {};
+  view.innerHTML = `<div class="editor fade-in"><div class="d-top solid"><button class="iconbtn" id="back">${ICON.back}</button><b>${isNew ? Z('创建角色', 'New character') : Z('编辑角色', 'Edit character')}</b>${walletPill()}</div>
+    <div class="ed-face"><div class="ph" id="face">${c.face ? `<img src="${esc(imgUrl(c.face))}" alt="">` : `<span>${Z('还没有定妆照', 'No portrait yet')}</span>`}</div>
+      <div class="ed-face-act"><button class="btn ghost sm" id="pickFace">${Z('从资产库挑脸', 'Pick from library')}</button>
+        <div class="stylepick" id="style">${[['real', '写实', 'Real'], ['otome', '2.5D', '2.5D'], ['cozy', '温暖居家', 'Cozy']].map(([k, zh, en]) => `<button class="${(/otome|3d/.test(c.style || '') ? 'otome' : /cozy/.test(c.style || '') ? 'cozy' : 'real') === k ? 'on' : ''}" data-st="${k}">${Z(zh, en)}</button>`).join('')}</div>
+        <button class="btn gold sm" id="gen">✨ ${Z('按设定生成定妆照 · ★80', 'Generate portrait · ★80')}</button></div></div>
+    <div class="ed-assist"><button class="btn ghost" id="assist">✨ ${Z('AI 帮我补全空着的设定（免费）', 'AI: fill the blanks (free)')}</button><p class="note" id="assistNote">${Z('先写几个你在意的（比如名字和职业），其余交给 AI；写过的不会被改。', 'Write what matters, AI fills the rest; your fields stay.')}</p></div>
+    <div class="ed-fields">${FIELDS.map(([k, zh, en]) => { const v = k === 'personality' ? arrOf(c[k]).join('，') : c[k] || ''; const long = ['look', 'backstory', 'world', 'secret', 'voice', 'likes', 'goal'].includes(k);
+      return `<div class="field"><label>${Z(zh, en)}</label>${long ? `<textarea data-f="${k}" rows="2">${esc(v)}</textarea>` : `<input data-f="${k}" value="${esc(v)}">`}</div>`; }).join('')}</div>
+    ${!isNew ? `<div class="ed-sec"><div class="list-h" style="margin:0 0 8px">${Z('演出中长出来的设定', 'Grown in play')}</div>${(c.pending || []).length ? `<button class="btn ghost sm" id="pend">${Z(`${c.pending.length} 条待采纳`, `${c.pending.length} to review`)}</button>` : ''}
+      ${(c.growth || []).length ? (c.growth || []).slice(-8).map(g => `<p class="note">· ${esc(fieldName(g.field))}：${esc(g.value)} <em>（${esc(g.drama || '')}）</em></p>`).join('') : `<p class="note">${Z('带 TA 去演几幕，新设定会从你的台词里长出来。', 'Play a few scenes and details grow from what you say.')}</p>`}
+      ${(c.memories || []).length ? `<div class="list-h" style="margin:14px 0 8px">${Z('演出记忆', 'Memories')}</div>${c.memories.slice(-5).map(m => `<p class="note">· ${esc(m.drama)}：${esc(m.text)}</p>`).join('')}` : ''}</div>` : ''}
+    <div class="ed-sec"><div class="list-h" style="margin:0 0 8px">${Z('上架到演员表', 'List in the cast')}</div>
+      <label class="tog"><input type="checkbox" id="lOn" ${lst.on ? 'checked' : ''}><span>${Z('上架：别的玩家可以扮演 TA、雇 TA 搭戏', 'List: others can play as or hire them')}</span></label>
+      <div class="field"><label>${Z('片酬（星票 / 场，0 = 免费）', 'Fee (stars per scene, 0 = free)')}</label><input id="lPrice" type="number" min="0" max="500" value="${lst.price || 40}"></div>
+      <p class="note">${Z('每被雇一次，片酬的 70% 进你的钱包。上架的是这张角色卡和定妆照，你的演出记忆不会公开。', 'You keep 70% of every fee. Your memories stay private.')}</p></div>
+    <div class="ed-save"><button class="btn gold" id="saveC" style="width:100%">${Z('保存', 'Save')}</button>${!isNew ? `<button class="btn ghost" id="delC" style="width:100%;margin-top:8px;color:var(--rose)">${Z('删除这个角色', 'Delete')}</button>` : ''}</div></div>`;
+  let face = c.face, style = /otome|3d/.test(c.style || '') ? 'otome' : /cozy/.test(c.style || '') ? 'cozy' : 'real';
+  const read = () => { const o = {}; $$('[data-f]').forEach(i => { const v = i.value.trim(); o[i.dataset.f] = i.dataset.f === 'personality' ? arrOf(v) : i.dataset.f === 'age' && /^\d+$/.test(v) ? +v : v; }); return o; };
+  const setFace = u => { face = u; $('#face').innerHTML = `<img src="${esc(imgUrl(u))}" alt="">`; };
+  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/cast');
+  $('#style').onclick = e => { const b = e.target.closest('[data-st]'); if (!b) return; style = b.dataset.st; $$('#style button').forEach(x => x.classList.toggle('on', x === b)); };
+  $('#pickFace').onclick = () => sheet(Z('从资产库挑一张脸', 'Pick a face'), Z('Vicky 资产库', 'Vicky library'), `<div class="facegrid">${ACT.map(a => `<button data-face="${esc(a.face)}" data-look="${esc(a.look || '')}"><img src="${esc(a.face)}" alt="" loading="lazy"></button>`).join('')}</div>`,
+    (sh, close) => $$('[data-face]', sh).forEach(b => b.onclick = () => { setFace(b.dataset.face); const lk = $('[data-f="look"]'); if (!lk.value && b.dataset.look) lk.value = b.dataset.look; close(); }));
+  $('#assist').onclick = () => { const btn = $('#assist'); btn.disabled = true; btn.textContent = Z('AI 正在补全…', 'Filling…');
+    sapi('/api/assist', {card: Object.assign(read(), {face: imgUrl(face)})}).then(j => { const f = j.fill || {}; $$('[data-f]').forEach(i => { const v = f[i.dataset.f]; if (!i.value.trim() && v != null && v !== '') i.value = Array.isArray(v) ? v.join('，') : v; });
+      $('#assistNote').textContent = [j.tagline, j.note].filter(Boolean).join(' · '); }).catch(e => toast(e.message)).finally(() => { btn.disabled = false; btn.textContent = '✨ ' + Z('再补一次', 'Fill again'); }); };
+  $('#gen').onclick = () => { const btn = $('#gen'); const card = read(); if (!card.look && !card.job && !card.name){ toast(Z('先写几句外形或身份', 'Describe the look first')); return; }
+    btn.disabled = true; btn.textContent = Z('生成中，约 20 秒…', 'Generating…');
+    sapi('/api/portrait', {card, style}).then(j => { setFace(j.url); toast(Z('定妆照好了 · 已扣 ★80', 'Portrait ready · ★80')); }).catch(e => toast(e.message)).finally(() => { btn.disabled = false; btn.textContent = '✨ ' + Z('重新生成 · ★80', 'Regenerate · ★80'); }); };
+  if ($('#pend')) $('#pend').onclick = () => growSheet(id);
+  if ($('#delC')) $('#delC').onclick = () => { if (!confirm(Z('删除这个角色？', 'Delete?'))) return; const l = c.listing || {}; if (l.mid) sapi('/api/unpublish', {id: l.mid}).catch(() => {}); delete S.chars[id]; save(); location.hash = '#/cast'; };
+  $('#saveC').onclick = async () => {
+    const o = read(); if (!o.name){ toast(Z('给角色取个名字', 'Give them a name')); return; }
+    const cid = isNew ? newChar({}) : id, ch = S.chars[cid];
+    Object.assign(ch, o, {face, style}); const on = $('#lOn').checked, price = Math.max(0, Math.min(500, +$('#lPrice').value || 0));
+    ch.listing = Object.assign({}, ch.listing, {on, price}); save();
+    if (on || (ch.listing || {}).mid){
+      try {
+        if (on){ if (!face){ toast(Z('上架需要一张定妆照', 'Listing needs a portrait')); return; }
+          const j = await sapi('/api/publish', {actor: Object.assign(studioCard(toActor(ch)), {id: ch.listing.mid, face, role: o.job, bio: o.backstory, personality: arrOf(o.personality), price, tags: arrOf(o.personality).slice(0, 2), age: o.age})});
+          ch.listing.mid = j.actor.id; toast(Z('已上架到演员表', 'Listed'));
+        } else { await sapi('/api/unpublish', {id: ch.listing.mid}); ch.listing.mid = null; toast(Z('已下架', 'Unlisted')); }
+        save();
+      } catch (e){ toast(e.message); }
+    } else toast(Z('已保存', 'Saved'));
+    location.hash = '#/actor/' + cid;
+  };
+}
+
+// ---------- 自由剧场：你的角色 + 雇来的演员，即兴写戏（文字 + 头像，可付费生成剧照） ----------
+function Stages(view){
+  const list = Object.values(S.stages || {}).sort((a, b) => b.at - a.at);
+  view.innerHTML = `<div class="page-h row" style="justify-content:space-between"><div><h1>${Z('自由剧场', 'Free stage')}</h1><p>${Z('自己写开场和世界观，带上你的角色、雇演员来演', 'Write a premise, bring your character, hire a cast')}</p></div>${walletPill()}</div>
+    <div style="padding:14px 18px 0"><button class="btn gold" style="width:100%" data-go="#/stage/new">＋ ${Z('新建一出戏', 'New play')}</button></div>
+    ${list.length ? list.map(s => `<div class="libitem" data-go="#/stage/${s.id}"><div class="avs">${[s.persona, ...s.cast].filter(Boolean).slice(0, 3).map(a => avatar(a)).join('')}</div><div><b>${esc(s.title)}</b><span>${esc((s.world || '').slice(0, 40))}</span><span>${Z(`${s.scenes.length} 幕`, `${s.scenes.length} scenes`)}</span></div><button class="go">${ICON.play}</button></div>`).join('')
+      : `<div class="empty">${Z('还没有戏。新建一出，写一句开场，剩下的交给演员。', 'No plays yet.')}</div>`}`;
+  view.onclick = e => { const g = e.target.closest('[data-go]'); if (g) location.hash = g.dataset.go; }; onLeave(() => view.onclick = null);
+}
+function StageNew(view, q){
+  document.body.classList.add('notabs');
+  let persona = q.get('persona') || '', cast = q.get('cast') ? [q.get('cast')] : [];
+  const draw = () => {
+    const p = actorById(persona), cs = cast.map(actorById).filter(Boolean), fee = cs.reduce((n, a) => n + (a.mine ? 0 : a.price || 0), 0) + (p && !p.mine ? p.price || 0 : 0);
+    $('#pSel').innerHTML = p ? `${avatar(p)}<span><b>${esc(p.name)}</b><small>${esc(p.role || '')}</small></span>` : `<span class="av blank">∅</span><span><b>${Z('空白的你', 'Blank you')}</b><small>${Z('无设定，演着演着长出来', 'No preset')}</small></span>`;
+    $('#cSel').innerHTML = cs.map(a => `<span class="castchip">${avatar(a)}${esc(a.name)}${a.price && !a.mine ? ` · ★${a.price}` : ''}<button data-rm="${esc(a.id)}">✕</button></span>`).join('') + (cs.length < 3 ? `<button class="castchip add" id="addCast">＋ ${Z('雇演员', 'Hire')}</button>` : '');
+    $('#fee').textContent = fee ? Z(`开演时付片酬 ★${fee}`, `Fees at curtain: ★${fee}`) : Z('不需要付片酬', 'No fees');
+    $$('[data-rm]').forEach(b => b.onclick = () => { cast = cast.filter(x => x !== b.dataset.rm); draw(); });
+    if ($('#addCast')) $('#addCast').onclick = () => sheet(Z('雇谁来演', 'Hire who'), '', `<div class="facegrid wide">${[...mine().map(toActor), ...ACT.filter(a => a.tier === 'star'), ...market].filter(a => !cast.includes(a.id) && a.id !== persona).map(a => `<button data-pick="${esc(a.id)}"><img src="${esc(imgUrl(a.face))}" alt="" loading="lazy"><span>${esc(a.name)}${a.price && !a.mine ? ` · ★${a.price}` : ''}</span></button>`).join('')}</div>`,
+      (sh, close) => $$('[data-pick]', sh).forEach(b => b.onclick = () => { cast.push(b.dataset.pick); close(); draw(); }));
+  };
+  view.innerHTML = `<div class="editor fade-in"><div class="d-top solid"><button class="iconbtn" id="back">${ICON.back}</button><b>${Z('新建一出戏', 'New play')}</b>${walletPill()}</div>
+    <div class="ed-fields"><div class="field"><label>${Z('剧名', 'Title')}</label><input id="sTitle" placeholder="${Z('比如：暴雨夜的暗房', 'e.g. Darkroom in the storm')}"></div>
+      <div class="field"><label>${Z('世界观与开场', 'World & opening')}</label><textarea id="sWorld" rows="4" placeholder="${Z('写一两句：在哪、什么时候、发生了什么。也可以留空，让演员按人设开场。', 'Where, when, what happens. Or leave empty.')}"></textarea></div>
+      <div class="field"><label>${Z('你的身份', 'You play as')}</label><button class="prow" id="pSel"></button></div>
+      <div class="field"><label>${Z('演员（最多 3 位）', 'Cast (up to 3)')}</label><div class="castsel" id="cSel"></div></div></div>
+    <div class="ed-save"><p class="note" id="fee"></p><button class="btn gold" id="go" style="width:100%">${Z('开演', 'Curtain up')}</button></div></div>`;
+  $('#back').onclick = () => history.back();
+  $('#pSel').onclick = () => sheet(Z('你的身份', 'You play as'), '', `<div class="plist"><button class="prow" data-p=""><span class="av blank">∅</span><span><b>${Z('空白的你', 'Blank you')}</b></span></button>${mine().map(c => `<button class="prow" data-p="${c.id}">${avatar(toActor(c))}<span><b>${esc(c.name)}</b><small>${esc(c.job || '')}</small></span></button>`).join('')}</div>`,
+    (sh, close) => $$('[data-p]', sh).forEach(b => b.onclick = () => { persona = b.dataset.p; close(); draw(); }));
+  $('#go').onclick = async () => {
+    if (!studio()){ toast(Z('自由剧场需要创作服务，请用带创作服务的测试链接打开', 'Free stage needs the studio')); return; }
+    const p = actorById(persona), cs = cast.map(actorById).filter(Boolean); if (!cs.length && !$('#sWorld').value.trim()){ toast(Z('至少雇一位演员，或者写个开场', 'Hire someone or write an opening')); return; }
+    const btn = $('#go'); btn.disabled = true;
+    try {
+      for (const a of [...(p && !p.mine ? [p] : []), ...cs]) if (!a.mine && a.price) await sapi('/api/hire', {actor: {id: a.id}, purpose: a === p ? 'lead' : 'support'});
+      const id = 's' + Date.now().toString(36); S.stages = S.stages || {};
+      S.stages[id] = {id, title: $('#sTitle').value.trim() || Z('无题', 'Untitled'), world: $('#sWorld').value.trim(), personaId: persona || null, persona: p ? studioCard(p) : null, cast: cs.map(studioCard), scenes: [], at: Date.now()};
+      save(); location.replace('#/stage/' + id);
+    } catch (e){ toast(e.message); btn.disabled = false; }
+  };
+  draw(); loadMarket().then(draw);
+}
+function StagePlay(view, id){
+  document.body.classList.add('notabs', 'noscroll');
+  const st = (S.stages || {})[id]; if (!st){ location.replace('#/stage'); return; }
+  const people = [st.persona, ...st.cast].filter(Boolean);
+  const face = who => { const a = st.cast.find(x => x.name === who) || (st.persona && st.persona.name === who ? st.persona : null); return a; };
+  view.innerHTML = `<div class="stage"><div class="st-bg" id="stBg"></div>
+    <div class="st-top"><button class="iconbtn" id="back">${ICON.back}</button><div><b>${esc(st.title)}</b><span id="stN"></span></div>${walletPill()}</div>
+    <div class="st-cast">${people.map(a => `<span>${avatar(a)}<small>${esc(a.name)}</small></span>`).join('')}${st.persona ? '' : `<span><span class="av blank">∅</span><small>${Z('你', 'You')}</small></span>`}</div>
+    <div class="st-log" id="stLog"></div>
+    <div class="st-bottom"><div id="stOpts"></div><form class="say" id="stF"><div class="inbox"><input id="stIn" maxlength="160" autocomplete="off" placeholder="${Z('说一句话，或者（写个动作）', 'Say something, or (do something)')}"><button type="button" class="bulb" id="stShot" title="${Z('生成这一幕的剧照 · ★30', 'Scene still · ★30')}">🎬</button></div><button class="send" type="submit">${ICON.send}</button></form></div></div>`;
+  const log = $('#stLog'); let busy = false;
+  const bg = () => { const last = [...st.scenes].reverse().find(s => s.frame); $('#stBg').style.backgroundImage = `url("${imgUrl(last ? last.frame : (st.cast[0] || st.persona || {}).face || '')}")`; $('#stBg').classList.toggle('still', !!last); };
+  const sceneHtml = (s, i) => `${s.said ? `<div class="st-you">${esc(s.said)}</div>` : ''}<div class="st-scene"><small>${Z(`第 ${i + 1} 幕`, `Scene ${i + 1}`)}${s.place ? ' · ' + esc(s.place) : ''}</small>
+    ${s.frame ? `<img class="st-frame" src="${esc(imgUrl(s.frame))}" alt="">` : s.framing ? `<div class="st-framing">${Z('剧照生成中，约 1 分钟…', 'Rendering the still, about a minute…')}</div>` : ''}${s.narration ? `<p class="st-nar">${esc(s.narration)}</p>` : ''}
+    ${(s.lines || []).map(l => { const a = face(l.who); return `<div class="st-line">${a ? avatar(a) : `<span class="av blank">${esc((l.who || '?').slice(0, 1))}</span>`}<div><b>${esc(l.who)}</b><p class="en">${esc(l.en)}</p>${lang() === 'zh' && l.zh ? `<p class="zh">${esc(l.zh)}</p>` : ''}</div></div>`; }).join('')}
+    ${s.hook ? `<p class="st-hook">${esc(s.hook)}</p>` : ''}</div>`;
+  const render = () => { log.innerHTML = st.scenes.map(sceneHtml).join('') + (busy ? `<div class="st-typing"><i></i><i></i><i></i> ${Z('演员们在想下一幕', 'The cast is thinking')}</div>` : '');
+    log.scrollTop = log.scrollHeight; $('#stN').textContent = Z(`第 ${st.scenes.length} 幕`, `Scene ${st.scenes.length}`); bg();
+    const last = st.scenes[st.scenes.length - 1]; $('#stOpts').innerHTML = !busy && last && (last.options || []).length ? last.options.map((o, k) => `<button class="opt" data-o="${k}"><i>${'AB'[k]}</i>${esc(lang() === 'zh' ? o.zh || o.en : o.en || o.zh)}</button>`).join('') : '';
+    $$('[data-o]').forEach(b => b.onclick = () => turn(lang() === 'zh' ? last.options[+b.dataset.o].zh || last.options[+b.dataset.o].en : last.options[+b.dataset.o].en)); };
+  async function turn(input){
+    if (busy) return; busy = true; const said = (input || '').trim(); if (said) st.scenes.push({said, pending: true}); render();
+    try {
+      const j = await sapi('/api/stage', {stage: {title: st.title, world: st.world}, persona: st.persona, cast: st.cast, history: st.scenes.filter(s => !s.pending).map(s => ({said: s.said, sum: [s.narration, s.hook].filter(Boolean).join(' ')})), input: said});
+      const sc = {said, place: j.place, narration: j.narration, lines: j.lines || [], options: j.options || [], hook: j.hook, beat: j.beat, at: Date.now()};
+      if (said) st.scenes[st.scenes.length - 1] = sc; else st.scenes.push(sc);
+      st.at = Date.now(); save();
+      const g = (j.grow || []).filter(x => x && x.field && x.value);
+      if (said){ const c = st.personaId && S.chars[st.personaId]; const tgt = c || (S.blank = S.blank || {growth: [], memories: []});
+        tgt.memories = (tgt.memories || []).concat([{drama: st.title, text: `说「${said}」`, at: Date.now()}]).slice(-30);
+        if (c){ c.credits = c.credits || {}; c.credits[st.title] = (c.credits[st.title] || 0) + 1; }
+        if (g.length){ tgt.pending = (tgt.pending || []).concat(g.map(x => Object.assign(x, {drama: st.title, at: Date.now()}))).slice(-12); growToast(g, c ? st.personaId : null); }
+        save(); }
+    } catch (e){ if (said) st.scenes.pop(); toast(e.message); }
+    busy = false; render();
+  }
+  $('#stF').onsubmit = e => { e.preventDefault(); const v = $('#stIn').value.trim(); if (!v) return; $('#stIn').value = ''; turn(v); };
+  $('#stShot').onclick = () => { const s = st.scenes[st.scenes.length - 1]; if (!s || !s.beat){ toast(Z('先演一幕', 'Play a scene first')); return; } if (s.frame){ toast(Z('这一幕已经有剧照了', 'Already has a still')); return; }
+    toast(Z('开始生成剧照 · ★30', 'Rendering still · ★30'));
+    if (s.framing) return; s.framing = true; render();
+    sapi('/api/frame', {beat: s.beat, place: s.place, cast: people}).then(j => { s.frame = j.url; save(); }).catch(e => toast(e.message)).finally(() => { delete s.framing; render(); }); };
+  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/stage');
+  render(); if (!st.scenes.length) turn('');
 }
 
 applyStatic();
 route();
+if (studio()) sapi('/api/me', {}).catch(() => {});  // 同步钱包
 })();
