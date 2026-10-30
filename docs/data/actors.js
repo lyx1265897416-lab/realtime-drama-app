@@ -70,6 +70,136 @@ window.ACTORS = [
   ]
  },
  {
+  "slug": "rafael",
+  "name": "Rafael Ortega",
+  "name_en": "Rafael Ortega",
+  "age": 26,
+  "gender": "male",
+  "price": 120,
+  "role": "定制摩托车店老板 · 你的六年朋友、三年室友",
+  "role_en": "Custom motorcycle shop owner, your friend of six years",
+  "personality": [
+   "看着懒散，答应的事都做到",
+   "爱照顾人",
+   "专业上固执"
+  ],
+  "bio": "朋友六年，室友三年。他总能把关心说得像顺手：多做的一份早餐、修好的灯、深夜接你回家的那趟车。昨晚为了帮你摆脱前任，他暂时扮演了你的男朋友，今天早上终于承认：临时的是男友身份，不是他对你的心意。",
+  "look": "身高187厘米，肩背宽阔，短黑发常被头盔或手指弄乱，深棕色眼睛，手臂和颈部有纹身，常穿素色T恤和旧牛仔裤。",
+  "tags": [
+   "室友",
+   "告白",
+   "现实向"
+  ],
+  "credits": [
+   "这次，不是演的"
+  ],
+  "style": "real",
+  "id": "fs.rafael",
+  "source": "feishu.rafael",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rafael-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rafael-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "heroine-rafael",
+  "name": "六年室友",
+  "name_en": "The Roommate",
+  "gender": "female",
+  "price": 120,
+  "role": "《这次，不是演的》女主",
+  "role_en": "Lead of Not Pretending This Time",
+  "personality": [
+   "独立",
+   "有自己的判断"
+  ],
+  "bio": "成年人，有独立的工作、卧室和生活。和 Rafael 是六年朋友、三年室友。昨晚和他假扮了一次情侣，今天早上被他正式约会。答应、考虑还是拒绝，都由她自己决定。",
+  "tags": [
+   "可当化身",
+   "女主",
+   "现实向"
+  ],
+  "credits": [
+   "这次，不是演的"
+  ],
+  "style": "real",
+  "id": "fs.heroine-rafael",
+  "source": "feishu.heroine-rafael",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-rafael-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-rafael-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "rhys",
+  "name": "Rhys",
+  "name_en": "Rhys",
+  "gender": "male",
+  "price": 120,
+  "role": "夜之王庭出走的王子 · 白天是猫，夜里是人",
+  "role_en": "Runaway prince of the Night Court, a cat by day",
+  "personality": [
+   "腹黑",
+   "讲程序",
+   "被拆穿时会认错"
+  ],
+  "bio": "旧誓把他锁成白天的猫、夜里的人，变形时间不归他选。他拒绝了给跨界门续期的婚盟，于是“逃走的王子”被办成了一只猫。他擅长用停顿、歧义和一句无辜的解释，把人引到他想听的答案。",
+  "look": "黑棕短发、冷灰色眼睛，头顶两只黑猫耳，身后一条黑色尾巴。",
+  "tags": [
+   "猫耳",
+   "王子",
+   "奇幻"
+  ],
+  "credits": [
+   "借来一晚，九次心动"
+  ],
+  "style": "otome",
+  "id": "fs.rhys",
+  "source": "feishu.rhys",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rhys-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rhys-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "june",
+  "name": "June",
+  "name_en": "June",
+  "gender": "female",
+  "price": 120,
+  "role": "动物诊所轮班 · 《借来一晚，九次心动》女主",
+  "role_en": "Animal clinic shift worker, lead of One Night, Nine Lives",
+  "personality": [
+   "有自己的判断",
+   "幽默",
+   "说不就是不"
+  ],
+  "bio": "她在收容所雨棚下对一只没人领养的黑猫说“就今晚”。当夜，那只猫在屏风后站成了一个男人。她是收留者，不是魔力电池：有权知道全部条款，也有权在知道之后撤回。",
+  "tags": [
+   "可当化身",
+   "女主",
+   "奇幻"
+  ],
+  "credits": [
+   "借来一晚，九次心动"
+  ],
+  "style": "otome",
+  "id": "fs.june",
+  "source": "feishu.june",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/june-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/june-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
   "id": "lib.animal.mii-nian-gao",
   "source": "animal.mii-nian-gao",
   "tier": "star",
@@ -108,6 +238,37 @@ window.ACTORS = [
    "今天不要上班，咪养你 · 开放式",
    "今天不要上班，咪养你"
   ]
+ },
+ {
+  "slug": "owner",
+  "name": "咪的主人",
+  "name_en": "Mii's Human",
+  "gender": "female",
+  "price": 120,
+  "role": "《今天不要上班，咪养你》女主",
+  "role_en": "Lead of No Work Today",
+  "personality": [
+   "刚忙完一个项目",
+   "被一只小猫照顾"
+  ],
+  "bio": "刚结束一个忙碌的项目，今天请好了假，却忘了关工作日闹钟。可以把今天整个交给咪，也可以随时伸手帮它、抱它、改主意。",
+  "tags": [
+   "可当化身",
+   "治愈",
+   "日常"
+  ],
+  "credits": [
+   "今天不要上班，咪养你"
+  ],
+  "style": "cozy",
+  "id": "fs.owner",
+  "source": "feishu.owner",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/owner-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/owner-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
  },
  {
   "id": "lib.human.selene-magnus-doc-20261019",
@@ -178,317 +339,6 @@ window.ACTORS = [
   ]
  },
  {
-  "id": "lib.human.kellan-brooks",
-  "source": "human.kellan-brooks",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Kellan Brooks",
-  "name_en": "Kellan Brooks",
-  "age": 18,
-  "role": "棒球队左投手 / 被调查方",
-  "appearance": "lean athletic build; tousled gray-brown hair; olive-green eyes; natural freckles; restrained, slightly guarded expression",
-  "personality": [
-   "responsible",
-   "protective",
-   "quiet under pressure",
-   "uses silence as self-protection"
-  ],
-  "signature": [
-   "white number 17 baseball jersey with navy piping; black socks and cleats",
-   "gray hoodie layer",
-   "glove or taped fingers",
-   "rubs left knuckles before pitching"
-  ],
-  "project": "the_ninth_inning",
-  "style": "realistic_live_action_bright",
-  "species": "human",
-  "gender": "male",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/51c08b4b3049046732622df4e5ad92e0e472c83fdbdba88e8a1f30da305f9e90-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/51c08b4b3049046732622df4e5ad92e0e472c83fdbdba88e8a1f30da305f9e90-1280-q80.webp",
-  "price": 60,
-  "bio": "棒球队左投手，被卷进一场校园调查。用沉默保护自己，投球前会揉左手指节。",
-  "tags": [
-   "校园",
-   "运动"
-  ],
-  "credits": [
-   "第九局之后"
-  ]
- },
- {
-  "id": "lib.human.aria-solano",
-  "source": "human.aria-solano",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Aria Solano",
-  "name_en": "Aria Solano",
-  "age": 17,
-  "role": "广播站剪辑员 / 调查方",
-  "appearance": "slim build; long chestnut-brown hair; gray-blue eyes; black rectangular glasses; natural youthful face",
-  "personality": [
-   "observant",
-   "restrained",
-   "evidence-minded",
-   "afraid of turning people into content"
-  ],
-  "signature": [
-   "black-frame glasses",
-   "sage-green knit",
-   "headphones",
-   "timecodes and audio recorder"
-  ],
-  "project": "the_ninth_inning",
-  "style": "realistic_live_action_bright",
-  "species": "human",
-  "gender": "female",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/4d5de5af1ab24262fd8aa6145130d76a6159f6c6e0e1efe6b584587eabdc7a0e-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/4d5de5af1ab24262fd8aa6145130d76a6159f6c6e0e1efe6b584587eabdc7a0e-1280-q80.webp",
-  "price": 60,
-  "bio": "广播站剪辑员，负责调查。克制、看证据，说话前会先把录音听三遍。",
-  "tags": [
-   "校园",
-   "调查"
-  ],
-  "credits": [
-   "第九局之后"
-  ]
- },
- {
-  "id": "lib.off-script.jamie",
-  "source": "off-script.jamie",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Jamie Reed",
-  "name_en": "Jamie Reed",
-  "age": 21,
-  "role": "编剧 · 演员",
-  "appearance": "栗棕蓬松碎发／榛色眼睛／柔和但清楚的下颌／年轻细腻的骨相",
-  "personality": [
-   "敏感",
-   "嘴硬",
-   "心软"
-  ],
-  "signature": [],
-  "project": "off-script / KISS ME FOR REAL",
-  "style": "realistic_live_action_cool_neutral",
-  "species": "human",
-  "gender": "male",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/5a02882459a78ef0c8c7088646de7205c1f79f87a1ecb61d2ece55702c506d75-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/5a02882459a78ef0c8c7088646de7205c1f79f87a1ecb61d2ece55702c506d75-1280-q80.webp",
-  "price": 60,
-  "bio": "写剧本也演戏的大学生，最怕的是戏外的心动比戏里更真。",
-  "tags": [
-   "BL",
-   "演员"
-  ],
-  "credits": [
-   "别演，吻我"
-  ]
- },
- {
-  "id": "lib.off-script.theo",
-  "source": "off-script.theo",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Theo Hart",
-  "name_en": "Theo Hart",
-  "age": 26,
-  "role": "演员 · Jamie 的初恋",
-  "appearance": "深色中分波浪／灰绿眼睛／较清晰的颧颌线／修长但不夸张的体型",
-  "personality": [
-   "体面",
-   "压抑",
-   "专情"
-  ],
-  "signature": [],
-  "project": "off-script / KISS ME FOR REAL",
-  "style": "realistic_live_action_cool_neutral",
-  "species": "human",
-  "gender": "male",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/be2c23c0a7c4eae35bd2f2ba9be8f0d20ef31cb221af2cc2839204d8d75a0538-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/be2c23c0a7c4eae35bd2f2ba9be8f0d20ef31cb221af2cc2839204d8d75a0538-1280-q80.webp",
-  "price": 60,
-  "bio": "当红演员，也是 Jamie 的初恋。镜头前游刃有余，镜头后一句话都说不完整。",
-  "tags": [
-   "BL",
-   "初恋"
-  ],
-  "credits": [
-   "别演，吻我"
-  ]
- },
- {
-  "id": "lib.off-script.owen",
-  "source": "off-script.owen",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Owen Price",
-  "name_en": "Owen Price",
-  "age": 24,
-  "role": "替补演员 · 主动追求者",
-  "appearance": "灰金中长中分／灰绿眼睛／略不对称的微笑／修长柔韧的轮廓",
-  "personality": [
-   "直球",
-   "阳光",
-   "执着"
-  ],
-  "signature": [],
-  "project": "off-script / KISS ME FOR REAL",
-  "style": "realistic_live_action_cool_neutral",
-  "species": "human",
-  "gender": "male",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/42d0ad0816f8b10b120579037d9f7683c77955406751dded9acc0c64759969a1-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/42d0ad0816f8b10b120579037d9f7683c77955406751dded9acc0c64759969a1-1280-q80.webp",
-  "price": 60,
-  "bio": "替补演员，主动、直接，从不掩饰自己想要什么。",
-  "tags": [
-   "BL",
-   "追求者"
-  ],
-  "credits": [
-   "别演，吻我"
-  ]
- },
- {
-  "id": "lib.off-script.mina",
-  "source": "off-script.mina",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Mina Shah",
-  "name_en": "Mina Shah",
-  "age": 29,
-  "role": "制作人 · 导演",
-  "appearance": "深色短波波头／深棕眼睛／自然肤质／海军蓝工作层次",
-  "personality": [
-   "干练",
-   "毒舌",
-   "护短"
-  ],
-  "signature": [],
-  "project": "off-script / KISS ME FOR REAL",
-  "style": "realistic_live_action_cool_neutral",
-  "species": "human",
-  "gender": "female",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/dc8fe2471c8360f911a2fca3b082929a898a53f5537db45653f643c2e9471e86-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/dc8fe2471c8360f911a2fca3b082929a898a53f5537db45653f643c2e9471e86-1280-q80.webp",
-  "price": 60,
-  "bio": "制作人兼导演，片场里唯一知道所有人秘密的人。",
-  "tags": [
-   "导演",
-   "职场"
-  ],
-  "credits": [
-   "别演，吻我"
-  ]
- },
- {
-  "id": "lib.human.yuna-park",
-  "source": "human.yuna-park",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Yuna Park",
-  "name_en": "Yuna Park",
-  "age": 17,
-  "role": "辩论队长 / 校董会青年顾问",
-  "appearance": "upright, precise presence; honey-blonde short bob in approved cast board; composed expression",
-  "personality": [
-   "articulate",
-   "strategic",
-   "socially polished",
-   "learning to choose honesty over reputation"
-  ],
-  "signature": [
-   "burgundy jacket",
-   "document folder",
-   "precise posture"
-  ],
-  "project": "the_ninth_inning",
-  "style": "realistic_live_action_bright",
-  "species": "human",
-  "gender": "female",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/1f2051769f35108a0579596c3a3a52c5a4f12528d0547a8fce5fdde67f8ec5e5-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/1f2051769f35108a0579596c3a3a52c5a4f12528d0547a8fce5fdde67f8ec5e5-1280-q80.webp",
-  "price": 60,
-  "bio": "辩论队长兼校董会青年顾问，擅长把对话引到自己想要的方向。",
-  "tags": [
-   "校园",
-   "精英"
-  ],
-  "credits": [
-   "第九局之后"
-  ]
- },
- {
-  "id": "lib.human.mara-vale",
-  "source": "human.mara-vale",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Mara Vale",
-  "name_en": "Mara Vale",
-  "age": 18,
-  "role": "前球队经理 / 缺席证人",
-  "appearance": "warm light olive-beige skin; hazel-green eyes; thick dark brows; fuller natural lips; prominent cheekbones; softly oval-square jaw; long voluminous ash-brown center-parted waves; youthful, no glasses",
-  "personality": [
-   "watchful",
-   "skeptical of institutions",
-   "methodical",
-   "protective of other people's privacy"
-  ],
-  "signature": [
-   "brick-red raincoat",
-   "silver round earrings",
-   "split copies of the recording"
-  ],
-  "project": "the_ninth_inning",
-  "style": "realistic_live_action_bright",
-  "species": "human",
-  "gender": "female",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/e52fe17a12974b71455640c6de8c0adc7abd6f873246b7821dadc28a59341e34-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/e52fe17a12974b71455640c6de8c0adc7abd6f873246b7821dadc28a59341e34-1280-q80.webp",
-  "price": 60,
-  "bio": "前球队经理，缺席的关键证人，对一切机构都不信任。",
-  "tags": [
-   "校园",
-   "悬疑"
-  ],
-  "credits": [
-   "第九局之后"
-  ]
- },
- {
-  "id": "lib.human.harland-magnus-doc-20261019",
-  "source": "human.harland-magnus-doc-20261019",
-  "tier": "star",
-  "owner": "Vicky 资产库",
-  "name": "Harland Royce",
-  "name_en": "Harland Royce — document edition",
-  "age": null,
-  "role": "保守派长老",
-  "appearance": "A visibly elderly male werewolf clan elder in fully human form, apparent human age late 60s. Distinguished weathered broad-long face, mature forehead creases, crow's feet and subtle under-eye bags, sunken cheeks, pronounced long straight nose, thinner lips, heavy hooded slate-gray eyes beneath silver eyebrows. Dense silver-gray hair neatly combed back with receding temples, trimmed short full silver beard and moustache. Calm authoritative unsmiling expression. Deep espresso brown knee-length wool overcoat over charcoal waistcoat and tailored trousers, ivory shirt, muted dark taupe tie, small antique bronze geometric lapel pin, brown leather dress shoes. Upright tall dignified lean frame; retain credible aged anatomy.",
-  "personality": [
-   "守旧",
-   "强硬",
-   "重血统"
-  ],
-  "signature": [],
-  "project": "Magnus Thorne",
-  "style": "otome_2d5d_3d",
-  "species": "human",
-  "gender": "male",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/bf7de7c03b0900bce6a7b7596c76e27d06271b772d51299d1b24ea323c665365-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/b4631fa4ba7ffe8a9a6e2d3c23d93bfa25ba3495f1bdf907686708aa1c7e778c-1280-q80.webp",
-  "price": 60,
-  "role_en": "Conservative pack elder",
-  "bio": "坚持纯血族规和联姻秩序，亲手把订婚宣布提前了十分钟。",
-  "tags": [
-   "长老",
-   "反派"
-  ],
-  "credits": [
-   "与狼为伍"
-  ]
- },
- {
   "id": "lib.human.elias-magnus-doc-20261019",
   "source": "human.elias-magnus-doc-20261019",
   "tier": "star",
@@ -517,6 +367,127 @@ window.ACTORS = [
    "狼人"
   ],
   "credits": []
+ },
+ {
+  "slug": "maya",
+  "name": "Maya Collins",
+  "name_en": "Maya Collins",
+  "gender": "female",
+  "price": 60,
+  "role": "共同的大学朋友",
+  "role_en": "A mutual friend from college",
+  "personality": [
+   "关心朋友",
+   "看得透"
+  ],
+  "bio": "她可能早就看出了 Rafael 的心意，也会说出自己的观察，但不会替任何人决定感情。她关心两边，也不要求谁必须接受告白才算幸福。",
+  "tags": [
+   "闺蜜",
+   "配角"
+  ],
+  "credits": [
+   "这次，不是演的"
+  ],
+  "style": "real",
+  "id": "fs.maya",
+  "source": "feishu.maya",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/maya-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/maya-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "evan",
+  "name": "Evan Miller",
+  "name_en": "Evan Miller",
+  "gender": "male",
+  "price": 60,
+  "role": "纠缠不休的前任",
+  "role_en": "The ex who will not let go",
+  "personality": [
+   "纠缠",
+   "不肯放手"
+  ],
+  "bio": "昨晚在酒吧的那场纠缠就是因他而起，也是那场假扮情侣的起因。他会不会再联系、要怎么回应，由被他纠缠的人决定。",
+  "tags": [
+   "前任",
+   "冲突"
+  ],
+  "credits": [
+   "这次，不是演的"
+  ],
+  "style": "real",
+  "id": "fs.evan",
+  "source": "feishu.evan",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/evan-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/evan-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "cole",
+  "name": "Cole Bennett",
+  "name_en": "Cole Bennett",
+  "gender": "male",
+  "price": 60,
+  "role": "小酒吧老板 · Rafael 的骑友",
+  "role_en": "Bar owner, Rafael's riding buddy",
+  "personality": [
+   "重秩序",
+   "可靠",
+   "说话直"
+  ],
+  "bio": "他的店里不许出乱子，能处理骚扰、留下必要记录、帮忙联系支持。作为朋友，他会提醒 Rafael：保护一个人，不等于替她做决定。",
+  "tags": [
+   "酒吧",
+   "配角"
+  ],
+  "credits": [
+   "这次，不是演的"
+  ],
+  "style": "real",
+  "id": "fs.cole",
+  "source": "feishu.cole",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/cole-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/cole-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "vael",
+  "name": "Vael",
+  "name_en": "Vael",
+  "gender": "male",
+  "price": 60,
+  "role": "王庭执事",
+  "role_en": "Steward of the Night Court",
+  "personality": [
+   "冷静",
+   "守程序"
+  ],
+  "bio": "奉命回收“逃走的王子”，持独立公务通行许可，能白天到诊所、正常投递纸信。习惯把人列成待归还事项，但守程序，最后会为自己的做法道歉。",
+  "tags": [
+   "对手",
+   "奇幻"
+  ],
+  "credits": [
+   "借来一晚，九次心动"
+  ],
+  "style": "otome",
+  "id": "fs.vael",
+  "source": "feishu.vael",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/vael-face.jpg",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/vael-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
  },
  {
   "id": "lib.research.white-D-03",

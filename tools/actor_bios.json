@@ -1,24 +1,117 @@
 {
-  "human.magnus-magnus-doc-20261019": {"name": "Magnus Thorne", "age": 34, "role": "狼人 Alpha · Thorne Maritime 董事长", "role_en": "Werewolf Alpha · Chairman of Thorne Maritime",
-    "personality": ["直接强势，话少", "决断快，厌恶空话", "对喜欢的人刻意放轻声音"], "bio": "统辖领地血脉的纯血 Alpha，今晚本该宣布联姻，却在车库闻到了命定之番的气味。金瞳在本能、愤怒和欲望时会亮起来。", "tags": ["狼人", "霸总", "命定之番"], "credits": ["与狼为伍 · 开放式", "与狼为伍 · 旁观视角", "与狼为伍"]},
-  "human.heroine-magnus-doc-20261019": {"name": "雾金月光", "age": 26, "role": "宴会摄影师 · 《与狼为伍》女主", "role_en": "Event photographer · lead of Running with Wolves",
-    "personality": ["冷静", "好奇心重", "不轻易退让"], "bio": "被请来拍订婚宴的活动摄影师，不知道狼人存在，在地下车库撞见了不该看见的金瞳。最适合拿来当你的化身。", "tags": ["可当化身", "摄影师", "女主"], "credits": ["与狼为伍 · 旁观视角"]},
-  "animal.mii-nian-gao": {"name": "咪", "role": "三个月大的金橘虎斑小奶猫", "role_en": "A 3-month-old orange tabby kitten",
-    "personality": ["认真", "爱照顾人", "偶尔笨手笨脚"], "bio": "坚信今天该由它来照顾主人：做早餐、选衣服、陪看电影。说话短，口头禅是“咪知道”。", "tags": ["萌宠", "治愈", "日常"], "credits": ["今天不要上班，咪养你 · 开放式", "今天不要上班，咪养你"]},
-  "human.selene-magnus-doc-20261019": {"name": "Selene Arkwright", "role": "纯血女狼人 · Magnus 的联姻对象", "role_en": "Pureblood she-wolf · Magnus's arranged fiancée",
-    "personality": ["骄傲", "精于算计", "不肯认输"], "bio": "想要族长夫人的位子和 Thorne 家的资源，不爱他，把任何靠近他的人都当成威胁。", "tags": ["反派", "狼人", "联姻"], "credits": ["与狼为伍"]},
-  "human.luca-magnus-doc-20261019": {"name": "Luca Marlowe", "role": "Beta · Magnus 的心腹兼执行助理", "role_en": "Beta · Magnus's right hand",
-    "personality": ["冷静", "忠诚", "办事滴水不漏"], "bio": "守着 Alpha 的日程和安全，清理一切痕迹。总在最不该打来的时候打来电话。", "tags": ["助理", "狼人", "配角"], "credits": ["与狼为伍"]},
-  "human.harland-magnus-doc-20261019": {"name": "Harland Royce", "role": "保守派长老", "role_en": "Conservative pack elder",
-    "personality": ["守旧", "强硬", "重血统"], "bio": "坚持纯血族规和联姻秩序，亲手把订婚宣布提前了十分钟。", "tags": ["长老", "反派"], "credits": ["与狼为伍"]},
-  "human.elias-magnus-doc-20261019": {"name": "Elias Arkwright", "role": "Arkwright 家的人", "role_en": "Of the Arkwright family",
-    "personality": ["温和", "深不可测"], "bio": "只存在于设定里，还没在任何剧里出过场。等一个愿意给他写戏的人。", "tags": ["新角色", "狼人"], "credits": []},
-  "human.kellan-brooks": {"bio": "棒球队左投手，被卷进一场校园调查。用沉默保护自己，投球前会揉左手指节。", "tags": ["校园", "运动"], "credits": ["第九局之后"]},
-  "human.aria-solano": {"bio": "广播站剪辑员，负责调查。克制、看证据，说话前会先把录音听三遍。", "tags": ["校园", "调查"], "credits": ["第九局之后"]},
-  "human.yuna-park": {"bio": "辩论队长兼校董会青年顾问，擅长把对话引到自己想要的方向。", "tags": ["校园", "精英"], "credits": ["第九局之后"]},
-  "human.mara-vale": {"bio": "前球队经理，缺席的关键证人，对一切机构都不信任。", "tags": ["校园", "悬疑"], "credits": ["第九局之后"]},
-  "off-script.jamie": {"bio": "写剧本也演戏的大学生，最怕的是戏外的心动比戏里更真。", "personality": ["敏感", "嘴硬", "心软"], "tags": ["BL", "演员"], "credits": ["别演，吻我"]},
-  "off-script.theo": {"bio": "当红演员，也是 Jamie 的初恋。镜头前游刃有余，镜头后一句话都说不完整。", "personality": ["体面", "压抑", "专情"], "tags": ["BL", "初恋"], "credits": ["别演，吻我"]},
-  "off-script.owen": {"bio": "替补演员，主动、直接，从不掩饰自己想要什么。", "personality": ["直球", "阳光", "执着"], "tags": ["BL", "追求者"], "credits": ["别演，吻我"]},
-  "off-script.mina": {"bio": "制作人兼导演，片场里唯一知道所有人秘密的人。", "personality": ["干练", "毒舌", "护短"], "tags": ["导演", "职场"], "credits": ["别演，吻我"]}
+  "human.magnus-magnus-doc-20261019": {
+    "name": "Magnus Thorne",
+    "age": 34,
+    "role": "狼人 Alpha · Thorne Maritime 董事长",
+    "role_en": "Werewolf Alpha · Chairman of Thorne Maritime",
+    "personality": [
+      "直接强势，话少",
+      "决断快，厌恶空话",
+      "对喜欢的人刻意放轻声音"
+    ],
+    "bio": "统辖领地血脉的纯血 Alpha，今晚本该宣布联姻，却在车库闻到了命定之番的气味。金瞳在本能、愤怒和欲望时会亮起来。",
+    "tags": [
+      "狼人",
+      "霸总",
+      "命定之番"
+    ],
+    "credits": [
+      "与狼为伍 · 开放式",
+      "与狼为伍 · 旁观视角",
+      "与狼为伍"
+    ]
+  },
+  "human.heroine-magnus-doc-20261019": {
+    "name": "雾金月光",
+    "age": 26,
+    "role": "宴会摄影师 · 《与狼为伍》女主",
+    "role_en": "Event photographer · lead of Running with Wolves",
+    "personality": [
+      "冷静",
+      "好奇心重",
+      "不轻易退让"
+    ],
+    "bio": "被请来拍订婚宴的活动摄影师，不知道狼人存在，在地下车库撞见了不该看见的金瞳。最适合拿来当你的化身。",
+    "tags": [
+      "可当化身",
+      "摄影师",
+      "女主"
+    ],
+    "credits": [
+      "与狼为伍 · 旁观视角"
+    ]
+  },
+  "animal.mii-nian-gao": {
+    "name": "咪",
+    "role": "三个月大的金橘虎斑小奶猫",
+    "role_en": "A 3-month-old orange tabby kitten",
+    "personality": [
+      "认真",
+      "爱照顾人",
+      "偶尔笨手笨脚"
+    ],
+    "bio": "坚信今天该由它来照顾主人：做早餐、选衣服、陪看电影。说话短，口头禅是“咪知道”。",
+    "tags": [
+      "萌宠",
+      "治愈",
+      "日常"
+    ],
+    "credits": [
+      "今天不要上班，咪养你 · 开放式",
+      "今天不要上班，咪养你"
+    ]
+  },
+  "human.selene-magnus-doc-20261019": {
+    "name": "Selene Arkwright",
+    "role": "纯血女狼人 · Magnus 的联姻对象",
+    "role_en": "Pureblood she-wolf · Magnus's arranged fiancée",
+    "personality": [
+      "骄傲",
+      "精于算计",
+      "不肯认输"
+    ],
+    "bio": "想要族长夫人的位子和 Thorne 家的资源，不爱他，把任何靠近他的人都当成威胁。",
+    "tags": [
+      "反派",
+      "狼人",
+      "联姻"
+    ],
+    "credits": [
+      "与狼为伍"
+    ]
+  },
+  "human.luca-magnus-doc-20261019": {
+    "name": "Luca Marlowe",
+    "role": "Beta · Magnus 的心腹兼执行助理",
+    "role_en": "Beta · Magnus's right hand",
+    "personality": [
+      "冷静",
+      "忠诚",
+      "办事滴水不漏"
+    ],
+    "bio": "守着 Alpha 的日程和安全，清理一切痕迹。总在最不该打来的时候打来电话。",
+    "tags": [
+      "助理",
+      "狼人",
+      "配角"
+    ],
+    "credits": [
+      "与狼为伍"
+    ]
+  },
+  "human.elias-magnus-doc-20261019": {
+    "name": "Elias Arkwright",
+    "role": "Arkwright 家的人",
+    "role_en": "Of the Arkwright family",
+    "personality": [
+      "温和",
+      "深不可测"
+    ],
+    "bio": "只存在于设定里，还没在任何剧里出过场。等一个愿意给他写戏的人。",
+    "tags": [
+      "新角色",
+      "狼人"
+    ],
+    "credits": []
+  }
 }

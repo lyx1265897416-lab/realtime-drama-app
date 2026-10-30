@@ -16,11 +16,8 @@ OUT = Path(__file__).resolve().parents[1] / 'docs/data/actors.js'
 PICK = [
     ('human.magnus-magnus-doc-20261019', 'star'), ('human.heroine-magnus-doc-20261019', 'star'),
     ('animal.mii-nian-gao', 'star'), ('human.selene-magnus-doc-20261019', 'star'), ('human.luca-magnus-doc-20261019', 'star'),
-    ('human.kellan-brooks', 'star'), ('human.aria-solano', 'star'), ('off-script.jamie', 'star'), ('off-script.theo', 'star'),
-    ('off-script.owen', 'star'), ('off-script.mina', 'star'), ('human.yuna-park', 'star'), ('human.mara-vale', 'star'),
-    ('human.harland-magnus-doc-20261019', 'star'), ('human.elias-magnus-doc-20261019', 'star'),
+    ('human.elias-magnus-doc-20261019', 'star'),
 ]
-COLLAGE = {'human.aria-solano', 'human.kellan-brooks'}  # 这两位的 identity 是四宫格拼图，定妆照改用全身
 TOP = {'human.magnus-magnus-doc-20261019', 'human.heroine-magnus-doc-20261019', 'animal.mii-nian-gao'}
 # 新人待签：Vicky 2026-10-30 指定的 13 位。(角色 id, 资产库编号 = 她选的那张定妆照, 显示名)
 ROOKIES = [
@@ -54,7 +51,7 @@ def main():
                 for a in assets:
                     if a['category'] == c:
                         return PAGES + a['path']
-        face = first('full_body', 'identity') if cid in COLLAGE else first('identity', 'full_body', 'face_turnaround', 'head_angles')
+        face = first('identity', 'full_body', 'face_turnaround', 'head_angles')
         body = first('full_body', 'body_turnaround', 'identity') or face
         name = (x.get('display_name_zh') or cid).split(' · 文档确认版')[0]
         if tier == 'rookie':  # 新人只有外形：名字用造型描述，等签下的人来取名；定妆照就用指定编号那张
@@ -74,6 +71,14 @@ def main():
     bios = json.loads((Path(__file__).with_name('actor_bios.json')).read_text())  # 资产库里缺的身份、性格，按剧集设定补
     for a in out:
         a.update(bios.get(a['source'], {}))
+    # 飞书「角色样例」文档里的角色：不在资产库线上版，图放 docs/actors/，人设在 tools/feishu_actors.json
+    SITE = 'https://lyx1265897416-lab.github.io/realtime-drama-app/actors/'
+    extra = [dict(a, id='fs.' + a['slug'], source='feishu.' + a['slug'], tier='star', owner='Vicky 角色内容包', face=f"{SITE}{a['slug']}-face.jpg", body=f"{SITE}{a['slug']}-body.jpg",
+                  species='human', project='feishu-character-packs') for a in json.loads(Path(__file__).with_name('feishu_actors.json').read_text())]
+    stars = [a for a in out if a['tier'] == 'star']
+    lead = {'fs.rafael': 2, 'fs.heroine-rafael': 3, 'fs.rhys': 4, 'fs.june': 5, 'fs.owner': 7}  # 男女主排在最前
+    head = stars[:2] + [a for a in extra if a['id'] in lead][:4] + [stars[2]] + [a for a in extra if a['id'] == 'fs.owner']
+    out = head + stars[3:] + [a for a in extra if a['id'] not in lead] + [a for a in out if a['tier'] == 'rookie']
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text('window.ACTORS = ' + json.dumps(out, ensure_ascii=False, indent=1) + ';\n')
     print(len(out), '个演员 →', OUT)

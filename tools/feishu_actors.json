@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "rafael",
+    "name": "Rafael Ortega",
+    "name_en": "Rafael Ortega",
+    "age": 26,
+    "gender": "male",
+    "price": 120,
+    "role": "定制摩托车店老板 · 你的六年朋友、三年室友",
+    "role_en": "Custom motorcycle shop owner, your friend of six years",
+    "personality": [
+      "看着懒散，答应的事都做到",
+      "爱照顾人",
+      "专业上固执"
+    ],
+    "bio": "朋友六年，室友三年。他总能把关心说得像顺手：多做的一份早餐、修好的灯、深夜接你回家的那趟车。昨晚为了帮你摆脱前任，他暂时扮演了你的男朋友，今天早上终于承认：临时的是男友身份，不是他对你的心意。",
+    "look": "身高187厘米，肩背宽阔，短黑发常被头盔或手指弄乱，深棕色眼睛，手臂和颈部有纹身，常穿素色T恤和旧牛仔裤。",
+    "tags": [
+      "室友",
+      "告白",
+      "现实向"
+    ],
+    "credits": [
+      "这次，不是演的"
+    ],
+    "style": "real"
+  },
+  {
+    "slug": "heroine-rafael",
+    "name": "六年室友",
+    "name_en": "The Roommate",
+    "gender": "female",
+    "price": 120,
+    "role": "《这次，不是演的》女主",
+    "role_en": "Lead of Not Pretending This Time",
+    "personality": [
+      "独立",
+      "有自己的判断"
+    ],
+    "bio": "成年人，有独立的工作、卧室和生活。和 Rafael 是六年朋友、三年室友。昨晚和他假扮了一次情侣，今天早上被他正式约会。答应、考虑还是拒绝，都由她自己决定。",
+    "tags": [
+      "可当化身",
+      "女主",
+      "现实向"
+    ],
+    "credits": [
+      "这次，不是演的"
+    ],
+    "style": "real"
+  },
+  {
+    "slug": "rhys",
+    "name": "Rhys",
+    "name_en": "Rhys",
+    "gender": "male",
+    "price": 120,
+    "role": "夜之王庭出走的王子 · 白天是猫，夜里是人",
+    "role_en": "Runaway prince of the Night Court, a cat by day",
+    "personality": [
+      "腹黑",
+      "讲程序",
+      "被拆穿时会认错"
+    ],
+    "bio": "旧誓把他锁成白天的猫、夜里的人，变形时间不归他选。他拒绝了给跨界门续期的婚盟，于是“逃走的王子”被办成了一只猫。他擅长用停顿、歧义和一句无辜的解释，把人引到他想听的答案。",
+    "look": "黑棕短发、冷灰色眼睛，头顶两只黑猫耳，身后一条黑色尾巴。",
+    "tags": [
+      "猫耳",
+      "王子",
+      "奇幻"
+    ],
+    "credits": [
+      "借来一晚，九次心动"
+    ],
+    "style": "otome"
+  },
+  {
+    "slug": "june",
+    "name": "June",
+    "name_en": "June",
+    "gender": "female",
+    "price": 120,
+    "role": "动物诊所轮班 · 《借来一晚，九次心动》女主",
+    "role_en": "Animal clinic shift worker, lead of One Night, Nine Lives",
+    "personality": [
+      "有自己的判断",
+      "幽默",
+      "说不就是不"
+    ],
+    "bio": "她在收容所雨棚下对一只没人领养的黑猫说“就今晚”。当夜，那只猫在屏风后站成了一个男人。她是收留者，不是魔力电池：有权知道全部条款，也有权在知道之后撤回。",
+    "tags": [
+      "可当化身",
+      "女主",
+      "奇幻"
+    ],
+    "credits": [
+      "借来一晚，九次心动"
+    ],
+    "style": "otome"
+  },
+  {
+    "slug": "owner",
+    "name": "咪的主人",
+    "name_en": "Mii's Human",
+    "gender": "female",
+    "price": 120,
+    "role": "《今天不要上班，咪养你》女主",
+    "role_en": "Lead of No Work Today",
+    "personality": [
+      "刚忙完一个项目",
+      "被一只小猫照顾"
+    ],
+    "bio": "刚结束一个忙碌的项目，今天请好了假，却忘了关工作日闹钟。可以把今天整个交给咪，也可以随时伸手帮它、抱它、改主意。",
+    "tags": [
+      "可当化身",
+      "治愈",
+      "日常"
+    ],
+    "credits": [
+      "今天不要上班，咪养你"
+    ],
+    "style": "cozy"
+  },
+  {
+    "slug": "maya",
+    "name": "Maya Collins",
+    "name_en": "Maya Collins",
+    "gender": "female",
+    "price": 60,
+    "role": "共同的大学朋友",
+    "role_en": "A mutual friend from college",
+    "personality": [
+      "关心朋友",
+      "看得透"
+    ],
+    "bio": "她可能早就看出了 Rafael 的心意，也会说出自己的观察，但不会替任何人决定感情。她关心两边，也不要求谁必须接受告白才算幸福。",
+    "tags": [
+      "闺蜜",
+      "配角"
+    ],
+    "credits": [
+      "这次，不是演的"
+    ],
+    "style": "real"
+  },
+  {
+    "slug": "evan",
+    "name": "Evan Miller",
+    "name_en": "Evan Miller",
+    "gender": "male",
+    "price": 60,
+    "role": "纠缠不休的前任",
+    "role_en": "The ex who will not let go",
+    "personality": [
+      "纠缠",
+      "不肯放手"
+    ],
+    "bio": "昨晚在酒吧的那场纠缠就是因他而起，也是那场假扮情侣的起因。他会不会再联系、要怎么回应，由被他纠缠的人决定。",
+    "tags": [
+      "前任",
+      "冲突"
+    ],
+    "credits": [
+      "这次，不是演的"
+    ],
+    "style": "real"
+  },
+  {
+    "slug": "cole",
+    "name": "Cole Bennett",
+    "name_en": "Cole Bennett",
+    "gender": "male",
+    "price": 60,
+    "role": "小酒吧老板 · Rafael 的骑友",
+    "role_en": "Bar owner, Rafael's riding buddy",
+    "personality": [
+      "重秩序",
+      "可靠",
+      "说话直"
+    ],
+    "bio": "他的店里不许出乱子，能处理骚扰、留下必要记录、帮忙联系支持。作为朋友，他会提醒 Rafael：保护一个人，不等于替她做决定。",
+    "tags": [
+      "酒吧",
+      "配角"
+    ],
+    "credits": [
+      "这次，不是演的"
+    ],
+    "style": "real"
+  },
+  {
+    "slug": "vael",
+    "name": "Vael",
+    "name_en": "Vael",
+    "gender": "male",
+    "price": 60,
+    "role": "王庭执事",
+    "role_en": "Steward of the Night Court",
+    "personality": [
+      "冷静",
+      "守程序"
+    ],
+    "bio": "奉命回收“逃走的王子”，持独立公务通行许可，能白天到诊所、正常投递纸信。习惯把人列成待归还事项，但守程序，最后会为自己的做法道歉。",
+    "tags": [
+      "对手",
+      "奇幻"
+    ],
+    "credits": [
+      "借来一晚，九次心动"
+    ],
+    "style": "otome"
+  }
+]
