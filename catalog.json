@@ -211,7 +211,8 @@
             "who": "you"
           }
         ]
-      }
+      },
+      "cover_local": "covers/mii-open.jpg"
     },
     {
       "id": "magnus-preset",

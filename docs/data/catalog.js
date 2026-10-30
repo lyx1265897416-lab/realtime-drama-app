@@ -1315,7 +1315,7 @@ window.CATALOG = {
      }
     ]
    },
-   "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/mii-open-O2201493d0.jpg",
+   "cover": "covers/mii-open.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-v45-5-10.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-v45-5-10.jpg",
