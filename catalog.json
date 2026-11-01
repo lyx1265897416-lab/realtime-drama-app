@@ -473,8 +473,8 @@
         "en": "Magnus · Werewolf Alpha"
       },
       "hook": {
-        "zh": "7 集预制剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
-        "en": "7 pre-made episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
+        "zh": "7 集剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
+        "en": "7 episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
       },
       "kind": "preset",
       "pov": "first",
@@ -523,8 +523,8 @@
         "en": "Mii · a 3-month-old kitten"
       },
       "hook": {
-        "zh": "10 集预制日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
-        "en": "10 pre-made episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
+        "zh": "10 集日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
+        "en": "10 episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
       },
       "kind": "preset",
       "pov": "first",

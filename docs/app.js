@@ -28,22 +28,22 @@ const lang = () => S.settings.lang === 'auto' ? (/^zh/i.test(navigator.language 
 const L = o => o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.zh || o.en || '');
 const I = {
   tabHome: ['剧场', 'Theater'], tabFeed: ['推荐', 'For You'], tabCast: ['演员表', 'Cast'], tabLib: ['在追', 'My List'], tabMe: ['我的', 'Me'],
-  deskNote: ['实时 AI 互动剧集合 · 网页预览版。每部剧只有开场是预制的（或预制剧情 + 选择点），之后你点选项或直接打字，他就会接着你的话演下去。', 'A home for live AI interactive dramas, web preview. Only the opening is pre-made; after that you pick or type, and the story is generated around what you said.'],
+  deskNote: ['实时 AI 互动剧集合 · 网页预览版。每部剧的故事接下来怎么走，都看你怎么演：点选项或直接打字，它就接着你的话演下去。', 'A home for live AI interactive dramas, web preview. Where each story goes is up to how you play it: tap a choice or just type, and it plays on from what you said.'],
   deskLi1: ['没连实时中转时，互动走「预览回放」：播放测试时真实生成的那一幕', 'Without a live relay, scenes replay real generations from testing'],
   deskLi2: ['在「我的 → 实时链接」填入测试链接，就能在 APP 里直接实时开玩', 'Paste a test link in Me → Live links to play live in-app'],
   deskLi3: ['手机打开体验更好；加新剧只需改 catalog.json', 'Best on a phone. New dramas are one entry in catalog.json'],
   continue: ['继续你的故事', 'Continue your story'], continueSub: ['停在你上次开口的地方', 'Right where you last spoke'],
-  all: ['全部', 'All'], open: ['开放式', 'Open'], preset: ['预设剧情', 'Pre-made'], romance: ['恋爱', 'Romance'], cozy: ['治愈', 'Cozy'], first: ['第一视角', 'First person'], third: ['第三视角', 'Third person'],
-  shelfOpen: ['开放式 · 每一幕都由你决定', 'Open live · every scene is yours'], shelfOpenSub: ['只有开场是预制的，之后全部实时生成，没有固定结局', 'Only the opening is pre-made. No fixed ending.'],
-  shelfPreset: ['预设剧情 · 关键时刻由你开口', 'Pre-made · you speak at key moments'], shelfPresetSub: ['完整剧集 + 选择点，选择点接实时生成', 'Full episodes with live-generated choice points'],
+  all: ['全部', 'All'], open: ['开放式', 'Open'], preset: ['剧情版', 'Story'], romance: ['恋爱', 'Romance'], cozy: ['治愈', 'Cozy'], first: ['第一视角', 'First person'], third: ['第三视角', 'Third person'],
+  shelfOpen: ['开放式 · 每一幕都由你决定', 'Open live · every scene is yours'], shelfOpenSub: ['接下来怎么走，就看你怎么演，没有固定结局', 'Where it goes is up to how you play it. No fixed ending.'],
+  shelfPreset: ['剧情版 · 关键时刻由你开口', 'Story · you speak at key moments'], shelfPresetSub: ['完整剧集 + 选择点，选择点接实时生成', 'Full episodes with live-generated choice points'],
   allDramas: ['全部剧集', 'All dramas'], rank: ['编辑推荐', "Editor's picks"],
   howT: ['怎么玩', 'How it works'], howS: ['不是选 A 或 B 那么简单，你说什么，他就接什么', "It's not just A or B. Whatever you say, he answers."],
-  how1: ['看开场', 'Watch the opening'], how1s: ['十几秒的预制开场，把你带进那一刻', 'A short pre-made opening drops you in'],
+  how1: ['看开场', 'Watch the opening'], how1s: ['十几秒的开场，把你带进那一刻', 'A short opening drops you in'],
   how2: ['开口', 'Speak up'], how2s: ['点一个选项，或者直接打字对他说', 'Tap an option or type anything'],
   how3: ['他接着演', 'He plays it out'], how3s: ['AI 实时写下一幕并生成视频：回应你 → 演出来 → 留个钩子', 'AI writes and renders the next scene live: reply → act → hook'],
   start: ['开始互动', 'Start'], resume: ['继续第 {n} 幕', 'Resume scene {n}'], watch: ['看完整成片', 'Watch full cut'], live: ['实时开玩', 'Play live'],
   scenes: ['幕表', 'Scenes'], log: ['事件簿', 'Story log'], about: ['关于', 'About'],
-  rounds: ['实时幕', 'Live scenes'], eps: ['预制集', 'Episodes'], waitMed: ['生成等待', 'Gen. wait'], endless: ['不设结局', 'No fixed end'],
+  rounds: ['实时幕', 'Live scenes'], eps: ['集数', 'Episodes'], waitMed: ['生成等待', 'Gen. wait'], endless: ['不设结局', 'No fixed end'],
   you: ['你', 'You'], youSaid: ['你说', 'You said'], scene: ['第 {n} 幕', 'Scene {n}'], opening: ['开场', 'Opening'],
   yourTurn: ['轮到你了', 'Your turn'], waitsYou: ['{name}在等你开口', '{name} is waiting for you'],
   sayPh: ['对{name}说点什么…', 'Say something to {name}…'], ideas: ['灵感', 'Ideas'],
@@ -505,17 +505,18 @@ function LivePlayer(view, d){
   fetch(`${API}/api/ping?k=${encodeURIComponent(K)}`).then(r => r.json()).then(j => setStat(!j.ok ? `<i class="bad"></i>${T('liveBadKey')}` : `<i></i>${T('liveConn')} · ${esc(j.model)} · ${esc(MODE)}`))
     .catch(() => setStat(`<i class="bad"></i>${T('liveOff2')}`));
 
-  // 开场：预制开场片 → 待机循环 → 第一个选择点
+  RT.init({stage: '#pl', drama: 'app-' + d.id, zh: () => lang() === 'zh', isPlaying: () => alive && !pl.classList.contains('choosing') && !pl.classList.contains('waiting') && !!front.classList.contains('on') && front !== idle, ignore: '.rail,.p-top,#tapStart,.iconbtn'}); onLeave(() => RT.destroy());
+  // 开场：开场片 → 待机循环 → 第一个选择点
   const ov = pool[1], idle = pool[2];
   load(ov, LV.open); load(idle, LV.idle, true);
   const persona = castingOf(d.id), youName = persona ? persona.name : T('you');
   const startSession = () => api('/api/session', Object.assign({mode: MODE}, persona ? {persona: cardText(persona)} : {})).then(j => { sid = j.sid; next = j.next; round = 0; });
   function playOpening(){
     run++; busy = false; setMode('play'); showSub(null); $('#chLabel').textContent = T('opening');
-    ov.currentTime = 0; ov.muted = false; ov.loop = false;
+    ov.currentTime = 0; ov.muted = false; ov.loop = false; RT.begin({key: 'OPEN', parts: [{v: ov}]});
     ov.play().then(() => { show(ov); $('#tapStart').hidden = true; }).catch(() => { $('#tapStart').hidden = false; });
     ov.ontimeupdate = () => { const t = ov.currentTime, c = LV.open_cues.find(q => t >= q.s && t <= q.e); showSub(c || null, c && c.who); };
-    ov.onended = () => { ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); openChoice(); };
+    ov.onended = () => { RT.done('OPEN'); RT.clear(); ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); openChoice(); };
   }
   $('#tapStart').onclick = () => { $('#tapStart').hidden = true; music.play().then(() => { if (!mTarget) music.pause(); }).catch(() => {}); playOpening(); };
   startSession().catch(e => setStat(`<i class="bad"></i>${esc(e.message)}`));
@@ -578,12 +579,13 @@ function LivePlayer(view, d){
     clearInterval(tick); mark(3);
     const view = {play_at: Date.now(), seg2_eta: r.segs[1] ? r.segs[1].eta_left : null};
     setMode('play'); waitMusic(false);
+    RT.begin({key: 'round:' + rid, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T('scene', {n: round + 1})}); RT.part(0);
     await play(0); view.seg1_end = Date.now();
     if (r.segs.length > 1){
       const ok2 = () => segErr() || (r.segs[1].url && V[1].dataset.src === abs(r.segs[1].url) && V[1].readyState >= 3);
       if (!ok2()){ waitMusic(true); while (!ok2() && my === run && alive) await new Promise(res => setTimeout(res, 100)); waitMusic(false); }  // 第 2 段还没到：停在第 1 段最后一帧
       view.stall = (Date.now() - view.seg1_end) / 1000;
-      if (my === run && !segErr()) await play(1);
+      if (my === run && !segErr()){ RT.part(1); await play(1); RT.done('round:' + rid); }
     } else view.stall = 0;
     polling = false; view.end_at = Date.now();
     if (rid) api(`/api/round/${rid}/view`, view).catch(() => {});
