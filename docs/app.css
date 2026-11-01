@@ -401,7 +401,7 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .d-bg.actor{height:520px;background:#efebe6}
 .d-bg.actor img{object-position:top}
 .d-top .wallet{background:rgba(0,0,0,.45);backdrop-filter:blur(10px)}
-.av{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;flex:none;background:#efebe6}
+.av{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;flex:none;background:rgba(255,255,255,.1)}
 .av.blank{display:grid;place-items:center;background:rgba(255,255,255,.1);color:var(--mute);font-size:16px}
 .plist{display:grid;gap:8px;padding-top:6px}
 .prow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid transparent}
