@@ -606,7 +606,7 @@ function LivePlayer(view, d){
     clearInterval(tick); mark(3);
     const view = {play_at: Date.now(), seg2_eta: r.segs[1] ? r.segs[1].eta_left : null};
     setMode('play'); waitMusic(false);
-    RT.begin({key: 'round:' + rid, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T('scene', {n: round + 1})}); RT.part(0);
+    RT.begin({key: 'round:' + rid, mix: r.mix, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T('scene', {n: round + 1})}); RT.part(0);
     await play(0); view.seg1_end = Date.now();
     if (r.segs.length > 1){
       const ok2 = () => segErr() || (r.segs[1].url && V[1].dataset.src === abs(r.segs[1].url) && V[1].readyState >= 3);
