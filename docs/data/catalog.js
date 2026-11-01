@@ -668,7 +668,8 @@ window.CATALOG = {
       "en": "Where did you come from?",
       "who": "Magnus"
      }
-    ]
+    ],
+    "mode": "auto"
    },
    "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/magnus-third-L2111588e6.jpg",
    "film": {
@@ -2341,7 +2342,8 @@ window.CATALOG = {
       "en": "Oh, right. It's my day off. I forgot the alarm.",
       "who": "you"
      }
-    ]
+    ],
+    "mode": "auto"
    },
    "cover": "covers/mii-open.jpg",
    "film": {

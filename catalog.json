@@ -107,6 +107,7 @@
         "en": "Public relay (third person)"
       },
       "live": {
+        "mode": "auto",
         "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ec51421aed9f46aa9f6d60b4134629bc/OPEN.mp4",
         "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/913679e6f19346218debbe6398571a46/IDLE0.mp4",
         "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
@@ -434,6 +435,7 @@
         "en": "Public tunnel (Mii open)"
       },
       "live": {
+        "mode": "auto",
         "open": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/OPEN.mp4",
         "idle": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/IDLE0.mp4",
         "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",

@@ -569,7 +569,7 @@ function LivePlayer(view, d){
     const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = V[0].duration || r.segs[0].dur || 5; return s2.eta_left != null && s2.eta_left <= d1 - M - (s2.dur >= 15 ? 1.5 : 0); };
     const dub = LV.lines === 'dub'; let vidAt = 0;
     const aud = k => !(r.lines || []).some(l => l.seg === k && !l.audio && !l.audio_err);
-    const voiced = () => !dub || (aud(1) && aud(2)) || (vidAt && Date.now() - vidAt > 6000);  // 配音晚到超过 6 秒就先播画面
+    const voiced = () => !dub || aud(1) || (vidAt && Date.now() - vidAt > 4000);  // 只等第 1 段的配音，第 2 段的到了会自动用上
     await new Promise(res => (function f(){ if (my !== run || !alive) return; if ((r && r.status === 'error') || segErr() || (seg1Ok() && seg2Soon() && (vidAt = vidAt || Date.now()) && voiced())) res(); else setTimeout(f, 100); })());
     if (my !== run || !alive){ polling = false; clearInterval(tick); return; }
     if (r.status === 'error' || segErr()){ const low = (r.segs || []).some(s => s.err_code === 10005);
@@ -602,15 +602,15 @@ function LivePlayer(view, d){
       let cur = null;
       if (dub){  // 咪的台词是另配的声音（画面里咪不开口）：第 1 段 0.4 秒起、第 2 段 1 秒起逐句播，句间 0.4 秒
         const Ls = (r.lines || []).filter(l => l.seg === i + 1); let k = -1, nextAt = i === 0 ? 0.4 : 1.0; v.volume = 0.6;
-        const say = () => { k++; if (k >= Ls.length){ cur = null; return; } const l = (r.lines || []).find(x => x.seg === Ls[k].seg && x.en === Ls[k].en) || Ls[k]; showSub({en: l.en, zh: l.zh}, 'him');
+        const say = () => { k++; if (k >= Ls.length){ cur = null; return; } const l = (r.lines || []).find(x => x.seg === Ls[k].seg && x.en === Ls[k].en) || Ls[k]; showSub({en: l.en, zh: l.zh}, l.who || 'him');
           if (l.audio){ cur = preAudio(l.audio); cur.currentTime = 0; cur.onended = () => { showSub(null); nextAt = v.currentTime + 0.4; cur = null; }; cur.play().catch(() => { cur = null; nextAt = v.currentTime + 2.2; }); }
           else { cur = null; nextAt = v.currentTime + 2.4; } };
-        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = v.duration || r.segs[i].seconds;
+        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = Math.min(v.duration || r.segs[i].seconds, r.segs[i].cut_at || 1e9);  // 中转标了提前收尾点就按它
           if (!cur && k < Ls.length - 1 && v.currentTime >= Math.max(nextAt, Ls[k + 1].at || 0)) say();
           if (dd && v.currentTime >= dd - 0.06) end(); };
       } else {  // Magnus 原声：台词按时长均分，第 2 段前 2 秒是静止承接
         v.volume = 1; const Lns = ((r.lines || {})['seg' + (i + 1)] || []).filter(Boolean), Z = ((r.zh || {})['seg' + (i + 1)] || []).filter(Boolean), off = i === 1 ? 2 : 0;
-        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = v.duration || r.segs[i].seconds;
+        v.ontimeupdate = () => { if (my !== run || !alive) return end(); const dd = Math.min(v.duration || r.segs[i].seconds, r.segs[i].cut_at || 1e9);  // 中转标了提前收尾点就按它
           const LT = (r.line_times || {})['seg' + (i + 1)];  // 中转给了每句的真实时间就按它显示，说完就收
           if (LT){ const c = LT.find(x => v.currentTime >= x.s && v.currentTime <= x.e); showSub(c ? {en: c.en, zh: c.zh || ''} : null, c && c.who); }
           else if (Lns.length){ const t = Math.max(0, v.currentTime - off), k = Math.min(Lns.length - 1, Math.floor(t / (dd - off) * Lns.length)); showSub({en: Lns[k], zh: Z[k] || ''}, 'him'); }
