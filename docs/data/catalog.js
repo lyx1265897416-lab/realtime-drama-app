@@ -47,7 +47,7 @@ window.CATALOG = {
     "zh": "本机中转 8890 / 8897（开放式第一视角）",
     "en": "Local relay (open, first person)"
    },
-   "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/md-ab-L060208a06.jpg",
+   "cover": "covers/magnus-open.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/md-ab-md-c-full-5-10.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/md-ab-md-c-full-5-10.jpg",
@@ -589,7 +589,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-open.mp4",
-   "opening_poster": "openings/magnus-open.jpg",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 108.5,
@@ -672,7 +671,7 @@ window.CATALOG = {
      }
     ]
    },
-   "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/magnus-third-L2111588e6.jpg",
+   "cover": "covers/magnus-open.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-third-md-c-full-5-10.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-third-md-c-full-5-10.jpg",
@@ -1245,7 +1244,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-third.mp4",
-   "opening_poster": "openings/magnus-third.jpg",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 96.5,
@@ -2271,7 +2269,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/rafael-third.mp4",
-   "opening_poster": "openings/rafael-third.jpg",
    "rounds": 13,
    "episodes": 0,
    "wait_median": 46.0,
@@ -2348,7 +2345,7 @@ window.CATALOG = {
      }
     ]
    },
-   "cover": "covers/mii-open.jpg",
+   "cover": "covers/mii-open-start.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.jpg",
@@ -5084,7 +5081,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/mii-open.mp4",
-   "opening_poster": "openings/mii-open.jpg",
    "rounds": 66,
    "episodes": 0,
    "wait_median": 24.1,
@@ -5132,7 +5128,7 @@ window.CATALOG = {
     "en": "Complete"
    },
    "series_url": "https://lyx1265897416-lab.github.io/magnus-midnight-garage-series/",
-   "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-full-5-10.jpg",
+   "cover": "covers/magnus-preset.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-full-5-10.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-full-5-10.jpg",
@@ -5826,7 +5822,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-preset.mp4",
-   "opening_poster": "openings/magnus-preset.jpg",
    "rounds": 8,
    "episodes": 7,
    "wait_median": 59.8,
@@ -6855,7 +6850,6 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/mii.mp4",
-   "opening_poster": "openings/mii.jpg",
    "rounds": 11,
    "episodes": 10,
    "wait_median": 29.7,

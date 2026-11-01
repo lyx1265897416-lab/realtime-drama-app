@@ -144,7 +144,7 @@ function scenesSheet(d, onPick){
   }).join('');
   return sheet(scenesName(d), esc(L(d.title)), body, (sh, close) => $$('.scene', sh).forEach(el => el.onclick = () => { close(); onPick(+el.dataset.i); }));
 }
-const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n play"><img src="${esc(d.opening_poster || d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
+const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n play"><img src="${esc(d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
 const scenesName = d => T(d.kind === 'open' ? 'caseTab' : 'scenes');
 const saidName = d => T(d.kind === 'open' ? 'caseSaid' : 'youSaid');
 const roundsName = d => T(d.kind === 'open' ? 'caseRounds' : 'rounds');
@@ -336,8 +336,7 @@ function Detail(view, d){
       pane.innerHTML = items.length || (p && (p.live || []).length) ? `<div class="log">${liveLogHtml(d)}${items.map(x => { const c = d.chapters[x.i], h = hisLine(d, c); return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${lang() === 'zh' && h.zh ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}<button data-i="${x.i}">↺ ${T('backTo')}</button></div>`; }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
       $$('.log-item button', pane).forEach(b => b.onclick = () => location.hash = `#/play/${d.id}?from=${b.dataset.i}`);
     } else {
-      const face = (r[0] && r[0].poster) || d.cover;
-      pane.innerHTML = `<div class="charcard"><img src="${esc(face)}" alt=""><div><b>${esc(L(d.lead))}</b><p>${esc(L(d.hook))}</p></div></div>
+      pane.innerHTML = `<div class="charcard"><img src="${esc(d.cover)}" alt=""><div><b>${esc(L(d.lead))}</b><p>${esc(L(d.hook))}</p></div></div>
         <dl class="kv"><dt>${T('pov')}</dt><dd>${T(d.pov)}</dd><dt>${T('gen')}</dt><dd>${esc(d.film.mode.replace('MD-C · ', ''))} · Vivix W1</dd><dt>${T('tested')}</dt><dd>${esc(d.tested)}</dd>
         <dt>${T('liveSt')}</dt><dd>${liveUrl(d.id) ? T('liveOn') : T('liveOff')}</dd></dl>
         <div class="row" style="margin-top:18px;flex-wrap:wrap"><button class="btn ghost" id="watchBtn" style="height:40px;font-size:13.5px">${T('watch')}</button>
@@ -360,7 +359,7 @@ function Player(view, d, q){
   const answered = new Set();  // 这一次播放里已经开过口的幕
   const startCh = d.chapters[from] || d.chapters[0];
   view.innerHTML = `<div class="player" id="pl">
-    <video id="v" playsinline preload="auto" poster="${esc(startCh.kind === 'rt' && startCh.poster ? startCh.poster : d.opening_poster || d.cover)}" src="${esc(d.film.video)}"></video>
+    <video id="v" playsinline preload="auto" poster="${esc(startCh.kind === 'rt' && startCh.poster ? startCh.poster : d.cover)}" src="${esc(d.film.video)}"></video>
     <div class="p-shade"></div><div class="p-tap" id="tap"></div>
     <div class="p-paused" id="paused" hidden>${ICON.play}</div>
     <div class="p-top"><div class="segbar" id="seg">${d.chapters.map(c => `<i class="${c.kind}" style="flex:${(c.end - c.start).toFixed(1)}"><b></b></i>`).join('')}</div>

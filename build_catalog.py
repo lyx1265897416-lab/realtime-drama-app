@@ -145,7 +145,6 @@ def build(d, log):
         'cues': [speaker(rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}), d) for c in cues if not c['input']],
         'chapters': chapters,
         'opening': cut_opening(d, film, rts[0]['pause']),
-        'opening_poster': f"openings/{d['id']}.jpg",
         'rounds': len(rts),
         'episodes': sum(1 for c in chapters if c['kind'] == 'ep' and c['label'] not in ('Opening', '开场')),
         'wait_median': waits[len(waits) // 2] if waits else None,
@@ -163,10 +162,6 @@ def cut_opening(d, film, end):
         ff = HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'
         subprocess.run([str(ff), '-y', '-loglevel', 'error', '-i', str(LOG / film['video']), '-t', f'{end:.2f}', '-an', '-vf', 'scale=540:-2',
                         '-c:v', 'libx264', '-preset', 'medium', '-crf', '25', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(out)], check=True)
-    pic = out.with_suffix('.jpg')  # 幕表里「开场」这一行的缩略图：开场自己的画面，不借别的幕
-    if not pic.exists():
-        ff = HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'
-        subprocess.run([str(ff), '-y', '-loglevel', 'error', '-sseof', '-1.5', '-i', str(out), '-frames:v', '1', '-vf', 'scale=360:-2', '-q:v', '3', str(pic)], check=True)
     return f"openings/{d['id']}.mp4"
 
 

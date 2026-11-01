@@ -41,6 +41,7 @@
       ],
       "accent": "#c9a227",
       "cover_round": 7,
+      "cover_local": "covers/magnus-open.jpg",
       "badge": {
         "zh": "热门",
         "en": "Hot"
@@ -93,6 +94,7 @@
       ],
       "accent": "#8f6bd8",
       "cover_round": 10,
+      "cover_local": "covers/magnus-open.jpg",
       "badge": {
         "zh": "新",
         "en": "New"
@@ -458,7 +460,7 @@
           }
         ]
       },
-      "cover_local": "covers/mii-open.jpg"
+      "cover_local": "covers/mii-open-start.jpg"
     },
     {
       "id": "magnus-preset",
@@ -497,7 +499,7 @@
         }
       ],
       "accent": "#d4a017",
-      "cover": "film/magnus-full-5-10.jpg",
+      "cover_local": "covers/magnus-preset.jpg",
       "badge": {
         "zh": "完结",
         "en": "Complete"
