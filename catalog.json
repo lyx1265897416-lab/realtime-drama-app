@@ -94,7 +94,7 @@
       ],
       "accent": "#8f6bd8",
       "cover_round": 10,
-      "cover_local": "covers/magnus-open.jpg",
+      "cover_local": "covers/magnus-third.jpg",
       "badge": {
         "zh": "新",
         "en": "New"
@@ -460,7 +460,7 @@
           }
         ]
       },
-      "cover_local": "covers/mii-open-start.jpg"
+      "cover_local": "covers/mii-open-clean.jpg"
     },
     {
       "id": "magnus-preset",

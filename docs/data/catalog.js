@@ -671,7 +671,7 @@ window.CATALOG = {
      }
     ]
    },
-   "cover": "covers/magnus-open.jpg",
+   "cover": "covers/magnus-third.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-third-md-c-full-5-10.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/magnus-third-md-c-full-5-10.jpg",
@@ -2345,7 +2345,7 @@ window.CATALOG = {
      }
     ]
    },
-   "cover": "covers/mii-open-start.jpg",
+   "cover": "covers/mii-open-clean.jpg",
    "film": {
     "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.mp4",
     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/mii-open-full-manual5-uf-5-15.jpg",
