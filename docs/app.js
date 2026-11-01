@@ -392,6 +392,7 @@ function Player(view, d, q){
   let note = null;  // 预览回放说明，播放这一幕开头几秒显示
 
   function onTime(){
+    if (!pl.isConnected) return;  // 已离开播放页：清掉视频时还会再触发一次
     const t = v.currentTime;
     d.chapters.forEach((c, i) => { bars[i].style.width = Math.max(0, Math.min(100, (t - c.start) / (c.end - c.start) * 100)) + '%'; });
     const k = chAt(t);

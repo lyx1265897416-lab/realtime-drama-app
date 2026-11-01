@@ -127,7 +127,7 @@
       });
       if (!once) document.addEventListener('keydown', e => { if (stage && e.code === 'Space' && playing() && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); toggle(); } });
       once = true;
-      stage.addEventListener('play', () => applyRate(), true);
+      stage.addEventListener('play', () => { if (stage) applyRate(); }, true);
       stage.addEventListener('loadedmetadata', e => { e.target.dataset.rtSrc = e.target.currentSrc; e.target.playbackRate = rate; paint(); }, true);
       applyRate();
       const me = (RT._loop = (RT._loop || 0) + 1);
