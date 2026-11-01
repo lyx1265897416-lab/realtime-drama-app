@@ -63,6 +63,13 @@ def rename(c):  # 剧名已改为「与狼为伍」，成片字幕里的旧片�
     return c
 
 
+def speaker(c, d):  # 开场字幕里写明了说话人的（比如 Evan），预览回放也按它标，不一律标成男主
+    for q in (d.get('live') or {}).get('open_cues') or []:
+        if q.get('who') and q.get('en') == c['en'] and q['who'] != 'you':
+            c['sp'] = q['who']
+    return c
+
+
 def pick(items, needle, key='title'):
     for x in items:
         if needle in x.get(key, ''):
@@ -135,7 +142,7 @@ def build(d, log):
     out.update({
         'cover': cover,
         'film': {'video': BASE + film['video'], 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
-        'cues': [rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}) for c in cues if not c['input']],
+        'cues': [speaker(rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}), d) for c in cues if not c['input']],
         'chapters': chapters,
         'opening': cut_opening(d, film, rts[0]['pause']),
         'rounds': len(rts),

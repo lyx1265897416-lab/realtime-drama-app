@@ -1,5 +1,5 @@
 window.CATALOG = {
- "updated": "2026-10-30",
+ "updated": "2026-11-01",
  "dramas": [
   {
    "id": "magnus-open",
@@ -683,21 +683,24 @@ window.CATALOG = {
      "e": 11.95,
      "zh": "别动。",
      "en": "Don't move.",
-     "who": null
+     "who": null,
+     "sp": "Magnus"
     },
     {
      "s": 16.3,
      "e": 17.3,
      "zh": "告诉我……",
      "en": "Tell me...",
-     "who": null
+     "who": null,
+     "sp": "Magnus"
     },
     {
      "s": 17.7,
      "e": 19.1,
      "zh": "你到底是从哪里来的？",
      "en": "Where did you come from?",
-     "who": null
+     "who": null,
+     "sp": "Magnus"
     },
     {
      "s": 25.23,
@@ -1246,6 +1249,1031 @@ window.CATALOG = {
    "tested": "2026-10-28 20:52–21:17"
   },
   {
+   "id": "rafael-third",
+   "genre": "romance",
+   "name": "Rafael",
+   "title": {
+    "zh": "这次，不是演的",
+    "en": "Not Pretending This Time"
+   },
+   "lead": {
+    "zh": "Rafael Ortega · 摩托车店老板",
+    "en": "Rafael Ortega · Motorcycle shop owner"
+   },
+   "hook": {
+    "zh": "朋友六年，室友三年。昨晚他替你挡前任，假扮了一次男朋友，还有一个吻。今天早上他承认：临时的是身份，不是心意。你怎么回答，由你决定。",
+    "en": "Friends for six years, roommates for three. Last night he played your boyfriend to get your ex off your back, and there was a kiss. This morning he admits the role was temporary, the feeling isn't. How you answer is up to you."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "室友",
+     "en": "Roommates"
+    },
+    {
+     "zh": "假扮情侣",
+     "en": "Fake dating"
+    },
+    {
+     "zh": "告白",
+     "en": "Confession"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#c8743c",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "live_hint": {
+    "zh": "launchd 中转 8901（Rafael 第三视角）",
+    "en": "Relay (Rafael third person)"
+   },
+   "live": {
+    "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/33a7c2bf668a4d40807299bae3cf88e9/OPEN.mp4",
+    "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/029f3280bef44841a26fccfceefda643/IDLE0.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/60e1d5fabd79493b954d58a85c6388cf/MUS_RAF_HOME_V1.mp3",
+    "lines": "magnus",
+    "post": "text",
+    "mode": "auto",
+    "open_cues": [
+     {
+      "s": 0.2,
+      "e": 3.3,
+      "zh": "得了吧，你连坐都坐不稳了。我送你回家。",
+      "en": "Come on. You can barely sit up. I'll drive you home.",
+      "who": "Evan"
+     },
+     {
+      "s": 4.0,
+      "e": 6.35,
+      "zh": "不用。我好着呢。好得很。",
+      "en": "No. I'm good. I'm so good.",
+      "who": "Her"
+     },
+     {
+      "s": 11.25,
+      "e": 11.8,
+      "zh": "走吧。",
+      "en": "Let's go.",
+      "who": "Evan"
+     },
+     {
+      "s": 17.77,
+      "e": 19.52,
+      "zh": "哇……我接住你了。",
+      "en": "Whoa. I got you.",
+      "who": "Rafael"
+     },
+     {
+      "s": 21.12,
+      "e": 21.82,
+      "zh": "Rafa。",
+      "en": "Rafa.",
+      "who": "Her"
+     },
+     {
+      "s": 23.62,
+      "e": 25.32,
+      "zh": "这是我男朋友。",
+      "en": "This is my boyfriend.",
+      "who": "Her"
+     },
+     {
+      "s": 25.53,
+      "e": 28.23,
+      "zh": "什么时候的事？你们俩不是“只是朋友”吗。",
+      "en": "Since when? You two are just friends.",
+      "who": "Evan"
+     },
+     {
+      "s": 29.99,
+      "e": 30.69,
+      "zh": "吻我。",
+      "en": "Kiss me.",
+      "who": "Her"
+     },
+     {
+      "s": 31.09,
+      "e": 32.24,
+      "zh": "让他信以为真。",
+      "en": "Make him believe it.",
+      "who": "Her"
+     },
+     {
+      "s": 50.08,
+      "e": 50.68,
+      "zh": "他走了。",
+      "en": "He's gone.",
+      "who": "Rafael"
+     },
+     {
+      "s": 52.23,
+      "e": 52.73,
+      "zh": "嗯。",
+      "en": "Yeah.",
+      "who": "Her"
+     },
+     {
+      "s": 56.13,
+      "e": 59.73,
+      "zh": "好了。喝水。然后我送你回家。",
+      "en": "Okay. Water. Then I'm taking you home.",
+      "who": "Rafael"
+     },
+     {
+      "s": 68.92,
+      "e": 69.72,
+      "zh": "醒了？",
+      "en": "Awake?",
+      "who": "Rafael"
+     },
+     {
+      "s": 70.11,
+      "e": 70.97,
+      "zh": "水在这里。",
+      "en": "Water’s here.",
+      "who": "Rafael"
+     },
+     {
+      "s": 71.36,
+      "e": 72.97,
+      "zh": "要是头疼，先别喝咖啡。",
+      "en": "Leave the coffee if your head hurts.",
+      "who": "Rafael"
+     },
+     {
+      "s": 73.56,
+      "e": 74.92,
+      "zh": "昨晚那场临时男友任务，",
+      "en": "Temporary boyfriend duty last night.",
+      "who": "Rafael"
+     },
+     {
+      "s": 75.06,
+      "e": 75.97,
+      "zh": "我觉得自己表现还不错。",
+      "en": "I thought I did all right.",
+      "who": "Rafael"
+     },
+     {
+      "s": 76.81,
+      "e": 78.81,
+      "zh": "不过，有件事得说清楚。",
+      "en": "One thing needs clearing up, though.",
+      "who": "Rafael"
+     },
+     {
+      "s": 79.72,
+      "e": 81.77,
+      "zh": "替你挡住 Evan，是演的。",
+      "en": "Keeping Evan off your back was an act.",
+      "who": "Rafael"
+     },
+     {
+      "s": 83.02,
+      "e": 84.47,
+      "zh": "想吻你，不是。",
+      "en": "Wanting to kiss you wasn’t.",
+      "who": "Rafael"
+     },
+     {
+      "s": 85.31,
+      "e": 86.91,
+      "zh": "我喜欢你。",
+      "en": "I like you.",
+      "who": "Rafael"
+     },
+     {
+      "s": 88.06,
+      "e": 89.52,
+      "zh": "有一阵子了。",
+      "en": "Have for a while.",
+      "who": "Rafael"
+     },
+     {
+      "s": 90.62,
+      "e": 92.97,
+      "zh": "昨晚不代表你答应过任何事。",
+      "en": "Last night doesn’t mean you agreed to anything.",
+      "who": "Rafael"
+     },
+     {
+      "s": 94.0,
+      "e": 95.66,
+      "zh": "你愿意和我约会吗？",
+      "en": "Will you go on a date with me?",
+      "who": "Rafael"
+     },
+     {
+      "s": 96.02,
+      "e": 96.91,
+      "zh": "一次真正的约会。",
+      "en": "A real date.",
+      "who": "Rafael"
+     },
+     {
+      "s": 97.41,
+      "e": 100.12,
+      "zh": "不是因为刚好顺路，就一起吃顿饭。",
+      "en": "Not just dinner because we happen to be heading the same way.",
+      "who": "Rafael"
+     }
+    ]
+   },
+   "cover": "covers/rafael-third.jpg",
+   "film": {
+    "video": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/rafael-third-full-manual1-uf-5-15.mp4",
+    "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/film/rafael-third-full-manual1-uf-5-15.jpg",
+    "duration": 390.1,
+    "mode": "5+15"
+   },
+   "cues": [
+    {
+     "s": 0.2,
+     "e": 3.3,
+     "zh": "得了吧，你连坐都坐不稳了。我送你回家。",
+     "en": "Come on. You can barely sit up. I'll drive you home.",
+     "who": null,
+     "sp": "Evan"
+    },
+    {
+     "s": 4.0,
+     "e": 6.35,
+     "zh": "不用。我好着呢。好得很。",
+     "en": "No. I'm good. I'm so good.",
+     "who": null,
+     "sp": "Her"
+    },
+    {
+     "s": 11.25,
+     "e": 11.8,
+     "zh": "走吧。",
+     "en": "Let's go.",
+     "who": null,
+     "sp": "Evan"
+    },
+    {
+     "s": 17.77,
+     "e": 19.52,
+     "zh": "哇……我接住你了。",
+     "en": "Whoa. I got you.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 21.12,
+     "e": 21.82,
+     "zh": "",
+     "en": "Rafa。",
+     "who": null
+    },
+    {
+     "s": 23.62,
+     "e": 25.32,
+     "zh": "这是我男朋友。",
+     "en": "This is my boyfriend.",
+     "who": null,
+     "sp": "Her"
+    },
+    {
+     "s": 25.53,
+     "e": 28.23,
+     "zh": "什么时候的事？你们俩不是“只是朋友”吗。",
+     "en": "Since when? You two are just friends.",
+     "who": null,
+     "sp": "Evan"
+    },
+    {
+     "s": 29.99,
+     "e": 30.69,
+     "zh": "吻我。",
+     "en": "Kiss me.",
+     "who": null,
+     "sp": "Her"
+    },
+    {
+     "s": 31.09,
+     "e": 32.24,
+     "zh": "让他信以为真。",
+     "en": "Make him believe it.",
+     "who": null,
+     "sp": "Her"
+    },
+    {
+     "s": 50.08,
+     "e": 50.68,
+     "zh": "他走了。",
+     "en": "He's gone.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 52.23,
+     "e": 52.73,
+     "zh": "嗯。",
+     "en": "Yeah.",
+     "who": null,
+     "sp": "Her"
+    },
+    {
+     "s": 56.13,
+     "e": 59.73,
+     "zh": "好了。喝水。然后我送你回家。",
+     "en": "Okay. Water. Then I'm taking you home.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 68.92,
+     "e": 69.72,
+     "zh": "醒了？",
+     "en": "Awake?",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 70.11,
+     "e": 70.97,
+     "zh": "水在这里。",
+     "en": "Water’s here.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 71.36,
+     "e": 72.97,
+     "zh": "要是头疼，先别喝咖啡。",
+     "en": "Leave the coffee if your head hurts.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 73.56,
+     "e": 74.92,
+     "zh": "昨晚那场临时男友任务，",
+     "en": "Temporary boyfriend duty last night.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 75.06,
+     "e": 75.97,
+     "zh": "我觉得自己表现还不错。",
+     "en": "I thought I did all right.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 76.81,
+     "e": 78.81,
+     "zh": "不过，有件事得说清楚。",
+     "en": "One thing needs clearing up, though.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 79.72,
+     "e": 81.77,
+     "zh": "替你挡住 Evan，是演的。",
+     "en": "Keeping Evan off your back was an act.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 83.02,
+     "e": 84.47,
+     "zh": "想吻你，不是。",
+     "en": "Wanting to kiss you wasn’t.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 85.31,
+     "e": 86.91,
+     "zh": "我喜欢你。",
+     "en": "I like you.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 88.06,
+     "e": 89.52,
+     "zh": "有一阵子了。",
+     "en": "Have for a while.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 90.62,
+     "e": 92.97,
+     "zh": "昨晚不代表你答应过任何事。",
+     "en": "Last night doesn’t mean you agreed to anything.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 94.0,
+     "e": 95.66,
+     "zh": "你愿意和我约会吗？",
+     "en": "Will you go on a date with me?",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 96.02,
+     "e": 96.91,
+     "zh": "一次真正的约会。",
+     "en": "A real date.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 97.41,
+     "e": 100.12,
+     "zh": "不是因为刚好顺路，就一起吃顿饭。",
+     "en": "Not just dinner because we happen to be heading the same way.",
+     "who": null,
+     "sp": "Rafael"
+    },
+    {
+     "s": 104.13,
+     "e": 106.45,
+     "zh": "我需要时间。先吃早餐。",
+     "en": "I need time. Breakfast first.",
+     "who": "you"
+    },
+    {
+     "s": 106.65,
+     "e": 108.97,
+     "zh": "好。你慢慢来。",
+     "en": "Okay. Take all the time.",
+     "who": null
+    },
+    {
+     "s": 109.17,
+     "e": 111.48,
+     "zh": "走吧。",
+     "en": "Come on.",
+     "who": null
+    },
+    {
+     "s": 116.7,
+     "e": 119.0,
+     "zh": "吃吧。这不是什么圈套。",
+     "en": "Eat. That's not a trick question.",
+     "who": null
+    },
+    {
+     "s": 126.72,
+     "e": 129.04,
+     "zh": "所以，你是什么时候开始喜欢我的？",
+     "en": "So, when did you start liking me?",
+     "who": "you"
+    },
+    {
+     "s": 129.24,
+     "e": 131.56,
+     "zh": "哇。直接问啊。",
+     "en": "Wow. Straight to it.",
+     "who": null
+    },
+    {
+     "s": 134.27,
+     "e": 136.57,
+     "zh": "没有哪一天。是慢慢攒起来的。",
+     "en": "There's no date. It just built up.",
+     "who": null
+    },
+    {
+     "s": 139.28,
+     "e": 141.59,
+     "zh": "你总偷吃面包边。我早就注意到了。",
+     "en": "You always steal the crust. I noticed.",
+     "who": null
+    },
+    {
+     "s": 149.3,
+     "e": 151.62,
+     "zh": "那你喜欢我什么？",
+     "en": "And what do you like about me?",
+     "who": "you"
+    },
+    {
+     "s": 151.82,
+     "e": 154.14,
+     "zh": "嗯。这个问题可大了。",
+     "en": "Hm. That's a big one.",
+     "who": null
+    },
+    {
+     "s": 154.34,
+     "e": 156.65,
+     "zh": "你总是先被自己的笑话逗笑。",
+     "en": "You laugh at your own jokes first.",
+     "who": null
+    },
+    {
+     "s": 159.36,
+     "e": 161.66,
+     "zh": "最多的是，你对我翻白眼的时候。",
+     "en": "You say you're fine when you aren't.",
+     "who": null
+    },
+    {
+     "s": 171.88,
+     "e": 174.21,
+     "zh": "我给你一个试用期。",
+     "en": "I'll give you a trial period.",
+     "who": "you"
+    },
+    {
+     "s": 174.41,
+     "e": 176.73,
+     "zh": "试用期。我接受。",
+     "en": "Trial period. Accepted.",
+     "who": null
+    },
+    {
+     "s": 176.93,
+     "e": 179.23,
+     "zh": "先说规矩。你来打分。",
+     "en": "Rules first. You grade me.",
+     "who": null
+    },
+    {
+     "s": 186.96,
+     "e": 189.26,
+     "zh": "几分？",
+     "en": "Score?",
+     "who": null
+    },
+    {
+     "s": 194.47,
+     "e": 196.79,
+     "zh": "我要来考察你了。",
+     "en": "Time to inspect you.",
+     "who": "you"
+    },
+    {
+     "s": 196.99,
+     "e": 199.31,
+     "zh": "尽管考察。",
+     "en": "Inspect away.",
+     "who": null
+    },
+    {
+     "s": 199.51,
+     "e": 201.82,
+     "zh": "走吧。",
+     "en": "Come on.",
+     "who": null
+    },
+    {
+     "s": 207.03,
+     "e": 209.34,
+     "zh": "那个刹车方案不行。",
+     "en": "That brake setup isn't doable.",
+     "who": null
+    },
+    {
+     "s": 217.05,
+     "e": 219.37,
+     "zh": "带我去兜风。",
+     "en": "Take me for a ride.",
+     "who": "you"
+    },
+    {
+     "s": 219.57,
+     "e": 221.9,
+     "zh": "不是绿的那辆，骑我的。",
+     "en": "Not the green one. Mine.",
+     "who": null
+    },
+    {
+     "s": 227.11,
+     "e": 229.42,
+     "zh": "去吧，店我看着。",
+     "en": "Go. I've got the shop.",
+     "who": null
+    },
+    {
+     "s": 234.63,
+     "e": 236.94,
+     "zh": "你头发乱了。很适合你。",
+     "en": "Your hair's a mess. Suits you.",
+     "who": null
+    },
+    {
+     "s": 239.64,
+     "e": 241.96,
+     "zh": "我要坐你的后座，带我走。",
+     "en": "I want your back seat. Take me.",
+     "who": "you"
+    },
+    {
+     "s": 242.16,
+     "e": 244.48,
+     "zh": "后座，明白。",
+     "en": "Back seat. Got it.",
+     "who": null
+    },
+    {
+     "s": 244.68,
+     "e": 246.99,
+     "zh": "抓住我的肩膀。",
+     "en": "Hold on to my shoulders.",
+     "who": null
+    },
+    {
+     "s": 264.74,
+     "e": 267.06,
+     "zh": "哦。好。",
+     "en": "Oh. Okay.",
+     "who": null
+    },
+    {
+     "s": 271.28,
+     "e": 273.09,
+     "zh": "这样很好，别动。",
+     "en": "This is nice. Don't move.",
+     "who": null
+    },
+    {
+     "s": 279.81,
+     "e": 282.13,
+     "zh": "我们去沙滩上散步吧。",
+     "en": "Let's walk on the beach.",
+     "who": "you"
+    },
+    {
+     "s": 282.33,
+     "e": 284.65,
+     "zh": "好啊。把鞋脱了。",
+     "en": "Sure. Shoes off.",
+     "who": null
+    },
+    {
+     "s": 294.88,
+     "e": 297.18,
+     "zh": "冷吗？",
+     "en": "Cold?",
+     "who": null
+    },
+    {
+     "s": 302.39,
+     "e": 304.71,
+     "zh": "泼水啦！",
+     "en": "Splash!",
+     "who": "you"
+    },
+    {
+     "s": 304.91,
+     "e": 307.23,
+     "zh": "你居然敢。",
+     "en": "You did not.",
+     "who": null
+    },
+    {
+     "s": 316.46,
+     "e": 319.26,
+     "zh": "停战？还是比赛？",
+     "en": "Truce? Or race?",
+     "who": null
+    },
+    {
+     "s": 324.97,
+     "e": 327.29,
+     "zh": "衣服湿了，脱了吧。",
+     "en": "Clothes are wet. Take them off.",
+     "who": "you"
+    },
+    {
+     "s": 327.49,
+     "e": 329.81,
+     "zh": "好。你先来。",
+     "en": "Okay. You first.",
+     "who": null
+    },
+    {
+     "s": 337.54,
+     "e": 339.84,
+     "zh": "这样好多了。现在你看着冷。",
+     "en": "Better. Now you look cold.",
+     "who": null
+    },
+    {
+     "s": 350.08,
+     "e": 352.4,
+     "zh": "你确定吗？",
+     "en": "Sure about this?",
+     "who": null
+    },
+    {
+     "s": 364.63,
+     "e": 367.44,
+     "zh": "这次不演了。",
+     "en": "No acting this time.",
+     "who": null
+    },
+    {
+     "s": 370.14,
+     "e": 372.46,
+     "zh": "抓到你了。",
+     "en": "Got you.",
+     "who": "you"
+    },
+    {
+     "s": 372.66,
+     "e": 374.98,
+     "zh": "哦。好吧。",
+     "en": "Oh. Okay.",
+     "who": null
+    },
+    {
+     "s": 387.22,
+     "e": 390.02,
+     "zh": "我赢了吗？",
+     "en": "Did I win?",
+     "who": null
+    }
+   ],
+   "chapters": [
+    {
+     "kind": "ep",
+     "label": "开场",
+     "start": 0.0,
+     "end": 101.53
+    },
+    {
+     "kind": "rt",
+     "label": "第 1 轮",
+     "start": 101.53,
+     "end": 124.12,
+     "pause": 101.48,
+     "resume": 104.03,
+     "said": {
+      "zh": "我需要时间。先吃早餐，答案晚点给你。",
+      "en": "I need time. Breakfast first, and I'll give you my answer later."
+     },
+     "options": [],
+     "wait": 34.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L010645f19.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L010645f19.jpg",
+     "beat": "双人中近景，平视，固定｜她靠坐在床头，对他轻轻点头，说出要先吃早餐的决定"
+    },
+    {
+     "kind": "rt",
+     "label": "第 2 轮",
+     "start": 124.12,
+     "end": 146.7,
+     "pause": 124.07,
+     "resume": 126.62,
+     "said": {
+      "zh": "所以，你是什么时候开始喜欢我的？",
+      "en": "So, when did you start liking me?"
+     },
+     "options": [
+      "我咬一口",
+      "我端着咖啡走去阳台"
+     ],
+     "wait": 50.7,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0108000b8.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0108000b8.jpg",
+     "beat": "双人中近景，固定，男左女右｜她放下手里的三明治，抬头直视他，开口问。他拿着咖啡杯的手停了一下，嘴角先扬起来。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 3 轮",
+     "start": 146.7,
+     "end": 169.28,
+     "pause": 146.65,
+     "resume": 149.2,
+     "said": {
+      "zh": "那你喜欢我什么？",
+      "en": "Then what do you like about me?"
+     },
+     "options": [
+      "我把三明治的面包边递给他",
+      "我说，带我去看你的店"
+     ],
+     "wait": 48.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L010926e7e.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L010926e7e.jpg",
+     "beat": "双人中近景，固定，男左女右｜她右手拿着三明治，看着他，开口问他。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 4 轮",
+     "start": 169.28,
+     "end": 191.87,
+     "pause": 169.23,
+     "resume": 171.78,
+     "said": {
+      "zh": "那我给你个机会，给你一个试用期考察一下。",
+      "en": "Then I'll give you a chance: a trial period to see how you do."
+     },
+     "options": [
+      "我拿起咖啡杯，递到他手里",
+      "我拉他去阳台看海"
+     ],
+     "wait": 48.5,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L01113648c.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L01113648c.jpg",
+     "beat": "双人中近景，固定，男左女右｜她放下三明治，看着他，嘴角带笑，把话说出口"
+    },
+    {
+     "kind": "rt",
+     "label": "第 5 轮",
+     "start": 191.87,
+     "end": 214.45,
+     "pause": 191.82,
+     "resume": 194.37,
+     "said": {
+      "zh": "我拿起外套，去你店里考察你",
+      "en": "I grab my jacket and head to your shop to check you out."
+     },
+     "options": [
+      "我拿起外套，去你店里考察你",
+      "我走到他面前，给他打满分"
+     ],
+     "wait": 36.5,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0112598f4.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0112598f4.jpg",
+     "beat": "双人中近景，固定，男左女右｜她从椅背上拿起外套，披到肩上，看着他，嘴角带笑。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 6 轮",
+     "start": 214.45,
+     "end": 237.04,
+     "pause": 214.4,
+     "resume": 216.95,
+     "said": {
+      "zh": "你骑车带我去兜风吧。",
+      "en": "Take me for a ride on your bike."
+     },
+     "options": [
+      "我蹲下来，和他一起看车",
+      "我拿起工具，要试试手"
+     ],
+     "wait": 51.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0114137ab.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0114137ab.jpg",
+     "beat": "双人中近景，固定｜她站在他右侧，对他微微扬起下巴，说出想兜风的话"
+    },
+    {
+     "kind": "rt",
+     "label": "第 7 轮",
+     "start": 237.04,
+     "end": 259.62,
+     "pause": 236.99,
+     "resume": 239.54,
+     "said": {
+      "zh": "我想坐你的后座，你带我兜风。",
+      "en": "I want to ride on the back of your bike. Take me for a spin."
+     },
+     "options": [
+      "我靠在石栏上，给他今天的打分",
+      "我抢过他的手套，戴上去试试"
+     ],
+     "wait": 47.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L011545835.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L011545835.jpg",
+     "beat": "双人中近景，固定，男左女右｜她站在摩托旁看着他，认真地说出要求。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 8 轮",
+     "start": 259.62,
+     "end": 277.2,
+     "pause": 259.57,
+     "resume": 262.12,
+     "said": {
+      "zh": "我从后面抱住他的腰",
+      "en": "I wrap my arms around his waist from behind."
+     },
+     "options": [
+      "我从后面抱住他的腰",
+      "我下车，坐上护栏看海"
+     ],
+     "wait": 25.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L011700452.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L011700452.jpg",
+     "beat": "双人中近景，平视，固定，男左女右｜她双臂从后面环住他的腰，侧脸靠近他的背"
+    },
+    {
+     "kind": "rt",
+     "label": "第 9 轮",
+     "start": 277.2,
+     "end": 299.79,
+     "pause": 277.15,
+     "resume": 279.7,
+     "said": {
+      "zh": "我们去沙滩上散步吧。",
+      "en": "Let's take a walk on the beach."
+     },
+     "options": [
+      "我下巴搁在他肩上，指给他看海",
+      "我松开手，跳下车跑到护栏边"
+     ],
+     "wait": 51.3,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0118533ac.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0118533ac.jpg",
+     "beat": "双人中近景，固定｜她松开环着他腰的手，坐直，在他背后笑着说话。双人中近景里他侧过头看她，嘴角带笑，男左女右。"
+    },
+    {
+     "kind": "rt",
+     "label": "第 10 轮",
+     "start": 299.79,
+     "end": 322.37,
+     "pause": 299.74,
+     "resume": 302.29,
+     "said": {
+      "zh": "我踢起一脚水花泼向他",
+      "en": "I kick up a splash of water at him."
+     },
+     "options": [
+      "我踢起一脚水花泼向他",
+      "我牵起他的手往前走"
+     ],
+     "wait": 33.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L012013260.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L012013260.jpg",
+     "beat": "双人中近景，固定，男左女右｜她右脚踢起浅浪，一片水花朝他飞去，她笑着看他"
+    },
+    {
+     "kind": "rt",
+     "label": "第 11 轮",
+     "start": 322.37,
+     "end": 344.96,
+     "pause": 322.32,
+     "resume": 324.87,
+     "said": {
+      "zh": "衣服湿了，把衣服脱了吧。",
+      "en": "Our clothes are wet. Let's take them off."
+     },
+     "options": [
+      "我先跑向礁石，不等他",
+      "我捧起海水，泼回他脸上"
+     ],
+     "wait": 45.2,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0121206a0.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0121206a0.jpg",
+     "beat": "双人中近景，固定，男左女右｜她在浪线边抬手拎起自己湿掉的袖口，对他说话，他在左侧看着她"
+    },
+    {
+     "kind": "rt",
+     "label": "第 12 轮",
+     "start": 344.96,
+     "end": 367.54,
+     "pause": 344.91,
+     "resume": 347.46,
+     "said": {
+      "zh": "我踮起脚，吻上他",
+      "en": "I rise onto my tiptoes and kiss him."
+     },
+     "options": [
+      "我踮起脚，吻上他",
+      "我把开衫披到他肩上"
+     ],
+     "wait": 38.6,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0123152e0.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L0123152e0.jpg",
+     "beat": "双人中近景，固定，男左女右｜她把开衫搭在臂上，向他走近半步，脚跟抬起，仰脸看着他"
+    },
+    {
+     "kind": "rt",
+     "label": "第 13 轮",
+     "start": 367.54,
+     "end": 390.1,
+     "pause": 367.49,
+     "resume": 370.04,
+     "said": {
+      "zh": "我顺势把他扑倒在沙滩上，继续吻。",
+      "en": "I take the chance to tackle him onto the sand and keep kissing him."
+     },
+     "options": [
+      "我拉住他的手，往礁石走",
+      "我再吻他一次，更久"
+     ],
+     "wait": 46.0,
+     "clip": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L01243799d.mp4",
+     "poster": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/rafael-third-L01243799d.jpg",
+     "beat": "双人中近景，固定｜她笑着抬手按在他胸口，两人在浪线边，他在左她在右，面对面很近"
+    }
+   ],
+   "opening": "openings/rafael-third.mp4",
+   "rounds": 13,
+   "episodes": 0,
+   "wait_median": 46.0,
+   "tested": "2026-11-01 01:06–01:25"
+  },
+  {
    "id": "mii-open",
    "genre": "cozy",
    "name": "Mii",
@@ -1328,7 +2356,8 @@ window.CATALOG = {
      "e": 11.22,
      "zh": "今天不要上班，咪养你。",
      "en": "No work today. I'll take care of you.",
-     "who": null
+     "who": null,
+     "sp": "Mii"
     },
     {
      "s": 18.0,

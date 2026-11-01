@@ -138,6 +138,250 @@
       }
     },
     {
+      "id": "rafael-third",
+      "genre": "romance",
+      "name": "Rafael",
+      "title": {
+        "zh": "这次，不是演的",
+        "en": "Not Pretending This Time"
+      },
+      "lead": {
+        "zh": "Rafael Ortega · 摩托车店老板",
+        "en": "Rafael Ortega · Motorcycle shop owner"
+      },
+      "hook": {
+        "zh": "朋友六年，室友三年。昨晚他替你挡前任，假扮了一次男朋友，还有一个吻。今天早上他承认：临时的是身份，不是心意。你怎么回答，由你决定。",
+        "en": "Friends for six years, roommates for three. Last night he played your boyfriend to get your ex off your back, and there was a kiss. This morning he admits the role was temporary, the feeling isn't. How you answer is up to you."
+      },
+      "kind": "open",
+      "pov": "third",
+      "tags": [
+        {
+          "zh": "室友",
+          "en": "Roommates"
+        },
+        {
+          "zh": "假扮情侣",
+          "en": "Fake dating"
+        },
+        {
+          "zh": "告白",
+          "en": "Confession"
+        },
+        {
+          "zh": "第三视角",
+          "en": "Third person"
+        }
+      ],
+      "accent": "#c8743c",
+      "cover_local": "covers/rafael-third.jpg",
+      "badge": {
+        "zh": "新",
+        "en": "New"
+      },
+      "source": {
+        "log": "rafael-third",
+        "film": "你的人工测试 · 第 1 次",
+        "group": "你的人工测试 · 第 1 次"
+      },
+      "live_hint": {
+        "zh": "launchd 中转 8901（Rafael 第三视角）",
+        "en": "Relay (Rafael third person)"
+      },
+      "live": {
+        "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/33a7c2bf668a4d40807299bae3cf88e9/OPEN.mp4",
+        "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/029f3280bef44841a26fccfceefda643/IDLE0.mp4",
+        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/60e1d5fabd79493b954d58a85c6388cf/MUS_RAF_HOME_V1.mp3",
+        "lines": "magnus",
+        "post": "text",
+        "mode": "auto",
+        "open_cues": [
+          {
+            "s": 0.2,
+            "e": 3.3,
+            "zh": "得了吧，你连坐都坐不稳了。我送你回家。",
+            "en": "Come on. You can barely sit up. I'll drive you home.",
+            "who": "Evan"
+          },
+          {
+            "s": 4.0,
+            "e": 6.35,
+            "zh": "不用。我好着呢。好得很。",
+            "en": "No. I'm good. I'm so good.",
+            "who": "Her"
+          },
+          {
+            "s": 11.25,
+            "e": 11.8,
+            "zh": "走吧。",
+            "en": "Let's go.",
+            "who": "Evan"
+          },
+          {
+            "s": 17.77,
+            "e": 19.52,
+            "zh": "哇……我接住你了。",
+            "en": "Whoa. I got you.",
+            "who": "Rafael"
+          },
+          {
+            "s": 21.12,
+            "e": 21.82,
+            "zh": "Rafa。",
+            "en": "Rafa.",
+            "who": "Her"
+          },
+          {
+            "s": 23.62,
+            "e": 25.32,
+            "zh": "这是我男朋友。",
+            "en": "This is my boyfriend.",
+            "who": "Her"
+          },
+          {
+            "s": 25.53,
+            "e": 28.23,
+            "zh": "什么时候的事？你们俩不是“只是朋友”吗。",
+            "en": "Since when? You two are just friends.",
+            "who": "Evan"
+          },
+          {
+            "s": 29.99,
+            "e": 30.69,
+            "zh": "吻我。",
+            "en": "Kiss me.",
+            "who": "Her"
+          },
+          {
+            "s": 31.09,
+            "e": 32.24,
+            "zh": "让他信以为真。",
+            "en": "Make him believe it.",
+            "who": "Her"
+          },
+          {
+            "s": 50.08,
+            "e": 50.68,
+            "zh": "他走了。",
+            "en": "He's gone.",
+            "who": "Rafael"
+          },
+          {
+            "s": 52.23,
+            "e": 52.73,
+            "zh": "嗯。",
+            "en": "Yeah.",
+            "who": "Her"
+          },
+          {
+            "s": 56.13,
+            "e": 59.73,
+            "zh": "好了。喝水。然后我送你回家。",
+            "en": "Okay. Water. Then I'm taking you home.",
+            "who": "Rafael"
+          },
+          {
+            "s": 68.92,
+            "e": 69.72,
+            "zh": "醒了？",
+            "en": "Awake?",
+            "who": "Rafael"
+          },
+          {
+            "s": 70.11,
+            "e": 70.97,
+            "zh": "水在这里。",
+            "en": "Water’s here.",
+            "who": "Rafael"
+          },
+          {
+            "s": 71.36,
+            "e": 72.97,
+            "zh": "要是头疼，先别喝咖啡。",
+            "en": "Leave the coffee if your head hurts.",
+            "who": "Rafael"
+          },
+          {
+            "s": 73.56,
+            "e": 74.92,
+            "zh": "昨晚那场临时男友任务，",
+            "en": "Temporary boyfriend duty last night.",
+            "who": "Rafael"
+          },
+          {
+            "s": 75.06,
+            "e": 75.97,
+            "zh": "我觉得自己表现还不错。",
+            "en": "I thought I did all right.",
+            "who": "Rafael"
+          },
+          {
+            "s": 76.81,
+            "e": 78.81,
+            "zh": "不过，有件事得说清楚。",
+            "en": "One thing needs clearing up, though.",
+            "who": "Rafael"
+          },
+          {
+            "s": 79.72,
+            "e": 81.77,
+            "zh": "替你挡住 Evan，是演的。",
+            "en": "Keeping Evan off your back was an act.",
+            "who": "Rafael"
+          },
+          {
+            "s": 83.02,
+            "e": 84.47,
+            "zh": "想吻你，不是。",
+            "en": "Wanting to kiss you wasn’t.",
+            "who": "Rafael"
+          },
+          {
+            "s": 85.31,
+            "e": 86.91,
+            "zh": "我喜欢你。",
+            "en": "I like you.",
+            "who": "Rafael"
+          },
+          {
+            "s": 88.06,
+            "e": 89.52,
+            "zh": "有一阵子了。",
+            "en": "Have for a while.",
+            "who": "Rafael"
+          },
+          {
+            "s": 90.62,
+            "e": 92.97,
+            "zh": "昨晚不代表你答应过任何事。",
+            "en": "Last night doesn’t mean you agreed to anything.",
+            "who": "Rafael"
+          },
+          {
+            "s": 94.0,
+            "e": 95.66,
+            "zh": "你愿意和我约会吗？",
+            "en": "Will you go on a date with me?",
+            "who": "Rafael"
+          },
+          {
+            "s": 96.02,
+            "e": 96.91,
+            "zh": "一次真正的约会。",
+            "en": "A real date.",
+            "who": "Rafael"
+          },
+          {
+            "s": 97.41,
+            "e": 100.12,
+            "zh": "不是因为刚好顺路，就一起吃顿饭。",
+            "en": "Not just dinner because we happen to be heading the same way.",
+            "who": "Rafael"
+          }
+        ]
+      }
+    },
+    {
       "id": "mii-open",
       "genre": "cozy",
       "name": "Mii",
