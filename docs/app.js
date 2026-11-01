@@ -29,7 +29,7 @@ const L = o => o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.zh |
 const I = {
   tabHome: ['剧场', 'Theater'], tabFeed: ['推荐', 'For You'], tabCast: ['演员表', 'Cast'], tabLib: ['在追', 'My List'], tabMe: ['我的', 'Me'],
   deskNote: ['实时 AI 互动剧集合 · 网页预览版。每部剧的故事接下来怎么走，都看你怎么演：点选项或直接打字，它就接着你的话演下去。', 'A home for live AI interactive dramas, web preview. Where each story goes is up to how you play it: tap a choice or just type, and it plays on from what you said.'],
-  deskLi1: ['没连实时中转时，互动走「预览回放」：播放测试时真实生成的那一幕', 'Without a live relay, scenes replay real generations from testing'],
+  deskLi1: ['「预览回放」连续播放一位玩家的完整演绎，TA 说的每句话都看得到', 'Preview replay plays one player’s full take, with everything they said on screen'],
   deskLi2: ['在「我的 → 实时链接」填入测试链接，就能在 APP 里直接实时开玩', 'Paste a test link in Me → Live links to play live in-app'],
   deskLi3: ['手机打开体验更好；加新剧只需改 catalog.json', 'Best on a phone. New dramas are one entry in catalog.json'],
   continue: ['继续你的故事', 'Continue your story'], continueSub: ['停在你上次开口的地方', 'Right where you last spoke'],
@@ -73,6 +73,9 @@ const I = {
   series: ['原版互动剧集', 'Original series'], soundOn: ['点一下画面打开声音', 'Tap to turn sound on'],
   fromHere: ['从这一幕开始互动', 'Play from this scene'], fromStart: ['从头开始', 'From the start'],
   hisLine: ['他回', 'He said'],
+  caseTab: ['大家的演绎', 'How others played'], caseReplay: ['案例回放', 'Case replay'], caseUser: ['案例用户说', 'The player said'], caseSaid: ['TA 说', 'They said'], caseRounds: ['案例幕', 'Case scenes'],
+  caseNote: ['这部剧没有固定剧本。下面是一位玩家真实演绎的 {n} 幕，只是参考，点开任意一幕都能看。换成你开口，故事会完全不一样。', 'This drama has no fixed script. Below are {n} scenes one player really performed, just for reference. Tap any to watch. When you speak, the story will go somewhere else.'],
+  caseOpening: ['所有人都从这里开始', 'Everyone starts here'], watchScene: ['看这一幕', 'Watch this scene'], caseEnd: ['这段演绎到这里', 'This take ends here'], caseEndSub: ['这是一位玩家的演绎。换成你开口，故事会不一样。', 'That was one player’s take. Yours will go somewhere else.'], watchAgain: ['从头再看', 'Watch again'],
   liveStart: ['实时开玩', 'Play live'], previewBtn: ['预览回放', 'Preview'], liveConn: ['实时生成已连接', 'Live generation connected'], liveOff2: ['实时中转没连上，先用预览回放', 'Live relay offline, using preview replay'],
   liveBadKey: ['实时口令不对，请用最新的测试链接打开', 'Wrong live key, open the latest test link'], tapStart: ['点一下开始', 'Tap to start'],
   lStep1: ['读懂你的话，导演层在写下一幕', 'Reading you, writing the next scene'], lStep1o: ['读取这个选项预先写好的分镜', 'Loading the storyboard for this choice'],
@@ -137,11 +140,15 @@ function scenesSheet(d, onPick){
   const body = d.chapters.map((c, i) => {
     if (c.kind === 'ep') return `<div class="scene" data-i="${i}">${epThumb(d, c)}<div><b>${esc(epLabel(c))}</b><p>${fmtDur(c.end - c.start)}</p></div></div>`;
     const h = hisLine(d, c), n = sceneNo(d, i), done = (p.done || []).includes(i);
-    return `<div class="scene${done ? ' done' : ''}" data-i="${i}"><div class="n">${c.poster ? `<img src="${esc(c.poster)}" loading="lazy" alt="">` : ''}</div><div><b>${T('scene', {n})} <span class="pill live">LIVE</span></b><p><em>${T('youSaid')}：</em>${esc(L(c.said))}${h ? `<br>${esc(lang() === 'zh' && h.zh ? h.zh : h.en)}` : ''}</p></div></div>`;
+    return `<div class="scene${done ? ' done' : ''}" data-i="${i}"><div class="n play">${c.poster ? `<img src="${esc(c.poster)}" loading="lazy" alt="">` : ''}</div><div><b>${T('scene', {n})} <span class="pill live">LIVE</span></b><p><em>${saidName(d)}：</em>${esc(L(c.said))}${h ? `<br>${esc(lang() === 'zh' && h.zh ? h.zh : h.en)}` : ''}</p></div></div>`;
   }).join('');
-  return sheet(T('scenes'), esc(L(d.title)), body, (sh, close) => $$('.scene', sh).forEach(el => el.onclick = () => { close(); onPick(+el.dataset.i); }));
+  return sheet(scenesName(d), esc(L(d.title)), body, (sh, close) => $$('.scene', sh).forEach(el => el.onclick = () => { close(); onPick(+el.dataset.i); }));
 }
-const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n"><img src="${esc(d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
+const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n play"><img src="${esc(d.opening_poster || d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
+const scenesName = d => T(d.kind === 'open' ? 'caseTab' : 'scenes');
+const saidName = d => T(d.kind === 'open' ? 'caseSaid' : 'youSaid');
+const roundsName = d => T(d.kind === 'open' ? 'caseRounds' : 'rounds');
+const watchHash = (d, i) => `#/play/${d.id}?watch=1&from=${i}`;
 const epLabel = c => /Opening|开场/.test(c.label) ? T('opening') : lang() === 'en' ? c.label.replace(/第\s*(\d+)\s*集/, 'Episode $1') : c.label;
 const fmtDur = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
 function liveLogHtml(d){
@@ -177,7 +184,15 @@ function route(){
   if (parts[0] === 'char') return Editor(view, parts[1] || 'new');
   if (parts[0] === 'stage') return parts[1] === 'new' ? StageNew(view, q) : parts[1] ? StagePlay(view, parts[1]) : Stages(view);
   if (parts[0] === 'd' && byId[parts[1]]) return Detail(view, byId[parts[1]]);
-  if (parts[0] === 'play' && byId[parts[1]]) return q.get('live') === '1' && liveNative(byId[parts[1]]) ? LivePlayer(view, byId[parts[1]]) : Player(view, byId[parts[1]], q);
+  if (parts[0] === 'play' && byId[parts[1]]){
+    const dr = byId[parts[1]];
+    if (q.get('live') === '1' && liveNative(dr)) return LivePlayer(view, dr);
+    if (dr.kind === 'open' && q.get('watch') !== '1'){  // 开放式没有固定剧本：能实时就实时开玩，否则看案例回放，不再演一遍假互动
+      if (!q.has('from') && liveNative(dr)) return LivePlayer(view, dr);
+      q.set('watch', '1');
+    }
+    return Player(view, dr, q);
+  }
   if (parts[0] === 'live' && byId[parts[1]]) return Live(view, byId[parts[1]]);
   return Home(view);
 }
@@ -195,7 +210,7 @@ function Home(view){
     <div class="hero-slide" data-id="${d.id}"><img src="${esc(d.cover)}" alt=""><video muted playsinline preload="none" data-src="${esc(d.opening)}"></video>
       <div class="hero-info"><div class="pills">${kindPill(d)}<span class="pill">${esc(L(d.badge))}</span></div>
         <h3>${esc(L(d.title))}</h3><div class="lead">${esc(L(d.lead))}</div><p>${esc(L(d.hook))}</p>
-        <button class="btn gold" data-play="${d.id}">${ICON.play}${T('start')}</button></div></div>`).join('')}</div>
+        <button class="btn gold" data-play="${d.id}">${ICON.play}${d.kind === 'open' && !liveNative(d) ? T('previewBtn') : T('start')}</button></div></div>`).join('')}</div>
     <div class="hero-dots">${heroes.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div></section>
   ${going.length ? `<section class="sec"><div class="sec-h"><div><h2>${T('continue')}</h2><p>${T('continueSub')}</p></div></div>
     <div class="scroller">${going.map(d => { const p = progOf(d.id), last = (p.log || []).slice(-1)[0]; const pct = Math.round(100 * (p.done || []).length / d.rounds);
@@ -208,7 +223,7 @@ function Home(view){
   <section class="sec"><div class="how"><h3>${T('howT')}</h3><p>${T('howS')}</p><ol>
     <li><i>1</i><div>${T('how1')}<small>${T('how1s')}</small></div></li><li><i>2</i><div>${T('how2')}<small>${T('how2s')}</small></div></li><li><i>3</i><div>${T('how3')}<small>${T('how3s')}</small></div></li></ol></div></section>
   <section class="sec"><div class="sec-h"><h2>${T('rank')}</h2></div><div class="rank">${D.map((d, i) => `
-    <div class="rank-item" data-id="${d.id}"><div class="no">${i + 1}</div><img src="${esc(d.cover)}" alt="" loading="lazy"><div><b>${esc(L(d.title))}</b><span>${esc(L(d.lead))}</span><span>${d.kind === 'open' ? T('endless') : d.episodes + ' ' + T('eps')} · ${d.rounds} ${T('rounds')}${d.wait_median ? ' · ' + T('waitMed') + ' ' + Math.round(d.wait_median) + 's' : ''}</span></div></div>`).join('')}</div></section>
+    <div class="rank-item" data-id="${d.id}"><div class="no">${i + 1}</div><img src="${esc(d.cover)}" alt="" loading="lazy"><div><b>${esc(L(d.title))}</b><span>${esc(L(d.lead))}</span><span>${d.kind === 'open' ? T('endless') : d.episodes + ' ' + T('eps')} · ${d.rounds} ${roundsName(d)}${d.wait_median ? ' · ' + T('waitMed') + ' ' + Math.round(d.wait_median) + 's' : ''}</span></div></div>`).join('')}</div></section>
   <section class="sec"><div class="sec-h"><h2>${T('allDramas')}</h2></div>
     <div class="chips" id="chips">${filters.map((f, i) => `<button class="chip${i ? '' : ' on'}" data-f="${f}">${T(f)}</button>`).join('')}</div>
     <div class="grid" id="grid" style="margin-top:14px"></div></section>`;
@@ -236,7 +251,7 @@ function Home(view){
   go(0); onLeave(() => { clearTimeout(timer); slides.forEach(s => { const v = $('video', s); v.pause(); v.removeAttribute('src'); v.load(); }); view.onclick = null; });
 }
 function pcard(d){
-  return `<div class="pcard" data-id="${d.id}"><div class="pic"><img src="${esc(d.cover)}" alt="" loading="lazy">${kindPill(d)}<div class="meta">${d.kind === 'open' ? `${d.rounds}+ ${T('rounds')}` : `${d.episodes} ${T('eps')} · ${d.rounds} ${T('rounds')}`}</div></div><b>${esc(L(d.title))}</b><span>${esc(L(d.lead))}</span></div>`;
+  return `<div class="pcard" data-id="${d.id}"><div class="pic"><img src="${esc(d.cover)}" alt="" loading="lazy">${kindPill(d)}<div class="meta">${d.kind === 'open' ? `${d.rounds} ${T('caseRounds')}` : `${d.episodes} ${T('eps')} · ${d.rounds} ${T('rounds')}`}</div></div><b>${esc(L(d.title))}</b><span>${esc(L(d.lead))}</span></div>`;
 }
 
 // ---------- 推荐（竖滑） ----------
@@ -249,10 +264,10 @@ function Feed(view){
   view.innerHTML = `<div class="feed" id="feed">${items.map(({d, c}, k) => { const h = hisLine(d, c);
     return `<section class="fitem" data-k="${k}"><img src="${esc(c.poster)}" alt=""><video playsinline loop muted preload="none" data-src="${esc(c.clip)}" poster="${esc(c.poster)}"></video>
     <div class="f-info"><div class="who">@${esc(L(d.title))}</div>
-      <div class="said"><em>${T('you')}</em>${esc(L(c.said))}</div>
+      <div class="said"><em>${d.kind === 'open' ? T('caseSaid') : T('you')}</em>${esc(L(c.said))}</div>
       ${h ? `<div class="line">“${esc(h.en)}”</div>` : ''}
       <div class="tags">${d.tags.map(t => '#' + esc(L(t))).join(' ')}</div>
-      <button class="btn gold" data-from="${c.i}" data-id="${d.id}">${ICON.play}${T('fromHere')}</button></div>
+      <button class="btn gold" data-from="${c.i}" data-id="${d.id}">${ICON.play}${T(d.kind === 'open' ? 'watchScene' : 'fromHere')}</button></div>
     <div class="rail"><button class="av-btn" data-go="${d.id}"><div class="av"><img src="${esc(d.cover)}" alt=""></div></button>
       <button class="like${S.liked[d.id] ? ' on' : ''}" data-like="${d.id}">${ICON.heart}<span>${T('liked')}</span></button>
       <button class="save${S.saved[d.id] ? ' on' : ''}" data-save="${d.id}">${ICON.mark}<span>${T('saveL')}</span></button>
@@ -271,7 +286,7 @@ function Feed(view){
     else if (b.dataset.go) location.hash = '#/d/' + b.dataset.go;
     else if (b.dataset.like){ const on = toggleLike(byId[b.dataset.like]); $$(`[data-like="${b.dataset.like}"]`).forEach(x => x.classList.toggle('on', on)); }
     else if (b.dataset.save){ const on = toggleSave(byId[b.dataset.save]); $$(`[data-save="${b.dataset.save}"]`).forEach(x => x.classList.toggle('on', on)); }
-    else if (b.dataset.scenes){ const d = byId[b.dataset.scenes]; scenesSheet(d, i => location.hash = `#/play/${d.id}?from=${i}`); }
+    else if (b.dataset.scenes){ const d = byId[b.dataset.scenes]; scenesSheet(d, i => location.hash = watchHash(d, i)); }
     else if (b.dataset.share) shareLink(byId[b.dataset.share]);
   };
   onLeave(() => { io.disconnect(); vids.forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); }); });
@@ -286,18 +301,18 @@ function Detail(view, d){
     <div class="d-top"><button class="iconbtn" id="back">${ICON.back}</button><div class="row"><button class="iconbtn" id="shareBtn">${ICON.share}</button></div></div>
     <div class="d-head" style="margin-top:-60px"><div class="pills">${kindPill(d)}<span class="pill">${esc(L(d.badge))}</span><span class="pill">${T(d.pov)}</span></div>
       <h1>${esc(L(d.title))}</h1><div class="lead">${esc(L(d.lead))}</div>
-      <div class="d-stats"><div><b>${d.kind === 'open' ? '∞' : d.episodes}</b><span>${d.kind === 'open' ? T('endless') : T('eps')}</span></div><div><b>${d.rounds}</b><span>${T('rounds')}</span></div><div><b>${d.wait_median ? Math.round(d.wait_median) + 's' : '—'}</b><span>${T('waitMed')}</span></div></div>
+      <div class="d-stats"><div><b>${d.kind === 'open' ? '∞' : d.episodes}</b><span>${d.kind === 'open' ? T('endless') : T('eps')}</span></div><div><b>${d.rounds}</b><span>${roundsName(d)}</span></div><div><b>${d.wait_median ? Math.round(d.wait_median) + 's' : '—'}</b><span>${T('waitMed')}</span></div></div>
       <p class="d-hook">${esc(L(d.hook))}</p><div class="d-tags">${d.tags.map(t => `<span>#${esc(L(t))}</span>`).join('')}</div></div>
-    <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${T('scenes')}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
+    <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${scenesName(d)}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
     <div class="d-pane" id="pane"></div>
     ${d.kind === 'open' ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<span><small>${Z('出演身份', 'Playing as')}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></span><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
-    <div class="d-cta">${liveNative(d) ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
+    <div class="d-cta">${liveNative(d) ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${d.kind === 'open' ? T('previewBtn') : resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
       <button class="btn ghost" id="saveBtn" title="${T('saveL')}" style="color:${S.saved[d.id] ? 'var(--gold)' : 'inherit'}">${ICON.mark}</button>
       ${!d.live && liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
   $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/');
   $('#shareBtn').onclick = () => shareLink(d);
   const top = $('.d-top'); view.onscroll = () => top.classList.toggle('solid', view.scrollTop > 330); onLeave(() => view.onscroll = null);
-  $('#go').onclick = () => location.hash = `#/play/${d.id}${resumeN ? '?resume=1' : ''}`;
+  $('#go').onclick = () => location.hash = d.kind === 'open' ? `#/play/${d.id}?watch=1` : `#/play/${d.id}${resumeN ? '?resume=1' : ''}`;
   $('#saveBtn').onclick = () => { const on = toggleSave(d); $('#saveBtn').style.color = on ? 'var(--gold)' : 'inherit'; };
   if ($('#liveBtn')) $('#liveBtn').onclick = () => location.hash = '#/live/' + d.id;
   if ($('#castRow')) $('#castRow').onclick = () => personaSheet(d.id, L(d.title), () => route());
@@ -312,10 +327,10 @@ function Detail(view, d){
     $$('#dtabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
     if (t === 'scenes'){
       const done = (p && p.done) || [];
-      pane.innerHTML = d.chapters.map((c, i) => c.kind === 'ep'
-        ? `<div class="scene" data-i="${i}">${epThumb(d, c)}<div><b>${esc(epLabel(c))}</b><p>${fmtDur(c.end - c.start)}</p></div></div>`
-        : (() => { const h = hisLine(d, c); return `<div class="scene${done.includes(i) ? ' done' : ''}" data-i="${i}"><div class="n">${c.poster ? `<img src="${esc(c.poster)}" loading="lazy" alt="">` : ''}</div><div><b>${T('scene', {n: sceneNo(d, i)})} <span class="pill live">LIVE</span></b><p><em>${T('youSaid')}：</em>${esc(L(c.said))}${h ? '<br>' + esc(lang() === 'zh' && h.zh ? h.zh : h.en) : ''}</p></div></div>`; })()).join('');
-      $$('.scene', pane).forEach(el => el.onclick = () => location.hash = `#/play/${d.id}?from=${el.dataset.i}`);
+      pane.innerHTML = (d.kind === 'open' ? `<p class="case-note">${T('caseNote', {n: d.rounds})}</p>` : '') + d.chapters.map((c, i) => c.kind === 'ep'
+        ? `<div class="scene" data-i="${i}">${epThumb(d, c)}<div><b>${esc(epLabel(c))}</b><p>${d.kind === 'open' ? T('caseOpening') + ' · ' : ''}${fmtDur(c.end - c.start)}</p></div></div>`
+        : (() => { const h = hisLine(d, c); return `<div class="scene${d.kind !== 'open' && done.includes(i) ? ' done' : ''}" data-i="${i}"><div class="n play">${c.poster ? `<img src="${esc(c.poster)}" loading="lazy" alt="">` : ''}</div><div><b>${T('scene', {n: sceneNo(d, i)})} <span class="pill live">LIVE</span></b><p><em>${saidName(d)}：</em>${esc(L(c.said))}${h ? '<br>' + esc(lang() === 'zh' && h.zh ? h.zh : h.en) : ''}</p></div></div>`; })()).join('');
+      $$('.scene', pane).forEach(el => el.onclick = () => location.hash = watchHash(d, el.dataset.i));
     } else if (t === 'log'){
       const items = (p && p.log) || [];
       pane.innerHTML = items.length || (p && (p.live || []).length) ? `<div class="log">${liveLogHtml(d)}${items.map(x => { const c = d.chapters[x.i], h = hisLine(d, c); return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${lang() === 'zh' && h.zh ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}<button data-i="${x.i}">↺ ${T('backTo')}</button></div>`; }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
@@ -343,26 +358,27 @@ function Player(view, d, q){
   const P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []};
   let from = q.has('from') ? +q.get('from') : q.get('resume') === '1' && P.i != null ? P.i : 0;
   const answered = new Set();  // 这一次播放里已经开过口的幕
-  const total = d.film.duration;
+  const startCh = d.chapters[from] || d.chapters[0];
   view.innerHTML = `<div class="player" id="pl">
-    <video id="v" playsinline preload="auto" poster="${esc(d.cover)}" src="${esc(d.film.video)}"></video>
+    <video id="v" playsinline preload="auto" poster="${esc(startCh.kind === 'rt' && startCh.poster ? startCh.poster : d.opening_poster || d.cover)}" src="${esc(d.film.video)}"></video>
     <div class="p-shade"></div><div class="p-tap" id="tap"></div>
     <div class="p-paused" id="paused" hidden>${ICON.play}</div>
     <div class="p-top"><div class="segbar" id="seg">${d.chapters.map(c => `<i class="${c.kind}" style="flex:${(c.end - c.start).toFixed(1)}"><b></b></i>`).join('')}</div>
       <div class="p-title"><button class="iconbtn" id="back">${ICON.back}</button><div><b>${esc(L(d.title))}</b><span id="chLabel"></span></div>
-      <span class="pill ${watch ? '' : 'gold'} p-mode">${watch ? T('watch') : T('previewChip')}</span></div></div>
+      <span class="pill ${watch ? '' : 'gold'} p-mode">${watch ? T(d.kind === 'open' ? 'caseReplay' : 'watch') : T('previewChip')}</span></div></div>
     <div class="rail p-rail"><button class="like${S.liked[d.id] ? ' on' : ''}" id="rLike">${ICON.heart}<span>${T('liked')}</span></button>
-      <button id="rLog">${ICON.book}<span>${T('log')}</span></button><button id="rScenes">${ICON.list}<span>${T('scenes')}</span></button>
+      <button id="rLog">${ICON.book}<span>${T('log')}</span></button><button id="rScenes">${ICON.list}<span>${scenesName(d)}</span></button>
       <button id="rCC">${ICON.cc}<span>${S.settings.subs === 'en' ? 'EN' : (lang() === 'zh' ? '中/EN' : 'EN/中')}</span></button></div>
+    <div class="p-said" id="said" hidden><small>${T(d.kind === 'open' ? 'caseUser' : 'youSaid')}</small><span></span></div>
     <div class="subs" id="subs"></div>
-    <div class="p-hint" id="hint">${T('tapPause')}</div>
+    <div class="p-hint" id="hint"${watch ? ' hidden' : ''}>${T('tapPause')}</div>
     <div class="wait" id="wait"></div>
     <div class="choice" id="choice"></div></div>`;
   const pl = $('#pl'), v = $('#v'), subs = $('#subs'), choice = $('#choice'), wait = $('#wait');
   const bars = $$('#seg i b'), chLabel = $('#chLabel');
   let mode = 'play', curCh = -1, waitTimer = [];
   const setMode = m => { mode = m; pl.classList.toggle('choosing', m === 'choose'); pl.classList.toggle('waiting', m === 'wait'); };
-  const chAt = t => { let k = 0; d.chapters.forEach((c, i) => { if (t >= c.start - .01) k = i; }); return k; };
+  const chAt = t => { let k = 0; d.chapters.forEach((c, i) => { if (t >= (c.kind === 'rt' ? Math.min(c.start, c.pause) : c.start) - .01) k = i; }); return k; };  // 输入卡算这一幕的开头
   setTimeout(() => $('#hint') && ($('#hint').hidden = true), 4000);
 
   // 字幕
@@ -380,7 +396,11 @@ function Player(view, d, q){
     d.chapters.forEach((c, i) => { bars[i].style.width = Math.max(0, Math.min(100, (t - c.start) / (c.end - c.start) * 100)) + '%'; });
     const k = chAt(t);
     if (k !== curCh){ curCh = k; const c = d.chapters[k]; chLabel.textContent = c.kind === 'rt' ? T('scene', {n: sceneNo(d, k)}) + ' · LIVE' : epLabel(c);
-      P.i = k; P.at = Date.now(); save(); }
+      if (!watch){ P.i = k; P.at = Date.now(); save(); } }
+    if (watch){  // 案例回放：把当时说的话显示出来，多留 2 秒看清
+      const c = d.chapters.find(x => x.kind === 'rt' && t >= x.pause && t < x.resume + 2), box = $('#said');
+      if (c){ const txt = L(c.said); if (box.dataset.t !== txt){ box.dataset.t = txt; $('span', box).textContent = txt; } box.hidden = false; } else box.hidden = true;
+    }
     // 到选择点：停下等她开口（完整成片模式不停）
     if (!watch && mode === 'play'){
       const nx = d.chapters.findIndex((c, i) => c.kind === 'rt' && !answered.has(i) && t >= c.pause && t < c.resume + .3);
@@ -388,13 +408,19 @@ function Player(view, d, q){
     }
     if (note && t < note.until){ subs.className = 'subs you'; subs.innerHTML = `<div class="zh" style="font-size:12px;color:#d8cbd9">${esc(note.text)}</div>`; return; }
     note = null;
-    showSub(mode === 'play' ? d.cues.find(c => t >= c.s && t <= c.e) : null);
+    const typing = watch && d.chapters.some(x => x.kind === 'rt' && t >= x.pause && t < x.resume);  // 她在说话的这几秒只显示她的话，不压上一幕的尾句
+    showSub(mode === 'play' && !typing ? d.cues.find(c => t >= c.s && t <= c.e) : null);
   }
   v.addEventListener('timeupdate', onTime);
   let raf; const loop = () => { if (mode === 'play' && !v.paused) onTime(); raf = requestAnimationFrame(loop); }; loop();
 
   function play(){ const pr = v.play(); if (pr) pr.catch(() => { v.muted = true; v.play().catch(() => {}); toast(T('soundOn')); }); $('#paused').hidden = true; }
-  $('#tap').onclick = () => { if (mode !== 'play') return; if (v.muted){ v.muted = false; return; } if (v.paused){ play(); } else { v.pause(); $('#paused').hidden = false; } };
+  $('#tap').onclick = e => { if (mode !== 'play') return; if (v.muted){ e.stopPropagation(); v.muted = false; return; } if (watch) return; if (v.paused){ play(); } else { v.pause(); $('#paused').hidden = false; } };
+  if (watch){  // 回放就是普通视频：进度条、时长、倍速、单击暂停，可以随意拖
+    RT.init({stage: '#pl', drama: 'app-' + d.id, zh: () => lang() === 'zh', isPlaying: () => mode === 'play' && !$('.endcard', pl), ignore: '.rail,.p-top,.iconbtn,.endcard'});
+    RT.begin({key: 'film', parts: [{v, d: d.film.duration}], free: true});
+    onLeave(() => RT.destroy());
+  }
 
   // 选择点
   function openChoice(i){
@@ -437,27 +463,28 @@ function Player(view, d, q){
     setMode('end'); showSub(null); P.i = null; save();
     const card = document.createElement('div'); card.className = 'endcard fade-in';
     const other = D.find(x => x.id !== d.id && x.genre === d.genre) || D.find(x => x.id !== d.id);
-    card.innerHTML = `<h3>${T(d.kind === 'open' ? 'endOpen' : 'endPreset')}</h3><p>${T('endSub', {a: answered.size, b: (P.done || []).length})}</p>
+    card.innerHTML = `<h3>${watch ? T('caseEnd') : T(d.kind === 'open' ? 'endOpen' : 'endPreset')}</h3><p>${watch ? T('caseEndSub') : T('endSub', {a: answered.size, b: (P.done || []).length})}</p>
       <div class="pcard" data-id="${other.id}" style="width:auto;display:flex;gap:12px;align-items:center"><div class="pic" style="width:70px;height:96px;flex:none"><img src="${esc(other.cover)}" alt=""></div><div><span>${T('more')}</span><b>${esc(L(other.title))}</b></div></div>
-      <div class="row"><button class="btn ghost" id="eLog">${T('seeLog')}</button><button class="btn gold" id="eAgain">${T('again')}</button></div>`;
+      <div class="row">${watch ? `<button class="btn ghost" id="eAgain">${T('watchAgain')}</button>${liveNative(d) ? `<button class="btn live" id="eLive">${ICON.live}${T('liveStart')}</button>` : ''}` : `<button class="btn ghost" id="eLog">${T('seeLog')}</button><button class="btn gold" id="eAgain">${T('again')}</button>`}</div>`;
     pl.appendChild(card);
-    $('#eAgain').onclick = () => { location.hash = `#/play/${d.id}?from=0&t=${Date.now()}`; };
-    $('#eLog').onclick = () => logSheet(d, rewind);
+    $('#eAgain').onclick = () => { location.hash = `#/play/${d.id}?${watch ? 'watch=1&' : ''}from=0&t=${Date.now()}`; };
+    if ($('#eLog')) $('#eLog').onclick = () => logSheet(d, rewind);
+    if ($('#eLive')) $('#eLive').onclick = () => { location.hash = `#/play/${d.id}?live=1`; };
     $('.pcard', card).onclick = () => location.hash = '#/d/' + other.id;
   });
 
   const rewind = i => { const c = d.chapters[i]; [...answered].forEach(k => { if (k >= i) answered.delete(k); }); closeChoice(); waitTimer.forEach(clearTimeout); setMode('play'); const end = $('.endcard', pl); end && end.remove();
-    if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; v.pause(); openChoice(i); } else { v.currentTime = c.start; play(); } };
+    if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; v.pause(); openChoice(i); } else { v.currentTime = c.kind === 'rt' ? c.pause : c.start; play(); } };
   $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
   $('#rLike').onclick = () => $('#rLike').classList.toggle('on', toggleLike(d));
-  $('#rLog').onclick = () => { if (mode === 'play') { v.pause(); $('#paused').hidden = false; } logSheet(d, rewind); };
-  $('#rScenes').onclick = () => { if (mode === 'play') { v.pause(); $('#paused').hidden = false; } scenesSheet(d, rewind); };
+  $('#rLog').onclick = () => { if (mode === 'play') { v.pause(); if (!watch) $('#paused').hidden = false; } logSheet(d, rewind); };
+  $('#rScenes').onclick = () => { if (mode === 'play') { v.pause(); if (!watch) $('#paused').hidden = false; } scenesSheet(d, rewind); };
   $('#rCC').onclick = () => { S.settings.subs = S.settings.subs === 'en' ? 'both' : 'en'; save(); $('#rCC span').textContent = S.settings.subs === 'en' ? 'EN' : (lang() === 'zh' ? '中/EN' : 'EN/中'); };
 
   // 起点
   const startAt = () => { const c = d.chapters[from] || d.chapters[0];
     if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; curCh = -1; onTime(); if (mode !== 'choose') openChoice(from); }
-    else { v.currentTime = c.start; play(); } };
+    else { v.currentTime = c.kind === 'rt' ? c.pause : c.start; play(); } };
   if (v.readyState >= 1) startAt(); else v.addEventListener('loadedmetadata', startAt, {once: true});
   onLeave(() => { cancelAnimationFrame(raf); waitTimer.forEach(clearTimeout); v.pause(); v.removeAttribute('src'); v.load(); });
 }
@@ -689,8 +716,8 @@ function Me(view){
   $('#mLive').onclick = () => sheet(T('liveL'), '', `<p class="note" style="margin:10px 0 16px">${T('liveHelp')}</p><div class="field"><label>${Z('创作服务（演员表 / 钱包 / 自由剧场）', 'Studio (cast, wallet, free stage)')}</label><input data-live="studio" value="${esc(liveUrl('studio') || '')}" placeholder="https://…?k=…" spellcheck="false"></div>${D.map(d => `<div class="field"><label>${esc(L(d.title))}</label>${d.live_hint ? `<small>${esc(L(d.live_hint))}</small>` : ''}<input data-live="${d.id}" value="${esc(liveUrl(d.id) || '')}" placeholder="https://…" spellcheck="false"></div>`).join('')}<button class="btn gold" id="liveSave" style="width:100%">${T('saveBtn')}</button>`,
     (sh, close) => $('#liveSave', sh).onclick = () => { $$('[data-live]', sh).forEach(i => { const u = i.value.trim(); if (u) S.settings.live[i.dataset.live] = u; else delete S.settings.live[i.dataset.live]; }); save(); close(); toast(T('liveSaved')); route(); });
   $('#mAbout').onclick = () => sheet(T('aboutL'), '', lang() === 'zh'
-    ? `<div class="note"><p>这是「实时 AI 互动剧」聚合 APP 的网页预览版，目前收录 ${D.length} 部剧。</p><p><b>预览回放</b>：剧集里的每一幕都来自真实测试时的实时生成（Vivix W1，测试记录页公开托管）。你在选择点说什么都可以，等待动画之后播放的是测试时那一轮的真实结果；画面开头会注明当时的输入。</p><p><b>实时开玩</b>：在「实时链接」里填入某部剧的实时测试链接后，详情页会出现红色的实时按钮，在 APP 里直接打开那部剧自己的实时播放页。</p><p><b>加新剧</b>：在项目的 <code>catalog.json</code> 里追加一条（标题、简介、对应测试记录里的成片和测试组），运行 <code>python3 build_catalog.py</code> 后推送即可。</p><p><b>星票</b>：演员表、雇佣和生成功能用的是测试币，不涉及真钱。</p><p>数据更新于 ${esc(DATA.updated)}。</p></div>`
-    : `<div class="note"><p>A web preview of a home for live AI interactive dramas, with ${D.length} titles so far.</p><p><b>Preview replay</b>: every scene is a real live generation from testing (Vivix W1). Say anything at a choice point; after the wait animation you see the real result from that test round, with the original input noted on screen.</p><p><b>Play live</b>: paste a drama's live test link in Live links and a red live button appears on its page.</p><p><b>Adding a drama</b>: add one entry to <code>catalog.json</code>, run <code>python3 build_catalog.py</code>, and push.</p><p>Data updated ${esc(DATA.updated)}.</p></div>`);
+    ? `<div class="note"><p>这是「实时 AI 互动剧」聚合 APP 的网页预览版，目前收录 ${D.length} 部剧。</p><p><b>预览回放</b>：连续播放一位玩家的完整演绎（Vivix W1 真实生成），TA 每一幕说的话都显示在画面上，可以拖动、倍速。开放式剧集的「大家的演绎」只是参考，点开任意一幕都能看；真正由你开口，要用实时开玩。</p><p><b>实时开玩</b>：在「实时链接」里填入某部剧的实时测试链接后，详情页会出现红色的实时按钮，在 APP 里直接打开那部剧自己的实时播放页。</p><p><b>加新剧</b>：在项目的 <code>catalog.json</code> 里追加一条（标题、简介、对应测试记录里的成片和测试组），运行 <code>python3 build_catalog.py</code> 后推送即可。</p><p><b>星票</b>：演员表、雇佣和生成功能用的是测试币，不涉及真钱。</p><p>数据更新于 ${esc(DATA.updated)}。</p></div>`
+    : `<div class="note"><p>A web preview of a home for live AI interactive dramas, with ${D.length} titles so far.</p><p><b>Preview replay</b>: plays one player’s full take straight through (real Vivix W1 generations), with what they said on screen; you can scrub and change speed. On open dramas, How others played is just for reference: tap any scene to watch it. To speak yourself, use Play live.</p><p><b>Play live</b>: paste a drama's live test link in Live links and a red live button appears on its page.</p><p><b>Adding a drama</b>: add one entry to <code>catalog.json</code>, run <code>python3 build_catalog.py</code>, and push.</p><p>Data updated ${esc(DATA.updated)}.</p></div>`);
 }
 
 // ==================== 角色 · 演员表 · 自由剧场 · 星票 ====================

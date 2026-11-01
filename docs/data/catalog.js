@@ -589,6 +589,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-open.mp4",
+   "opening_poster": "openings/magnus-open.jpg",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 108.5,
@@ -1244,6 +1245,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-third.mp4",
+   "opening_poster": "openings/magnus-third.jpg",
    "rounds": 12,
    "episodes": 0,
    "wait_median": 96.5,
@@ -2269,6 +2271,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/rafael-third.mp4",
+   "opening_poster": "openings/rafael-third.jpg",
    "rounds": 13,
    "episodes": 0,
    "wait_median": 46.0,
@@ -5081,6 +5084,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/mii-open.mp4",
+   "opening_poster": "openings/mii-open.jpg",
    "rounds": 66,
    "episodes": 0,
    "wait_median": 24.1,
@@ -5822,6 +5826,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/magnus-preset.mp4",
+   "opening_poster": "openings/magnus-preset.jpg",
    "rounds": 8,
    "episodes": 7,
    "wait_median": 59.8,
@@ -6850,6 +6855,7 @@ window.CATALOG = {
     }
    ],
    "opening": "openings/mii.mp4",
+   "opening_poster": "openings/mii.jpg",
    "rounds": 11,
    "episodes": 10,
    "wait_median": 29.7,
