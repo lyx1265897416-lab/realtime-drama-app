@@ -43,5 +43,6 @@
 
 1. 先把新剧的测试结果进测试记录页（`realtime-drama-test-log` 的 `dramas/<id>.json`，要有完整成片 films 和测试组 groups）
 2. 在 `catalog.json` 的 `dramas` 里追加一条：`source.log` 写测试记录页的剧集 id，`source.film` / `source.group` 写成片标题和测试组标题里的一段文字
-3. `python3 build_catalog.py`（会提示字幕输入和卡片对不上的轮次）
-4. `./publish.sh "说明"`
+3. 封面放 `docs/covers/`（`cover_local`），再从封面裁一张方形脸部图放 `docs/covers/av/<id>.jpg`（`avatar`），圆形头像用它
+4. `python3 build_catalog.py`（会提示字幕输入和卡片对不上的轮次）
+5. `./publish.sh "说明"`

@@ -144,6 +144,7 @@ function scenesSheet(d, onPick){
   }).join('');
   return sheet(scenesName(d), esc(L(d.title)), body, (sh, close) => $$('.scene', sh).forEach(el => el.onclick = () => { close(); onPick(+el.dataset.i); }));
 }
+const faceOf = d => d.avatar || d.cover;  // 圆形头像用脸部裁切图，封面是竖图不能直接塞进圆里
 const epThumb = (d, c) => /Opening|开场/.test(c.label) ? `<div class="n play"><img src="${esc(d.cover)}" alt=""></div>` : `<div class="n ep">${esc(c.label.replace(/[^\d]/g, ''))}</div>`;
 const scenesName = d => T(d.kind === 'open' ? 'caseTab' : 'scenes');
 const saidName = d => T(d.kind === 'open' ? 'caseSaid' : 'youSaid');
@@ -268,7 +269,7 @@ function Feed(view){
       ${h ? `<div class="line">“${esc(h.en)}”</div>` : ''}
       <div class="tags">${d.tags.map(t => '#' + esc(L(t))).join(' ')}</div>
       <button class="btn gold" data-from="${c.i}" data-id="${d.id}">${ICON.play}${T(d.kind === 'open' ? 'watchScene' : 'fromHere')}</button></div>
-    <div class="rail"><button class="av-btn" data-go="${d.id}"><div class="av"><img src="${esc(d.cover)}" alt=""></div></button>
+    <div class="rail"><button class="av-btn" data-go="${d.id}"><div class="av"><img src="${esc(faceOf(d))}" alt=""></div></button>
       <button class="like${S.liked[d.id] ? ' on' : ''}" data-like="${d.id}">${ICON.heart}<span>${T('liked')}</span></button>
       <button class="save${S.saved[d.id] ? ' on' : ''}" data-save="${d.id}">${ICON.mark}<span>${T('saveL')}</span></button>
       <button data-scenes="${d.id}">${ICON.list}<span>${T('scenes')}</span></button>
@@ -303,9 +304,9 @@ function Detail(view, d){
       <h1>${esc(L(d.title))}</h1><div class="lead">${esc(L(d.lead))}</div>
       <div class="d-stats"><div><b>${d.kind === 'open' ? '∞' : d.episodes}</b><span>${d.kind === 'open' ? T('endless') : T('eps')}</span></div><div><b>${d.rounds}</b><span>${roundsName(d)}</span></div><div><b>${d.wait_median ? Math.round(d.wait_median) + 's' : '—'}</b><span>${T('waitMed')}</span></div></div>
       <p class="d-hook">${esc(L(d.hook))}</p><div class="d-tags">${d.tags.map(t => `<span>#${esc(L(t))}</span>`).join('')}</div></div>
+    ${d.kind === 'open' ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<div class="who"><small>${Z('出演身份', 'Playing as')}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></div><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
     <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${scenesName(d)}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
     <div class="d-pane" id="pane"></div>
-    ${d.kind === 'open' ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<span><small>${Z('出演身份', 'Playing as')}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></span><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
     <div class="d-cta">${liveNative(d) ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${d.kind === 'open' ? T('previewBtn') : resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
       <button class="btn ghost" id="saveBtn" title="${T('saveL')}" style="color:${S.saved[d.id] ? 'var(--gold)' : 'inherit'}">${ICON.mark}</button>
       ${!d.live && liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
@@ -336,14 +337,12 @@ function Detail(view, d){
       pane.innerHTML = items.length || (p && (p.live || []).length) ? `<div class="log">${liveLogHtml(d)}${items.map(x => { const c = d.chapters[x.i], h = hisLine(d, c); return `<div class="log-item"><small>${T('scene', {n: sceneNo(d, x.i)})}</small><div><span class="y">${esc(x.text)}</span></div>${h ? `<div class="h">“${esc(h.en)}”</div>${lang() === 'zh' && h.zh ? `<div class="h2">${esc(h.zh)}</div>` : ''}` : ''}<button data-i="${x.i}">↺ ${T('backTo')}</button></div>`; }).join('')}</div>` : `<div class="empty">${T('noLog')}</div>`;
       $$('.log-item button', pane).forEach(b => b.onclick = () => location.hash = `#/play/${d.id}?from=${b.dataset.i}`);
     } else {
-      pane.innerHTML = `<div class="charcard"><img src="${esc(d.cover)}" alt=""><div><b>${esc(L(d.lead))}</b><p>${esc(L(d.hook))}</p></div></div>
-        <dl class="kv"><dt>${T('pov')}</dt><dd>${T(d.pov)}</dd><dt>${T('gen')}</dt><dd>${esc(d.film.mode.replace('MD-C · ', ''))} · Vivix W1</dd><dt>${T('tested')}</dt><dd>${esc(d.tested)}</dd>
-        <dt>${T('liveSt')}</dt><dd>${liveUrl(d.id) ? T('liveOn') : T('liveOff')}</dd></dl>
-        <div class="row" style="margin-top:18px;flex-wrap:wrap"><button class="btn ghost" id="watchBtn" style="height:40px;font-size:13.5px">${T('watch')}</button>
-        <button class="btn ghost" id="liveBtn2" style="height:40px;font-size:13.5px">${ICON.live}${T('live')}</button>
-        ${d.series_url ? `<a class="btn ghost" href="${esc(d.series_url)}" target="_blank" rel="noopener" style="height:40px;font-size:13.5px">${T('series')} ↗</a>` : ''}</div>`;
-      $('#watchBtn').onclick = () => location.hash = `#/play/${d.id}?watch=1`;
-      $('#liveBtn2').onclick = () => liveNative(d) ? location.hash = `#/play/${d.id}?live=1` : liveUrl(d.id) ? location.hash = '#/live/' + d.id : toast(T('liveNone'));
+      const rows = [[T('pov'), T(d.pov)], [T('gen'), d.film.mode.replace('MD-C · ', '') + ' · Vivix W1'], [T('tested'), d.tested], [T('liveSt'), liveUrl(d.id) ? T('liveOn') : T('liveOff')]];
+      const links = (d.kind === 'open' ? '' : `<button id="watchBtn"><span>${T('watch')}</span><i>›</i></button>`) + (d.series_url ? `<a href="${esc(d.series_url)}" target="_blank" rel="noopener"><span>${T('series')}</span><i>↗</i></a>` : '');
+      pane.innerHTML = `<div class="charcard"><img class="av" src="${esc(faceOf(d))}" alt=""><div><b>${esc(L(d.lead))}</b><span>${esc(L(d.title))}</span></div></div>
+        <dl class="kv">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+        ${links ? `<div class="kv links">${links}</div>` : ''}`;
+      if ($('#watchBtn')) $('#watchBtn').onclick = () => location.hash = `#/play/${d.id}?watch=1`;
     }
   };
   $('#dtabs').onclick = e => { const b = e.target.closest('button'); if (b) show(b.dataset.t); };
@@ -874,8 +873,8 @@ function pickDrama(a){
   const live = D.filter(d => liveNative(d)), others = D.filter(d => !liveNative(d) && d.kind === 'open');
   sheet(Z('带 TA 去哪', 'Where to'), esc(a.name), `<div class="plist">
     <button class="prow" data-stage>${avatar(a)}<span><b>🎭 ${Z('自由剧场', 'Free stage')}</b><small>${Z('自己写开场，可以再雇别的演员搭戏', 'Your own premise, hire co-stars')}</small></span></button>
-    ${live.map(d => `<button class="prow" data-d="${d.id}"><img class="av" src="${esc(d.cover)}" alt=""><span><b>${esc(L(d.title))} <span class="pill live">LIVE</span></b><small>${Z('角色卡交给导演层：名字、身份、性格按你的设定演；画面外形仍是剧里原来的', 'Card goes to the director; visuals stay as in the drama')}</small></span></button>`).join('')}
-    ${others.map(d => `<button class="prow" data-d="${d.id}" data-preview><img class="av" src="${esc(d.cover)}" alt=""><span><b>${esc(L(d.title))}</b><small>${Z('预览回放：只换称呼，剧情不会按角色变', 'Preview: name only')}</small></span></button>`).join('')}</div>`,
+    ${live.map(d => `<button class="prow" data-d="${d.id}"><img class="av" src="${esc(faceOf(d))}" alt=""><span><b>${esc(L(d.title))} <span class="pill live">LIVE</span></b><small>${Z('角色卡交给导演层：名字、身份、性格按你的设定演；画面外形仍是剧里原来的', 'Card goes to the director; visuals stay as in the drama')}</small></span></button>`).join('')}
+    ${others.map(d => `<button class="prow" data-d="${d.id}" data-preview><img class="av" src="${esc(faceOf(d))}" alt=""><span><b>${esc(L(d.title))}</b><small>${Z('预览回放：只换称呼，剧情不会按角色变', 'Preview: name only')}</small></span></button>`).join('')}</div>`,
     (sh, close) => {
       const ensure = () => a.mine || !a.price ? Promise.resolve() : sapi('/api/hire', {actor: {id: a.id}, purpose: 'lead'}).then(j => toast(Z(`已付片酬 ★${j.paid}`, `Paid ★${j.paid}`)));
       $('[data-stage]', sh).onclick = () => { close(); location.hash = '#/stage/new?persona=' + encodeURIComponent(a.id); };

@@ -3,6 +3,7 @@ window.CATALOG = {
  "dramas": [
   {
    "id": "magnus-open",
+   "avatar": "covers/av/magnus-open.jpg",
    "genre": "romance",
    "name": "Magnus",
    "title": {
@@ -596,6 +597,7 @@ window.CATALOG = {
   },
   {
    "id": "magnus-third",
+   "avatar": "covers/av/magnus-third.jpg",
    "genre": "romance",
    "name": "Magnus",
    "title": {
@@ -1251,6 +1253,7 @@ window.CATALOG = {
   },
   {
    "id": "rafael-third",
+   "avatar": "covers/av/rafael-third.jpg",
    "genre": "romance",
    "name": "Rafael",
    "title": {
@@ -2276,6 +2279,7 @@ window.CATALOG = {
   },
   {
    "id": "mii-open",
+   "avatar": "covers/av/mii-open.jpg",
    "genre": "cozy",
    "name": "Mii",
    "name_zh": "咪",
@@ -5088,6 +5092,7 @@ window.CATALOG = {
   },
   {
    "id": "magnus-preset",
+   "avatar": "covers/av/magnus-preset.jpg",
    "genre": "romance",
    "name": "Magnus",
    "title": {
@@ -5829,6 +5834,7 @@ window.CATALOG = {
   },
   {
    "id": "mii",
+   "avatar": "covers/av/mii.jpg",
    "genre": "cozy",
    "name": "Mii",
    "name_zh": "咪",

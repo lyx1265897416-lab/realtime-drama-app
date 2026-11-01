@@ -177,12 +177,13 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .d-stats{display:flex;margin:18px 0 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .d-stats div{flex:1;text-align:center}
 .d-stats div+div{border-left:1px solid var(--line)}
-.d-stats b{display:block;font-size:18px;font-weight:650}
-.d-stats span{font-size:11.5px;color:var(--mute)}
+.d-stats b{display:block;height:24px;font-size:18px;line-height:24px;font-weight:650}
+.d-stats span{display:block;margin-top:2px;font-size:11.5px;line-height:16px;color:var(--mute)}
 .d-hook{margin:16px 0 0;font-size:14.5px;line-height:1.7;color:#e3d9e6}
 .d-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .d-tags span{font-size:12px;color:var(--mute);padding:4px 10px;border-radius:12px;border:1px solid var(--line)}
-.d-cta{position:sticky;bottom:calc(var(--safe-b) + 14px);z-index:6;display:flex;gap:10px;padding:14px 20px 0;margin-top:6px}
+.d-cta{position:sticky;bottom:0;z-index:6;display:flex;gap:10px;padding:28px 20px calc(var(--safe-b) + 14px);margin-top:4px;background:linear-gradient(180deg,rgba(13,10,16,0),var(--bg) 28px);pointer-events:none}
+.d-cta>*{pointer-events:auto}
 .d-cta .btn{flex:1}
 .d-cta .btn.ghost{flex:none;width:48px;padding:0}
 .tabsw{display:flex;gap:22px;padding:0 20px;margin-top:26px;border-bottom:1px solid var(--line)}
@@ -200,13 +201,19 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .scene p{margin:5px 0 0;font-size:12.5px;color:var(--mute);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .scene p em{font-style:normal;color:var(--ink)}
 .scene.done b::after{content:"✓";color:var(--gold);font-size:12px;margin-left:auto}
-.charcard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:18px;background:var(--card)}
-.charcard img{width:78px;height:78px;border-radius:50%;object-fit:cover;object-position:top}
-.charcard b{display:block;font-size:16px}
-.charcard p{margin:5px 0 0;font-size:12.5px;color:var(--mute);line-height:1.5}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:13px;margin-top:16px}
-.kv dt{color:var(--mute)}
-.kv dd{margin:0}
+.charcard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.charcard .av{width:64px;height:64px;object-position:center}
+.charcard div{flex:1;min-width:0}
+.charcard b{display:block;font-size:15.5px;font-weight:650;line-height:1.35}
+.charcard span{display:block;margin-top:4px;font-size:12.5px;line-height:1.45;color:var(--mute)}
+.kv{margin:12px 0 0;padding:0 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);font-size:13.5px;line-height:1.4}
+.kv div{display:flex;justify-content:space-between;gap:16px;padding:13px 0}
+.kv div+div{border-top:1px solid var(--line)}
+.kv dt{flex:none;color:var(--mute)}
+.kv dd{margin:0;min-width:0;text-align:right}
+.kv.links>*{display:flex;justify-content:space-between;align-items:center;width:100%;padding:13px 0;text-align:left}
+.kv.links>*+*{border-top:1px solid var(--line)}
+.kv.links i{font-style:normal;color:var(--gold)}
 
 /* 播放器 */
 .player{position:absolute;inset:0;background:#000;overflow:hidden}
@@ -402,11 +409,11 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .prow b{display:block;font-size:14.5px}
 .prow small{display:block;font-size:12px;color:var(--mute);margin-top:2px;line-height:1.4}
 .prow.add{color:var(--gold);font-size:20px}
-.castrow{display:flex;align-items:center;gap:12px;margin:18px 20px 0;padding:10px 14px;border-radius:16px;background:var(--card);cursor:pointer}
-.castrow span{flex:1}
-.castrow small{display:block;font-size:11px;color:var(--mute)}
-.castrow b{font-size:14.5px}
-.castrow em{font-style:normal;font-size:12.5px;color:var(--gold)}
+.castrow{position:relative;display:flex;align-items:center;gap:12px;margin:16px 20px 0;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);cursor:pointer}
+.castrow .who{flex:1;min-width:0}
+.castrow small{display:block;margin-bottom:2px;font-size:11.5px;line-height:16px;color:var(--mute)}
+.castrow b{display:block;font-size:14.5px;font-weight:650;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.castrow em{flex:none;font-style:normal;font-size:13px;color:var(--gold)}
 .asme{display:flex;align-items:center;gap:6px;flex:none;font-size:11.5px;padding:3px 9px 3px 3px;border-radius:14px;background:rgba(0,0,0,.4)}
 .asme .av{width:22px;height:22px}
 .castbanner{display:flex;align-items:center;gap:14px;margin:0 18px;padding:14px;border-radius:20px;background:linear-gradient(120deg,#4a2a45,#20172a);border:1px solid var(--line);cursor:pointer}
