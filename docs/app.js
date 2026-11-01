@@ -593,9 +593,9 @@ function LivePlayer(view, d){
       if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u) load(V[i], u); });  // 一到就预载
       if (r && Array.isArray(r.lines)) r.lines.forEach(l => l.audio && preAudio(l.audio));  // 咪的配音也一出来就预载
       await new Promise(res => setTimeout(res, LOCAL ? 500 : 1200)); } })();
-    const M = LOCAL ? 1.5 : 3.0;  // 轮询、隧道延迟和第 2 段缓冲的余量（秒）
+    const M = LOCAL ? 1.5 : 2.0;  // 轮询、隧道延迟和第 2 段缓冲的余量（秒）
     const seg1Ok = () => r && r.segs && r.segs[0] && r.segs[0].url && V[0].dataset.src === abs(r.segs[0].url) && V[0].readyState >= 3;
-    const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = V[0].duration || r.segs[0].dur || 5; return s2.eta_left != null && s2.eta_left <= d1 - M - (s2.dur >= 15 ? 1.5 : 0); };
+    const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = V[0].duration || r.segs[0].dur || 5; return s2.eta_left != null && s2.eta_left <= d1 - M; };
     const dub = LV.lines === 'dub'; let vidAt = 0;
     const aud = k => !(r.lines || []).some(l => l.seg === k && !l.audio && !l.audio_err);
     const voiced = () => !dub || aud(1) || (vidAt && Date.now() - vidAt > 4000);  // 只等第 1 段的配音，第 2 段的到了会自动用上
