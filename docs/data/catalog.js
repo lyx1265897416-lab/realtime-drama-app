@@ -641,6 +641,7 @@ window.CATALOG = {
     "en": "Public relay (third person)"
    },
    "live": {
+    "mode": "auto",
     "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ec51421aed9f46aa9f6d60b4134629bc/OPEN.mp4",
     "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/913679e6f19346218debbe6398571a46/IDLE0.mp4",
     "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
@@ -668,8 +669,7 @@ window.CATALOG = {
       "en": "Where did you come from?",
       "who": "Magnus"
      }
-    ],
-    "mode": "auto"
+    ]
    },
    "cover": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/v/magnus-third-L2111588e6.jpg",
    "film": {
@@ -2322,6 +2322,7 @@ window.CATALOG = {
     "en": "Public tunnel (Mii open)"
    },
    "live": {
+    "mode": "auto",
     "open": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/OPEN.mp4",
     "idle": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/IDLE0.mp4",
     "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
@@ -2342,8 +2343,7 @@ window.CATALOG = {
       "en": "Oh, right. It's my day off. I forgot the alarm.",
       "who": "you"
      }
-    ],
-    "mode": "auto"
+    ]
    },
    "cover": "covers/mii-open.jpg",
    "film": {
@@ -5099,8 +5099,8 @@ window.CATALOG = {
     "en": "Magnus · Werewolf Alpha"
    },
    "hook": {
-    "zh": "7 集预制剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
-    "en": "7 pre-made episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
+    "zh": "7 集剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
+    "en": "7 episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
    },
    "kind": "preset",
    "pov": "first",
@@ -5841,8 +5841,8 @@ window.CATALOG = {
     "en": "Mii · a 3-month-old kitten"
    },
    "hook": {
-    "zh": "10 集预制日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
-    "en": "10 pre-made episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
+    "zh": "10 集日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
+    "en": "10 episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
    },
    "kind": "preset",
    "pov": "first",
