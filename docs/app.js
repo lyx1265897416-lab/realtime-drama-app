@@ -608,7 +608,7 @@ function EmbedPlayer(view, d){
   view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
+  $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
 }
 function LivePlayer(view, d){
   if (d.live.embed) return EmbedPlayer(view, d);
