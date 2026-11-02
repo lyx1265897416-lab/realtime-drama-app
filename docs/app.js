@@ -217,6 +217,8 @@ function bufferUI(pl){
 function shareLink(d){ const u = location.origin + location.pathname + '#/d/' + d.id; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast(T('copied')), () => toast(u)); }
 function toggleSave(d){ S.saved[d.id] = S.saved[d.id] ? 0 : Date.now(); if (!S.saved[d.id]) delete S.saved[d.id]; save(); toast(T(S.saved[d.id] ? 'savedT' : 'unsavedT')); return !!S.saved[d.id]; }
 function toggleLike(d){ S.liked[d.id] = !S.liked[d.id]; if (!S.liked[d.id]) delete S.liked[d.id]; save(); return !!S.liked[d.id]; }
+const FEED_OPENING = new Set(['mii-open']);  // 推荐页第一张放开场（带声音），不放某一幕
+const feedFirst = d => FEED_OPENING.has(d.id) ? Object.assign({i: 0, opening: true, clip: d.live.open, poster: d.cover}, d.chapters[0]) : highlight(d);
 const highlight = d => { const r = rts(d); const want = d.cover_round ? r[d.cover_round - 1] : r[Math.min(1, r.length - 1)]; return want || r[0]; };
 
 // ---------- 底部弹层 ----------
@@ -358,13 +360,13 @@ function pcard(d){
 function Feed(view){
   document.body.classList.add('noscroll', 'feed-on');
   const items = [];
-  const per = D.map(d => { const r = rts(d); const h = highlight(d); const pick = [h, r[Math.floor(r.length * .6)]].filter((x, i, a) => x && a.indexOf(x) === i); return pick.map(c => ({d, c})); });
+  const per = D.map(d => { const r = rts(d); const h = feedFirst(d); const pick = [h, r[Math.floor(r.length * .6)]].filter((x, i, a) => x && a.indexOf(x) === i); return pick.map(c => ({d, c})); });
   for (let i = 0; i < 3; i++) per.forEach(list => list[i] && items.push(list[i]));
   let muted = false;  // 默认开声音；浏览器不让有声自动播放时先静音播，第一次点画面就打开
   view.innerHTML = `<div class="feed" id="feed">${items.map(({d, c}, k) => { const h = hisLine(d, c);
     return `<section class="fitem" data-k="${k}"><img decoding="async" src="${esc(c.poster)}" alt=""${k > 1 ? ' loading="lazy"' : ''}><video playsinline loop muted preload="none" data-src="${esc(c.clip)}"></video>
     <div class="f-info"><div class="who">@${esc(L(d.title))}</div>
-      <div class="said"><em>${d.kind === 'open' ? T('caseSaid') : T('you')}</em>${esc(L(c.said))}</div>
+      ${c.said ? `<div class="said"><em>${d.kind === 'open' ? T('caseSaid') : T('you')}</em>${esc(L(c.said))}</div>` : ''}
       ${h ? `<div class="line">“${esc(h.en)}”</div>` : ''}
       <div class="tags">${d.tags.map(t => '#' + esc(L(t))).join(' ')}</div>
       <button class="btn gold" data-from="${c.i}" data-id="${d.id}">${ICON.play}${T(d.kind === 'open' ? 'watchScene' : 'fromHere')}</button></div>
