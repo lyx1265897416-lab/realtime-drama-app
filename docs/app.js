@@ -143,12 +143,24 @@ function liveUnlock(d, done){
     (sh, close) => { $('#liveLinkOk', sh).onclick = () => { if (applyLiveLink($('#liveLink', sh).value)){ close(); toast(T('liveSaved')); done && done(); } else toast(T('liveBadLink')); }; });
 }
 // 播放卡住（网络跟不上）时转圈，并记下卡了几次、多久
-// 进详情页就先取成片的索引和开头：GitHub 上一次请求要等 1–2 秒，长片的索引有 1MB，等点了播放再取要好几秒
-let warmV = null, warmT = 0;
-const stopWarm = () => { clearTimeout(warmT); if (warmV){ warmV.removeAttribute('src'); warmV.load(); warmV = null; } };
-function prewarmFilm(d){
-  stopWarm(); if ((navigator.connection || {}).saveData) return;
-  warmT = setTimeout(() => { warmV = document.createElement('video'); warmV.muted = true; warmV.preload = 'metadata'; warmV.src = d.film.video; }, 700);
+// 成片分段播放（docs/film/，build_catalog.py 生成）：一次只取几秒。整部 mp4 浏览器会尽量往前下载，几 MB 压在 HTTP/2 连接上，代理网络下离开后页面和下一部都要排队十几秒
+let hlsP = null, warmT = 0;
+const loadHls = () => hlsP = hlsP || new Promise((res, rej) => { const el = document.createElement('script'); el.src = 'vendor/hls.light.min.js'; el.onload = () => res(window.Hls); el.onerror = rej; document.head.appendChild(el); });
+function attachFilm(v, d, start){
+  let h = null, dead = false;
+  const plain = () => { if (!dead){ v.src = d.film.video; v.load(); } };
+  const native = () => { v.addEventListener('error', plain, {once: true}); v.src = d.film.hls; v.load(); };  // iPhone 没有 MSE，系统自己按分段播
+  if (!d.film.hls) plain();
+  else if (!window.MediaSource && !window.ManagedMediaSource) native();
+  else loadHls().then(Hls => { if (dead) return; if (!Hls.isSupported()) return native();
+    h = new Hls({maxBufferLength: 20, maxMaxBufferLength: 30, backBufferLength: 20, startPosition: start});
+    h.on(Hls.Events.ERROR, (_, e) => { if (e.fatal){ h.destroy(); h = null; plain(); } });  // 分段出错退回整部 mp4
+    h.loadSource(d.film.hls); h.attachMedia(v); }).catch(plain);
+  return () => { dead = true; if (h){ h.destroy(); h = null; } };
+}
+function prewarmFilm(d){  // 进详情页先把播放组件和分段表取好，点播放不用再等这两个文件
+  clearTimeout(warmT); if ((navigator.connection || {}).saveData || !d.film.hls) return;
+  warmT = setTimeout(() => { if (window.MediaSource || window.ManagedMediaSource) loadHls().catch(() => {}); fetch(d.film.hls).catch(() => {}); }, 700);
 }
 function bufferUI(pl){
   const el = document.createElement('div'); el.className = 'p-buf'; el.hidden = true; pl.appendChild(el);
@@ -406,7 +418,7 @@ function Player(view, d, q){
   const answered = new Set();  // 这一次播放里已经开过口的幕
   const startCh = d.chapters[from] || d.chapters[0];
   view.innerHTML = `<div class="player" id="pl">
-    <video id="v" playsinline preload="auto" poster="${esc(startCh.kind === 'rt' && startCh.poster ? startCh.poster : d.cover)}" src="${esc(d.film.video)}"></video>
+    <video id="v" playsinline preload="auto" poster="${esc(startCh.kind === 'rt' && startCh.poster ? startCh.poster : d.cover)}"></video>
     <div class="p-shade"></div><div class="p-tap" id="tap"></div>
     <div class="p-paused" id="paused" hidden>${ICON.play}</div>
     <div class="p-top"><div class="segbar" id="seg">${d.chapters.map(c => `<i class="${c.kind}" style="flex:${(c.end - c.start).toFixed(1)}"><b></b></i>`).join('')}</div>
@@ -422,6 +434,7 @@ function Player(view, d, q){
     <div class="choice" id="choice"></div></div>`;
   const pl = $('#pl'), v = $('#v'), subs = $('#subs'), choice = $('#choice'), wait = $('#wait');
   const bars = $$('#seg i b'), chLabel = $('#chLabel'); bufferUI(pl);
+  const detachFilm = attachFilm(v, d, startCh.kind === 'rt' ? startCh.pause : startCh.start);
   let mode = 'play', curCh = -1, barNow = '', waitTimer = [];
   const setMode = m => { mode = m; pl.classList.toggle('choosing', m === 'choose'); pl.classList.toggle('waiting', m === 'wait'); };
   const chAt = t => { let k = 0; d.chapters.forEach((c, i) => { if (t >= (c.kind === 'rt' ? Math.min(c.start, c.pause) : c.start) - .01) k = i; }); return k; };  // 输入卡算这一幕的开头
@@ -536,14 +549,13 @@ function Player(view, d, q){
   const startAt = () => { const c = d.chapters[from] || d.chapters[0];
     if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; curCh = -1; onTime(); if (mode !== 'choose') openChoice(from); }
     else { v.currentTime = c.kind === 'rt' ? c.pause : c.start; play(); } };
-  clearTimeout(warmT); v.addEventListener('playing', stopWarm, {once: true});  // 播起来再释放预取，数据不白取
   if (v.readyState >= 1) startAt(); else v.addEventListener('loadedmetadata', startAt, {once: true});
-  onLeave(() => { cancelAnimationFrame(raf); waitTimer.forEach(clearTimeout); v.pause(); v.removeAttribute('src'); v.load(); });
+  onLeave(() => { cancelAnimationFrame(raf); waitTimer.forEach(clearTimeout); detachFilm(); v.pause(); v.removeAttribute('src'); v.load(); });
 }
 
 // ---------- 实时播放器（直接调这部剧的中转：开场 → 选项/输入 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播） ----------
 function LivePlayer(view, d){
-  document.body.classList.add('notabs', 'noscroll'); stopWarm();
+  document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), LV = d.live, K = C.k, MODE = LV.mode || '5+10'; let API = C.api;
   const modeTxt = m => m && m !== 'auto' ? ' · ' + m.replace('+', 's + ') + 's' : '';
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(new URL(API).hostname);

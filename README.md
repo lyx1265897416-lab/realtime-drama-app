@@ -32,6 +32,7 @@
 - 视频上面不用 filter、backdrop-filter：压暗用 `.p-shade::after` 的透明度
 - 列表和卡片用小图：幕表 `docs/thumbs/`、封面 `docs/covers/thumb/`（`build_catalog.py` 生成），演员 `docs/actors/thumb/`（演员表改了跑 `tools/actor_thumbs.py`）
 - 推荐流只保留当前和前后各一条的视频；轮播滚出屏幕就暂停
+- 回放成片走分段（`docs/film/<id>/`，单文件 + 字节范围，`build_catalog.py` 从测试记录页成片转封装，不重新编码；Chrome 用 `docs/vendor/hls.light.min.js`，iPhone 用系统播放器，出错退回整部 mp4）。原因：这台 Mac 走 Shadowrocket，到 GitHub 只有约 1 Mbps，整站共用一条 HTTP/2 连接，整部 mp4 的数据压在连接上时离开页面要排队十几秒。不要再把长片直接放 `<video src>`；单个文件尽量不超过几 MB（Rafael 轮播片段因此只留前 30 秒）
 - `docs/sw.js` 缓存同源的图片和脚本，页面本身先走网络，所以发布后打开就是新版；字体放 `docs/fonts/`，不依赖 Google
 
 ## 预览回放与实时开玩

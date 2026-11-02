@@ -4,7 +4,7 @@ self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
   const r = e.request, u = new URL(r.url);
-  if (r.method !== 'GET' || u.origin !== location.origin || r.headers.has('range') || /\.(mp4|mp3)$/.test(u.pathname) || u.pathname.endsWith('relays.json') || u.pathname.endsWith('sw.js')) return;
+  if (r.method !== 'GET' || u.origin !== location.origin || r.headers.has('range') || /\.(mp4|mp3|m4s)$/.test(u.pathname) || u.pathname.endsWith('relays.json') || u.pathname.endsWith('sw.js')) return;
   if (r.mode === 'navigate'){
     e.respondWith(fetch(r).then(x => { if (x.ok){ const copy = x.clone(); caches.open(CACHE).then(c => c.put('page', copy)); } return x; }).catch(() => caches.match('page')));
     return;

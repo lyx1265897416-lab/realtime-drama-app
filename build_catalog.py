@@ -144,7 +144,7 @@ def build(d, log):
     out.update({
         'cover': cover,
         'thumb': thumb(local_cover, f"covers/thumb/{d['id']}.jpg", 360) if local_cover else thumb(LOG / cover.replace(BASE, ''), f"covers/thumb/{d['id']}.jpg", 360),
-        'film': {'video': BASE + film['video'], 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
+        'film': {'video': BASE + film['video'], 'hls': hls(d, film), 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
         'cues': [speaker(rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}), d) for c in cues if not c['input']],
         'chapters': chapters,
         'opening': cut_opening(d, film, rts[0]['pause']),
@@ -166,6 +166,16 @@ def thumb(src, rel, width):
         out.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run([str(HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'), '-y', '-loglevel', 'error', '-i', str(src), '-vf', f'scale={width}:-2:flags=lanczos', '-q:v', '5', str(out)], check=True)
     return rel
+
+
+def hls(d, film):
+    """成片转成分段（不重新编码，单文件 + 字节范围）：一次只取几秒。整部 mp4 会把几 MB 数据压在 HTTP/2 连接上，代理网络下离开后其他请求要排队十几秒。"""
+    src, out = LOG / film['video'], HERE / 'docs' / 'film' / d['id']
+    if not (out / 'i.m3u8').exists() or (out / 'i.m3u8').stat().st_mtime < src.stat().st_mtime:
+        out.mkdir(parents=True, exist_ok=True)
+        subprocess.run([str(HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'), '-y', '-loglevel', 'error', '-i', str(src), '-c', 'copy', '-f', 'hls', '-hls_time', '4', '-hls_playlist_type', 'vod',
+                        '-hls_segment_type', 'fmp4', '-hls_flags', 'single_file+independent_segments', '-hls_fmp4_init_filename', 'v.m4s', '-hls_segment_filename', str(out / 'v.m4s'), str(out / 'i.m3u8')], check=True)
+    return f"film/{d['id']}/i.m3u8"
 
 
 def cut_opening(d, film, end):
