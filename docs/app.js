@@ -143,6 +143,13 @@ function liveUnlock(d, done){
     (sh, close) => { $('#liveLinkOk', sh).onclick = () => { if (applyLiveLink($('#liveLink', sh).value)){ close(); toast(T('liveSaved')); done && done(); } else toast(T('liveBadLink')); }; });
 }
 // 播放卡住（网络跟不上）时转圈，并记下卡了几次、多久
+// 进详情页就先取成片的索引和开头：GitHub 上一次请求要等 1–2 秒，长片的索引有 1MB，等点了播放再取要好几秒
+let warmV = null, warmT = 0;
+const stopWarm = () => { clearTimeout(warmT); if (warmV){ warmV.removeAttribute('src'); warmV.load(); warmV = null; } };
+function prewarmFilm(d){
+  stopWarm(); if ((navigator.connection || {}).saveData) return;
+  warmT = setTimeout(() => { warmV = document.createElement('video'); warmV.muted = true; warmV.preload = 'metadata'; warmV.src = d.film.video; }, 700);
+}
 function bufferUI(pl){
   const el = document.createElement('div'); el.className = 'p-buf'; el.hidden = true; pl.appendChild(el);
   const st = {n: 0, sec: 0}; let t = 0, at = 0;
@@ -363,6 +370,7 @@ function Detail(view, d){
       location.hash = `#/play/${d.id}?live=1`; };
     check();
   }
+  prewarmFilm(d);
   const pane = $('#pane');
   const show = t => {
     $$('#dtabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
@@ -528,13 +536,14 @@ function Player(view, d, q){
   const startAt = () => { const c = d.chapters[from] || d.chapters[0];
     if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; curCh = -1; onTime(); if (mode !== 'choose') openChoice(from); }
     else { v.currentTime = c.kind === 'rt' ? c.pause : c.start; play(); } };
+  clearTimeout(warmT); v.addEventListener('playing', stopWarm, {once: true});  // 播起来再释放预取，数据不白取
   if (v.readyState >= 1) startAt(); else v.addEventListener('loadedmetadata', startAt, {once: true});
   onLeave(() => { cancelAnimationFrame(raf); waitTimer.forEach(clearTimeout); v.pause(); v.removeAttribute('src'); v.load(); });
 }
 
 // ---------- 实时播放器（直接调这部剧的中转：开场 → 选项/输入 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播） ----------
 function LivePlayer(view, d){
-  document.body.classList.add('notabs', 'noscroll');
+  document.body.classList.add('notabs', 'noscroll'); stopWarm();
   const C = liveCfg(d.id), LV = d.live, K = C.k, MODE = LV.mode || '5+10'; let API = C.api;
   const modeTxt = m => m && m !== 'auto' ? ' · ' + m.replace('+', 's + ') + 's' : '';
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(new URL(API).hostname);
