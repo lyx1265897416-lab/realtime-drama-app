@@ -576,3 +576,6 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .cs-two small{grid-column:1/3;font-size:12px;color:var(--mute)}
 .cs-task{display:block;margin-top:5px;font-size:12px;color:#58d68d}
 .rail .cs-n{font-style:normal}
+/* 嵌入式实时页（别信这段直播）：整页 iframe，返回键浮在它的左上角 */
+.embed-play{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.embed-back{position:absolute;z-index:3;left:14px;top:calc(12px + var(--safe-t));background:rgba(0,0,0,.42)}

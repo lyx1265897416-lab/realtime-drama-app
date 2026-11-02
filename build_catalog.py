@@ -94,7 +94,7 @@ def build(d, log):
     if d.get('live', {}).get('case_dir'):  # 悬疑剧：证据卡、来源标签、转播小窗由播放器叠加，数据取自这部剧自己的页面
         cd = (HERE / d['live'].pop('case_dir')).resolve(); ui = json.loads((cd / 'open_ui.json').read_text())
         d['live']['open_cues'] = ui['cues']
-        d['live']['case'] = {'src': ui['src'], 'msgs': ui['msgs'], 'evidence': ui['evidence'], 'cards': json.loads((cd / 'evidence.json').read_text()), 'clip': d['live'].pop('case_clip')}
+        d['live']['case'] = {'src': ui['src'], 'msgs': ui['msgs'], 'evidence': ui['evidence'], 'cards': json.loads((cd / 'evidence.json').read_text())['evidence'], 'clip': d['live'].pop('case_clip')}
     src = log[d['source']['log']]
     film = pick(src['films'], d['source']['film'])
     group = pick(src['groups'], d['source']['group'])

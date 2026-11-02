@@ -1,639 +1,640 @@
 {
-  "media_base": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/",
-  "log_dir": "../realtime-drama-test-log",
-  "_说明": "加新剧：在 dramas 里追加一条，跑 python3 build_catalog.py。source.log = 测试记录页的剧集 id，film / group = 用哪一条完整成片和哪一组测试卡片（标题里包含的文字即可）。",
-  "dramas": [
+ "media_base": "https://lyx1265897416-lab.github.io/realtime-drama-test-log/",
+ "log_dir": "../realtime-drama-test-log",
+ "_说明": "加新剧：在 dramas 里追加一条，跑 python3 build_catalog.py。source.log = 测试记录页的剧集 id，film / group = 用哪一条完整成片和哪一组测试卡片（标题里包含的文字即可）。",
+ "dramas": [
+  {
+   "id": "magnus-open",
+   "avatar": "covers/av/magnus-open.jpg",
+   "genre": "romance",
+   "name": "Magnus",
+   "title": {
+    "zh": "与狼为伍 · 开放式",
+    "en": "Running with Wolves: Open Live"
+   },
+   "lead": {
+    "zh": "Magnus · 狼人 Alpha",
+    "en": "Magnus · Werewolf Alpha"
+   },
+   "hook": {
+    "zh": "十分钟后他就要订婚了，却在车库扣住了你的手腕。之后每一幕，都由你说的话实时生成。",
+    "en": "He gets engaged in ten minutes, yet he's holding your wrist in the garage. Every scene after this is generated live from what you say."
+   },
+   "kind": "open",
+   "pov": "first",
+   "tags": [
     {
-      "id": "magnus-open",
-      "avatar": "covers/av/magnus-open.jpg",
-      "genre": "romance",
-      "name": "Magnus",
-      "title": {
-        "zh": "与狼为伍 · 开放式",
-        "en": "Running with Wolves: Open Live"
-      },
-      "lead": {
-        "zh": "Magnus · 狼人 Alpha",
-        "en": "Magnus · Werewolf Alpha"
-      },
-      "hook": {
-        "zh": "十分钟后他就要订婚了，却在车库扣住了你的手腕。之后每一幕，都由你说的话实时生成。",
-        "en": "He gets engaged in ten minutes, yet he's holding your wrist in the garage. Every scene after this is generated live from what you say."
-      },
-      "kind": "open",
-      "pov": "first",
-      "tags": [
-        {
-          "zh": "狼人",
-          "en": "Werewolf"
-        },
-        {
-          "zh": "命定之番",
-          "en": "Fated mate"
-        },
-        {
-          "zh": "订婚前夜",
-          "en": "Engagement night"
-        },
-        {
-          "zh": "第一视角",
-          "en": "First person"
-        }
-      ],
-      "accent": "#c9a227",
-      "cover_round": 7,
-      "cover_local": "covers/magnus-open.jpg",
-      "badge": {
-        "zh": "热门",
-        "en": "Hot"
-      },
-      "source": {
-        "log": "magnus-open",
-        "film": "MD-C · 完整成片 · 5+10",
-        "group": "MD-C · 5+10"
-      },
-      "live_hint": {
-        "zh": "本机中转 8890 / 8897（开放式第一视角）",
-        "en": "Local relay (open, first person)"
-      },
-      "live": {
-        "mode": "5+10",
-        "open": "live/magnus-open-open.mp4",
-        "idle": "live/magnus-open-idle.mp4",
-        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
-        "lines": "magnus",
-        "post": "json",
-        "persona": false
-      }
+     "zh": "狼人",
+     "en": "Werewolf"
     },
     {
-      "id": "magnus-third",
-      "avatar": "covers/av/magnus-third.jpg",
-      "genre": "romance",
-      "name": "Magnus",
-      "title": {
-        "zh": "与狼为伍 · 旁观视角",
-        "en": "Running with Wolves: Third Person"
-      },
-      "lead": {
-        "zh": "Magnus & 她",
-        "en": "Magnus & Her"
-      },
-      "hook": {
-        "zh": "同一个夜晚，换你站在一旁看：画面里同时有 Magnus 和她。你替她说话，他接着演。",
-        "en": "Same night, but you watch from beside them, Magnus and her both in frame. You speak for her; he answers."
-      },
-      "kind": "open",
-      "pov": "third",
-      "tags": [
-        {
-          "zh": "狼人",
-          "en": "Werewolf"
-        },
-        {
-          "zh": "双人同框",
-          "en": "Two-shot"
-        },
-        {
-          "zh": "豪车",
-          "en": "Maybach"
-        },
-        {
-          "zh": "第三视角",
-          "en": "Third person"
-        }
-      ],
-      "accent": "#8f6bd8",
-      "cover_round": 10,
-      "cover_local": "covers/magnus-third.jpg",
-      "badge": {
-        "zh": "新",
-        "en": "New"
-      },
-      "source": {
-        "log": "magnus-third",
-        "film": "MD-C · 完整成片 · 5+10",
-        "group": "MD-C · 5+10"
-      },
-      "live_hint": {
-        "zh": "公网中转 8895（第三视角）",
-        "en": "Public relay (third person)"
-      },
-      "live": {
-        "mode": "auto",
-        "open": "live/magnus-third-open.mp4",
-        "idle": "live/magnus-third-idle.mp4",
-        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
-        "lines": "magnus",
-        "post": "json",
-        "open_cues": [
-          {
-            "s": 10.9,
-            "e": 11.95,
-            "zh": "别动。",
-            "en": "Don't move.",
-            "who": "Magnus"
-          },
-          {
-            "s": 16.3,
-            "e": 17.3,
-            "zh": "告诉我……",
-            "en": "Tell me...",
-            "who": "Magnus"
-          },
-          {
-            "s": 17.7,
-            "e": 19.1,
-            "zh": "你到底是从哪里来的？",
-            "en": "Where did you come from?",
-            "who": "Magnus"
-          }
-        ]
-      }
+     "zh": "命定之番",
+     "en": "Fated mate"
     },
     {
-      "id": "rafael-third",
-      "avatar": "covers/av/rafael-third.jpg",
-      "genre": "romance",
-      "name": "Rafael",
-      "title": {
-        "zh": "这次，不是演的",
-        "en": "Not Pretending This Time"
-      },
-      "lead": {
-        "zh": "Rafael Ortega · 摩托车店老板",
-        "en": "Rafael Ortega · Motorcycle shop owner"
-      },
-      "hook": {
-        "zh": "朋友六年，室友三年。昨晚他替你挡前任，假扮了一次男朋友，还有一个吻。今天早上他承认：临时的是身份，不是心意。你怎么回答，由你决定。",
-        "en": "Friends for six years, roommates for three. Last night he played your boyfriend to get your ex off your back, and there was a kiss. This morning he admits the role was temporary, the feeling isn't. How you answer is up to you."
-      },
-      "kind": "open",
-      "pov": "third",
-      "tags": [
-        {
-          "zh": "室友",
-          "en": "Roommates"
-        },
-        {
-          "zh": "假扮情侣",
-          "en": "Fake dating"
-        },
-        {
-          "zh": "告白",
-          "en": "Confession"
-        },
-        {
-          "zh": "第三视角",
-          "en": "Third person"
-        }
-      ],
-      "accent": "#c8743c",
-      "cover_local": "covers/rafael-third.jpg",
-      "badge": {
-        "zh": "新",
-        "en": "New"
-      },
-      "source": {
-        "log": "rafael-third",
-        "film": "你的人工测试 · 第 1 次",
-        "group": "你的人工测试 · 第 1 次"
-      },
-      "live_hint": {
-        "zh": "launchd 中转 8901（Rafael 第三视角）",
-        "en": "Relay (Rafael third person)"
-      },
-      "live": {
-        "open": "live/rafael-third-open.mp4",
-        "idle": "live/rafael-third-idle.mp4",
-        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/60e1d5fabd79493b954d58a85c6388cf/MUS_RAF_HOME_V1.mp3",
-        "lines": "magnus",
-        "post": "text",
-        "mode": "auto",
-        "open_cues": [
-          {
-            "s": 0.2,
-            "e": 3.3,
-            "zh": "得了吧，你连坐都坐不稳了。我送你回家。",
-            "en": "Come on. You can barely sit up. I'll drive you home.",
-            "who": "Evan"
-          },
-          {
-            "s": 4.0,
-            "e": 6.35,
-            "zh": "不用。我好着呢。好得很。",
-            "en": "No. I'm good. I'm so good.",
-            "who": "Her"
-          },
-          {
-            "s": 11.25,
-            "e": 11.8,
-            "zh": "走吧。",
-            "en": "Let's go.",
-            "who": "Evan"
-          },
-          {
-            "s": 17.77,
-            "e": 19.52,
-            "zh": "哇……我接住你了。",
-            "en": "Whoa. I got you.",
-            "who": "Rafael"
-          },
-          {
-            "s": 21.12,
-            "e": 21.82,
-            "zh": "Rafa。",
-            "en": "Rafa.",
-            "who": "Her"
-          },
-          {
-            "s": 23.62,
-            "e": 25.32,
-            "zh": "这是我男朋友。",
-            "en": "This is my boyfriend.",
-            "who": "Her"
-          },
-          {
-            "s": 25.53,
-            "e": 28.23,
-            "zh": "什么时候的事？你们俩不是“只是朋友”吗。",
-            "en": "Since when? You two are just friends.",
-            "who": "Evan"
-          },
-          {
-            "s": 29.99,
-            "e": 30.69,
-            "zh": "吻我。",
-            "en": "Kiss me.",
-            "who": "Her"
-          },
-          {
-            "s": 31.09,
-            "e": 32.24,
-            "zh": "让他信以为真。",
-            "en": "Make him believe it.",
-            "who": "Her"
-          },
-          {
-            "s": 50.08,
-            "e": 50.68,
-            "zh": "他走了。",
-            "en": "He's gone.",
-            "who": "Rafael"
-          },
-          {
-            "s": 52.23,
-            "e": 52.73,
-            "zh": "嗯。",
-            "en": "Yeah.",
-            "who": "Her"
-          },
-          {
-            "s": 56.13,
-            "e": 59.73,
-            "zh": "好了。喝水。然后我送你回家。",
-            "en": "Okay. Water. Then I'm taking you home.",
-            "who": "Rafael"
-          },
-          {
-            "s": 68.92,
-            "e": 69.72,
-            "zh": "醒了？",
-            "en": "Awake?",
-            "who": "Rafael"
-          },
-          {
-            "s": 70.11,
-            "e": 70.97,
-            "zh": "水在这里。",
-            "en": "Water’s here.",
-            "who": "Rafael"
-          },
-          {
-            "s": 71.36,
-            "e": 72.97,
-            "zh": "要是头疼，先别喝咖啡。",
-            "en": "Leave the coffee if your head hurts.",
-            "who": "Rafael"
-          },
-          {
-            "s": 73.56,
-            "e": 74.92,
-            "zh": "昨晚那场临时男友任务，",
-            "en": "Temporary boyfriend duty last night.",
-            "who": "Rafael"
-          },
-          {
-            "s": 75.06,
-            "e": 75.97,
-            "zh": "我觉得自己表现还不错。",
-            "en": "I thought I did all right.",
-            "who": "Rafael"
-          },
-          {
-            "s": 76.81,
-            "e": 78.81,
-            "zh": "不过，有件事得说清楚。",
-            "en": "One thing needs clearing up, though.",
-            "who": "Rafael"
-          },
-          {
-            "s": 79.72,
-            "e": 81.77,
-            "zh": "替你挡住 Evan，是演的。",
-            "en": "Keeping Evan off your back was an act.",
-            "who": "Rafael"
-          },
-          {
-            "s": 83.02,
-            "e": 84.47,
-            "zh": "想吻你，不是。",
-            "en": "Wanting to kiss you wasn’t.",
-            "who": "Rafael"
-          },
-          {
-            "s": 85.31,
-            "e": 86.91,
-            "zh": "我喜欢你。",
-            "en": "I like you.",
-            "who": "Rafael"
-          },
-          {
-            "s": 88.06,
-            "e": 89.52,
-            "zh": "有一阵子了。",
-            "en": "Have for a while.",
-            "who": "Rafael"
-          },
-          {
-            "s": 90.62,
-            "e": 92.97,
-            "zh": "昨晚不代表你答应过任何事。",
-            "en": "Last night doesn’t mean you agreed to anything.",
-            "who": "Rafael"
-          },
-          {
-            "s": 94.0,
-            "e": 95.66,
-            "zh": "你愿意和我约会吗？",
-            "en": "Will you go on a date with me?",
-            "who": "Rafael"
-          },
-          {
-            "s": 96.02,
-            "e": 96.91,
-            "zh": "一次真正的约会。",
-            "en": "A real date.",
-            "who": "Rafael"
-          },
-          {
-            "s": 97.41,
-            "e": 100.12,
-            "zh": "不是因为刚好顺路，就一起吃顿饭。",
-            "en": "Not just dinner because we happen to be heading the same way.",
-            "who": "Rafael"
-          }
-        ]
-      }
+     "zh": "订婚前夜",
+     "en": "Engagement night"
     },
     {
-      "id": "dont-trust",
-      "avatar": "covers/av/dont-trust.jpg",
-      "genre": "mystery",
-      "name": "Lena",
-      "title": {
-        "zh": "别信这段直播",
-        "en": "Don't Trust This Feed"
-      },
-      "lead": {
-        "zh": "Lena Hart · 失联的档案员",
-        "en": "Lena Hart · Missing archivist"
-      },
-      "hook": {
-        "zh": "她发来语音：别信正在说话的我。可中心转播里的她一直说自己没事。你只能隔着手机验证哪一路是真的，再带她离开这栋楼。",
-        "en": "Her voice memo says: don't trust the me who's talking. But on the center feed she keeps saying she's fine. Through a phone, you decide which one is real and get her out of the building."
-      },
-      "kind": "open",
-      "pov": "first",
-      "tags": [
-        {
-          "zh": "悬疑解谜",
-          "en": "Mystery"
-        },
-        {
-          "zh": "远程通话",
-          "en": "Remote call"
-        },
-        {
-          "zh": "证据链",
-          "en": "Evidence"
-        },
-        {
-          "zh": "真相固定",
-          "en": "Fixed truth"
-        }
-      ],
-      "badge": {
-        "zh": "实时悬疑",
-        "en": "Live mystery"
-      },
-      "cover_local": "covers/dont-trust.jpg",
-      "source": {
-        "log": "dont-trust",
-        "film": "脚本模拟用户",
-        "group": "脚本模拟用户"
-      },
-      "live": {
-        "mode": "auto",
-        "open": "live/dont-trust-open.mp4",
-        "idle": "live/dont-trust-idle.mp4",
-        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3",
-        "lines": "lena",
-        "post": "json",
-        "persona": false,
-        "case_dir": "../../output/dont-trust-live-v1/site",
-        "case_clip": "live/dont-trust-clip.mp4"
-      }
-    },
-    {
-      "id": "mii-open",
-      "avatar": "covers/av/mii-open.jpg",
-      "genre": "cozy",
-      "name": "Mii",
-      "name_zh": "咪",
-      "title": {
-        "zh": "今天不要上班，咪养你 · 开放式",
-        "en": "No Work Today, Mii's Got You: Open Live"
-      },
-      "lead": {
-        "zh": "咪 · 三个月大的小奶猫",
-        "en": "Mii · a 3-month-old kitten"
-      },
-      "hook": {
-        "zh": "休假日的早上，小奶猫咪决定今天由它来照顾你。去厨房、去公园、去电影院，你说去哪就去哪。",
-        "en": "On your day off, little Mii decides it's taking care of you today. Kitchen, park, cinema: wherever you say."
-      },
-      "kind": "open",
-      "pov": "first",
-      "tags": [
-        {
-          "zh": "治愈",
-          "en": "Cozy"
-        },
-        {
-          "zh": "小奶猫",
-          "en": "Kitten"
-        },
-        {
-          "zh": "日常",
-          "en": "Slice of life"
-        },
-        {
-          "zh": "主人视角",
-          "en": "Owner POV"
-        }
-      ],
-      "accent": "#e8a25a",
-      "cover_round": 8,
-      "badge": {
-        "zh": "治愈",
-        "en": "Cozy"
-      },
-      "source": {
-        "log": "mii-open",
-        "film": "你的人工测试 · 第 5 次",
-        "group": "你的人工测试 · 第 5 次"
-      },
-      "live_hint": {
-        "zh": "公网隧道 8896（咪开放式）",
-        "en": "Public tunnel (Mii open)"
-      },
-      "live": {
-        "mode": "auto",
-        "open": "live/mii-open-open.mp4",
-        "idle": "live/mii-open-idle.mp4",
-        "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
-        "lines": "dub",
-        "post": "text",
-        "open_cues": [
-          {
-            "s": 7.9,
-            "e": 11.22,
-            "zh": "今天不要上班，咪养你。",
-            "en": "No work today. I'll take care of you.",
-            "who": "Mii"
-          },
-          {
-            "s": 17.98,
-            "e": 21.46,
-            "zh": "啊对，今天休假。我忘关闹钟啦。",
-            "en": "Oh, right. It's my day off. I forgot the alarm.",
-            "who": "you"
-          }
-        ]
-      },
-      "cover_local": "covers/mii-open-clean.jpg"
-    },
-    {
-      "id": "magnus-preset",
-      "avatar": "covers/av/magnus-preset.jpg",
-      "genre": "romance",
-      "name": "Magnus",
-      "title": {
-        "zh": "与狼为伍",
-        "en": "Running with Wolves"
-      },
-      "lead": {
-        "zh": "Magnus · 狼人 Alpha",
-        "en": "Magnus · Werewolf Alpha"
-      },
-      "hook": {
-        "zh": "7 集剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
-        "en": "7 episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
-      },
-      "kind": "preset",
-      "pov": "first",
-      "tags": [
-        {
-          "zh": "狼人",
-          "en": "Werewolf"
-        },
-        {
-          "zh": "多结局",
-          "en": "Multiple endings"
-        },
-        {
-          "zh": "7 集",
-          "en": "7 episodes"
-        },
-        {
-          "zh": "第一视角",
-          "en": "First person"
-        }
-      ],
-      "accent": "#d4a017",
-      "cover_local": "covers/magnus-preset.jpg",
-      "badge": {
-        "zh": "完结",
-        "en": "Complete"
-      },
-      "source": {
-        "log": "magnus-preset",
-        "film": "完整成片 · 5+10",
-        "group": "人工体验整轮 · 5+10"
-      },
-      "series_url": "https://lyx1265897416-lab.github.io/magnus-midnight-garage-series/"
-    },
-    {
-      "id": "mii",
-      "avatar": "covers/av/mii.jpg",
-      "genre": "cozy",
-      "name": "Mii",
-      "name_zh": "咪",
-      "title": {
-        "zh": "今天不要上班，咪养你",
-        "en": "No Work Today, Mii's Got You"
-      },
-      "lead": {
-        "zh": "咪 · 三个月大的小奶猫",
-        "en": "Mii · a 3-month-old kitten"
-      },
-      "hook": {
-        "zh": "10 集日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
-        "en": "10 episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
-      },
-      "kind": "preset",
-      "pov": "first",
-      "tags": [
-        {
-          "zh": "治愈",
-          "en": "Cozy"
-        },
-        {
-          "zh": "小奶猫",
-          "en": "Kitten"
-        },
-        {
-          "zh": "10 集",
-          "en": "10 episodes"
-        },
-        {
-          "zh": "主人视角",
-          "en": "Owner POV"
-        }
-      ],
-      "accent": "#f0b46b",
-      "cover_local": "covers/mii.jpg",
-      "badge": {
-        "zh": "完结",
-        "en": "Complete"
-      },
-      "source": {
-        "log": "mii",
-        "film": "完整成片 · 5+10",
-        "group": "按新版宠物 PE · 5+10"
-      },
-      "series_url": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/"
+     "zh": "第一视角",
+     "en": "First person"
     }
-  ]
+   ],
+   "accent": "#c9a227",
+   "cover_round": 7,
+   "cover_local": "covers/magnus-open.jpg",
+   "badge": {
+    "zh": "热门",
+    "en": "Hot"
+   },
+   "source": {
+    "log": "magnus-open",
+    "film": "MD-C · 完整成片 · 5+10",
+    "group": "MD-C · 5+10"
+   },
+   "live_hint": {
+    "zh": "本机中转 8890 / 8897（开放式第一视角）",
+    "en": "Local relay (open, first person)"
+   },
+   "live": {
+    "mode": "5+10",
+    "open": "live/magnus-open-open.mp4",
+    "idle": "live/magnus-open-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
+    "lines": "magnus",
+    "post": "json",
+    "persona": false
+   }
+  },
+  {
+   "id": "magnus-third",
+   "avatar": "covers/av/magnus-third.jpg",
+   "genre": "romance",
+   "name": "Magnus",
+   "title": {
+    "zh": "与狼为伍 · 旁观视角",
+    "en": "Running with Wolves: Third Person"
+   },
+   "lead": {
+    "zh": "Magnus & 她",
+    "en": "Magnus & Her"
+   },
+   "hook": {
+    "zh": "同一个夜晚，换你站在一旁看：画面里同时有 Magnus 和她。你替她说话，他接着演。",
+    "en": "Same night, but you watch from beside them, Magnus and her both in frame. You speak for her; he answers."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "狼人",
+     "en": "Werewolf"
+    },
+    {
+     "zh": "双人同框",
+     "en": "Two-shot"
+    },
+    {
+     "zh": "豪车",
+     "en": "Maybach"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#8f6bd8",
+   "cover_round": 10,
+   "cover_local": "covers/magnus-third.jpg",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "source": {
+    "log": "magnus-third",
+    "film": "MD-C · 完整成片 · 5+10",
+    "group": "MD-C · 5+10"
+   },
+   "live_hint": {
+    "zh": "公网中转 8895（第三视角）",
+    "en": "Public relay (third person)"
+   },
+   "live": {
+    "mode": "auto",
+    "open": "live/magnus-third-open.mp4",
+    "idle": "live/magnus-third-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
+    "lines": "magnus",
+    "post": "json",
+    "open_cues": [
+     {
+      "s": 10.9,
+      "e": 11.95,
+      "zh": "别动。",
+      "en": "Don't move.",
+      "who": "Magnus"
+     },
+     {
+      "s": 16.3,
+      "e": 17.3,
+      "zh": "告诉我……",
+      "en": "Tell me...",
+      "who": "Magnus"
+     },
+     {
+      "s": 17.7,
+      "e": 19.1,
+      "zh": "你到底是从哪里来的？",
+      "en": "Where did you come from?",
+      "who": "Magnus"
+     }
+    ]
+   }
+  },
+  {
+   "id": "rafael-third",
+   "avatar": "covers/av/rafael-third.jpg",
+   "genre": "romance",
+   "name": "Rafael",
+   "title": {
+    "zh": "这次，不是演的",
+    "en": "Not Pretending This Time"
+   },
+   "lead": {
+    "zh": "Rafael Ortega · 摩托车店老板",
+    "en": "Rafael Ortega · Motorcycle shop owner"
+   },
+   "hook": {
+    "zh": "朋友六年，室友三年。昨晚他替你挡前任，假扮了一次男朋友，还有一个吻。今天早上他承认：临时的是身份，不是心意。你怎么回答，由你决定。",
+    "en": "Friends for six years, roommates for three. Last night he played your boyfriend to get your ex off your back, and there was a kiss. This morning he admits the role was temporary, the feeling isn't. How you answer is up to you."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "室友",
+     "en": "Roommates"
+    },
+    {
+     "zh": "假扮情侣",
+     "en": "Fake dating"
+    },
+    {
+     "zh": "告白",
+     "en": "Confession"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#c8743c",
+   "cover_local": "covers/rafael-third.jpg",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "source": {
+    "log": "rafael-third",
+    "film": "你的人工测试 · 第 1 次",
+    "group": "你的人工测试 · 第 1 次"
+   },
+   "live_hint": {
+    "zh": "launchd 中转 8901（Rafael 第三视角）",
+    "en": "Relay (Rafael third person)"
+   },
+   "live": {
+    "open": "live/rafael-third-open.mp4",
+    "idle": "live/rafael-third-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/60e1d5fabd79493b954d58a85c6388cf/MUS_RAF_HOME_V1.mp3",
+    "lines": "magnus",
+    "post": "text",
+    "mode": "auto",
+    "open_cues": [
+     {
+      "s": 0.2,
+      "e": 3.3,
+      "zh": "得了吧，你连坐都坐不稳了。我送你回家。",
+      "en": "Come on. You can barely sit up. I'll drive you home.",
+      "who": "Evan"
+     },
+     {
+      "s": 4.0,
+      "e": 6.35,
+      "zh": "不用。我好着呢。好得很。",
+      "en": "No. I'm good. I'm so good.",
+      "who": "Her"
+     },
+     {
+      "s": 11.25,
+      "e": 11.8,
+      "zh": "走吧。",
+      "en": "Let's go.",
+      "who": "Evan"
+     },
+     {
+      "s": 17.77,
+      "e": 19.52,
+      "zh": "哇……我接住你了。",
+      "en": "Whoa. I got you.",
+      "who": "Rafael"
+     },
+     {
+      "s": 21.12,
+      "e": 21.82,
+      "zh": "Rafa。",
+      "en": "Rafa.",
+      "who": "Her"
+     },
+     {
+      "s": 23.62,
+      "e": 25.32,
+      "zh": "这是我男朋友。",
+      "en": "This is my boyfriend.",
+      "who": "Her"
+     },
+     {
+      "s": 25.53,
+      "e": 28.23,
+      "zh": "什么时候的事？你们俩不是“只是朋友”吗。",
+      "en": "Since when? You two are just friends.",
+      "who": "Evan"
+     },
+     {
+      "s": 29.99,
+      "e": 30.69,
+      "zh": "吻我。",
+      "en": "Kiss me.",
+      "who": "Her"
+     },
+     {
+      "s": 31.09,
+      "e": 32.24,
+      "zh": "让他信以为真。",
+      "en": "Make him believe it.",
+      "who": "Her"
+     },
+     {
+      "s": 50.08,
+      "e": 50.68,
+      "zh": "他走了。",
+      "en": "He's gone.",
+      "who": "Rafael"
+     },
+     {
+      "s": 52.23,
+      "e": 52.73,
+      "zh": "嗯。",
+      "en": "Yeah.",
+      "who": "Her"
+     },
+     {
+      "s": 56.13,
+      "e": 59.73,
+      "zh": "好了。喝水。然后我送你回家。",
+      "en": "Okay. Water. Then I'm taking you home.",
+      "who": "Rafael"
+     },
+     {
+      "s": 68.92,
+      "e": 69.72,
+      "zh": "醒了？",
+      "en": "Awake?",
+      "who": "Rafael"
+     },
+     {
+      "s": 70.11,
+      "e": 70.97,
+      "zh": "水在这里。",
+      "en": "Water’s here.",
+      "who": "Rafael"
+     },
+     {
+      "s": 71.36,
+      "e": 72.97,
+      "zh": "要是头疼，先别喝咖啡。",
+      "en": "Leave the coffee if your head hurts.",
+      "who": "Rafael"
+     },
+     {
+      "s": 73.56,
+      "e": 74.92,
+      "zh": "昨晚那场临时男友任务，",
+      "en": "Temporary boyfriend duty last night.",
+      "who": "Rafael"
+     },
+     {
+      "s": 75.06,
+      "e": 75.97,
+      "zh": "我觉得自己表现还不错。",
+      "en": "I thought I did all right.",
+      "who": "Rafael"
+     },
+     {
+      "s": 76.81,
+      "e": 78.81,
+      "zh": "不过，有件事得说清楚。",
+      "en": "One thing needs clearing up, though.",
+      "who": "Rafael"
+     },
+     {
+      "s": 79.72,
+      "e": 81.77,
+      "zh": "替你挡住 Evan，是演的。",
+      "en": "Keeping Evan off your back was an act.",
+      "who": "Rafael"
+     },
+     {
+      "s": 83.02,
+      "e": 84.47,
+      "zh": "想吻你，不是。",
+      "en": "Wanting to kiss you wasn’t.",
+      "who": "Rafael"
+     },
+     {
+      "s": 85.31,
+      "e": 86.91,
+      "zh": "我喜欢你。",
+      "en": "I like you.",
+      "who": "Rafael"
+     },
+     {
+      "s": 88.06,
+      "e": 89.52,
+      "zh": "有一阵子了。",
+      "en": "Have for a while.",
+      "who": "Rafael"
+     },
+     {
+      "s": 90.62,
+      "e": 92.97,
+      "zh": "昨晚不代表你答应过任何事。",
+      "en": "Last night doesn’t mean you agreed to anything.",
+      "who": "Rafael"
+     },
+     {
+      "s": 94.0,
+      "e": 95.66,
+      "zh": "你愿意和我约会吗？",
+      "en": "Will you go on a date with me?",
+      "who": "Rafael"
+     },
+     {
+      "s": 96.02,
+      "e": 96.91,
+      "zh": "一次真正的约会。",
+      "en": "A real date.",
+      "who": "Rafael"
+     },
+     {
+      "s": 97.41,
+      "e": 100.12,
+      "zh": "不是因为刚好顺路，就一起吃顿饭。",
+      "en": "Not just dinner because we happen to be heading the same way.",
+      "who": "Rafael"
+     }
+    ]
+   }
+  },
+  {
+   "id": "dont-trust",
+   "avatar": "covers/av/dont-trust.jpg",
+   "genre": "mystery",
+   "name": "Lena",
+   "title": {
+    "zh": "别信这段直播",
+    "en": "Don't Trust This Feed"
+   },
+   "lead": {
+    "zh": "Lena Hart · 失联的档案员",
+    "en": "Lena Hart · Missing archivist"
+   },
+   "hook": {
+    "zh": "今晚 00:00，Lena 被锁的那层会放气。有人提前告诉了你，她自己还不知道。转播里的她一直说没事，那是昨晚录的。隔着手机带她出来，带上证据。赶不上，三分钟后“她”会打给你。",
+    "en": "At 00:00 tonight, gas fires on the floor where Lena is locked in. Someone told you. She doesn't know. On the feed she keeps saying she's fine, but that was recorded last night. Get her out, with proof. Miss it, and three minutes later \"she\" will call you."
+   },
+   "kind": "open",
+   "pov": "first",
+   "tags": [
+    {
+     "zh": "悬疑解谜",
+     "en": "Mystery"
+    },
+    {
+     "zh": "午夜倒计时",
+     "en": "Countdown"
+    },
+    {
+     "zh": "6 个结局",
+     "en": "6 endings"
+    },
+    {
+     "zh": "失败可重来",
+     "en": "Retry with memory"
+    }
+   ],
+   "badge": {
+    "zh": "实时悬疑",
+    "en": "Live mystery"
+   },
+   "cover_local": "covers/dont-trust.jpg",
+   "source": {
+    "log": "dont-trust",
+    "film": "脚本模拟用户",
+    "group": "脚本模拟用户"
+   },
+   "live": {
+    "mode": "auto",
+    "open": "live/dont-trust-open.mp4",
+    "idle": "live/dont-trust-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3",
+    "lines": "lena",
+    "post": "json",
+    "persona": false,
+    "case_dir": "../../output/dont-trust-live-v1/site",
+    "case_clip": "live/dont-trust-clip.mp4",
+    "embed": "https://lyx1265897416-lab.github.io/dont-trust-this-feed/"
+   }
+  },
+  {
+   "id": "mii-open",
+   "avatar": "covers/av/mii-open.jpg",
+   "genre": "cozy",
+   "name": "Mii",
+   "name_zh": "咪",
+   "title": {
+    "zh": "今天不要上班，咪养你 · 开放式",
+    "en": "No Work Today, Mii's Got You: Open Live"
+   },
+   "lead": {
+    "zh": "咪 · 三个月大的小奶猫",
+    "en": "Mii · a 3-month-old kitten"
+   },
+   "hook": {
+    "zh": "休假日的早上，小奶猫咪决定今天由它来照顾你。去厨房、去公园、去电影院，你说去哪就去哪。",
+    "en": "On your day off, little Mii decides it's taking care of you today. Kitchen, park, cinema: wherever you say."
+   },
+   "kind": "open",
+   "pov": "first",
+   "tags": [
+    {
+     "zh": "治愈",
+     "en": "Cozy"
+    },
+    {
+     "zh": "小奶猫",
+     "en": "Kitten"
+    },
+    {
+     "zh": "日常",
+     "en": "Slice of life"
+    },
+    {
+     "zh": "主人视角",
+     "en": "Owner POV"
+    }
+   ],
+   "accent": "#e8a25a",
+   "cover_round": 8,
+   "badge": {
+    "zh": "治愈",
+    "en": "Cozy"
+   },
+   "source": {
+    "log": "mii-open",
+    "film": "你的人工测试 · 第 5 次",
+    "group": "你的人工测试 · 第 5 次"
+   },
+   "live_hint": {
+    "zh": "公网隧道 8896（咪开放式）",
+    "en": "Public tunnel (Mii open)"
+   },
+   "live": {
+    "mode": "auto",
+    "open": "live/mii-open-open.mp4",
+    "idle": "live/mii-open-idle.mp4",
+    "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
+    "lines": "dub",
+    "post": "text",
+    "open_cues": [
+     {
+      "s": 7.9,
+      "e": 11.22,
+      "zh": "今天不要上班，咪养你。",
+      "en": "No work today. I'll take care of you.",
+      "who": "Mii"
+     },
+     {
+      "s": 17.98,
+      "e": 21.46,
+      "zh": "啊对，今天休假。我忘关闹钟啦。",
+      "en": "Oh, right. It's my day off. I forgot the alarm.",
+      "who": "you"
+     }
+    ]
+   },
+   "cover_local": "covers/mii-open-clean.jpg"
+  },
+  {
+   "id": "magnus-preset",
+   "avatar": "covers/av/magnus-preset.jpg",
+   "genre": "romance",
+   "name": "Magnus",
+   "title": {
+    "zh": "与狼为伍",
+    "en": "Running with Wolves"
+   },
+   "lead": {
+    "zh": "Magnus · 狼人 Alpha",
+    "en": "Magnus · Werewolf Alpha"
+   },
+   "hook": {
+    "zh": "7 集剧情 + 8 个选择点。每到选择点，你可以点选项，也可以直接对他说话，他会实时回应。",
+    "en": "7 episodes with 8 choice points. At each one, pick an option or just talk to him, and he answers live."
+   },
+   "kind": "preset",
+   "pov": "first",
+   "tags": [
+    {
+     "zh": "狼人",
+     "en": "Werewolf"
+    },
+    {
+     "zh": "多结局",
+     "en": "Multiple endings"
+    },
+    {
+     "zh": "7 集",
+     "en": "7 episodes"
+    },
+    {
+     "zh": "第一视角",
+     "en": "First person"
+    }
+   ],
+   "accent": "#d4a017",
+   "cover_local": "covers/magnus-preset.jpg",
+   "badge": {
+    "zh": "完结",
+    "en": "Complete"
+   },
+   "source": {
+    "log": "magnus-preset",
+    "film": "完整成片 · 5+10",
+    "group": "人工体验整轮 · 5+10"
+   },
+   "series_url": "https://lyx1265897416-lab.github.io/magnus-midnight-garage-series/"
+  },
+  {
+   "id": "mii",
+   "avatar": "covers/av/mii.jpg",
+   "genre": "cozy",
+   "name": "Mii",
+   "name_zh": "咪",
+   "title": {
+    "zh": "今天不要上班，咪养你",
+    "en": "No Work Today, Mii's Got You"
+   },
+   "lead": {
+    "zh": "咪 · 三个月大的小奶猫",
+    "en": "Mii · a 3-month-old kitten"
+   },
+   "hook": {
+    "zh": "10 集日常 + 11 个选择点。起床、选衣服、定菜单……每个选择点都可以直接告诉咪你想要什么。",
+    "en": "10 episodes with 11 choice points. Wake up, pick an outfit, plan the menu, and tell Mii what you want."
+   },
+   "kind": "preset",
+   "pov": "first",
+   "tags": [
+    {
+     "zh": "治愈",
+     "en": "Cozy"
+    },
+    {
+     "zh": "小奶猫",
+     "en": "Kitten"
+    },
+    {
+     "zh": "10 集",
+     "en": "10 episodes"
+    },
+    {
+     "zh": "主人视角",
+     "en": "Owner POV"
+    }
+   ],
+   "accent": "#f0b46b",
+   "cover_local": "covers/mii.jpg",
+   "badge": {
+    "zh": "完结",
+    "en": "Complete"
+   },
+   "source": {
+    "log": "mii",
+    "film": "完整成片 · 5+10",
+    "group": "按新版宠物 PE · 5+10"
+   },
+   "series_url": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/"
+  }
+ ]
 }

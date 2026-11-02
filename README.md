@@ -20,7 +20,7 @@
 ## 实时开玩（APP 内直接生成）
 
 - 接进 APP 播放器的：Magnus 开放式（8890，MD-C，ultrafast）、Magnus 第三视角（8895）、Rafael（8901）、咪开放式（8896）。开场 → 中转给的 A/B 选项 + 输入框 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播；咪的配音另播；每幕回报 `/api/round/<id>/view`（含 buffer、buffer_n：这一幕播放时卡了多久、几次）
-- 《别信这段直播》（8902）也接进 APP 播放器：证据卡、案卷、信号来源、转播小窗、结案都由 `caseLayer` 叠加（catalog 的 `live.case_dir` 指向这部剧的 site，回放用成片的 `film.overlay`）；案例是脚本模拟用户 8 轮，她人工测后用 `output/dont-trust-live-v1/build_log.py` 换
+- 《别信这段直播》（8902）实时开玩用 `EmbedPlayer` 整页嵌入这部剧自己的实时页（catalog 的 `live.embed`；V3 的内幕、时间线、结局、门禁、音效都在那边，改一处两边都是最新）。回放案例仍走 caseLayer：证据卡、案卷、信号来源、转播小窗、结案都由 `caseLayer` 叠加（catalog 的 `live.case_dir` 指向这部剧的 site，回放用成片的 `film.overlay`）；案例是脚本模拟用户 8 轮，她人工测后用 `output/dont-trust-live-v1/build_log.py` 换
 - 两部预设剧情没接实时：它们的中转是人工接单的导演层，详情页只有「开始互动」预览
 - 口令：`python3 live_links.py` 打印中英两条测试链接（`?live=剧id~隧道地址~口令`），APP 存到本机后从地址栏去掉。没存过口令时点「实时开玩」会让粘贴测试链接
 - 地址：隧道重开地址会变，但不用换链接。launchd 服务 `app-relay-sync`（`tools/realtime-relays/app_relay_sync.py`）每分钟探一次隧道，把地址写进 `docs/relays.json` 并推送，APP 每次打开和连不上时都会重读；隧道域名失效时它还会自动重启隧道。这个文件只有地址，口令不进仓库

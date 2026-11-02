@@ -601,7 +601,17 @@ function Player(view, d, q){
 }
 
 // ---------- 实时播放器（直接调这部剧的中转：开场 → 选项/输入 → 导演层 + 两段并发生成 → 第 1 段按第 2 段出片倒推开播 → 两段接着播） ----------
+// 玩法比通用播放器多很多的剧（内幕、时间线、结局、门禁、页面音效）：整页嵌入这部剧自己的实时页，改一处两边都是最新。进度靠 postMessage 回传
+function EmbedPlayer(view, d){
+  document.body.classList.add('notabs', 'noscroll');
+  const C = liveCfg(d.id), P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
+  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
+  const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
+  addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
+  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
+}
 function LivePlayer(view, d){
+  if (d.live.embed) return EmbedPlayer(view, d);
   document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), LV = d.live, K = C.k, MODE = LV.mode || '5+10'; let API = C.api;
   const modeTxt = m => m && m !== 'auto' ? ' · ' + m.replace('+', 's + ') + 's' : '';
