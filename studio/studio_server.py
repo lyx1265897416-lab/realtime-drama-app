@@ -163,6 +163,8 @@ def grow(b):
 
 
 STYLE = {'real': 'photorealistic live-action portrait, soft natural window light, natural skin texture, 50mm shallow depth of field',
+         'anime': '2D anime character illustration, clean line art, cel shading, expressive eyes, vibrant colors',
+         '3d': 'high-quality 3D animated character render, stylized CG film look, soft studio lighting, detailed hair and fabric',
          'otome': 'polished 2.5D otome-game character art, semi-realistic 3D render, soft rim light, glossy hair',
          'cozy': 'warm photoreal domestic portrait, cream and wood tones, gentle morning light'}
 

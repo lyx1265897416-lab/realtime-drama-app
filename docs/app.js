@@ -814,6 +814,7 @@ function Me(view){
 }
 
 // ==================== 角色 · 演员表 · 自由剧场 · 星票 ====================
+const styleKey = s => /anime/.test(s || '') ? 'anime' : /otome|3d/.test(s || '') ? '3d' : 'real';  // 旧角色的 otome 归 3D，cozy 归写实
 // 你的角色（c.*）存在本机；演员表 = Vicky 资产库演员（lib.*，docs/data/actors.js）+ 玩家上架的演员（u.*，创作服务共享）。
 // 需要模型或共享数据的（AI 补全、生成定妆照/剧照、自由剧场写戏、上架、雇佣、钱包）走创作服务：链接里 ?live=studio~地址~口令。
 const Z = (zh, en) => lang() === 'zh' ? zh : en;
@@ -984,8 +985,8 @@ function Editor(view, id){
   const lst = c.listing || {};
   view.innerHTML = `<div class="editor fade-in"><div class="d-top solid"><button class="iconbtn" id="back">${ICON.back}</button><b>${isNew ? Z('创建角色', 'New character') : Z('编辑角色', 'Edit character')}</b>${walletPill()}</div>
     <div class="ed-face"><div class="ph" id="face">${c.face ? `<img decoding="async" src="${esc(imgUrl(c.face))}" alt="">` : `<span>${Z('还没有定妆照', 'No portrait yet')}</span>`}</div>
-      <div class="ed-face-act"><button class="btn ghost sm" id="pickFace">${Z('从资产库挑脸', 'Pick from library')}</button>
-        <div class="stylepick" id="style">${[['real', '写实', 'Real'], ['otome', '2.5D', '2.5D'], ['cozy', '温暖居家', 'Cozy']].map(([k, zh, en]) => `<button class="${(/otome|3d/.test(c.style || '') ? 'otome' : /cozy/.test(c.style || '') ? 'cozy' : 'real') === k ? 'on' : ''}" data-st="${k}">${Z(zh, en)}</button>`).join('')}</div>
+      <div class="ed-face-act"><button class="btn ghost sm" id="pickFace">${Z('从角色库提取形象', 'From character library')}</button>
+        <div class="stylepick" id="style">${[['real', '写实', 'Real'], ['anime', '二次元', 'Anime'], ['3d', '3D', '3D']].map(([k, zh, en]) => `<button class="${styleKey(c.style) === k ? 'on' : ''}" data-st="${k}">${Z(zh, en)}</button>`).join('')}</div>
         <button class="btn gold sm" id="gen">✨ ${Z('按设定生成定妆照 · ★80', 'Generate portrait · ★80')}</button></div></div>
     <div class="ed-assist"><button class="btn ghost" id="assist">✨ ${Z('AI 帮我补全空着的设定（免费）', 'AI: fill the blanks (free)')}</button><p class="note" id="assistNote">${Z('先写几个你在意的（比如名字和职业），其余交给 AI；写过的不会被改。', 'Write what matters, AI fills the rest; your fields stay.')}</p></div>
     <div class="ed-fields">${FIELDS.map(([k, zh, en]) => { const v = k === 'personality' ? arrOf(c[k]).join('，') : c[k] || ''; const long = ['look', 'backstory', 'world', 'secret', 'voice', 'likes', 'goal'].includes(k);
@@ -998,12 +999,12 @@ function Editor(view, id){
       <div class="field"><label>${Z('片酬（星票 / 场，0 = 免费）', 'Fee (stars per scene, 0 = free)')}</label><input id="lPrice" type="number" min="0" max="500" value="${lst.price || 40}"></div>
       <p class="note">${Z('每被雇一次，片酬的 70% 进你的钱包。上架的是这张角色卡和定妆照，你的演出记忆不会公开。', 'You keep 70% of every fee. Your memories stay private.')}</p></div>
     <div class="ed-save"><button class="btn gold" id="saveC" style="width:100%">${Z('保存', 'Save')}</button>${!isNew ? `<button class="btn ghost" id="delC" style="width:100%;margin-top:8px;color:var(--rose)">${Z('删除这个角色', 'Delete')}</button>` : ''}</div></div>`;
-  let face = c.face, style = /otome|3d/.test(c.style || '') ? 'otome' : /cozy/.test(c.style || '') ? 'cozy' : 'real';
+  let face = c.face, style = styleKey(c.style);
   const read = () => { const o = {}; $$('[data-f]').forEach(i => { const v = i.value.trim(); o[i.dataset.f] = i.dataset.f === 'personality' ? arrOf(v) : i.dataset.f === 'age' && /^\d+$/.test(v) ? +v : v; }); return o; };
   const setFace = u => { face = u; $('#face').innerHTML = `<img decoding="async" src="${esc(imgUrl(u))}" alt="">`; };
   $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/cast');
   $('#style').onclick = e => { const b = e.target.closest('[data-st]'); if (!b) return; style = b.dataset.st; $$('#style button').forEach(x => x.classList.toggle('on', x === b)); };
-  $('#pickFace').onclick = () => sheet(Z('从资产库挑一张脸', 'Pick a face'), Z('Vicky 资产库', 'Vicky library'), `<div class="facegrid">${ACT.map(a => `<button data-face="${esc(a.face)}" data-look="${esc(a.look || '')}"><img decoding="async" src="${esc(a.face)}" alt="" loading="lazy"></button>`).join('')}</div>`,
+  $('#pickFace').onclick = () => sheet(Z('从角色库提取形象', 'From character library'), Z('Vicky 角色库', 'Vicky library'), `<div class="facegrid">${ACT.map(a => `<button data-face="${esc(a.face)}" data-look="${esc(a.look || '')}"><img decoding="async" src="${esc(a.face)}" alt="" loading="lazy"></button>`).join('')}</div>`,
     (sh, close) => $$('[data-face]', sh).forEach(b => b.onclick = () => { setFace(b.dataset.face); const lk = $('[data-f="look"]'); if (!lk.value && b.dataset.look) lk.value = b.dataset.look; close(); }));
   $('#assist').onclick = () => { const btn = $('#assist'); btn.disabled = true; btn.textContent = Z('AI 正在补全…', 'Filling…');
     sapi('/api/assist', {card: Object.assign(read(), {face: imgUrl(face)})}).then(j => { const f = j.fill || {}; $$('[data-f]').forEach(i => { const v = f[i.dataset.f]; if (!i.value.trim() && v != null && v !== '') i.value = Array.isArray(v) ? v.join('，') : v; });
