@@ -122,6 +122,7 @@ def build(d, log):
             ch['wait'] = stat(card, '发送到开播') or stat(card, '第 2 段就绪')
             ch['clip'] = card.get('video') and BASE + card['video']
             ch['poster'] = card.get('poster') and BASE + card['poster']
+            ch['thumb'] = card.get('poster') and thumb(LOG / card['poster'], f"thumbs/{d['id']}/{len(chapters)}.jpg", 132)  # 幕表只有 44 像素宽，不用整张海报
             ch['beat'] = (card.get('beat') or '').split('；')[0][:80]
             if card.get('her') and ch['said']['zh'] and card['her'][:4] not in (ch['said']['zh'] + ch['said']['en']):
                 print(f"  ! {d['id']} {label}：字幕输入「{ch['said']['zh'][:20]}」和卡片「{card['her'][:20]}」对不上", file=sys.stderr)
@@ -136,11 +137,13 @@ def build(d, log):
         cover = BASE + cards[cover_round - 1]['poster']
     else:
         cover = BASE + film['poster']
+    local_cover = HERE / 'docs' / cover if d.get('cover_local') else None
     rts = [c for c in chapters if c['kind'] == 'rt']
     waits = sorted(c['wait'] for c in rts if c.get('wait'))
     out = {k: v for k, v in d.items() if k not in ('source', 'cover', 'cover_local')}
     out.update({
         'cover': cover,
+        'thumb': thumb(local_cover, f"covers/thumb/{d['id']}.jpg", 360) if local_cover else thumb(LOG / cover.replace(BASE, ''), f"covers/thumb/{d['id']}.jpg", 360),
         'film': {'video': BASE + film['video'], 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
         'cues': [speaker(rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}), d) for c in cues if not c['input']],
         'chapters': chapters,
@@ -150,8 +153,19 @@ def build(d, log):
         'wait_median': waits[len(waits) // 2] if waits else None,
         'tested': group.get('when', ''),
     })
+    if out.get('live') and not out['live'].get('open_cues'):  # 开场字幕：没单独给的取成片开头这一段
+        out['live']['open_cues'] = [{'s': c['s'], 'e': c['e'], 'zh': c['zh'], 'en': c['en'], 'who': d['name']} for c in out['cues'] if c['e'] <= rts[0]['pause'] + .1]
     print(f"  {d['id']}: {len(chapters)} 段 · {len(rts)} 个实时轮次 · 成片 {film['duration']}s")
     return out
+
+
+def thumb(src, rel, width):
+    """列表和卡片用的小图，放 docs/ 下；已有且不比原图旧就不重做。"""
+    out = HERE / 'docs' / rel
+    if not out.exists() or out.stat().st_mtime < Path(src).stat().st_mtime:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run([str(HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'), '-y', '-loglevel', 'error', '-i', str(src), '-vf', f'scale={width}:-2:flags=lanczos', '-q:v', '5', str(out)], check=True)
+    return rel
 
 
 def cut_opening(d, film, end):
@@ -173,7 +187,7 @@ def main():
     data['updated'] = m.group(1) if m else ''
     out = HERE / 'docs' / 'data' / 'catalog.js'
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text('window.CATALOG = ' + json.dumps(data, ensure_ascii=False, indent=1) + ';\n')
+    out.write_text('window.CATALOG = ' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ';\n')
     print('→', out.relative_to(HERE))
 
 

@@ -55,6 +55,15 @@
       "live_hint": {
         "zh": "本机中转 8890 / 8897（开放式第一视角）",
         "en": "Local relay (open, first person)"
+      },
+      "live": {
+        "mode": "5+10",
+        "open": "live/magnus-open-open.mp4",
+        "idle": "live/magnus-open-idle.mp4",
+        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
+        "lines": "magnus",
+        "post": "json",
+        "persona": false
       }
     },
     {
@@ -112,8 +121,8 @@
       },
       "live": {
         "mode": "auto",
-        "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ec51421aed9f46aa9f6d60b4134629bc/OPEN.mp4",
-        "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/913679e6f19346218debbe6398571a46/IDLE0.mp4",
+        "open": "live/magnus-third-open.mp4",
+        "idle": "live/magnus-third-idle.mp4",
         "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
         "lines": "magnus",
         "post": "json",
@@ -195,8 +204,8 @@
         "en": "Relay (Rafael third person)"
       },
       "live": {
-        "open": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/33a7c2bf668a4d40807299bae3cf88e9/OPEN.mp4",
-        "idle": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/029f3280bef44841a26fccfceefda643/IDLE0.mp4",
+        "open": "live/rafael-third-open.mp4",
+        "idle": "live/rafael-third-idle.mp4",
         "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/60e1d5fabd79493b954d58a85c6388cf/MUS_RAF_HOME_V1.mp3",
         "lines": "magnus",
         "post": "text",
@@ -442,8 +451,8 @@
       },
       "live": {
         "mode": "auto",
-        "open": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/OPEN.mp4",
-        "idle": "https://lyx1265897416-lab.github.io/mii-takes-care-of-you/open-live/media/IDLE0.mp4",
+        "open": "live/mii-open-open.mp4",
+        "idle": "live/mii-open-idle.mp4",
         "wait": "https://static.vivi-x.ai/audios/2026/10/29/9b5ebed5819347e7.mp3",
         "lines": "dub",
         "post": "text",
