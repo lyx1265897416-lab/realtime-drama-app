@@ -91,6 +91,10 @@ def stat(card, *names):
 
 
 def build(d, log):
+    if d.get('live', {}).get('case_dir'):  # 悬疑剧：证据卡、来源标签、转播小窗由播放器叠加，数据取自这部剧自己的页面
+        cd = (HERE / d['live'].pop('case_dir')).resolve(); ui = json.loads((cd / 'open_ui.json').read_text())
+        d['live']['open_cues'] = ui['cues']
+        d['live']['case'] = {'src': ui['src'], 'msgs': ui['msgs'], 'evidence': ui['evidence'], 'cards': json.loads((cd / 'evidence.json').read_text()), 'clip': d['live'].pop('case_clip')}
     src = log[d['source']['log']]
     film = pick(src['films'], d['source']['film'])
     group = pick(src['groups'], d['source']['group'])
@@ -144,7 +148,7 @@ def build(d, log):
     out.update({
         'cover': cover,
         'thumb': thumb(local_cover, f"covers/thumb/{d['id']}.jpg", 360) if local_cover else thumb(LOG / cover.replace(BASE, ''), f"covers/thumb/{d['id']}.jpg", 360),
-        'film': {'video': BASE + film['video'], 'hls': hls(d, film), 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', '')},
+        'film': {'video': BASE + film['video'], 'hls': hls(d, film), 'poster': BASE + film['poster'], 'duration': film['duration'], 'mode': film.get('mode', ''), **({'overlay': film['overlay']} if film.get('overlay') else {})},
         'cues': [speaker(rename({k: c[k] for k in ('s', 'e', 'zh', 'en', 'who')}), d) for c in cues if not c['input']],
         'chapters': chapters,
         'opening': cut_opening(d, film, rts[0]['pause']),

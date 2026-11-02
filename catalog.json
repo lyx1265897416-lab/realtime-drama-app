@@ -397,6 +397,65 @@
       }
     },
     {
+      "id": "dont-trust",
+      "avatar": "covers/av/dont-trust.jpg",
+      "genre": "mystery",
+      "name": "Lena",
+      "title": {
+        "zh": "别信这段直播",
+        "en": "Don't Trust This Feed"
+      },
+      "lead": {
+        "zh": "Lena Hart · 失联的档案员",
+        "en": "Lena Hart · Missing archivist"
+      },
+      "hook": {
+        "zh": "她发来语音：别信正在说话的我。可中心转播里的她一直说自己没事。你只能隔着手机验证哪一路是真的，再带她离开这栋楼。",
+        "en": "Her voice memo says: don't trust the me who's talking. But on the center feed she keeps saying she's fine. Through a phone, you decide which one is real and get her out of the building."
+      },
+      "kind": "open",
+      "pov": "first",
+      "tags": [
+        {
+          "zh": "悬疑解谜",
+          "en": "Mystery"
+        },
+        {
+          "zh": "远程通话",
+          "en": "Remote call"
+        },
+        {
+          "zh": "证据链",
+          "en": "Evidence"
+        },
+        {
+          "zh": "真相固定",
+          "en": "Fixed truth"
+        }
+      ],
+      "badge": {
+        "zh": "实时悬疑",
+        "en": "Live mystery"
+      },
+      "cover_local": "covers/dont-trust.jpg",
+      "source": {
+        "log": "dont-trust",
+        "film": "脚本模拟用户",
+        "group": "脚本模拟用户"
+      },
+      "live": {
+        "mode": "auto",
+        "open": "live/dont-trust-open.mp4",
+        "idle": "live/dont-trust-idle.mp4",
+        "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3",
+        "lines": "lena",
+        "post": "json",
+        "persona": false,
+        "case_dir": "../../output/dont-trust-live-v1/site",
+        "case_clip": "live/dont-trust-clip.mp4"
+      }
+    },
+    {
       "id": "mii-open",
       "avatar": "covers/av/mii-open.jpg",
       "genre": "cozy",
