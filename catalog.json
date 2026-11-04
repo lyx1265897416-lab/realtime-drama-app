@@ -646,7 +646,8 @@
      }
     ]
    },
-   "cover_local": "covers/mii-open-clean.jpg"
+   "cover_local": "covers/mii-open-clean.jpg",
+   "feed_round": 10
   },
   {
    "id": "magnus-preset",

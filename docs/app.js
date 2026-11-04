@@ -360,7 +360,7 @@ function pcard(d){
 function Feed(view){
   document.body.classList.add('noscroll', 'feed-on');
   const items = [];
-  const per = D.map(d => { const r = rts(d); const h = feedFirst(d); const pick = [h, r[Math.floor(r.length * .6)]].filter((x, i, a) => x && a.indexOf(x) === i); return pick.map(c => ({d, c})); });
+  const per = D.map(d => { const r = rts(d); const h = feedFirst(d); const pick = [h, d.feed_round ? r[d.feed_round - 1] : r[Math.floor(r.length * .6)]]  /* feed_round：她指定的第二张，默认取 60% 处 */.filter((x, i, a) => x && a.indexOf(x) === i); return pick.map(c => ({d, c})); });
   for (let i = 0; i < 3; i++) per.forEach(list => list[i] && items.push(list[i]));
   let muted = false;  // 默认开声音；浏览器不让有声自动播放时先静音播，第一次点画面就打开
   view.innerHTML = `<div class="feed" id="feed">${items.map(({d, c}, k) => { const h = hisLine(d, c);
