@@ -217,7 +217,7 @@ function bufferUI(pl){
 function shareLink(d){ const u = location.origin + location.pathname + '#/d/' + d.id; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast(T('copied')), () => toast(u)); }
 function toggleSave(d){ S.saved[d.id] = S.saved[d.id] ? 0 : Date.now(); if (!S.saved[d.id]) delete S.saved[d.id]; save(); toast(T(S.saved[d.id] ? 'savedT' : 'unsavedT')); return !!S.saved[d.id]; }
 function toggleLike(d){ S.liked[d.id] = !S.liked[d.id]; if (!S.liked[d.id]) delete S.liked[d.id]; save(); return !!S.liked[d.id]; }
-const FEED_OPENING = new Set(['mii-open']);  // 推荐页第一张放开场（带声音），不放某一幕
+const FEED_OPENING = new Set(['mii-open', 'meet-third']);  // 推荐页第一张放开场（带声音），不放某一幕
 const feedFirst = d => FEED_OPENING.has(d.id) ? Object.assign({i: 0, opening: true, clip: d.live.open, poster: d.cover}, d.chapters[0]) : highlight(d);
 const highlight = d => { const r = rts(d); const want = d.cover_round ? r[d.cover_round - 1] : r[Math.min(1, r.length - 1)]; return want || r[0]; };
 
