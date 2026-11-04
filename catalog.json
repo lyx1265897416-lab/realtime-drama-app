@@ -397,6 +397,118 @@
    }
   },
   {
+   "id": "meet-third",
+   "avatar": "covers/av/meet-third.jpg",
+   "genre": "romance",
+   "name": "Rowan",
+   "title": {
+    "zh": "今天，再喜欢我一次",
+    "en": "Meet Me, Again"
+   },
+   "lead": {
+    "zh": "Rowan · 修理工",
+    "en": "Rowan · Repairman"
+   },
+   "hook": {
+    "zh": "海边温室的女主人隔着院门，拦下一个来修招牌的陌生人。他叫得出你的习惯，像早就认识你。他到底是谁、要不要让他进门，由你决定。",
+    "en": "Across the garden gate of her seaside greenhouse, she stops a stranger who came to fix the sign. He knows your habits, as if he has known you for a long time. Who he is, and whether he gets in, is up to you."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "海边温室",
+     "en": "Seaside greenhouse"
+    },
+    {
+     "zh": "治愈",
+     "en": "Healing"
+    },
+    {
+     "zh": "悬念",
+     "en": "Mystery"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#8aa36b",
+   "cover_local": "covers/meet-third.jpg",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "source": {
+    "log": "meet-third",
+    "film": "案例 · 脚本模拟用户",
+    "group": "案例 · 脚本模拟用户"
+   },
+   "live_hint": {
+    "zh": "launchd 中转 8905（今天，再喜欢我一次 第三视角）",
+    "en": "Relay (Meet Me, Again third person)"
+   },
+   "live": {
+    "open": "live/meet-third-open.mp4",
+    "idle": "live/meet-third-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/601a3b2890f54bbea724270617d38a2e/DAYLIGHT.mp3",
+    "lines": "magnus",
+    "post": "text",
+    "mode": "auto",
+    "open_cues": [
+     {
+      "s": 9.28,
+      "e": 9.8,
+      "zh": "放下。",
+      "en": "Put it down.",
+      "who": "Her"
+     },
+     {
+      "s": 10.85,
+      "e": 13.87,
+      "zh": "这个？放了可真要砸脚。",
+      "en": "This? Your toes might have a problem with that.",
+      "who": "Rowan"
+     },
+     {
+      "s": 14.77,
+      "e": 18.95,
+      "zh": "我是说，放下招牌，后退一点。",
+      "en": "The sign. Put it down, and take a step back.",
+      "who": "Her"
+     },
+     {
+      "s": 21.33,
+      "e": 25.79,
+      "zh": "好吧。先说清楚，我可不防水。",
+      "en": "Okay. Just so we are clear, I am not waterproof.",
+      "who": "Rowan"
+     },
+     {
+      "s": 27.17,
+      "e": 30.35,
+      "zh": "我是洛温。来修招牌的。",
+      "en": "I'm Rowan. Here to fix the sign.",
+      "who": "Rowan"
+     },
+     {
+      "s": 31.29,
+      "e": 33.13,
+      "zh": "你看着不像我叫来的。",
+      "en": "You don't look like someone I hired.",
+      "who": "Her"
+     },
+     {
+      "s": 34.14,
+      "e": 36.82,
+      "zh": "那我介绍得不够好。需要重来吗？",
+      "en": "Bad introduction. Want me to start over?",
+      "who": "Rowan"
+     }
+    ]
+   }
+  },
+  {
    "id": "dont-trust",
    "avatar": "covers/av/dont-trust.jpg",
    "genre": "mystery",
