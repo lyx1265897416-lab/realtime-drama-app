@@ -66,7 +66,9 @@ window.ACTORS = [
    "女主"
   ],
   "credits": [
-   "与狼为伍 · 旁观视角"
+   "与狼为伍 · 开放式",
+   "与狼为伍 · 旁观视角",
+   "与狼为伍"
   ]
  },
  {
@@ -131,6 +133,109 @@ window.ACTORS = [
   "owner": "Vicky 角色内容包",
   "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-rafael-face.jpg?v=2",
   "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-rafael-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "rowan",
+  "name": "Rowan",
+  "name_en": "Rowan",
+  "age": 27,
+  "gender": "male",
+  "price": 120,
+  "role": "修理工 · 每天来修她温室的人",
+  "role_en": "Handyman who comes to fix her greenhouse every day",
+  "personality": [
+   "阳光外向",
+   "可靠",
+   "爱说小笑话",
+   "她真害怕时会收住玩笑"
+  ],
+  "bio": "修好了她温室的窗和门，今天来修掉下来的招牌。调情靠接招和坦白想靠近，不靠压低声音；会被她逗得接不上话。弱点是怕失去刚得到的亲近，总把昨天成功的相处当成今天该重复的答案。",
+  "look": "栗棕色短发，暖棕色眼睛，常穿暖中棕麂皮外套配浅色毛衣。",
+  "tags": [
+   "治愈",
+   "每天重新认识",
+   "第三视角"
+  ],
+  "credits": [
+   "今天，再喜欢我一次"
+  ],
+  "style": "otome",
+  "id": "fs.rowan",
+  "source": "feishu.rowan",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rowan-face.jpg?v=2",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/rowan-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "heroine-meet",
+  "name": "Maisie",
+  "name_en": "Maisie",
+  "age": 25,
+  "gender": "female",
+  "price": 120,
+  "role": "温室和花店的主人 · 《今天，再喜欢我一次》女主",
+  "role_en": "Greenhouse and flower shop owner · lead of Like Me Again Today",
+  "personality": [
+   "幽默干脆",
+   "有事业心",
+   "不因为对方好看就信任"
+  ],
+  "bio": "陌生人站在门口，她先确认身份、限定活动空间，熟一点会反撩。知道自己失忆后会震惊、生气、核实、需要独处，之后慢慢从“我忘了什么”转向“我今天想做什么”。她怎么回应，由你决定。",
+  "look": "红棕色长卷发，浅绿眼睛，米白泡泡袖上衣配橄榄绿系带背心。",
+  "tags": [
+   "可当化身",
+   "女主",
+   "治愈"
+  ],
+  "credits": [
+   "今天，再喜欢我一次"
+  ],
+  "style": "otome",
+  "id": "fs.heroine-meet",
+  "source": "feishu.heroine-meet",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-meet-face.jpg?v=2",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/heroine-meet-body.jpg",
+  "species": "human",
+  "project": "feishu-character-packs"
+ },
+ {
+  "slug": "lena",
+  "name": "Lena Hart",
+  "name_en": "Lena Hart",
+  "age": 27,
+  "gender": "female",
+  "price": 120,
+  "role": "档案整理员 · 失联的那个人",
+  "role_en": "Archivist who went missing on the feed",
+  "personality": [
+   "遇险先想办法",
+   "不尖叫",
+   "不肯一下子说出全部实情"
+  ],
+  "bio": "Meridian 媒体中心的档案整理员。她发来一条语音：“别信正在说话的我。”可中心转播里的她一直说自己没事。她要带原档离开大楼，遇险先确认通道，再请你帮忙；怕别人因此不帮她，所以不会一下子把实情都说出来。",
+  "look": "深棕色长发，棕色眼睛，深灰工作外套配米白毛衣。",
+  "tags": [
+   "悬疑",
+   "远程通话",
+   "第一视角"
+  ],
+  "credits": [
+   "别信这段直播"
+  ],
+  "style": "real",
+  "id": "fs.lena",
+  "source": "feishu.lena",
+  "tier": "star",
+  "owner": "Vicky 角色内容包",
+  "face": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/lena-face.jpg?v=2",
+  "body": "https://lyx1265897416-lab.github.io/realtime-drama-app/actors/lena-body.jpg",
   "species": "human",
   "project": "feishu-character-packs"
  },
