@@ -528,7 +528,7 @@ function Player(view, d, q){
   function play(){ const pr = v.play(); if (pr) pr.catch(() => { v.muted = true; v.play().catch(() => {}); toast(T('soundOn')); }); $('#paused').hidden = true; }
   $('#tap').onclick = e => { if (mode !== 'play') return; if (v.muted){ e.stopPropagation(); v.muted = false; return; } if (watch) return; if (v.paused){ play(); } else { v.pause(); $('#paused').hidden = false; } };
   if (watch){  // 回放就是普通视频：进度条、时长、倍速、单击暂停，可以随意拖
-    RT.init({stage: '#pl', drama: 'app-' + d.id, zh: () => lang() === 'zh', isPlaying: () => mode === 'play' && !$('.endcard', pl), ignore: '.rail,.p-top,.iconbtn,.endcard,.cs-drawer,.cs-ev,.cs-pip'});
+    RT.init({stage: '#pl', drama: 'app-' + d.id, base: d.speed || 1, zh: () => lang() === 'zh', isPlaying: () => mode === 'play' && !$('.endcard', pl), ignore: '.rail,.p-top,.iconbtn,.endcard,.cs-drawer,.cs-ev,.cs-pip'});
     RT.begin({key: 'film', parts: [{v, d: d.film.duration}], free: true});
     onLeave(() => RT.destroy());
   }
@@ -656,7 +656,7 @@ function LivePlayer(view, d){
     const j = await r.json(); if (!r.ok) throw Object.assign(new Error(j.err || r.status), {code: r.status}); return j;
   }
 
-  RT.init({stage: '#pl', drama: 'app-' + d.id, zh: () => lang() === 'zh', isPlaying: () => alive && !pl.classList.contains('choosing') && !pl.classList.contains('waiting') && !!front.classList.contains('on') && front !== idle, ignore: '.rail,.p-top,#tapStart,.iconbtn,.endcard,.cs-drawer,.cs-ev,.cs-pip'}); onLeave(() => RT.destroy());
+  RT.init({stage: '#pl', drama: 'app-' + d.id, base: d.speed || 1, zh: () => lang() === 'zh', isPlaying: () => alive && !pl.classList.contains('choosing') && !pl.classList.contains('waiting') && !!front.classList.contains('on') && front !== idle, ignore: '.rail,.p-top,#tapStart,.iconbtn,.endcard,.cs-drawer,.cs-ev,.cs-pip'}); onLeave(() => RT.destroy());
   const cs = LV.case ? caseLayer(pl, d, () => front) : null; if (cs){ $('#rCase').onclick = cs.open; onLeave(cs.stop); }
   // 开场：开场片 → 待机循环 → 第一个选择点
   const ov = pool[1], idle = pool[2];
@@ -744,7 +744,7 @@ function LivePlayer(view, d){
     // 够播了才开始：浏览器判断能播完，或已缓冲 3 秒。手机省流量时可能一直不缓冲，等 8 秒就直接播（播放时它才会下载）
     const enough = (v, i) => { if (v.readyState >= 4) return true; const b = v.buffered, end = b.length ? b.end(b.length - 1) : 0; return (v.readyState >= 3 && end >= Math.min(v.duration || 5, 3)) || (seenAt[i] && Date.now() - seenAt[i] > 8000); };
     const seg1Ok = () => r && r.segs && r.segs[0] && r.segs[0].url && V[0].dataset.src === abs(r.segs[0].url) && enough(V[0], 0);
-    const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = V[0].duration || r.segs[0].dur || 5; return s2.eta_left != null && s2.eta_left <= d1 - M - (s2.dur >= 15 ? 1.5 : 0); };
+    const seg2Soon = () => { const s2 = r.segs[1]; if (!s2 || s2.url) return true; const d1 = (V[0].duration || r.segs[0].dur || 5) / RT.speed(); return s2.eta_left != null && s2.eta_left <= d1 - M - (s2.dur >= 15 ? 1.5 : 0); };
     const dub = LV.lines === 'dub'; let vidAt = 0;
     const aud = k => !(r.lines || []).some(l => l.seg === k && !l.audio && !l.audio_err);
     const voiced = () => !dub || aud(1) || (vidAt && Date.now() - vidAt > 4000);  // 只等第 1 段的配音，第 2 段的到了会自动用上
