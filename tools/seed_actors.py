@@ -19,11 +19,11 @@ PICK = [
     ('human.elias-magnus-doc-20261019', 'star'),
 ]
 TOP = {'human.magnus-magnus-doc-20261019', 'human.heroine-magnus-doc-20261019', 'animal.mii-nian-gao'}
-# 新人待签：Vicky 2026-10-30 指定的 13 位。(角色 id, 资产库编号 = 她选的那张定妆照, 造型描述, 英文艺名)
+# 新人待签：Vicky 2026-10-30 指定的 13 位，2026-11-04 删了 Willa Brooks（和 Maisie 是同一张脸）。(角色 id, 资产库编号 = 她选的那张定妆照, 造型描述, 英文艺名)
 ROOKIES = [
     ('research.white-D-03', 1637, '深色短发灰西装', 'Nadia Reyes'), ('research.white-C-03', 1615, '雀斑金发鼠尾草', 'Hazel Quinn'),
     ('human.3d-white-34-20260923-03', 716, '栗暖·日常', 'Clara Winters'), ('human.3d-white-34-20260923-06', 737, '沙金·探险者', 'Sage Holloway'),
-    ('human.3d-white-34-20260923-08', 751, '麦溪·田园', 'Willa Brooks'), ('human.3d-white-34-20260923-13', 795, '香槟·西装', 'Vivienne Laurent'),
+    ('human.3d-white-34-20260923-13', 795, '香槟·西装', 'Vivienne Laurent'),
     ('human.3d-white-34-20260923-26', 886, '雾银·轻运动', 'Silas Grey'), ('human.3d-original-28-selected-20260924-02', 1434, '夜色机车', 'Dante Cross'),
     ('human.3d-original-28-selected-20260924-04', 1448, '冬岸旅人', 'Elliot Frost'), ('human.research-white-27-20260923-18', 1048, '深色长发杏黄色裙装', 'Isabella Cruz'),
     ('human.research-white-27-20260923-05', 971, '深棕长发白衬衫领带', 'Eleanor Shaw'), ('human.male-white-portraits-23-v2-20260923-03', 231, '从容自信', 'Kian Mercer'),

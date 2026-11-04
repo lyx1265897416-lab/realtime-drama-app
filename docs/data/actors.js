@@ -614,26 +614,6 @@ window.ACTORS = [
   "price": 0
  },
  {
-  "id": "lib.human.3d-white-34-20260923-08",
-  "source": "human.3d-white-34-20260923-08",
-  "tier": "rookie",
-  "owner": "Vicky 资产库",
-  "name": "Willa Brooks",
-  "name_en": "3D white portrait 08",
-  "age": null,
-  "role": "麦溪·田园",
-  "appearance": "Feminine pastoral apothecary. Long cinnamon-brown loose waves partly tucked behind ear with a small braided section, muted turquoise eyes, softly long oval face, visible light freckles. Ivory gathered linen blouse with modest square neckline, moss-green embroidered laced bodice , tiny bronze leaf pin. Relaxed warm smile.",
-  "personality": [],
-  "signature": [],
-  "project": "3d-white-34-20260923",
-  "style": "otome_2d5d_3d",
-  "species": "human",
-  "gender": "female",
-  "face": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/ac68d76864c2d6e9ea21400fc1a73329437e1b6c197ac716be04b79a79311005-1280-q80.webp",
-  "body": "https://lyx1265897416-lab.github.io/Vicky-Asset-Repository/web/images/f0e353bb607aaa38dd655e4ec46d8d01e52b53446fff401c26873c6b8e8dbc29-1280-q80.webp",
-  "price": 0
- },
- {
   "id": "lib.human.3d-white-34-20260923-13",
   "source": "human.3d-white-34-20260923-13",
   "tier": "rookie",
