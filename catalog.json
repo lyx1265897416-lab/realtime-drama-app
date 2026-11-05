@@ -643,6 +643,134 @@
    }
   },
   {
+   "id": "island-liars",
+   "avatar": "covers/av/island-liars.jpg",
+   "genre": "romance",
+   "name": "Jasper",
+   "title": {
+    "zh": "三真四假",
+    "en": "Four Liars, One Island"
+   },
+   "lead": {
+    "zh": "Wes / Jasper · 七位男嘉宾",
+    "en": "Wes / Jasper · Seven bachelors"
+   },
+   "hook": {
+    "zh": "海岛恋综，七个男嘉宾：三个是真千万富翁，四个是装富豪来骗奖金的。你选一个配对，一边心动一边验真假。最后谁是真的，看你怎么查。",
+    "en": "An island dating show with seven bachelors: three are real millionaires, four are faking it for the prize money. Pair up, fall for someone, and find out who's lying. What you uncover is up to you."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "恋综",
+     "en": "Dating show"
+    },
+    {
+     "zh": "真假富豪",
+     "en": "Real or fake"
+    },
+    {
+     "zh": "选男主",
+     "en": "Pick your guy"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#d9a85c",
+   "cover_local": "covers/island-liars.jpg",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "source": {
+    "log": "island-liars",
+    "film": "你的人工测试 · Jasper 线",
+    "group": "你的人工测试 · Jasper 线"
+   },
+   "live_hint": {
+    "zh": "launchd 中转 8906 / 8907（三真四假两条线）",
+    "en": "Relays (Four Liars, One Island, two lines)"
+   },
+   "live": {
+    "mode": "auto",
+    "embed": "https://lyx1265897416-lab.github.io/four-liars-one-island/",
+    "lines": [
+     "wes",
+     "jasper"
+    ],
+    "lines_prefix": "ila-",
+    "persona": false,
+    "open_cues": [
+     {
+      "s": 2.26,
+      "e": 7.28,
+      "zh": "七个大帅哥。其中三个是来找老婆的千万富翁。",
+      "en": "Seven gorgeous men. Three of them are millionaires looking for a wife.",
+      "who": "Mei"
+     },
+     {
+      "s": 10.58,
+      "e": 17.11,
+      "zh": "另外四个身无分文……装富豪，是为了一百万奖金。爱上假的，你就得跟他一起回家。",
+      "en": "The other four are broke… and faking it for a million dollars. Fall for a fake, and he's the one you fly home with.",
+      "who": "Mei"
+     },
+     {
+      "s": 20.43,
+      "e": 24.59,
+      "zh": "第一晚就穿香槟色？真敢。可惜你撑不到周五。",
+      "en": "Champagne dress, night one? Bold. Shame you won't make it to Friday.",
+      "who": "Sloane"
+     },
+     {
+      "s": 25.22,
+      "e": 26.86,
+      "zh": "那我得抓紧了。",
+      "en": "Then I'd better work fast.",
+      "who": "Her"
+     },
+     {
+      "s": 27.51,
+      "e": 32.19,
+      "zh": "别理她。我是 Wes。这杯给你，没插小伞的。",
+      "en": "Ignore her. I'm Wes. This one's yours — no tiny umbrella.",
+      "who": "Wes"
+     },
+     {
+      "s": 32.84,
+      "e": 34.92,
+      "zh": "那么，Wes。你是真的，还是假的？",
+      "en": "So, Wes. Real or fake?",
+      "who": "Her"
+     },
+     {
+      "s": 35.59,
+      "e": 38.49,
+      "zh": "一周后再问我。我还会在这儿。",
+      "en": "Ask me again in a week. I'll still be here.",
+      "who": "Wes"
+     },
+     {
+      "s": 39.13,
+      "e": 41.29,
+      "zh": "想听实话？下面可没有。",
+      "en": "You want a straight answer? Not down there.",
+      "who": "Jasper"
+     },
+     {
+      "s": 45.72,
+      "e": 49.44,
+      "zh": "女士们——午夜，选出你的搭档。",
+      "en": "Ladies — at midnight, you couple up.",
+      "who": "Mei"
+     }
+    ]
+   }
+  },
+  {
    "id": "dont-trust",
    "avatar": "covers/av/dont-trust.jpg",
    "genre": "mystery",

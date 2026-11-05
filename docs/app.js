@@ -611,7 +611,8 @@ function Player(view, d, q){
 function EmbedPlayer(view, d){
   document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
-  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}&api=${encodeURIComponent(C.api)}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
+  const gw = (S.settings.gw || {}).url, api = d.live.lines ? (gw ? `${gw}/d/${d.live.lines_prefix}{line}` : '') : C.api;  // 多条线的剧（三真四假）：页面按 {line} 选中转，统一走公共入口，真口令也能过
+  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
   $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
