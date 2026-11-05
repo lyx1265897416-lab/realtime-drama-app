@@ -736,7 +736,7 @@ function LivePlayer(view, d){
     catch (e){ if (e.code === 404 || e.code === 410 || e.code === 400){ sid = null; connect(); } return fail(e.code === 429 ? T('busyGen') : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
     (async () => { while (polling && alive){  // 上一次返回后再发下一次（隧道每次 1 秒多，定时器会把请求堆起来）
       try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
-      if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u){ load(V[i], u); seenAt[i] = Date.now(); } });  // 一到就预载
+      if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u){ load(V[i], u); seenAt[i] = Date.now(); } const f = u + JSON.stringify(s.flip || []); if (u && V[i] && V[i].dataset.flip !== f){ V[i].dataset.flip = f; RT.flip(V[i], s.flip); } });  // 一到就预载；V3.6 左右对调的镜头由中转标出（flip），播到那几秒水平镜像
       if (r && Array.isArray(r.lines)) r.lines.forEach(l => l.audio && preAudio(l.audio));  // 咪的配音也一出来就预载
       const settled = r && r.segs && r.next && r.segs.every(s => s.url || s.status === 'error') && !(Array.isArray(r.lines) && r.lines.some(l => !l.audio && !l.audio_err));
       await new Promise(res => setTimeout(res, settled ? 6000 : LOCAL ? 500 : 1200)); } })();  // 都到齐后放慢轮询，播放时少占主线程
