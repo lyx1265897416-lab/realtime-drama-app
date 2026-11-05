@@ -63,7 +63,72 @@
     "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/b3d202886d5442ef9f1e13a81a2ed7e9/MUS_MAGNUS_RESTRAINT_V1.mp3",
     "lines": "magnus",
     "post": "json",
-    "persona": false
+    "persona": false,
+    "open_cues": [
+     {
+      "s": 0.5,
+      "e": 3.0,
+      "zh": "新郎呢？Thorne 家在找他。",
+      "en": "Where's the groom? The Thornes are asking for him.",
+      "who": "Planner"
+     },
+     {
+      "s": 3.7,
+      "e": 8.75,
+      "zh": "去车库看看。没有新郎，就没有照片；没有照片，就没有尾款。",
+      "en": "Check the garage. No groom, no photos. No photos, no pay.",
+      "who": "Planner"
+     },
+     {
+      "s": 12.0,
+      "e": 14.46,
+      "zh": "找到新郎。十分钟后宣布。",
+      "en": "Find the groom. Announcement's in ten.",
+      "who": "Planner"
+     },
+     {
+      "s": 19.61,
+      "e": 20.66,
+      "zh": "别动。",
+      "en": "Don't move.",
+      "who": "Magnus"
+     },
+     {
+      "s": 23.95,
+      "e": 24.95,
+      "zh": "告诉我……",
+      "en": "Tell me...",
+      "who": "Magnus"
+     },
+     {
+      "s": 25.34,
+      "e": 26.75,
+      "zh": "你到底是从哪里来的？",
+      "en": "Where did you come from?",
+      "who": "Magnus"
+     },
+     {
+      "s": 29.48,
+      "e": 30.68,
+      "zh": "摄影师。",
+      "en": "The photographer.",
+      "who": "Magnus"
+     },
+     {
+      "s": 30.79,
+      "e": 32.63,
+      "zh": "他们派你下来找我。",
+      "en": "They sent you down here for me.",
+      "who": "Magnus"
+     },
+     {
+      "s": 34.03,
+      "e": 35.23,
+      "zh": "把相机给我。",
+      "en": "Give me the camera.",
+      "who": "Magnus"
+     }
+    ]
    }
   },
   {
@@ -128,24 +193,66 @@
     "post": "json",
     "open_cues": [
      {
-      "s": 10.9,
-      "e": 11.95,
+      "s": 0.5,
+      "e": 3.0,
+      "zh": "新郎呢？Thorne 家在找他。",
+      "en": "Where's the groom? The Thornes are asking for him.",
+      "who": "Planner"
+     },
+     {
+      "s": 3.7,
+      "e": 8.75,
+      "zh": "去车库看看。没有新郎，就没有照片；没有照片，就没有尾款。",
+      "en": "Check the garage. No groom, no photos. No photos, no pay.",
+      "who": "Planner"
+     },
+     {
+      "s": 12.0,
+      "e": 14.46,
+      "zh": "找到新郎。十分钟后宣布。",
+      "en": "Find the groom. Announcement's in ten.",
+      "who": "Planner"
+     },
+     {
+      "s": 19.61,
+      "e": 20.66,
       "zh": "别动。",
       "en": "Don't move.",
       "who": "Magnus"
      },
      {
-      "s": 16.3,
-      "e": 17.3,
+      "s": 23.95,
+      "e": 24.95,
       "zh": "告诉我……",
       "en": "Tell me...",
       "who": "Magnus"
      },
      {
-      "s": 17.7,
-      "e": 19.1,
+      "s": 25.34,
+      "e": 26.75,
       "zh": "你到底是从哪里来的？",
       "en": "Where did you come from?",
+      "who": "Magnus"
+     },
+     {
+      "s": 29.18,
+      "e": 29.79,
+      "zh": "摄影师。",
+      "en": "The photographer.",
+      "who": "Magnus"
+     },
+     {
+      "s": 30.68,
+      "e": 32.44,
+      "zh": "他们派你下来找我。",
+      "en": "They sent you down here for me.",
+      "who": "Magnus"
+     },
+     {
+      "s": 33.98,
+      "e": 35.23,
+      "zh": "把相机给我。",
+      "en": "Give me the camera.",
       "who": "Magnus"
      }
     ]
