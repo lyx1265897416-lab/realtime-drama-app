@@ -117,8 +117,11 @@ const nm = d => lang() === 'zh' && d.name_zh ? d.name_zh : d.name;
 const progOf = id => S.progress[id];
 const parseLive = v => { if (!v) return null; if (typeof v === 'object') return v.api && v.k ? v : null;
   try { const u = new URL(v); const k = u.searchParams.get('k'); return k ? {api: (u.searchParams.get('api') || u.origin).replace(/\/$/, ''), k, url: v} : null; } catch (e) { return null; } };
-const liveCfg = id => parseLive((S.settings.live || {})[id]);
-const liveUrl = id => { const c = liveCfg(id); return c && (c.url || `${c.api}/?k=${encodeURIComponent(c.k)}`); };  // 没接进 APP 的剧：嵌入它自己的实时页
+const storedCfg = id => parseLive((S.settings.live || {})[id]);
+// 没存测试口令时走公共入口（tools/realtime-relays/app_gateway.py）：地址和公开口令都在 relays.json，每部剧每天有公开名额上限
+const pubCfg = id => { const g = S.settings.gw; return g && g.url && g.k && byId[id] && byId[id].live ? {api: g.url + '/d/' + id, k: g.k, pub: true} : null; };
+const liveCfg = id => storedCfg(id) || pubCfg(id);
+const liveUrl = id => { const c = storedCfg(id); return c && (c.url || `${c.api}/?k=${encodeURIComponent(c.k)}`); };  // 没接进 APP 的剧：嵌入它自己的实时页
 const liveNative = d => !!(d.live && liveCfg(d.id));
 const applyLiveLink = t => { try { const v = new URL(t.trim()).searchParams.get('live'); return v ? takeLive(v) : 0; } catch (e) { return 0; } };
 // 隧道重开后地址会变：relays.json 由这台 Mac 上的同步服务自动更新（只有地址，没有口令），所以存过一次口令就一直能连
@@ -128,6 +131,8 @@ const refreshRelays = force => {
   relaysAt = Date.now(); const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 6000);
   return relaysP = fetch('relays.json?t=' + relaysAt, {cache: 'no-store', signal: ctl.signal}).then(r => r.json()).then(j => { let moved = false;
     Object.keys(j).forEach(id => { const c = parseLive(S.settings.live[id]); if (c && c.api !== j[id] && !/127\.0\.0\.1|localhost/.test(c.api)){ S.settings.live[id] = {api: j[id], k: c.k}; moved = true; } });
+    const gw = j.gateway && j.pub ? {url: j.gateway, k: j.pub} : null;
+    if (JSON.stringify(gw) !== JSON.stringify(S.settings.gw || null)){ S.settings.gw = gw; moved = true; }
     if (moved) save(); return moved; }).catch(() => false).finally(() => clearTimeout(t));
 };
 const probeInfo = {};
@@ -135,7 +140,7 @@ async function liveProbe(id){  // 探一下中转，连不上就再取一次地�
   await refreshRelays();
   const once = async () => { const c = liveCfg(id); if (!c) return 'none'; const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
     try { const j = await (await fetch(`${c.api}/api/ping?k=${encodeURIComponent(c.k)}`, {signal: ctl.signal})).json(); probeInfo[id] = j; return j.ok ? 'ok' : 'badkey'; } catch (e) { return 'off'; } finally { clearTimeout(t); } };
-  let r = await once(); if (r === 'off' && await refreshRelays(true)) r = await once(); return r;
+  let r = await once(); if ((r === 'off' || (r === 'badkey' && !storedCfg(id))) && await refreshRelays(true)) r = await once(); return r;
 }
 refreshRelays();
 function liveUnlock(d, done){
@@ -421,9 +426,10 @@ function Detail(view, d){
   if ($('#castRow')) $('#castRow').onclick = () => personaSheet(d.id, L(d.title), () => route());
   if ($('#goLive')){
     const b = $('#goLive'); let state = 'none';
-    const check = () => { if (!liveCfg(d.id)) return; state = 'checking'; liveProbe(d.id).then(r => { state = r; if (b.isConnected) b.classList.toggle('dim', r === 'off' || r === 'badkey'); }); };
+    const check = async () => { if (!liveCfg(d.id)) await refreshRelays(); if (!liveCfg(d.id) || !b.isConnected) return; state = 'checking'; liveProbe(d.id).then(r => { state = r; if (b.isConnected) b.classList.toggle('dim', r === 'off' || r === 'badkey'); }); };
     b.onclick = () => {
-      if (state === 'none' || state === 'badkey') return liveUnlock(d, () => route());  // 没口令或口令不对：粘贴测试链接
+      if (state === 'none' && !liveCfg(d.id)) return refreshRelays(true).then(() => liveCfg(d.id) ? (location.hash = `#/play/${d.id}?live=1`) : liveUnlock(d, () => route()));  // 公共入口还没取到：再取一次，取不到才让粘贴测试链接
+      if (state === 'badkey') return liveUnlock(d, () => route());  // 口令不对：粘贴测试链接
       if (state === 'off'){ toast(T('liveOff3')); return check(); }
       location.hash = `#/play/${d.id}?live=1`; };
     check();
@@ -605,7 +611,7 @@ function Player(view, d, q){
 function EmbedPlayer(view, d){
   document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
-  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
+  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}&api=${encodeURIComponent(C.api)}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
   $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
@@ -733,7 +739,7 @@ function LivePlayer(view, d){
       mark(!r || r.status === 'submitted' ? 0 : r.segs && r.segs[0] && r.segs[0].url ? 2 : 1); }, 250);
     const fail = msg => { clearInterval(tick); polling = false; busy = false; toast(msg); setMode('play'); if (my === run) openChoice(); };
     try { rid = (await api('/api/round', {sid, kind, choice: ch, input: kind === 'free' ? said.zh : undefined})).id; }
-    catch (e){ if (e.code === 404 || e.code === 410 || e.code === 400){ sid = null; connect(); } return fail(e.code === 429 ? T('busyGen') : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
+    catch (e){ if (e.code === 404 || e.code === 410 || e.code === 400){ sid = null; connect(); } return fail(e.code === 429 ? (/\D/.test(e.message) ? e.message : T('busyGen')) : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
     (async () => { while (polling && alive){  // 上一次返回后再发下一次（隧道每次 1 秒多，定时器会把请求堆起来）
       try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
       if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u){ load(V[i], u); seenAt[i] = Date.now(); } const f = u + JSON.stringify(s.flip || []); if (u && V[i] && V[i].dataset.flip !== f){ V[i].dataset.flip = f; RT.flip(V[i], s.flip); } });  // 一到就预载；V3.6 左右对调的镜头由中转标出（flip），播到那几秒水平镜像
