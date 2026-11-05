@@ -76,7 +76,7 @@ def main():
     extra = [dict(a, id='fs.' + a['slug'], source='feishu.' + a['slug'], tier='star', owner='Vicky 角色内容包', face=f"{SITE}{a['slug']}-face.jpg?v=2", body=f"{SITE}{a['slug']}-body.jpg",
                   species='human', project='feishu-character-packs') for a in json.loads(Path(__file__).with_name('feishu_actors.json').read_text())]
     stars = [a for a in out if a['tier'] == 'star']
-    lead = {'fs.rafael', 'fs.heroine-rafael', 'fs.rowan', 'fs.heroine-meet', 'fs.lena', 'fs.rhys', 'fs.june'}  # 男女主排在最前（现有剧集的主角，2026-11-04 补 Rowan、Maisie、Lena）
+    lead = {'fs.rafael', 'fs.heroine-rafael', 'fs.rowan', 'fs.heroine-meet', 'fs.lena', 'fs.rian', 'fs.rhys', 'fs.june'}  # 男女主排在最前（现有剧集的主角，2026-11-04 补 Rowan、Maisie、Lena）
     head = stars[:2] + [a for a in extra if a['id'] in lead] + [stars[2]]
     out = head + stars[3:] + [a for a in extra if a['id'] not in lead] + [a for a in out if a['tier'] == 'rookie']
     OUT.parent.mkdir(parents=True, exist_ok=True)

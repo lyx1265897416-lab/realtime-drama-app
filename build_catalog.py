@@ -177,7 +177,11 @@ def hls(d, film):
     src, out = LOG / film['video'], HERE / 'docs' / 'film' / d['id']
     if not (out / 'i.m3u8').exists() or (out / 'i.m3u8').stat().st_mtime < src.stat().st_mtime:
         out.mkdir(parents=True, exist_ok=True)
-        subprocess.run([str(HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg'), '-y', '-loglevel', 'error', '-i', str(src), '-c', 'copy', '-f', 'hls', '-hls_time', '4', '-hls_playlist_type', 'vod',
+        ff = str(HERE.parents[1] / '.media-runtime/vivix-bin/ffmpeg')
+        rate = subprocess.run([ff.replace('ffmpeg', 'ffprobe'), '-v', 'error', '-show_entries', 'format=bit_rate', '-of', 'csv=p=0', str(src)], capture_output=True, text=True).stdout.strip()
+        enc = ['-c', 'copy'] if rate.isdigit() and int(rate) <= 800000 else [  # 720p 高码率的成片（新剧的测试记录原片约 1.5 Mbps）转成和其他剧一样的 540 宽、约 500 kbps，慢网也能连续播
+            '-vf', 'scale=540:-2:flags=lanczos', '-c:v', 'libx264', '-preset', 'slow', '-crf', '26', '-maxrate', '560k', '-bufsize', '1120k', '-g', '96', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k']
+        subprocess.run([ff, '-y', '-loglevel', 'error', '-i', str(src), *enc, '-f', 'hls', '-hls_time', '4', '-hls_playlist_type', 'vod',
                         '-hls_segment_type', 'fmp4', '-hls_flags', 'single_file+independent_segments', '-hls_fmp4_init_filename', 'v.m4s', '-hls_segment_filename', str(out / 'v.m4s'), str(out / 'i.m3u8')], check=True)
     return f"film/{d['id']}/i.m3u8"
 

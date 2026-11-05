@@ -17,6 +17,7 @@ RELAYS = {  # 剧 id: (中转目录, 隧道日志或地址文件, 本机端口)
     'magnus-third': (ROOT / 'output/magnus-third-live-v1', 'logs/tunnel-public.log', 8895),  # launchd 托管的公网实例（tools/realtime-relays）
     'rafael-third': (ROOT / 'output/rafael-third-live-v1', 'logs/tunnel-public.log', 8901),
     'dont-trust': (ROOT / 'output/dont-trust-live-v1', 'logs/tunnel-public.log', 8902),
+    'rian-third': (ROOT / 'output/rian-third-live-v1', 'logs/tunnel-public.log', 8908),
     'meet-third': (ROOT / 'output/meet-me-third-live-v1', 'logs/tunnel-public.log', 8905),
     'studio': (ROOT / 'projects/realtime-drama-app/studio', 'tunnel.log', 8860),  # 创作服务：演员表、钱包、自由剧场
 }

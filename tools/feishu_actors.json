@@ -128,6 +128,32 @@
   "style": "real"
  },
  {
+  "slug": "rian",
+  "name": "Rian Thalys",
+  "name_en": "Rian Thalys",
+  "age": 23,
+  "gender": "male",
+  "price": 120,
+  "role": "人鱼王子 · 潮城王族继承人",
+  "role_en": "Merman prince, heir of the Tide City",
+  "personality": [
+   "自信会调情",
+   "反应快",
+   "她认真时会收起笑把话说清楚"
+  ],
+  "bio": "潮城王族继承人，面临继位和政治联姻。为了让误入禁海的她过摄政官那一关，他当众说她是“我未来的新娘”。轻佻只是表达方式，不把承诺当笑话；怕对方喜欢的只是奇遇和头衔，所以会拖延解释。情绪起伏时，耳鳍和锁骨上的细鳞会发出微光。",
+  "look": "银紫色长发，蓝色半透明耳鳍，紫灰色眼睛，海蓝水晶吊坠和珍珠流苏，白色鳞纹披袍。",
+  "tags": [
+   "人鱼",
+   "假婚约",
+   "奇幻"
+  ],
+  "credits": [
+   "人鱼王子的假新娘"
+  ],
+  "style": "otome"
+ },
+ {
   "slug": "rhys",
   "name": "Rhys",
   "name_en": "Rhys",

@@ -510,6 +510,139 @@
    "speed": 1.1
   },
   {
+   "id": "rian-third",
+   "avatar": "covers/av/rian-third.jpg",
+   "genre": "romance",
+   "name": "Rian",
+   "title": {
+    "zh": "人鱼王子的假新娘",
+    "en": "The Sea Prince's Almost Bride"
+   },
+   "lead": {
+    "zh": "Rian Thalys · 人鱼王子",
+    "en": "Rian Thalys · Merman prince"
+   },
+   "hook": {
+    "zh": "为了找回被潮水卷走的好友，你跟着跳进海里，被人鱼王子救进海下王宫。守门的摄政官不放外人进来，他当众说你是“我未来的新娘”。接不接这出戏，由你决定。",
+    "en": "You dive after your best friend when the tide takes her, and a merman prince pulls you into his palace beneath the sea. When the regent won't let an outsider in, he tells the whole hall you're his future bride. Whether you play along is up to you."
+   },
+   "kind": "open",
+   "pov": "third",
+   "tags": [
+    {
+     "zh": "人鱼",
+     "en": "Merman"
+    },
+    {
+     "zh": "假婚约",
+     "en": "Fake engagement"
+    },
+    {
+     "zh": "海下王宫",
+     "en": "Undersea palace"
+    },
+    {
+     "zh": "第三视角",
+     "en": "Third person"
+    }
+   ],
+   "accent": "#6f8fd6",
+   "cover_local": "covers/rian-third.jpg",
+   "badge": {
+    "zh": "新",
+    "en": "New"
+   },
+   "source": {
+    "log": "rian-third",
+    "film": "你的人工测试 · 第 1 次",
+    "group": "你的人工测试 · 第 1 次"
+   },
+   "live_hint": {
+    "zh": "launchd 中转 8908（人鱼王子的假新娘 第三视角）",
+    "en": "Relay (The Sea Prince's Almost Bride, third person)"
+   },
+   "live": {
+    "open": "live/rian-third-open.mp4",
+    "idle": "live/rian-third-idle.mp4",
+    "wait": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/2257e3ba2b9848059d41170f2106adf2/WAIT.mp3",
+    "lines": "magnus",
+    "post": "text",
+    "mode": "auto",
+    "open_cues": [
+     {
+      "s": 0.2,
+      "e": 2.8,
+      "zh": "盐点港海岸 · 清晨 6:12",
+      "en": "Saltpoint Coast · 6:12 AM",
+      "who": ""
+     },
+     {
+      "s": 3.0,
+      "e": 5.6,
+      "zh": "Skye，你看！海水在发光！",
+      "en": "Skye, look! The water is glowing!",
+      "who": "Mila"
+     },
+     {
+      "s": 8.75,
+      "e": 9.45,
+      "zh": "米拉！",
+      "en": "Mila!",
+      "who": "Her"
+     },
+     {
+      "s": 29.4,
+      "e": 31.65,
+      "zh": "这是……哪里？",
+      "en": "Where... am I?",
+      "who": "Her"
+     },
+     {
+      "s": 29.6,
+      "e": 32.2,
+      "zh": "潮门 · 藏在海下的王宫",
+      "en": "The Tidal Gate · a palace beneath the sea",
+      "who": ""
+     },
+     {
+      "s": 37.7,
+      "e": 41.15,
+      "zh": "我朋友，穿黄外套的。她在哪？",
+      "en": "My friend. Yellow jacket. Where is she?",
+      "who": "Her"
+     },
+     {
+      "s": 41.6,
+      "e": 47.7,
+      "zh": "她很安全。访客不得进入这一翼。未登记的访客会被扣留，",
+      "en": "She is safe. Visitors cannot enter this wing. Unregistered visitors are held,",
+      "who": "Vessa"
+     },
+     {
+      "s": 47.7,
+      "e": 50.15,
+      "zh": "关于这里的记忆，也会被封存。",
+      "en": "and their memory of this place is sealed.",
+      "who": "Vessa"
+     },
+     {
+      "s": 62.85,
+      "e": 63.6,
+      "zh": "她跟我一起。",
+      "en": "She is with me.",
+      "who": "Rian"
+     },
+     {
+      "s": 66.65,
+      "e": 67.5,
+      "zh": "我未来的新娘。",
+      "en": "My future bride.",
+      "who": "Rian"
+     }
+    ]
+   }
+  },
+  {
    "id": "dont-trust",
    "avatar": "covers/av/dont-trust.jpg",
    "genre": "mystery",
