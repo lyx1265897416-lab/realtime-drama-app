@@ -48,6 +48,7 @@
 方案见 [角色与演员表方案.md](角色与演员表方案.md)。
 
 - 创作服务 `studio/studio_server.py`（8860，口令 studio/token.txt，数据 studio/data/，不进仓库）：AI 补全、提炼设定、定妆照、剧照、自由剧场写戏、上架、雇佣、星票钱包。模型走 OpenRouter
+- 创建角色可上传照片（11-05，复用 external/nl-video-harness 的 face_box.swift / person_mask.swift）：`/api/face` 免费，查脸（没脸、脸小于 110px 退回）、抠人像铺白底、裁 3:4 胸像当形象；原图存 studio/data/img 不上架。`/api/portrait` 带 card.photo 时按这张脸用 Waku gpt-image-2/edit 出定妆照（没写外形就保留照片里的穿着）。生图超 45 秒先回 `{pending}`，前端 `/api/job` 轮询（隧道约 100 秒会断）；waku --wait 中途放手时按 job id 接着取
 - 由 launchd 托管（com.vicky.realtime.studio、studio-tunnel，见 ../../tools/realtime-relays/README.md）。改完代码或演员表：`launchctl kickstart -k gui/$(id -u)/com.vicky.realtime.studio`；只重启服务时隧道地址不变，隧道重启或电脑重启后重跑 `live_links.py` 发新链接
 - 演员种子：`python3 tools/seed_actors.py` 从 Vicky 资产库选角（`PICK` / `ROOKIE_GROUPS`），人设补充在 `tools/actor_bios.json`，图片引用资产库线上地址
 - 串场：实时中转的 `/api/session` 接受可选的 `persona`（角色卡文本），导演层收到后按卡演；不带时行为不变
