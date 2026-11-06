@@ -36,6 +36,7 @@ ACTORS = Path(__file__).resolve().parents[1] / 'docs/data/actors.js'
 LIB = {a['id']: a for a in json.loads(ACTORS.read_text()[ACTORS.read_text().index('['):ACTORS.read_text().rindex(']') + 1])}
 
 
+import sys as _sys; _sys.path.insert(0, '/Users/vicky/Interactive storyline/tools'); import claude_cli as CC  # 11-05 所有剧集统一 Opus 5.5（DIRECTOR_CLI）
 def log(*a):
     print(time.strftime('%H:%M:%S'), *a, flush=True)
 
@@ -84,6 +85,11 @@ def key():
 
 
 def chat(model, system, user, max_tokens=1800, images=None, image_out=False, timeout=90):
+    if CC.enabled() and not images and not image_out:  # 11-05 所有剧集统一 Opus 5.5：文字任务走本机 Claude Code，失败照旧走 OpenRouter
+        try:
+            txt, _ = CC.call_text(system, user, timeout=max(timeout, 120)); i = txt.find('{')
+            if i >= 0: return json.JSONDecoder().raw_decode(txt[i:])[0]
+        except Exception as e: print('STUDIO_CLI failed:', repr(e)[:160], flush=True)
     content = [{'type': 'text', 'text': user}] + [{'type': 'image_url', 'image_url': {'url': u}} for u in (images or [])]
     body = {'model': model, 'max_tokens': max_tokens, 'messages': [{'role': 'system', 'content': system}, {'role': 'user', 'content': content}]}
     if image_out: body['modalities'] = ['image', 'text']

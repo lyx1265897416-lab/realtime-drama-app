@@ -617,6 +617,7 @@ function EmbedPlayer(view, d){
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
   $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
 }
+const LIVE_KEEP = {};  // 每部剧当前这一局（会话、第几幕、下一轮选项、最后一段视频），离开播放页再回来时接着演
 function LivePlayer(view, d){
   if (d.live.embed) return EmbedPlayer(view, d);
   document.body.classList.add('notabs', 'noscroll');
@@ -672,7 +673,7 @@ function LivePlayer(view, d){
   const startSession = () => api('/api/session', Object.assign({mode: MODE}, persona ? {persona: cardText(persona)} : {})).then(j => { sid = j.sid; next = j.next; round = 0; });
   function playOpening(){
     run++; busy = false; setMode('play'); showSub(null); $('#chLabel').textContent = T('opening'); const end = $('.endcard', pl); end && end.remove(); const csFired = new Set(); if (cs) cs.reset();
-    ov.currentTime = 0; ov.muted = false; ov.loop = false; RT.begin({key: 'OPEN', parts: [{v: ov}]});
+    ov.currentTime = 0; ov.muted = false; ov.loop = false; RT.begin({hist: {cues: (typeof OPEN_CUES !== 'undefined' ? OPEN_CUES : null)}, key: 'OPEN', parts: [{v: ov}]});
     ov.play().then(() => { show(ov); $('#tapStart').hidden = true; }).catch(() => { $('#tapStart').hidden = false; });
     ov.ontimeupdate = () => { const t = ov.currentTime, c = LV.open_cues.find(q => t >= q.s && t <= q.e); showSub(c || null, c && c.who); if (cs) cs.tickOpen(t, csFired); };
     ov.onended = () => { RT.done('OPEN'); RT.clear(); ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); if (cs) cs.setSrc('direct'); openChoice(); };
@@ -691,8 +692,21 @@ function LivePlayer(view, d){
     }
     connecting = false; if (sid && offPanel && alive){ offPanel = false; openChoice(); }
   }
-  connect();
-  playOpening();
+  // 接着上一局：去采纳设定、看角色页、切到别的页再回来，回到刚才那一幕的选择点，不重播开场（Vicky 11-05）
+  const KEEP = 'live-keep-' + d.id;
+  const keepGet = () => { let k = LIVE_KEEP[d.id]; if (!k){ try { k = JSON.parse(sessionStorage.getItem(KEEP) || 'null'); } catch (e) {} } return k && k.api === API && Date.now() - k.at < 6 * 3600e3 ? k : null; };
+  const keepSet = k => { LIVE_KEEP[d.id] = k; try { k ? sessionStorage.setItem(KEEP, JSON.stringify(k)) : sessionStorage.removeItem(KEEP); } catch (e) {} };
+  let resumed = false;
+  function resume(k){
+    resumed = true; sid = k.sid; next = k.next; round = k.round; run++; busy = false;
+    const j = probeInfo[d.id] || {}; setStat(`<i></i>${T('liveConn')}${j.model ? ' · ' + esc(j.model) : ''} · ${esc(MODE)}`);
+    $('#chLabel').textContent = T('scene', {n: round + 1}) + ' · LIVE'; $('#tapStart').hidden = true;
+    const v = pool[0]; load(v, k.last); v.loop = false; v.muted = true;
+    v.onloadedmetadata = () => { v.onloadedmetadata = null; try { v.currentTime = Math.max(0, (v.duration || 0.2) - 0.08); } catch (e) {} };
+    show(v); openChoice();
+  }
+  const kept = keepGet();
+  if (kept) setTimeout(() => alive && resume(kept), 0); else { connect(); playOpening(); }  // 等下面的选项函数都定义好再接
 
   // 选择点：导演层给的两个选项 + 输入框 + 灵感
   const optText = o => lang() === 'zh' ? `${esc(o.zh || o.en)}${o.en && o.zh ? `<small>${esc(o.en)}</small>` : ''}` : esc(o.en || o.zh);
@@ -740,7 +754,8 @@ function LivePlayer(view, d){
       mark(!r || r.status === 'submitted' ? 0 : r.segs && r.segs[0] && r.segs[0].url ? 2 : 1); }, 250);
     const fail = msg => { clearInterval(tick); polling = false; busy = false; toast(msg); setMode('play'); if (my === run) openChoice(); };
     try { rid = (await api('/api/round', {sid, kind, choice: ch, input: kind === 'free' ? said.zh : undefined})).id; }
-    catch (e){ if (e.code === 404 || e.code === 410 || e.code === 400){ sid = null; connect(); } return fail(e.code === 429 ? (/\D/.test(e.message) ? e.message : T('busyGen')) : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
+    catch (e){ if (resumed && e.code === 404){ busy = false; toast(Z('这一局在服务器上已经过期，从开场重新开始', 'This run expired on the server. Starting over')); return $('#rRe').click(); }
+      if (e.code === 404 || e.code === 410 || e.code === 400){ sid = null; connect(); } return fail(e.code === 429 ? (/\D/.test(e.message) ? e.message : T('busyGen')) : e.code === 410 ? e.message : T('liveFail', {e: e.message})); }
     (async () => { while (polling && alive){  // 上一次返回后再发下一次（隧道每次 1 秒多，定时器会把请求堆起来）
       try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
       if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u){ load(V[i], u); seenAt[i] = Date.now(); } const f = u + JSON.stringify(s.flip || []); if (u && V[i] && V[i].dataset.flip !== f){ V[i].dataset.flip = f; RT.flip(V[i], s.flip); } });  // 一到就预载；V3.6 左右对调的镜头由中转标出（flip），播到那几秒水平镜像
@@ -763,7 +778,7 @@ function LivePlayer(view, d){
     clearInterval(tick); mark(3);
     const view = {play_at: Date.now(), seg2_eta: r.segs[1] ? r.segs[1].eta_left : null};
     setMode('play'); waitMusic(false);
-    RT.begin({key: 'round:' + rid, mix: r.mix, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T('scene', {n: round + 1})}); RT.part(0);
+    RT.begin({hist: {r: r, her: (typeof herLine !== 'undefined' ? herLine : (typeof said !== 'undefined' && said ? (said.zh || said.en || '') : ''))}, key: 'round:' + rid, mix: r.mix, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T('scene', {n: round + 1})}); RT.part(0);
     await play(0); view.seg1_end = Date.now();
     if (r.segs.length > 1){
       const ok2 = () => segErr() || (r.segs[1].url && V[1].dataset.src === abs(r.segs[1].url) && enough(V[1], 1));
@@ -779,6 +794,7 @@ function LivePlayer(view, d){
     afterScene(L(d.title), text, his2(), (S.casting || {})[d.id] && String(S.casting[d.id]).startsWith('c.') ? S.casting[d.id] : null);
     toast(T('liveDone', {n: round + 1, s: ((view.play_at - t0) / 1000).toFixed(1)}));
     busy = false; round++; next = r.next || next; if (cs) cs.after(r);
+    keepSet({sid, next, round, api: API, last: abs(r.segs[r.segs.length - 1].url), at: Date.now()});
     if (cs && r.case_closed){  // 结案：这条线走到头了
       const e = r.ending || {}, named = cs.held().includes('E13'), card = document.createElement('div'); card.className = 'endcard fade-in'; RT.clear(); waitMusic(true);
       card.innerHTML = `<h3>${named ? Z('证据指向了他', 'It names him') : Z('人出来了，事还没完', 'Out, not finished')}</h3><p>${esc(L(e))}</p><p>${Z(`拿到 ${cs.held().length} / ${cs.total} 份证据 · ${round} 步`, `${cs.held().length} of ${cs.total} pieces of evidence · ${round} moves`)}</p><div class="row"><button class="btn ghost" id="eCase">${Z('看案卷', 'Case file')}</button><button class="btn live" id="eAgain">${Z('再查一次', 'Play again')}</button></div>`;
@@ -819,7 +835,7 @@ function LivePlayer(view, d){
   $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
   $('#rLike').onclick = () => $('#rLike').classList.toggle('on', toggleLike(d));
   $('#rLog').onclick = () => logSheet(d, i => location.hash = `#/play/${d.id}?from=${i}`);
-  $('#rRe').onclick = () => { bless(ov); closeChoice(); next = null; sid = null; connect(); load(ov, LV.open); load(idle, LV.idle, true); playOpening(); };
+  $('#rRe').onclick = () => { keepSet(null); resumed = false; bless(ov); closeChoice(); next = null; sid = null; connect(); load(ov, LV.open); load(idle, LV.idle, true); playOpening(); };
   $('#rCC').onclick = () => { S.settings.subs = S.settings.subs === 'en' ? 'both' : 'en'; save(); $('#rCC span').textContent = S.settings.subs === 'en' ? 'EN' : (lang() === 'zh' ? '中/EN' : 'EN/中'); };
   onLeave(() => { alive = false; run++; clearInterval(mTick); music.pause(); Object.values(AUD).forEach(a => a.pause()); voice.pause(); curVoice = null; pool.forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); }); });
 }
