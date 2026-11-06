@@ -302,7 +302,7 @@ function route(){
 // 返回键只在 APP 自己走过的页面里退：直接打开某个链接、或嵌入页（iframe）在浏览器历史里多了几步时，history.back() 会退出 APP 或原地不动
 const TRAIL = [location.hash || '#/'];
 addEventListener('hashchange', () => { const h = location.hash || '#/'; if (TRAIL.length > 1 && TRAIL[TRAIL.length - 2] === h) TRAIL.pop(); else if (TRAIL[TRAIL.length - 1] !== h) TRAIL.push(h); });
-const goBack = fallback => { if (TRAIL.length > 1) location.hash = TRAIL[TRAIL.length - 2]; else location.hash = fallback; };
+const goBack = fallback => { if (TRAIL.length > 1) location.hash = TRAIL[TRAIL.length - 2]; else { TRAIL.length = 0; location.replace(fallback); } };  // 没有上一页：换成兜底页并把它当起点，免得在两页之间来回跳
 addEventListener('hashchange', route);
 
 // ---------- 剧场（首页） ----------
@@ -619,7 +619,7 @@ function EmbedPlayer(view, d){
   view.innerHTML = `<div class="player embed" id="pl"><div class="embed-top"><button class="iconbtn" id="back" aria-label="${Z('返回', 'Back')}">${ICON.back}</button><b>${esc(L(d.title))}</b></div><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe></div>`;
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.remove(); });  // 直接移除：改 src 会在浏览器历史里多一步
-  $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
+  $('#back').onclick = () => goBack('#/d/' + d.id);  // 不用 history.back：iframe 自己的跳转也在同一条历史里
 }
 const LIVE_KEEP = {};  // 每部剧当前这一局（会话、第几幕、下一轮选项、最后一段视频），离开播放页再回来时接着演
 function LivePlayer(view, d){
