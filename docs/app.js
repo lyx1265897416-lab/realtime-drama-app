@@ -616,7 +616,7 @@ function EmbedPlayer(view, d){
   document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
   const gw = (S.settings.gw || {}).url, api = d.live.lines ? (gw ? `${gw}/d/${d.live.lines_prefix}{line}` : '') : C.api;  // 多条线的剧（三真四假）：页面按 {line} 选中转，统一走公共入口，真口令也能过
-  view.innerHTML = `<div class="player embed" id="pl"><div class="embed-top"><button class="iconbtn" id="back" aria-label="${Z('返回', 'Back')}">${ICON.back}</button><b>${esc(L(d.title))}</b></div><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe></div>`;
+  view.innerHTML = `<div class="player embed" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back" aria-label="${Z('返回', 'Back')}">${ICON.back}</button></div>`;  // 返回键和其他播放页一样浮在左上角；嵌入页带 embed=1 时自己的顶栏往右让出位置
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
   addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.remove(); });  // 直接移除：改 src 会在浏览器历史里多一步
   $('#back').onclick = () => goBack('#/d/' + d.id);  // 不用 history.back：iframe 自己的跳转也在同一条历史里

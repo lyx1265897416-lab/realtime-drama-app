@@ -578,8 +578,4 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .rail .cs-n{font-style:normal}
 /* 嵌入式实时页（别信这段直播）：整页 iframe，返回键浮在它的左上角 */
 .embed-play{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.player.embed{display:flex;flex-direction:column}
-.embed-top{flex:none;display:flex;align-items:center;gap:10px;height:calc(52px + var(--safe-t));padding:var(--safe-t) 12px 0;background:#0d0a10;border-bottom:1px solid var(--line);z-index:3}
-.embed-top b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.embed-top .iconbtn{flex:none;width:40px;height:40px}
-.player.embed .embed-play{position:relative;inset:auto;flex:1;height:auto}
+.embed-back{position:absolute;z-index:7;left:12px;top:calc(10px + var(--safe-t));background:rgba(0,0,0,.35)}
