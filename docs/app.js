@@ -920,7 +920,8 @@ async function sapi(path, body){
   const r = await fetch(c.api + path + (body ? '' : (path.includes('?') ? '&' : '?') + 'k=' + encodeURIComponent(c.k)), {method: body ? 'POST' : 'GET', headers: body ? {'Content-Type': 'text/plain'} : {},
     body: body ? JSON.stringify(Object.assign({k: c.k, uid: S.uid, nick: S.nick}, body)) : undefined});
   const j = await r.json(); if (j.wallet){ S.wallet = j.wallet; save(); refreshWallet(); }
-  if (!r.ok) throw Object.assign(new Error(j.err || r.status), {code: r.status}); return j;
+  if (!r.ok) throw Object.assign(new Error(j.err || r.status), {code: r.status});
+  return j.pending ? sapi('/api/job', {id: j.pending}) : j;  // 生图超过 45 秒先回任务号，接着等（隧道约 100 秒会断）
 }
 const refreshWallet = () => $$('[data-wallet]').forEach(el => el.textContent = S.wallet ? S.wallet.balance : '—');
 const walletPill = () => `<button class="wallet" data-go-wallet>★ <b data-wallet>${S.wallet ? S.wallet.balance : '—'}</b></button>`;
@@ -1078,9 +1079,9 @@ function Editor(view, id){
   const lst = c.listing || {};
   view.innerHTML = `<div class="editor fade-in"><div class="d-top solid"><button class="iconbtn" id="back">${ICON.back}</button><b>${isNew ? Z('创建角色', 'New character') : Z('编辑角色', 'Edit character')}</b>${walletPill()}</div>
     <div class="ed-face"><div class="ph" id="face">${c.face ? `<img decoding="async" src="${esc(imgUrl(c.face))}" alt="">` : `<span>${Z('还没有定妆照', 'No portrait yet')}</span>`}</div>
-      <div class="ed-face-act"><button class="btn ghost sm" id="pickFace">${Z('从角色库提取形象', 'From character library')}</button>
+      <div class="ed-face-act"><div class="facesrc"><button class="btn ghost sm" id="upFace">📷 ${Z('上传我的照片', 'Upload a photo')}</button><button class="btn ghost sm" id="pickFace">${Z('从角色库选', 'From library')}</button></div><input type="file" id="upFile" accept="image/*" hidden>
         <div class="stylepick" id="style">${[['real', '写实', 'Real'], ['anime', '二次元', 'Anime'], ['3d', '3D', '3D']].map(([k, zh, en]) => `<button class="${styleKey(c.style) === k ? 'on' : ''}" data-st="${k}">${Z(zh, en)}</button>`).join('')}</div>
-        <button class="btn gold sm" id="gen">✨ ${Z('按设定生成定妆照 · ★80', 'Generate portrait · ★80')}</button></div></div>
+        <button class="btn gold sm" id="gen"></button><p class="note" id="faceNote" style="margin:0">${c.photo ? Z('已按你上传的照片取脸。照片只存在创作服务这台电脑上，不会上架。', 'Face from your photo. The photo stays on the studio machine and is never listed.') : Z('上传一张正脸清楚的照片（免费），或从角色库选；再按画风生成定妆照。', 'Upload a clear front-facing photo (free) or pick one, then generate a styled portrait.')}</p></div></div>
     <div class="ed-assist"><button class="btn ghost" id="assist">✨ ${Z('AI 帮我补全空着的设定（免费）', 'AI: fill the blanks (free)')}</button><p class="note" id="assistNote">${Z('先写几个你在意的（比如名字和职业），其余交给 AI；写过的不会被改。', 'Write what matters, AI fills the rest; your fields stay.')}</p></div>
     <div class="ed-fields">${FIELDS.map(([k, zh, en]) => { const v = k === 'personality' ? arrOf(c[k]).join('，') : c[k] || ''; const long = ['look', 'backstory', 'world', 'secret', 'voice', 'likes', 'goal'].includes(k);
       return `<div class="field"><label>${Z(zh, en)}</label>${long ? `<textarea data-f="${k}" rows="2">${esc(v)}</textarea>` : `<input data-f="${k}" value="${esc(v)}">`}</div>`; }).join('')}</div>
@@ -1092,25 +1093,39 @@ function Editor(view, id){
       <div class="field"><label>${Z('片酬（星票 / 场，0 = 免费）', 'Fee (stars per scene, 0 = free)')}</label><input id="lPrice" type="number" min="0" max="500" value="${lst.price || 40}"></div>
       <p class="note">${Z('每被雇一次，片酬的 70% 进你的钱包。上架的是这张角色卡和定妆照，你的演出记忆不会公开。', 'You keep 70% of every fee. Your memories stay private.')}</p></div>
     <div class="ed-save"><button class="btn gold" id="saveC" style="width:100%">${Z('保存', 'Save')}</button>${!isNew ? `<button class="btn ghost" id="delC" style="width:100%;margin-top:8px;color:var(--rose)">${Z('删除这个角色', 'Delete')}</button>` : ''}</div></div>`;
-  let face = c.face, style = styleKey(c.style);
+  let face = c.face, style = styleKey(c.style), photo = c.photo || '';
+  const genLabel = again => '✨ ' + (photo ? (again ? Z('按照片重新生成 · ★80', 'Regenerate from photo · ★80') : Z('按照片生成定妆照 · ★80', 'Portrait from photo · ★80')) : (again ? Z('重新生成 · ★80', 'Regenerate · ★80') : Z('按设定生成定妆照 · ★80', 'Generate portrait · ★80')));
+  $('#gen').textContent = genLabel(false);
   const read = () => { const o = {}; $$('[data-f]').forEach(i => { const v = i.value.trim(); o[i.dataset.f] = i.dataset.f === 'personality' ? arrOf(v) : i.dataset.f === 'age' && /^\d+$/.test(v) ? +v : v; }); return o; };
   const setFace = u => { face = u; $('#face').innerHTML = `<img decoding="async" src="${esc(imgUrl(u))}" alt="">`; };
   $('#back').onclick = () => goBack('#/cast');
   $('#style').onclick = e => { const b = e.target.closest('[data-st]'); if (!b) return; style = b.dataset.st; $$('#style button').forEach(x => x.classList.toggle('on', x === b)); };
   $('#pickFace').onclick = () => sheet(Z('从角色库提取形象', 'From character library'), Z('Vicky 角色库', 'Vicky library'), `<div class="facegrid">${ACT.map(a => `<button data-face="${esc(a.face)}" data-look="${esc(a.look || '')}"><img decoding="async" src="${esc(a.face)}" alt="" loading="lazy"></button>`).join('')}</div>`,
-    (sh, close) => $$('[data-face]', sh).forEach(b => b.onclick = () => { setFace(b.dataset.face); const lk = $('[data-f="look"]'); if (!lk.value && b.dataset.look) lk.value = b.dataset.look; close(); }));
+    (sh, close) => $$('[data-face]', sh).forEach(b => b.onclick = () => { setFace(b.dataset.face); photo = ''; $('#gen').textContent = genLabel(false); $('#faceNote').textContent = Z('已选角色库形象，可以直接保存，也可以按画风生成定妆照。', 'Library face picked. Save, or generate a styled portrait.'); const lk = $('[data-f="look"]'); if (!lk.value && b.dataset.look) lk.value = b.dataset.look; close(); }));
+  // 上传照片：先在手机上缩到 1600 以内再传（省流量），创作服务查脸、抠白底、裁成 3:4 胸像；原图留作生成定妆照的参考
+  const shrink = f => new Promise((ok, no) => { const u = URL.createObjectURL(f), im = new Image();
+    im.onload = () => { const k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight)), cv = document.createElement('canvas'); cv.width = Math.round(im.naturalWidth * k); cv.height = Math.round(im.naturalHeight * k);
+      cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); URL.revokeObjectURL(u); ok(cv.toDataURL('image/jpeg', .9)); };
+    im.onerror = () => { URL.revokeObjectURL(u); no(new Error(Z('这张图打不开，换一张 jpg / png', 'Cannot read this image, try a jpg / png'))); }; im.src = u; });
+  $('#upFace').onclick = () => $('#upFile').click();
+  $('#upFile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    const btn = $('#upFace'); btn.disabled = true; btn.textContent = Z('识别中…', 'Reading…');
+    try { const j = await sapi('/api/face', {image: await shrink(f)}); setFace(j.face); photo = j.photo; $('#gen').textContent = genLabel(false);
+      $('#faceNote').textContent = j.faces > 1 ? Z('照片里有好几个人，取了最大的那张脸；不对就换一张单人照。', 'Several people found, used the largest face.') : Z('已用你的照片，可以直接保存，或生成统一画风的定妆照。照片只留在创作服务电脑上，不会上架。', 'Using your photo. Save now, or generate a styled portrait. The photo stays on the studio machine.');
+      const lk = $('[data-f="look"]'); if (!lk.value.trim()) lk.placeholder = Z('外形可以留空，定妆照会按照片来', 'Look can stay empty — portrait follows the photo');
+    } catch (err){ toast(err.message); } finally { btn.disabled = false; btn.textContent = '📷 ' + Z('换一张照片', 'Another photo'); } };
   $('#assist').onclick = () => { const btn = $('#assist'); btn.disabled = true; btn.textContent = Z('AI 正在补全…', 'Filling…');
     sapi('/api/assist', {card: Object.assign(read(), {face: imgUrl(face)})}).then(j => { const f = j.fill || {}; $$('[data-f]').forEach(i => { const v = f[i.dataset.f]; if (!i.value.trim() && v != null && v !== '') i.value = Array.isArray(v) ? v.join('，') : v; });
       $('#assistNote').textContent = [j.tagline, j.note].filter(Boolean).join(' · '); }).catch(e => toast(e.message)).finally(() => { btn.disabled = false; btn.textContent = '✨ ' + Z('再补一次', 'Fill again'); }); };
-  $('#gen').onclick = () => { const btn = $('#gen'); const card = read(); if (!card.look && !card.job && !card.name){ toast(Z('先写几句外形或身份', 'Describe the look first')); return; }
-    btn.disabled = true; btn.textContent = Z('生成中，约 20 秒…', 'Generating…');
-    sapi('/api/portrait', {card, style}).then(j => { setFace(j.url); toast(Z('定妆照好了 · 已扣 ★80', 'Portrait ready · ★80')); }).catch(e => toast(e.message)).finally(() => { btn.disabled = false; btn.textContent = '✨ ' + Z('重新生成 · ★80', 'Regenerate · ★80'); }); };
+  $('#gen').onclick = () => { const btn = $('#gen'); const card = read(); if (photo) card.photo = photo; if (!photo && !card.look && !card.job && !card.name){ toast(Z('先写几句外形或身份', 'Describe the look first')); return; }
+    btn.disabled = true; btn.textContent = Z('生成中，约 1 分钟…', 'Generating, ~1 min…');
+    sapi('/api/portrait', {card, style}).then(j => { setFace(j.url); toast(Z('定妆照好了 · 已扣 ★80', 'Portrait ready · ★80')); }).catch(e => toast(e.message)).finally(() => { btn.disabled = false; btn.textContent = genLabel(true); }); };
   if ($('#pend')) $('#pend').onclick = () => growSheet(id);
   if ($('#delC')) $('#delC').onclick = () => { if (!confirm(Z('删除这个角色？', 'Delete?'))) return; const l = c.listing || {}; if (l.mid) sapi('/api/unpublish', {id: l.mid}).catch(() => {}); delete S.chars[id]; save(); location.hash = '#/cast'; };
   $('#saveC').onclick = async () => {
     const o = read(); if (!o.name){ toast(Z('给角色取个名字', 'Give them a name')); return; }
     const cid = isNew ? newChar({}) : id, ch = S.chars[cid];
-    Object.assign(ch, o, {face, style}); const on = $('#lOn').checked, price = Math.max(0, Math.min(500, +$('#lPrice').value || 0));
+    Object.assign(ch, o, {face, style, photo}); const on = $('#lOn').checked, price = Math.max(0, Math.min(500, +$('#lPrice').value || 0));
     ch.listing = Object.assign({}, ch.listing, {on, price}); save();
     if (on || (ch.listing || {}).mid){
       try {

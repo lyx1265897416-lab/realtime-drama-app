@@ -464,6 +464,7 @@ body.feed-on #tabs{background:rgba(0,0,0,.5);border-top-color:transparent}
 .ed-face .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
 .ed-face-act{display:flex;flex-direction:column;gap:10px;justify-content:center;flex:1;min-width:0}
 .stylepick{display:flex;gap:6px}
+.facesrc{display:flex;gap:6px}.facesrc .btn{flex:1;min-width:0;padding:0 8px;white-space:nowrap}
 .stylepick button{flex:1;height:30px;border-radius:15px;font-size:12px;background:rgba(255,255,255,.07);color:var(--mute)}
 .stylepick button.on{background:var(--ink);color:#1a1020;font-weight:600}
 .ed-assist{padding:16px 18px 0}

@@ -6,7 +6,9 @@ APP 是 GitHub Pages 上的静态页，需要模型和共享数据的功能都�
   POST /api/topup     {k, uid}                           → 领 300 体验星票（测试用，不是真钱）
   POST /api/assist    {k, uid, card}                     → AI 补全角色设定（免费）
   POST /api/grow      {k, uid, card, said, scene}        → 从刚演完的一幕里提炼新设定（免费）
-  POST /api/portrait  {k, uid, card, style}              → 生成定妆照，扣 80 星票，失败退回
+  POST /api/face      {k, uid, image}                    → 玩家上传自己的照片当角色形象（免费）：查脸、抠人像、出白底胸像；复用 nl-video-harness 的 face_box / person_mask
+  POST /api/job       {k, uid, id}                        → 生图慢任务轮询：没做完回 {pending: id}，做完回结果
+  POST /api/portrait  {k, uid, card, style}              → 生成定妆照，扣 80 星票，失败退回；card.photo 有上传照片时按这张脸出
   POST /api/stage     {k, uid, stage, persona, cast, history, input}  → 自由剧场：写下一幕（台词、旁白、两个选项、新设定）
   POST /api/frame     {k, uid, scene, cast}              → 自由剧场：给这一幕出一张画面，扣 30 星票
   GET  /api/market?k= → 玩家上架的演员；POST /api/publish {k, uid, actor} / /api/unpublish {k, uid, id}
@@ -15,7 +17,7 @@ APP 是 GitHub Pages 上的静态页，需要模型和共享数据的功能都�
 星票只是测试币，没有任何真钱流转。数据存在 studio/data/。
 用法：python3 studio_server.py <口令> [端口，默认 8860]
 """
-import base64, json, os, re, sys, threading, time, uuid
+import base64, json, os, re, subprocess, sys, tempfile, threading, time, uuid
 import urllib.request as U
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -96,7 +98,13 @@ def chat(model, system, user, max_tokens=1800, images=None, image_out=False, tim
     else: body['reasoning'] = {'effort': 'low'}; body['temperature'] = 0.8
     req = U.Request('https://openrouter.ai/api/v1/chat/completions', data=json.dumps(body).encode(),
                     headers={'Authorization': 'Bearer ' + key(), 'Content-Type': 'application/json', 'X-Title': 'Unscripted studio'})
-    with U.urlopen(req, timeout=timeout) as r: j = json.loads(r.read())
+    try:
+        with U.urlopen(req, timeout=timeout) as r: j = json.loads(r.read())
+    except Exception as e:
+        if image_out or not CC.enabled(): raise
+        print('STUDIO openrouter failed, text-only CLI:', repr(e)[:120], flush=True)  # 11-05 OpenRouter 403：带图的补全退回本机 Claude Code，只看文字
+        txt, _ = CC.call_text(system, user, timeout=max(timeout, 120)); i = txt.find('{')
+        return json.JSONDecoder().raw_decode(txt[i:])[0]
     msg = j['choices'][0]['message']
     if image_out:
         for im in msg.get('images') or []:
@@ -126,6 +134,69 @@ def as_ref(u):  # 自己生成的图在本机：转成 data URL 交给生图模�
     if m and (IMG / m.group(1)).exists():
         return 'data:image/jpeg;base64,' + base64.b64encode((IMG / m.group(1)).read_bytes()).decode()
     return u if (u or '').startswith('http') else None
+
+
+HARNESS = Path('/Users/vicky/Interactive storyline/external/nl-video-harness/tools')  # 同事的 nl-video-harness：上传照片的查脸、抠人像就用它的脚本
+WENV = dict(os.environ, PATH=os.path.expanduser('~/.waku/bin') + ':' + os.path.expanduser('~/.local/bin') + ':/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin')
+for _k in ('HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy'): WENV.pop(_k, None)
+MIN_FACE = 110  # 和 harness 一样：脸宽不到 110 像素就让换一张近一点的
+
+
+def img_path(u):
+    m = re.search(r'/img/([0-9a-f]{16}\.(?:png|jpg|webp))$', u or '')
+    return IMG / m.group(1) if m and (IMG / m.group(1)).exists() else None
+
+
+def waku_image(prompt, refs=(), ar='3:4'):
+    """生图走 Waku 的 gpt-image-2（11-05 OpenRouter 403）。有参考图用 edit，没有用 text-to-image。返回 /img/<名字>.jpg。"""
+    urls = []
+    for r in refs:
+        out = subprocess.run(['waku', 'persist', str(r)], capture_output=True, text=True, timeout=300, env=WENV).stdout
+        m = re.search(r'https://\S+?\.(?:jpg|jpeg|png)', out)
+        if not m: print('persist failed', out[-200:], flush=True); raise RuntimeError('参考图上传失败')
+        urls.append(m.group(0))
+    model = 'openai/gpt-image-2/edit' if urls else 'openai/gpt-image-2/text-to-image'
+    params = dict(prompt=prompt, aspect_ratio=ar, **({'images': urls} if urls else {}))
+    tmp = Path(tempfile.mkdtemp()) / 'out.png'
+    r = subprocess.run(['waku', 'gen', 'run', model, '--capability', 'multimodal.generate.image', '--params', json.dumps(params), '--wait', '--timeout', '300', '--out', str(tmp)],
+                       capture_output=True, text=True, timeout=360, env=WENV)
+    for _ in range(2):  # CLI 的 --wait 有时 2 分钟就放手（任务还在跑），按它给的 job id 接着等
+        if tmp.exists() and tmp.stat().st_size >= 10000: break
+        m = re.search(r'waku gen result (\S+)', (r.stderr or '') + (r.stdout or ''))
+        if not m: break
+        r = subprocess.run(['waku', 'gen', 'result', m.group(1), '--wait', '--timeout', '300', '--out', str(tmp)], capture_output=True, text=True, timeout=360, env=WENV)
+    if not tmp.exists() or tmp.stat().st_size < 10000: raise RuntimeError('生图失败：' + ((r.stderr or r.stdout) or '')[-160:])
+    from PIL import Image
+    name = f'{uuid.uuid4().hex[:16]}.jpg'; im = Image.open(tmp).convert('RGB'); im.thumbnail((1080, 1440)); im.save(IMG / name, quality=88)
+    return '/img/' + name
+
+
+def face_upload(b):
+    """玩家上传照片当角色形象（免费）：原图存一份当参考；用 harness 的 face_box.swift 查脸（没有脸、脸太小就让换），
+    person_mask.swift 抠出人像，铺白底，裁成和演员卡一样的 3:4 正面胸像。照片只存在这台电脑的 studio/data/img。"""
+    from PIL import Image, ImageOps, ImageFilter
+    import io
+    data = (b.get('image') or '').split(',', 1)[-1]
+    if not data or len(data) > 14_000_000: raise ValueError('照片太大或没有收到，换一张 10MB 以内的 jpg / png')
+    im = ImageOps.exif_transpose(Image.open(io.BytesIO(base64.b64decode(data)))).convert('RGB'); im.thumbnail((1600, 1600))
+    pid = uuid.uuid4().hex[:16]; photo = IMG / f'{pid}.jpg'; im.save(photo, quality=92); W, H = im.size
+    boxes = json.loads(subprocess.run(['swift', str(HARNESS / 'face_box.swift'), str(photo)], capture_output=True, text=True, timeout=120, env=WENV).stdout or '[]')
+    faces = (boxes[0].get('faces') if boxes else None) or []
+    if not faces: raise ValueError('照片里没找到脸：换一张正面、光线清楚的照片')
+    f = max(faces, key=lambda x: x['w'] * x['h']); fx, fy, fw, fh = f['x'] * W, f['y'] * H, f['w'] * W, f['h'] * H
+    if fw < MIN_FACE: raise ValueError('脸太小了：换一张离镜头近一点的照片')
+    mpath = IMG / f'{pid}_mask.png'
+    subprocess.run(['swift', str(HARNESS / 'person_mask.swift'), str(photo), str(mpath)], capture_output=True, text=True, timeout=120, env=WENV)
+    card = im
+    if mpath.exists():  # 抠出来的人铺白底；抠图失败就用原图
+        m = Image.open(mpath).convert('L').resize((W, H)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(1.0))
+        card = Image.composite(im, Image.new('RGB', (W, H), (250, 250, 250)), m); mpath.unlink()
+    cw = fw * 3.0; ch = cw * 4 / 3; cx = fx + fw / 2; top = fy - fh * 0.9  # 头顶留一点、裁到胸口：和演员表的定妆照一样
+    l, t = cx - cw / 2, top
+    box = (int(max(0, l)), int(max(0, t)), int(min(W, l + cw)), int(min(H, t + ch)))
+    canvas = Image.new('RGB', (int(cw), int(ch)), (250, 250, 250)); canvas.paste(card.crop(box), (int(box[0] - l), int(box[1] - t)))
+    fid = uuid.uuid4().hex[:16]; canvas.resize((750, 1000), Image.LANCZOS).save(IMG / f'{fid}.jpg', quality=90)
+    return {'face': f'/img/{fid}.jpg', 'photo': f'/img/{pid}.jpg', 'faces': len(faces)}
 
 
 def card_text(c):
@@ -178,10 +249,16 @@ STYLE = {'real': 'photorealistic live-action portrait, soft natural window light
 def portrait(b):
     c = b.get('card') or {}
     style = STYLE.get(b.get('style'), STYLE['real'])
-    prompt = (f"Create one vertical 3:4 character portrait (head to mid-thigh), single character, plain light studio background, no text, no watermark. Style: {style}. "
-              f"Character: {c.get('name') or 'an original character'}, age {c.get('age') or 'young adult'}, {c.get('gender') or ''}, {c.get('job') or ''}. Appearance: {c.get('look') or 'distinctive, memorable look'}. "
-              f"Expression and pose show this personality: {', '.join(c.get('personality') or []) if isinstance(c.get('personality'), list) else c.get('personality') or ''}. Tasteful, fully clothed.")
-    return {'url': save_image(chat(IMAGE_MODEL, 'You are an image generator.', prompt, image_out=True, timeout=150)), 'prompt': prompt}
+    who = (f"{c.get('name') or 'an original character'}, age {c.get('age') or 'young adult'}, {c.get('gender') or ''}, {c.get('job') or ''}. "
+           f"Expression shows this personality: {', '.join(c.get('personality') or []) if isinstance(c.get('personality'), list) else c.get('personality') or ''}.")
+    frame = 'One vertical 3:4 character card: front-facing chest-up bust, looking at the camera, plain clean white background, single character, no text, no watermark, tasteful and fully clothed.'
+    photo = img_path(c.get('photo'))
+    if photo:  # 玩家上传了自己的照片：同一张脸，按选的画风出定妆照
+        prompt = (f"{frame} Style: {style}. The image is a photo of the person this character is based on: keep the same person and likeness exactly — face shape, eyes, nose, lips, "
+                  f"eyebrows, skin tone, hairstyle and hair colour — only redraw them in the chosen style. Use a calm, natural, closed-mouth expression and a straight-on pose; do not copy the photo's expression, head tilt or background. Outfit and details: {c.get('look') or 'keep the same outfit, accessories and jewellery as in the photo'}. Character: {who}")
+        return {'url': waku_image(prompt, [photo]), 'prompt': prompt}
+    prompt = f"{frame} Style: {style}. Appearance: {c.get('look') or 'distinctive, memorable look'}. Character: {who}"
+    return {'url': waku_image(prompt), 'prompt': prompt}
 
 
 def stage(b):
@@ -229,6 +306,30 @@ def charged(uid, cost, what, fn, b):
         raise
 
 
+JOBS = {}  # 慢任务：id -> {'done': Event, 'res': (code, obj), 'uid', 'at'}
+
+
+def run_job(uid, p, fn):
+    jid = uuid.uuid4().hex[:12]; j = JOBS[jid] = {'done': threading.Event(), 'res': None, 'uid': uid, 'at': time.time()}
+    def go():
+        t0 = time.time()
+        try: r = fn(); r['wallet'] = WALLETS[uid]; j['res'] = (200, r); log(p, uid[:8], f'{time.time() - t0:.1f}s', 'ok')
+        except PermissionError as e: j['res'] = (402, {'err': str(e), 'wallet': WALLETS.get(uid)})
+        except ValueError as e: j['res'] = (400, {'err': str(e)})
+        except Exception as e: log(p, uid[:8], 'ERR', repr(e)[:300]); j['res'] = (500, {'err': str(e)[:200], 'wallet': WALLETS.get(uid)})
+        j['done'].set()
+    threading.Thread(target=go, daemon=True).start()
+    for k in [k for k, v in JOBS.items() if time.time() - v['at'] > 3600]: JOBS.pop(k, None)
+    return jid
+
+
+def job_wait(jid, uid, sec):
+    j = JOBS.get(jid)
+    if not j or j['uid'] != uid: return 404, {'err': '任务不存在或已过期'}
+    if not j['done'].wait(sec): return 200, {'pending': jid}
+    return j['res']
+
+
 class H(BaseHTTPRequestHandler):
     def cors(self):
         self.send_header('Access-Control-Allow-Origin', '*'); self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); self.send_header('Access-Control-Allow-Headers', 'Content-Type')
@@ -272,8 +373,11 @@ class H(BaseHTTPRequestHandler):
             if p == '/api/assist': r = assist(b)
             elif p == '/api/grow': r = grow(b)
             elif p == '/api/stage': r = stage(b)
-            elif p == '/api/portrait': r = charged(uid, PRICE['portrait'], '生成定妆照', portrait, b)
-            elif p == '/api/frame': r = charged(uid, PRICE['frame'], '生成剧照', frame, b)
+            elif p == '/api/face': r = face_upload(b)
+            elif p in ('/api/portrait', '/api/frame'):
+                fn = (lambda: charged(uid, PRICE['portrait'], '生成定妆照', portrait, b)) if p == '/api/portrait' else (lambda: charged(uid, PRICE['frame'], '生成剧照', frame, b))
+                return self.out(*job_wait(run_job(uid, p, fn), uid, 45))
+            elif p == '/api/job': return self.out(*job_wait(str(b.get('id') or ''), uid, 40))
             elif p == '/api/publish':
                 a = dict(b.get('actor') or {}); a['id'] = a.get('id') if str(a.get('id', '')).startswith('u.') else 'u.' + uuid.uuid4().hex[:10]
                 old = MARKET.get(a['id'])
@@ -294,6 +398,7 @@ class H(BaseHTTPRequestHandler):
             return self.out(200, r)
         except PermissionError as e: return self.out(402, {'err': str(e), 'wallet': WALLETS.get(uid)})
         except LookupError as e: return self.out(404, {'err': str(e)})
+        except ValueError as e: return self.out(400, {'err': str(e)})  # 照片不合格（没脸、太小、太大）
         except Exception as e:
             log(p, uid[:8], 'ERR', repr(e)[:300]); return self.out(500, {'err': str(e)[:200]})
 
