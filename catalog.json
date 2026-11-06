@@ -255,7 +255,8 @@
       "en": "Give me the camera.",
       "who": "Magnus"
      }
-    ]
+    ],
+    "you": true
    }
   },
   {
@@ -549,7 +550,8 @@
       "en": "Not just dinner because we happen to be heading the same way.",
       "who": "Rafael"
      }
-    ]
+    ],
+    "you": true
    }
   },
   {
@@ -661,7 +663,8 @@
       "en": "Bad introduction. Want me to start over?",
       "who": "Rowan"
      }
-    ]
+    ],
+    "you": true
    },
    "speed": 1.1
   },
@@ -837,7 +840,8 @@
       "en": "Is that true?",
       "who": "Vessa"
      }
-    ]
+    ],
+    "you": true
    }
   },
   {

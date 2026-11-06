@@ -415,7 +415,7 @@ function Detail(view, d){
       <h1>${esc(L(d.title))}</h1><div class="lead">${esc(L(d.lead))}</div>
       <div class="d-stats"><div><b>${d.kind === 'open' ? '∞' : d.episodes}</b><span>${d.kind === 'open' ? T('endless') : T('eps')}</span></div><div><b>${d.rounds}</b><span>${roundsName(d)}</span></div><div><b>${d.wait_median ? Math.round(d.wait_median) + 's' : '—'}</b><span>${T('waitMed')}</span></div></div>
       <p class="d-hook">${esc(L(d.hook))}</p><div class="d-tags">${d.tags.map(t => `<span>#${esc(L(t))}</span>`).join('')}</div></div>
-    ${d.kind === 'open' && !(d.live && d.live.persona === false) ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<div class="who"><small>${Z('出演身份', 'Playing as')}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></div><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
+    ${d.kind === 'open' && !(d.live && d.live.persona === false) ? `<div class="castrow" id="castRow">${(() => { const a = castingOf(d.id); return `${a ? avatar(a) : '<span class="av blank">∅</span>'}<div class="who"><small>${Z('出演身份', 'Playing as')}${d.live && d.live.you && a && a.face ? Z(' · 女主换成 TA 的样子', ' · plays the lead') : ''}</small><b>${esc(a ? a.name : Z('空白的你', 'Blank you'))}</b></div><em>${Z('更换', 'Change')} ›</em>`; })()}</div>` : ''}
     <div class="tabsw" id="dtabs"><button class="on" data-t="scenes">${scenesName(d)}</button><button data-t="log">${T('log')}</button><button data-t="about">${T('about')}</button></div>
     <div class="d-pane" id="pane"></div>
     <div class="d-cta">${d.live ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${d.kind === 'open' ? T('previewBtn') : resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
@@ -674,7 +674,9 @@ function LivePlayer(view, d){
   const ov = pool[1], idle = pool[2];
   load(ov, LV.open); load(idle, LV.idle, true);
   const persona = LV.persona === false ? null : castingOf(d.id), youName = persona ? persona.name : T('you');
-  const startSession = () => api('/api/session', Object.assign({mode: MODE}, persona ? {persona: cardText(persona)} : {})).then(j => { sid = j.sid; next = j.next; round = 0; });
+  const youSrc = LV.you && persona && persona.face ? new URL(imgUrl(persona.face), location.href).href : '';  // 第三视角：女主换成你的角色（中转做母版、把开场末帧换人，第 1 幕会多等一会儿）
+  const startSession = () => api('/api/session', Object.assign({mode: MODE}, persona ? {persona: cardText(persona)} : {}, youSrc ? {you: {src: youSrc, name: persona.name}} : {})).then(j => { sid = j.sid; next = j.next; round = 0;
+    if (j.you === 'preparing') toast(Z(`正在把女主换成 ${persona.name}，从你的第一次选择开始就是 TA（第一幕会多等一两分钟）`, `Casting ${persona.name} as the lead — from your first choice on (first scene takes a little longer)`)); });
   function playOpening(){
     run++; busy = false; setMode('play'); showSub(null); $('#chLabel').textContent = T('opening'); const end = $('.endcard', pl); end && end.remove(); const csFired = new Set(); if (cs) cs.reset();
     ov.currentTime = 0; ov.muted = false; ov.loop = false; RT.begin({hist: {cues: (typeof OPEN_CUES !== 'undefined' ? OPEN_CUES : null)}, key: 'OPEN', parts: [{v: ov}]});
