@@ -299,6 +299,10 @@ function route(){
   if (parts[0] === 'live' && byId[parts[1]]) return Live(view, byId[parts[1]]);
   return Home(view);
 }
+// 返回键只在 APP 自己走过的页面里退：直接打开某个链接、或嵌入页（iframe）在浏览器历史里多了几步时，history.back() 会退出 APP 或原地不动
+const TRAIL = [location.hash || '#/'];
+addEventListener('hashchange', () => { const h = location.hash || '#/'; if (TRAIL.length > 1 && TRAIL[TRAIL.length - 2] === h) TRAIL.pop(); else if (TRAIL[TRAIL.length - 1] !== h) TRAIL.push(h); });
+const goBack = fallback => { if (TRAIL.length > 1) location.hash = TRAIL[TRAIL.length - 2]; else location.hash = fallback; };
 addEventListener('hashchange', route);
 
 // ---------- 剧场（首页） ----------
@@ -417,7 +421,7 @@ function Detail(view, d){
     <div class="d-cta">${d.live ? `<button class="btn live" id="goLive">${ICON.live}${T('liveStart')}</button><button class="btn ghost txt" id="go">${T('previewBtn')}</button>` : `<button class="btn gold" id="go">${ICON.play}${d.kind === 'open' ? T('previewBtn') : resumeN ? T('resume', {n: resumeN}) : T('start')}</button>`}
       <button class="btn ghost" id="saveBtn" title="${T('saveL')}" style="color:${S.saved[d.id] ? 'var(--gold)' : 'inherit'}">${ICON.mark}</button>
       ${!d.live && liveUrl(d.id) ? `<button class="btn ghost" id="liveBtn" title="${T('live')}" style="color:var(--live)">${ICON.live}</button>` : ''}</div></div>`;
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/');
+  $('#back').onclick = () => goBack('#/');
   $('#shareBtn').onclick = () => shareLink(d);
   const top = $('.d-top'); view.onscroll = () => top.classList.toggle('solid', view.scrollTop > 330); onLeave(() => view.onscroll = null);
   $('#go').onclick = () => location.hash = d.kind === 'open' ? `#/play/${d.id}?watch=1` : `#/play/${d.id}${resumeN ? '?resume=1' : ''}`;
@@ -592,7 +596,7 @@ function Player(view, d, q){
 
   const rewind = i => { const c = d.chapters[i]; [...answered].forEach(k => { if (k >= i) answered.delete(k); }); closeChoice(); waitTimer.forEach(clearTimeout); setMode('play'); const end = $('.endcard', pl); end && end.remove();
     if (c.kind === 'rt' && !watch){ v.currentTime = c.pause; v.pause(); openChoice(i); } else { v.currentTime = c.kind === 'rt' ? c.pause : c.start; play(); } };
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
+  $('#back').onclick = () => goBack('#/d/' + d.id);
   $('#rLike').onclick = () => $('#rLike').classList.toggle('on', toggleLike(d));
   $('#rLog').onclick = () => { if (mode === 'play') { v.pause(); if (!watch) $('#paused').hidden = false; } logSheet(d, rewind); };
   $('#rScenes').onclick = () => { if (mode === 'play') { v.pause(); if (!watch) $('#paused').hidden = false; } scenesSheet(d, rewind); };
@@ -612,9 +616,9 @@ function EmbedPlayer(view, d){
   document.body.classList.add('notabs', 'noscroll');
   const C = liveCfg(d.id), P = S.progress[d.id] = S.progress[d.id] || {log: [], done: []}; P.live = P.live || [];
   const gw = (S.settings.gw || {}).url, api = d.live.lines ? (gw ? `${gw}/d/${d.live.lines_prefix}{line}` : '') : C.api;  // 多条线的剧（三真四假）：页面按 {line} 选中转，统一走公共入口，真口令也能过
-  view.innerHTML = `<div class="player" id="pl"><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe><button class="iconbtn embed-back" id="back">${ICON.back}</button></div>`;
+  view.innerHTML = `<div class="player embed" id="pl"><div class="embed-top"><button class="iconbtn" id="back" aria-label="${Z('返回', 'Back')}">${ICON.back}</button><b>${esc(L(d.title))}</b></div><iframe class="embed-play" allow="autoplay; fullscreen" title="${esc(L(d.title))}" src="${esc(d.live.embed)}?k=${encodeURIComponent(C.k)}${api ? '&api=' + encodeURIComponent(api) : ''}&lang=${lang()}&embed=1"></iframe></div>`;
   const fr = $('iframe', view), onMsg = e => { const m = e.data; if (!m || !m.dttf || e.source !== fr.contentWindow || m.ev !== 'round') return; P.live.push({n: m.n, text: m.text, en: m.en, zh: m.zh, at: Date.now()}); P.at = Date.now(); save(); };
-  addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.src = 'about:blank'; });
+  addEventListener('message', onMsg); onLeave(() => { removeEventListener('message', onMsg); fr.remove(); });  // 直接移除：改 src 会在浏览器历史里多一步
   $('#back').onclick = () => { location.hash = '#/d/' + d.id; };  // 不用 history.back：iframe 自己的跳转也在同一条历史里
 }
 const LIVE_KEEP = {};  // 每部剧当前这一局（会话、第几幕、下一轮选项、最后一段视频），离开播放页再回来时接着演
@@ -832,7 +836,7 @@ function LivePlayer(view, d){
   }
 
   $('#tap').onclick = () => { if (front.muted && !front.loop){ front.muted = false; } };
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/d/' + d.id);
+  $('#back').onclick = () => goBack('#/d/' + d.id);
   $('#rLike').onclick = () => $('#rLike').classList.toggle('on', toggleLike(d));
   $('#rLog').onclick = () => logSheet(d, i => location.hash = `#/play/${d.id}?from=${i}`);
   $('#rRe').onclick = () => { keepSet(null); resumed = false; bless(ov); closeChoice(); next = null; sid = null; connect(); load(ov, LV.open); load(idle, LV.idle, true); playOpening(); };
@@ -846,7 +850,7 @@ function Live(view, d){
   const url = liveUrl(d.id);
   if (!url){ toast(T('liveNone')); location.replace('#/d/' + d.id); return; }
   view.innerHTML = `<div class="liveframe"><button class="iconbtn back" id="back">${ICON.back}</button><iframe src="${esc(url)}" allow="autoplay; fullscreen; microphone" referrerpolicy="no-referrer"></iframe></div>`;
-  $('#back').onclick = () => history.back();
+  $('#back').onclick = () => goBack('#/');
 }
 
 // ---------- 在追 ----------
@@ -1044,7 +1048,7 @@ function Actor(view, id){
     <div class="d-cta" style="margin-top:20px">${isMine ? `<button class="btn gold" id="aUse">${ICON.play}${Z('带 TA 去串场', 'Take into a drama')}</button><button class="btn ghost txt" id="aEdit">${Z('编辑', 'Edit')}</button>`
       : rookie ? `<button class="btn gold" id="aSign">${Z('签下 TA，开始培养', 'Sign & develop')}</button>`
       : `<button class="btn gold" id="aLead">${Z('扮演 TA', 'Play as')}${a.price ? ' · ★' + a.price : ''}</button><button class="btn ghost txt" id="aHire">${Z('雇来搭戏', 'Hire')}</button>`}</div></div>`;
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/cast');
+  $('#back').onclick = () => goBack('#/cast');
   const go = (k, f) => { const b = $(k); if (b) b.onclick = f; };
   go('#aEdit', () => location.hash = '#/char/' + a.id);
   go('#aUse', () => pickDrama(a));
@@ -1090,7 +1094,7 @@ function Editor(view, id){
   let face = c.face, style = styleKey(c.style);
   const read = () => { const o = {}; $$('[data-f]').forEach(i => { const v = i.value.trim(); o[i.dataset.f] = i.dataset.f === 'personality' ? arrOf(v) : i.dataset.f === 'age' && /^\d+$/.test(v) ? +v : v; }); return o; };
   const setFace = u => { face = u; $('#face').innerHTML = `<img decoding="async" src="${esc(imgUrl(u))}" alt="">`; };
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/cast');
+  $('#back').onclick = () => goBack('#/cast');
   $('#style').onclick = e => { const b = e.target.closest('[data-st]'); if (!b) return; style = b.dataset.st; $$('#style button').forEach(x => x.classList.toggle('on', x === b)); };
   $('#pickFace').onclick = () => sheet(Z('从角色库提取形象', 'From character library'), Z('Vicky 角色库', 'Vicky library'), `<div class="facegrid">${ACT.map(a => `<button data-face="${esc(a.face)}" data-look="${esc(a.look || '')}"><img decoding="async" src="${esc(a.face)}" alt="" loading="lazy"></button>`).join('')}</div>`,
     (sh, close) => $$('[data-face]', sh).forEach(b => b.onclick = () => { setFace(b.dataset.face); const lk = $('[data-f="look"]'); if (!lk.value && b.dataset.look) lk.value = b.dataset.look; close(); }));
@@ -1147,7 +1151,7 @@ function StageNew(view, q){
       <div class="field"><label>${Z('你的身份', 'You play as')}</label><button class="prow" id="pSel"></button></div>
       <div class="field"><label>${Z('演员（最多 3 位）', 'Cast (up to 3)')}</label><div class="castsel" id="cSel"></div></div></div>
     <div class="ed-save"><p class="note" id="fee"></p><button class="btn gold" id="go" style="width:100%">${Z('开演', 'Curtain up')}</button></div></div>`;
-  $('#back').onclick = () => history.back();
+  $('#back').onclick = () => goBack('#/');
   $('#pSel').onclick = () => sheet(Z('你的身份', 'You play as'), '', `<div class="plist"><button class="prow" data-p=""><span class="av blank">∅</span><span><b>${Z('空白的你', 'Blank you')}</b></span></button>${mine().map(c => `<button class="prow" data-p="${c.id}">${avatar(toActor(c))}<span><b>${esc(c.name)}</b><small>${esc(c.job || '')}</small></span></button>`).join('')}</div>`,
     (sh, close) => $$('[data-p]', sh).forEach(b => b.onclick = () => { persona = b.dataset.p; close(); draw(); }));
   $('#go').onclick = async () => {
@@ -1204,7 +1208,7 @@ function StagePlay(view, id){
     toast(Z('开始生成剧照 · ★30', 'Rendering still · ★30'));
     if (s.framing) return; s.framing = true; render();
     sapi('/api/frame', {beat: s.beat, place: s.place, cast: people}).then(j => { s.frame = j.url; save(); }).catch(e => toast(e.message)).finally(() => { delete s.framing; render(); }); };
-  $('#back').onclick = () => history.length > 1 ? history.back() : (location.hash = '#/stage');
+  $('#back').onclick = () => goBack('#/stage');
   render(); if (!st.scenes.length) turn('');
 }
 
