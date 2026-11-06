@@ -764,7 +764,8 @@ function LivePlayer(view, d){
       try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
       if (r && r.segs) r.segs.forEach((s, i) => { const u = abs(s.url); if (u && V[i] && V[i].dataset.src !== u){ load(V[i], u); seenAt[i] = Date.now(); } const f = u + JSON.stringify(s.flip || []); if (u && V[i] && V[i].dataset.flip !== f){ V[i].dataset.flip = f; RT.flip(V[i], s.flip); } });  // 一到就预载；V3.6 左右对调的镜头由中转标出（flip），播到那几秒水平镜像
       if (r && Array.isArray(r.lines)) r.lines.forEach(l => l.audio && preAudio(l.audio));  // 咪的配音也一出来就预载
-      const settled = r && r.segs && r.next && r.segs.every(s => s.url || s.status === 'error') && !(Array.isArray(r.lines) && r.lines.some(l => !l.audio && !l.audio_err));
+      const settled = r && r.segs && r.next && r.segs.every(s => s.url || s.status === 'error') && !(Array.isArray(r.lines) && r.lines.some(l => !l.audio && !l.audio_err))
+        && (!r.line_times || Object.keys(r.subs_aligned || {}).length >= r.segs.length || Date.now() - Math.max(...seenAt) > 20000);  // 中转按真实说话时间对齐字幕要几秒，对齐完再放慢轮询
       await new Promise(res => setTimeout(res, settled ? 6000 : LOCAL ? 500 : 1200)); } })();  // 都到齐后放慢轮询，播放时少占主线程
     const M = LOCAL ? 1.5 : 3.0;  // 轮询、隧道延迟和第 2 段缓冲的余量（秒）
     // 够播了才开始：浏览器判断能播完，或已缓冲 3 秒。手机省流量时可能一直不缓冲，等 8 秒就直接播（播放时它才会下载）
