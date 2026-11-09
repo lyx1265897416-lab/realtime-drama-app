@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Harness Test</title>
+<style>
+  :root { --bg: #0b0b0d; --ink: #f2efe8; --dim: #9a968e; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #f6f4ef; --ink: #1b1a18; --dim: #6c685f; } }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; padding: 0 16px; }
+  main { max-width: 420px; text-align: center; }
+  p { color: var(--dim); }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="h">Opening the test app…</h1>
+  <p id="m">Merged Harness · same link on every computer.</p>
+</main>
+<script>
+// 合并版 Harness 的固定入口（Vicky 11-09：她和同事用同一个链接在不同电脑上测）。
+// 8912 跑在 Vicky 的 Mac 上，经 Cloudflare 临时隧道出来；隧道地址变了，同步服务（app_relay_sync.py）会更新 relays.json 的 harness-merged。
+// 这里读到最新地址就带上链接里的参数（pass 口令、lang）跳过去；口令只在链接里，不进仓库。
+(async () => {
+  const q = location.search || '';
+  try {
+    const r = await fetch('relays.json?t=' + Date.now(), { cache: 'no-store' });
+    const j = await r.json();
+    if (!j['harness-merged']) throw new Error('not online');
+    location.replace(j['harness-merged'] + '/' + q);
+  } catch (e) {
+    document.getElementById('h').textContent = 'The test app is offline right now.';
+    document.getElementById('m').textContent = "It runs on Vicky's Mac. Try again in a minute, or ask her to check it's on.";
+  }
+})();
+</script>
+</body>
+</html>
