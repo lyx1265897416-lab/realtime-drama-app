@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="use-iframe" content="true">
 <meta name="html-box-height-mode" content="auto">
-<meta name="description" content="perhaps 新版 UI 对比版（参考 Anamana 的排版）：18 个可点击的英文界面，iPhone 17 Pro 尺寸，可并排对照旧版截图">
+<meta name="description" content="perhaps 新版 UI 样机：18 个可点击的界面（iPhone 17 Pro 尺寸），可切换显示或隐藏编号框，右侧是每个编号对应的功能说明，可并排对照旧版截图">
 <title>perhaps 新版 UI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,10 +47,18 @@ h1{font-size:17px;margin:0;font-weight:700;white-space:nowrap}h1 b{color:var(--p
 .info{width:300px;flex:none;display:flex;flex-direction:column;padding:14px 16px 12px;border-left:1px solid var(--line);min-height:0}
 .crumb{font-size:12px;color:var(--sub)}
 h2{font-size:18px;margin:2px 0 8px;font-weight:700}
+.mkov{position:absolute;inset:0;pointer-events:none;z-index:5}
+.mk{position:absolute;border:2px solid var(--pur);border-radius:7px;background:rgba(123,97,232,.12);opacity:0;transition:opacity .12s}
+.mk b{position:absolute;left:-9px;top:-9px;min-width:20px;height:20px;border-radius:10px;background:var(--pur);color:#fff;font-size:11.5px;line-height:17px;text-align:center;border:1.5px solid #fff;font-weight:700;padding:0 3px}
+.mkov.show .mk,.mk.peek{opacity:1}
+.mk.peek{border-color:#FFB020;background:rgba(255,176,32,.18)}.mk.peek b{background:#E08A00}
+.legend{flex:1;overflow:auto;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.legend li{display:flex;gap:9px;padding:8px 4px;border-bottom:1px solid var(--line);cursor:default}
+.legend li:hover{background:var(--purf)}
+.legend .n{flex:none;width:21px;height:21px;border-radius:50%;background:var(--pur);color:#fff;font-size:11.5px;font-weight:700;line-height:21px;text-align:center;margin-top:1px}
+.legend .t{min-width:0}.legend .t b{display:block;font-size:13.5px}.legend .t span{color:var(--sub);font-size:12.5px;display:block}
 .notes{flex:1;overflow:auto;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
 .notes li{padding:7px 2px;border-bottom:1px solid var(--line);font-size:12.5px;line-height:1.55}
-.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:0 5px;margin-right:6px;line-height:18px;vertical-align:1px}
-.t-b{background:var(--purf);color:var(--purd)}.t-k{background:var(--gf);color:var(--g)}.t-n{background:var(--of);color:var(--o)}
 .tip{font-size:12px;color:var(--sub);margin:8px 0 0}
 @media (max-width:980px){.nav{width:138px}.info{width:236px;padding:12px 12px 10px}.app.cmp .info{display:none}}
 @media (max-width:560px){.app{height:auto;border:0}.body{flex-direction:column}.nav{width:auto;border-right:0;border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px}.nav .grp{display:none}.nav button{width:auto;white-space:nowrap;flex:none;background:var(--gry)}.stage{min-height:560px}.info{width:auto;border-left:0}.notes{max-height:300px}header{padding-right:16px}h1{font-size:15px}.count{display:none}}
@@ -142,8 +150,8 @@ h2{font-size:18px;margin:2px 0 8px;font-weight:700}
 <body>
 <div class="app">
   <header>
-    <span class="dot"></span><h1><b>perhaps</b> · 新版 UI（参考 Anamana）</h1>
-    <button class="tog" id="tog" type="button" aria-pressed="false"><i></i><span>并排看旧版</span></button><span class="lsw" id="langsw" role="group" aria-label="手机界面语言"><button type="button" data-l="zh" aria-pressed="false">中文</button><button type="button" data-l="en" aria-pressed="true">EN</button></span>
+    <span class="dot"></span><h1><b>perhaps</b> · 新版 UI 样机</h1>
+    <button class="tog" id="mtog" type="button" aria-pressed="false"><i></i><span id="mtogt">显示编号框</span></button><button class="tog" id="tog" type="button" aria-pressed="false"><i></i><span>并排看旧版</span></button><span class="lsw" id="langsw" role="group" aria-label="手机界面语言"><button type="button" data-l="zh" aria-pressed="false">中文</button><button type="button" data-l="en" aria-pressed="true">EN</button></span>
     <span class="sp"></span><span class="count" id="count"></span>
   </header>
   <div class="body">
@@ -152,15 +160,15 @@ h2{font-size:18px;margin:2px 0 8px;font-weight:700}
       <button class="arrow" id="prev" type="button" aria-label="上一个界面">‹</button>
       <div class="pair" id="pair">
         <div class="col" id="oldcol" hidden><div class="cap">旧版（11-13 线上截图，英文）</div><div class="frame" id="oldf"></div></div>
-        <div class="col"><div class="cap" id="newcap"><b>新版</b> · 可以直接点</div><div class="frame" id="newf"><div class="ph" id="ph"></div></div></div>
+        <div class="col"><div class="cap" id="newcap"><b>新版</b> · 可以直接点</div><div class="frame" id="newf"><div class="ph" id="ph"></div><div class="mkov" id="mkov"></div></div></div>
       </div>
       <button class="arrow" id="next" type="button" aria-label="下一个界面">›</button>
     </div>
     <aside class="info">
       <div class="crumb" id="crumb"></div>
       <h2 id="title"></h2>
-      <ul class="notes" id="notes"></ul>
-      <p class="tip"><span class="tag t-b">借鉴</span>取自 Anamana <span class="tag t-k">保留</span>旧版已有功能 <span class="tag t-n">新增</span>旧版没有、等你定。手机里的按钮、海报、标签栏都能点。</p>
+      <ul class="legend" id="legend"></ul>
+      <p class="tip">手机里的按钮、海报、标签栏都能点。鼠标移到某一条说明上，会在界面里标出对应位置。</p>
     </aside>
   </div>
 </div>
@@ -354,90 +362,149 @@ SCR.topup=function(){var pk=[['100','','$0.99',''],['300','+60','$2.99','HOT'],[
 
 /* ---------- 走查数据：每屏的说明 ---------- */
 var LIST=[
-['Home 首页','home','首页（推荐）','a-explore',[
- ['b','排版换成 Anamana 首页的“密集海报墙”：搜索栏 + 横向文字标签 + 三列竖版海报，一屏能看到 6 部（旧版首页一屏只有 1 部）。'],
- ['b','顶部一行：左边筛选图标进分类，中间搜索框占位轮播剧名，右边礼物（签到奖励，红点）和金色 VIP 角标带 -50%。'],
- ['b','海报左上角 HOT / NEW 角标，右上角原来是“AI”，这里换成“可对话”气泡图标，说明这是能跟他说话的剧。'],
- ['b','海报下面两行剧名 + 两个题材标签，用细竖线分开（Dating show | Real or fake）。'],
- ['n','最上面加一条“继续你的故事”：头像 + 第几轮 + 他最后一句 + Your turn 按钮，回到正在等你回答的那一刻。'],
- ['k','旧版的全部剧集网格、类型筛选、搜索都还在，只是入口挪到这一页。']]],
-['Home 首页','rankings','首页 · 排行榜','a-search',[
- ['b','对应 Anamana 首页的 Rankings 标签：排名数字 + 海报 + 剧名 + 三个标签 + 一句钩子。前三名金色数字。'],
- ['b','上面一排子榜单 chip：Most played / Trending / New & rising / Most talked-to。'],
- ['n','“xx playing”人数和各个子榜单都是示意，现在没有这类统计，要后端记播放和对话次数才能做。'],
- ['k','旧版搜索页的 Top picks 列表合并到这里。']]],
-['Home 首页','categories','分类筛选（剧集）','a04-filters',[
- ['b','照 Anamana Categories：三行横向滚动 chip，每行开头都是选中的 All（金色淡底），分别是题材 / 关系 / 设定。'],
- ['b','下面 Popular / Latest 排序 + 共几部，再接三列海报网格。'],
- ['k','保留旧版的 Worlds / Characters 切换和旧版全部筛选标签（只是从“展开一大片”改成三行滑动，一屏不再被标签占满）。']]],
-['Home 首页','characters','分类筛选（角色）','j02-characters',[
- ['k','旧版独有的“按角色找剧”保留，Anamana 没有这个。'],
- ['b','角色卡改成和剧集同样的三列竖版网格，统一节奏：大写名字 + 所在剧（金色）+ 一句人设。'],
- ['n','上面加一排性格 chip（Sunshine / Cold & quiet / Possessive…），按“喜欢哪种他”来挑。']]],
-['Home 首页','search','搜索','a-search',[
- ['b','Anamana 式搜索页：最近搜索、热搜榜（两列编号，前两条带 HOT）、猜你想搜。'],
- ['n','“Try a vibe”：可以按情节点搜（He’s jealous / Locked in till midnight），适合互动剧。'],
- ['k','保留旧版 Top picks 结果样式（缩略图 + 标签 + 一句钩子）和 Cancel。']]],
-['For You','foryou','For You 竖屏预告流','a01-feed',[
- ['k','旧版首页的全屏视频流整页搬到 For You 标签：上滑下一部、静音、预览片都保留。'],
- ['b','借 Anamana / 短剧 App 的竖屏流排法：右侧竖排操作栏（主角头像 + 收藏、点赞数、角色、分享），左下剧名 + 标签 + 一句钩子。'],
- ['b','底部一条“剧集条”：Opening · 1:24 + Step in 按钮，对应短剧 App 的“看全集 EP.1/30”。'],
- ['b','画面中间放一句大字台词（Anamana For You 的做法），先用他的一句话勾人。'],
- ['b','底部标签栏在这页变成透明，画面更满。']]],
-['剧集和进剧','detail','剧集详情','b01-world',[
- ['k','海报、标语、剧名、Step into this world、简介、规则、角色表、收藏都保留。'],
- ['b','加评分 / 播放量一行，收藏按钮挪到主按钮右边（短剧 App 详情页的“播放 + 追剧”并排）。'],
- ['b','借 Anamana 的选集格子，改成“Your story”回合格子：Intro、Round 1–3，当前那轮金框，最后一格虚线“Next”。点哪轮回看哪轮。'],
- ['n','底部加“More like this”三列推荐，看完详情不走就能接着挑。']]],
-['剧集和进剧','look','进剧前：选你的样子','c02-after-intro',[
- ['k','三种样子（剧中女主 / 上传自拍 / 第一视角）、换一张脸（Sofia / Hazel / Luna）、Continue、“在 Profile 里随时改”都保留。'],
- ['b','从整页改成底部弹层（短剧 App 的解锁和选集都是弹层），背景还是这部剧，不打断进剧的感觉。'],
- ['b','三种样子并排一屏看完，不用左右滑；换脸的三张小头像直接放在下面。']]],
-['剧集和进剧','pick','选他','d01-partner-pick',[
- ['k','主持人那句话、问题、两位男主卡片都保留。'],
- ['b','每张卡加一个明确的“Pick Wes / Pick Jasper”按钮，和 Anamana 卡片上明确的按钮一样，减少“这张卡能不能点”的犹豫。']]],
-['播放和选择点','play','播放中','g01-playing',[
- ['k','字幕、中 / EN、关闭、输入框、麦克风、发送都保留。'],
- ['b','照 Anamana 播放页底部的排法：剧名 ›、一行剧情、进度条（带拖柄、时长、倍速 1x），最下面一条整宽“Round 3 / 3 ^”回合条，对应它的 EP.5/EP.30 选集条，点开就是回合列表。'],
- ['b','右侧竖排操作栏：点赞、当前男主头像（点开换人）、Rounds、分享。Anamana 右栏只有书签、红心、More，我们多放了换人和回合两个互动剧特有的入口。'],
- ['k','进度条、时长、倍速、单击暂停是之前定的播放控件要求，都在。'],
- ['k','旧版右上角的“重看菜单 / 关于这部剧”收进 ⋯ 里。']]],
-['播放和选择点','turn','轮到你（选择点）','h01-round-done',[
- ['k','他的最后一句、Change（换人）、两个选项、自由输入、Reshoot 都保留。'],
- ['b','两个选项改成 A / B 两张卡，字更大、更好点；YOUR TURN 和 Reshoot 放在选项上面一行。'],
- ['n','输入框下面一行小字：每段多少币、今天还剩几次免费。这是借 Anamana 的“每集 xx 金币”做的付费提示，数值是占位，旧版没有。'],
- ['n','点选项 B 会弹出“余额不足”演示（下一屏）。']]],
-['播放和选择点','wait','等待生成','f02-waiting',[
- ['k','你刚说的话、展开的前文对话、旁白小字（The bar’s bottles have no labels.）、倒计时、THE ISLAND IS WATCHING 都保留。'],
- ['b','把倒计时和进度条合成一张卡片，进度用金色渐变条，一眼看到还要等多久。'],
- ['b','你说的话靠右、他们说的靠左，像对话一样排。']]],
-['播放和选择点','episodes','回合列表（回看）','i01-review',[
- ['b','照短剧 App 的选集弹层：剧名 + 你的进度、三个分页（Your rounds / Characters / About）、格子列表。'],
- ['b','每一格是那一轮的画面缩略图，当前轮金框 + NOW，最后一格虚线“Round 4 · your move”。'],
- ['k','旧版的回看、Back to now、重新开始（Start over）、重看开场（Watch intro）都在这里。']]],
-['播放和选择点','unlock','继续剧情（解锁弹层）',null,[
- ['n','旧版没有付费，这一屏是新增建议：照 Anamana / 短剧 App 的解锁弹层，在“生成下一段”这一刻弹出。'],
- ['b','本段价格 + 余额、金色 VIP 横条（50% OFF）、四个金币包（HOT 角标）、看广告免费这一段、自动解锁下一段开关。'],
- ['n','所有价格、币值都是占位，等你定要不要做付费、怎么定价。']]],
-['My List 我的','mylist','我的剧','j01-ongoing',[
- ['k','旧版 Ongoing 的“进行中 / 收藏”保留，并加一个 History（借 Anamana 的 My List / History）。'],
- ['b','每部剧一行：海报（底部金色进度条，对应 EP.1/EP.30）+ 第几轮 · 和谁 + 他最后一句 + 继续按钮。'],
- ['n','“轮到你”的那部用金色按钮排在最上面，其余是 Continue。'],
- ['b','标签栏第三格从 Ongoing 改名 My List，图标换成书签。']]],
-['Profile 我','profile','个人页 + 钱包','a-you',[
- ['b','照 Anamana Profile：头像 + Sign in + ID，上面红色气泡“首次登录送 20”，右上礼物和设置。'],
- ['b','金色 VIP 卡：三个权益（Unlimited scenes / Skip the queue / 1080P HD）+ Activate 按钮带 50% OFF。'],
- ['b','My Wallet：Coins / Bonus 两个数 + 红色 Top up。'],
- ['k','旧版个人页的“你在每部剧里的样子 + 名字”变成一张卡，点进去还是原来的选样子界面。中 / EN 放进列表。'],
- ['n','“轮到我时通知我”开关、Daily rewards 入口。']]],
-['Profile 我','rewards','签到奖励',null,[
- ['n','旧版没有。照短剧 App 的签到页：连续 7 天格子（已签灰勾、今天金色、第 7 天送一次免费生成）、Check in 按钮。'],
- ['n','下面任务列表全换成我们的行为：看开场、完成第一轮、用语音回他、开“轮到你”提醒、分享一段、看广告。'],
- ['b','奖励发的是 Bonus 币，和钱包里的 Bonus 对应。']]],
-['Profile 我','topup','充值',null,[
- ['n','旧版没有。从个人页 Top up / VIP 进来：上面余额和“1 段 = 30 币、先扣 Bonus”。'],
- ['b','VIP 三档（周 / 月 / 年，周卡金色带 50% OFF），金币六档三列（送 Bonus、HOT / BEST 角标）。'],
- ['n','价格全是占位。']]]
+['首页','home','首页（推荐）','a-explore',[
+ ['[data-go="categories"]','筛选','进入分类页，按题材、关系、设定筛剧'],
+ ['.srch','搜索框','占位文字轮播剧名，点开进搜索页'],
+ ['[data-go="rewards"]','福利','签到和做任务领赠币，红点表示今天还没签到'],
+ ['.vip','VIP','开通会员入口，角标是当前折扣'],
+ ['.ttabs','横向标签','首页 / 上新 / 排行榜 / 各题材，切换下面的内容'],
+ ['[data-go="turn"]','继续你的故事','正在等你回答的那部剧：他的头像、第几轮、他最后一句；点「轮到你」直接回到那一刻'],
+ ['.sec','分区标题','今晚热门；右边进排行榜'],
+ ['.grid .card','剧集海报','竖版海报，左上 HOT / NEW，右上气泡表示能和他对话；下面是剧名和两个题材标签'],
+ ['.tb','底部导航','首页 / 推荐 / 在追 / 我的']]],
+['首页','rankings','首页 · 排行榜','a-search',[
+ ['.ttabs','横向标签','当前在「排行榜」'],
+ ['.chips','子榜单','最多人玩 / 飙升 / 新剧上升 / 聊得最多'],
+ ['.row[data-go="detail"] .bb','排名','前三名金色数字'],
+ ['.row[data-go="detail"] .pst','海报','点整行进剧集详情'],
+ ['.row[data-go="detail"] .tags','剧名和标签','剧名、三个题材标签、一句钩子'],
+ ['.row[data-go="detail"] .small:last-child','在玩人数','这部剧正在玩的人数'],
+ ['.tb','底部导航','首页 / 推荐 / 在追 / 我的']]],
+['首页','categories','分类筛选（剧集）','a04-filters',[
+ ['[data-go="home"]','返回','回到首页'],
+ ['[data-go="search"]','搜索','进搜索页'],
+ ['div:has(> [data-go="characters"])','剧集 / 角色','按剧找，或按角色找'],
+ ['.chips@0','题材','第一行：恋爱、暗黑浪漫、恋综、超自然、悬疑……，每行开头是「全部」'],
+ ['.chips@1','关系','第二行：三角恋、朋友变恋人、命定伴侣、假装恋爱……'],
+ ['.chips@2','设定','第三行：头狼与人类、人鱼王子、室友、被困……'],
+ ['.row:has(+ .grid)','排序','最热 / 最新，右边是一共几部'],
+ ['.grid','剧集网格','三列海报，点进剧集详情']]],
+['首页','characters','分类筛选（角色）','j02-characters',[
+ ['div:has(> [data-go="characters"])','剧集 / 角色','当前在「角色」'],
+ ['.chips','性格','阳光、高冷、占有欲、男闺蜜、王室，按喜欢哪种他来挑'],
+ ['.grid .card','角色卡','角色照片、名字、所在的剧、一句人设；点了直接进剧和他聊'],
+ ['.tb','底部导航','首页 / 推荐 / 在追 / 我的']]],
+['首页','search','搜索','a-search',[
+ ['.srch','搜索框','搜剧名、角色、情节'],
+ ['[data-go="home"]','取消','回到上一页'],
+ ['.chips@0','最近搜索','最近搜过的词，右上可清空'],
+ ['.scr > div[style*="1fr 1fr"]','热搜','两列编号榜单，前两条带「热门」'],
+ ['.chips@1','按情节找','他吃醋了、假装恋爱、困到午夜……'],
+ ['.row[data-go="detail"]','为你精选','缩略图、剧名、标签、一句钩子']]],
+['推荐','foryou','推荐（竖屏预告流）','a01-feed',[
+ ['.icbtn','静音','预告片的声音开关'],
+ ['.ttabs','关注 / 推荐','当前在「推荐」，上滑看下一部'],
+ ['[data-go="search"]','搜索','进搜索页'],
+ ['.rail','操作栏','主角头像（+ 收藏）、点赞数、角色、分享'],
+ ['.sub','台词','预告里他的一句话'],
+ ['div:has(> .kick)','剧名和简介','标语、剧名、两个标签、一句钩子'],
+ ['div[data-go="detail"].row','进入','开场时长；点「进入」进这部剧'],
+ ['div[style*="bottom:84px"]','进度条','预告片播放进度'],
+ ['.tb','底部导航','这一页透明，画面更满']]],
+['进剧','detail','剧集详情','b01-world',[
+ ['.icbtn[data-go="home"]','返回','回到上一页'],
+ ['.lang','中 / EN','切换界面语言'],
+ ['.icbtn@1','分享','分享这部剧'],
+ ['div:has(> .bb) > .bb','剧名','标语和剧名'],
+ ['.row.small','评分和热度','评分、玩过的人数、题材'],
+ ['.btn.gold','走进这个世界','开始这部剧'],
+ ['.btn.ghost','收藏','收藏后出现在「在追 · 收藏」'],
+ ['p','简介','剧情简介，点「展开」看全文'],
+ ['.card2','规则','这部剧的规则'],
+ ['div[style*="repeat(5"]','你的故事','开场、第 1–3 轮，当前那轮金框；点哪轮回看哪轮，最后一格是下一轮'],
+ ['.chips','角色','这部剧的人物'],
+ ['.grid','相似推荐','三列海报']]],
+['进剧','look','进剧前：选你的样子','c02-after-intro',[
+ ['.sheet .bb','标题','今晚走进来的是谁'],
+ ['.sheet div[style*="repeat(3,1fr)"] > div@0','剧中女主','这部剧自己的女主'],
+ ['.sheet div[style*="repeat(3,1fr)"] > div@1','你的脸','上传自拍，你出现在每一个镜头里'],
+ ['.sheet div[style*="repeat(3,1fr)"] > div@2','第一视角','他看着你，你看不到自己'],
+ ['.sheet .row:has(img.av)','换一张脸','Sofia / Hazel / Luna'],
+ ['[data-go="pick"]','继续','选好后进下一步；以后可以在「我的」里改']]],
+['进剧','pick','选他','d01-partner-pick',[
+ ['[data-go="detail"]','关闭','退出这部剧'],
+ ['.lang','中 / EN','切换界面语言'],
+ ['.row:has(> img.av)','主持人','主持人的话'],
+ ['div[style*="bottom:44px"] > .bb','问题','你和谁配对'],
+ ['[data-go="play"]@0','男主卡片','照片、名字、一句人设'],
+ ['[data-go="play"] .pill','选他','点了就和他开始']]],
+['播放','play','播放中','g01-playing',[
+ ['.icbtn[data-go="detail"]','返回','退出播放'],
+ ['.lang','中 / EN','切换字幕语言'],
+ ['.icbtn@1','更多','重拍、重新开始、重看开场、关于这部剧'],
+ ['.rail','操作栏','点赞、当前的他（点了换人）、回合、分享'],
+ ['.sub','字幕','这一段的台词'],
+ ['div[data-go="detail"]','剧名和剧情','剧名、这一轮在演什么'],
+ ['div[style*="tabular-nums"]','进度条','拖动、时长、倍速'],
+ ['[data-go="episodes"]','回合条','第几轮 / 共几轮，点开看每一轮'],
+ ['.inp','输入框','随时说话或做动作，按住麦克风说']]],
+['播放','turn','轮到你（选择点）','h01-round-done',[
+ ['.icbtn[data-go="detail"] + div','剧名和状态','第 3 轮 · 轮到你'],
+ ['.row:has(> .who)','说话的人','他的名字，旁边「换人」'],
+ ['div[style*="font-size:16px"]','他的话','他刚说的最后一句'],
+ ['.row:has(> .kick)','轮到你','右边「重拍」：不满意这一段可以重拍'],
+ ['.opt@0','选项 A','他的话之后你可以这样回'],
+ ['.opt@1','选项 B','另一种回法'],
+ ['.inp','输入框','不选选项，自己说或做什么'],
+ ['div:has(> .coin)','次数提示','每段花多少、今天还剩几次免费']]],
+['播放','wait','等待生成','f02-waiting',[
+ ['.icbtn[data-go="detail"] + div','剧名和状态','第 4 轮 · 拍摄中'],
+ ['div[style*="14px 14px 4px 14px"]','你说的话','你刚发出去的那句'],
+ ['div[style*="max-width:86%"]','前文','前面的对话'],
+ ['div[style*="font-style:italic"]','旁白','等待时的一句剧情旁白'],
+ ['.card2','拍摄进度','正在拍你的这一段：倒计时和进度条']]],
+['播放','episodes','回合列表（回看）','i01-review',[
+ ['.sheet > .row','剧名和进度','你的故事 · 几轮 · 和谁'],
+ ['.sheet .chips','分页','你的回合 / 角色 / 简介'],
+ ['.sheet div[style*="repeat(3,1fr)"] > div@0','回合','每一轮的画面，点了回看'],
+ ['.sheet div[style*="repeat(3,1fr)"] > div@3','当前这一轮','金框 + 当前'],
+ ['[data-go="turn"]','下一轮','轮到你，点了回到现在'],
+ ['.sheet > .row:last-child','重新开始 / 重看开场','从头再来，或只看一遍开场']]],
+['播放','unlock','继续剧情（解锁弹层）',null,[
+ ['.sheet > .row','这一段','这一段花多少、余额还有多少'],
+ ['[data-go="topup"]','VIP','开通 VIP 无限生成，带折扣'],
+ ['.sheet div[style*="1fr 1fr"]','金币包','四档金币，热门那档有角标'],
+ ['.btn.ghost','看广告','看一条广告，这一段免费'],
+ ['.sheet > .row:last-child','自动解锁','打开后下一段自动扣币，不再弹出']]],
+['在追','mylist','在追','j01-ongoing',[
+ ['.ttabs','分页','在玩 / 收藏 / 看过'],
+ ['.lang','中 / EN','切换界面语言'],
+ ['.row[data-go="turn"]','在玩的剧','海报（底部是进度）、第几轮和谁、他最后一句'],
+ ['.row[data-go="turn"] .pill','轮到你','等你回答的剧排在最上面，点了回到那一刻'],
+ ['.row[data-go="detail"] .pill','继续','接着上次玩'],
+ ['.sec','收藏','收藏的剧'],
+ ['.tb','底部导航','首页 / 推荐 / 在追 / 我的']]],
+['我的','profile','我的','a-you',[
+ ['[data-go="rewards"]','福利','签到和任务'],
+ ['.pill[style*="--hot"]','首次登录奖励','登录送赠币'],
+ ['.row:has(> img.av)','头像和登录','你的样子、登录、ID'],
+ ['div[style*="border-radius:18px"]','VIP 卡','三项权益和开通按钮'],
+ ['.card2@0','我的钱包','金币、赠币、充值'],
+ ['.card2[data-go="look"]','你的样子','你在每部剧里怎么出现，点了更换'],
+ ['.lst','设置','每日福利、语言、提醒、帮助'],
+ ['.tb','底部导航','首页 / 推荐 / 在追 / 我的']]],
+['我的','rewards','签到奖励',null,[
+ ['[data-go="profile"]','返回','回到我的'],
+ ['.card2 .row','连续签到','已连续几天、赠币余额'],
+ ['div[style*="repeat(7,1fr)"]','7 天签到','已签打勾、今天金色、第 7 天送一次免费生成'],
+ ['.btn.gold','签到','今天签到领赠币'],
+ ['.lst','任务','看开场、完成第一轮、用语音回他、打开提醒、分享、看广告']]],
+['我的','topup','充值',null,[
+ ['[data-go="profile"]','返回','回到我的'],
+ ['.scr > .row@1','余额','金币、赠币，1 段 = 30，优先扣赠币'],
+ ['.scr > .row[style*="border-radius:14px"]','VIP','周卡 / 月卡 / 年卡'],
+ ['.scr > div[style*="repeat(3,1fr)"]','金币','六档金币和赠送'],
+ ['.scr > .small:last-child','说明','价格和赠币有效期']]]
 ];
 var cur=0,cmp=false;
 function $(i){return document.getElementById(i);}
@@ -446,19 +513,33 @@ function setLang(l){if(l===LANG)return;LANG=l;setW();var bs=document.querySelect
 function render(){var s=LIST[cur];ph.innerHTML=SCR[s[1]]();ph.classList.toggle('zh',LANG==='zh');
   var lgs=ph.querySelectorAll('.lang span');for(var q=0;q<lgs.length;q++)lgs[q].classList.toggle('on',(lgs[q].textContent==='中')===(LANG==='zh'));zhText(ph);
   $('crumb').textContent=s[0]+' · 第 '+(cur+1)+' / '+LIST.length+' 个界面';$('title').textContent=s[2];$('count').textContent=(cur+1)+' / '+LIST.length;
-  var tg={b:['t-b','借鉴'],k:['t-k','保留'],n:['t-n','新增']};
-  $('notes').innerHTML=s[4].map(function(n){return '<li><span class="tag '+tg[n[0]][0]+'">'+tg[n[0]][1]+'</span>'+esc(n[1])+'</li>';}).join('');
+  peekI=-1;var lg=$('legend');lg.innerHTML='';s[4].forEach(function(m,i){var li=document.createElement('li');li.innerHTML='<span class="n">'+(i+1)+'</span><div class="t"><b>'+esc(m[1])+'</b><span>'+esc(m[2])+'</span></div>';
+    li.onmouseenter=function(){peek(i,true);};li.onmouseleave=function(){peek(i,false);};li.onclick=function(){var d=$('mkov').children[i];peek(i,!(d&&d.classList.contains('peek')));};lg.appendChild(li);});
+  marks();setTimeout(marks,400);setTimeout(marks,1500);
   var nb=document.querySelectorAll('.nav button');for(var i=0;i<nb.length;i++)nb[i].classList.toggle('on',+nb[i].dataset.i===cur);
-  var of=$('oldf');of.innerHTML=s[3]&&OLD[s[3]]?'<img class="oldimg" src="'+esc(OLD[s[3]])+'" alt="旧版截图">':'<div class="oldnone">旧版没有这一屏<br>（新增）</div>';
+  var of=$('oldf');of.innerHTML=s[3]&&OLD[s[3]]?'<img class="oldimg" src="'+esc(OLD[s[3]])+'" alt="旧版截图">':'<div class="oldnone">旧版没有这一屏</div>';
   $('prev').disabled=cur===0;$('next').disabled=cur===LIST.length-1;fit();}
+
+// 编号框：按每屏的选择器找到手机里的元素，在手机外框上画框（框不跟着手机缩放，编号一样大）；sel@n = 第 n 个匹配
+function pickEl(sel){var m=/^(.*)@(\d+)$/.exec(sel);var all;try{all=ph.querySelectorAll(m?m[1]:sel);}catch(e){return null;}return all[m?+m[2]:0]||null;}
+function marks(){var ov=$('mkov');ov.innerHTML='';var s=LIST[cur],fr=$('newf').getBoundingClientRect();
+  s[4].forEach(function(m,i){var d=document.createElement('div');d.className='mk';d.innerHTML='<b>'+(i+1)+'</b>';var el=pickEl(m[0]);
+    if(el){var r=el.getBoundingClientRect();var l=Math.max(r.left,fr.left)-fr.left,t=Math.max(r.top,fr.top)-fr.top,w=Math.min(r.right,fr.right)-fr.left-l,h=Math.min(r.bottom,fr.bottom)-fr.top-t;
+      if(w>2&&h>0){d.style.left=(l-2)+'px';d.style.top=(t-2)+'px';d.style.width=(w+4)+'px';d.style.height=(h+4)+'px';}else d.style.display='none';}else d.style.display='none';
+    if(i===peekI)d.classList.add('peek');ov.appendChild(d);});ov.classList.toggle('show',showMk);}
+function peek(i,on){peekI=on?i:(peekI===i?-1:peekI);var s=LIST[cur],el=pickEl(s[4][i][0]);if(on&&el){var sc=el.closest('.scr');if(sc){var r=el.getBoundingClientRect(),q=sc.getBoundingClientRect();if(r.top<q.top||r.bottom>q.bottom){el.scrollIntoView({block:'center'});marks();}}}
+  var d=$('mkov').children[i];if(d)d.classList.toggle('peek',on);}
+var showMk=false,peekI=-1;
 function fit(){var st=$('stage');var solo=document.body.classList.contains('solo');var h=st.clientHeight-(solo?0:40),w=st.clientWidth-(solo?0:80);var n=cmp?2:1;
   var sc=Math.min(h/874,(w-(n-1)*14)/(402*n),solo?1.6:0.82);if(sc<0.3)sc=0.3;
   var fw=Math.round(402*sc),fh=Math.round(874*sc);
   $('newf').style.width=fw+'px';$('newf').style.height=fh+'px';$('oldf').style.width=fw+'px';$('oldf').style.height=fh+'px';
-  ph.style.transform='scale('+sc+')';$('newf').style.borderRadius=Math.round(56*sc)+'px';$('oldf').style.borderRadius=Math.round(56*sc)+'px';}
+  ph.style.transform='scale('+sc+')';if($('mkov'))setTimeout(marks,0);$('newf').style.borderRadius=Math.round(56*sc)+'px';$('oldf').style.borderRadius=Math.round(56*sc)+'px';}
 function buildNav(){var nv=$('nav'),last='';LIST.forEach(function(s,i){if(s[0]!==last){var g=document.createElement('div');g.className='grp';g.textContent=s[0];nv.appendChild(g);last=s[0];}
   var b=document.createElement('button');b.type='button';b.dataset.i=i;b.innerHTML='<span>'+(i<9?'0':'')+(i+1)+'</span>'+esc(s[2]);b.onclick=function(){cur=i;render();};nv.appendChild(b);});}
 ph.addEventListener('click',function(e){var lg=e.target.closest('.lang span');if(lg){setLang(lg.textContent==='中'?'zh':'en');return;}var t=e.target.closest('[data-go]');if(!t)return;var id=t.getAttribute('data-go');for(var i=0;i<LIST.length;i++)if(LIST[i][1]===id){cur=i;render();return;}});
+$('mtog').onclick=function(){showMk=!showMk;this.setAttribute('aria-pressed',showMk);$('mtogt').textContent=showMk?'隐藏编号框':'显示编号框';$('mkov').classList.toggle('show',showMk);};
+ph.addEventListener('scroll',function(){marks();},true);
 $('tog').onclick=function(){cmp=!cmp;this.setAttribute('aria-pressed',cmp);$('oldcol').hidden=!cmp;document.querySelector('.app').classList.toggle('cmp',cmp);fit();};
 $('prev').onclick=function(){if(cur>0){cur--;render();}};$('next').onclick=function(){if(cur<LIST.length-1){cur++;render();}};
 document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')$('prev').click();else if(e.key==='ArrowRight')$('next').click();});
