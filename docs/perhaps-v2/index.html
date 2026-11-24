@@ -191,6 +191,24 @@ h2{font-size:18px;margin:2px 0 8px;font-weight:700}
 .ph .cm{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--t3);line-height:16px}.ph .cm b{color:var(--t2);font-weight:600}.ph .cm .lk{margin-left:auto;display:flex;align-items:center;gap:4px}
 .ph .cr{margin-top:8px;font-size:13px;color:var(--t2)}
 .ph .cin{position:absolute;left:12px;right:12px;bottom:34px;height:44px;border-radius:22px;background:var(--s2);display:flex;align-items:center;padding:0 16px;font-size:14px;color:var(--t3)}
+.ph .bub{position:absolute;left:33px;top:-20px;display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 10px 0 5px;border-radius:11px;background:var(--hot);color:#fff;font-size:11.5px;font-weight:700;line-height:1;white-space:nowrap;z-index:2}
+.ph .bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--hot)}   /* 气泡尖角指向下面的登录 */
+.ph .vipc{position:relative;overflow:hidden;margin:24px 10px 0;padding:14px 14px 12px;border-radius:16px;background:var(--gg);color:#3B230B}
+.ph .vdeco{position:absolute;right:-6px;top:-8px;width:52px;height:56px;fill:rgba(255,255,255,.28)}
+.ph .vt2{position:relative;text-align:center;font-weight:800;font-size:15px;line-height:20px}
+.ph .vperks{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin:10px 0 12px;text-align:center}
+.ph .vperks div{display:flex;flex-direction:column;align-items:center;gap:5px}
+.ph .vperks span{display:flex;width:26px;height:26px;border-radius:7px;background:#3A2510;color:var(--g1);align-items:center;justify-content:center}
+.ph .vperks b{font-size:11.5px;line-height:14px;font-weight:600}
+.ph .vact{position:relative;height:36px;border-radius:18px;background:linear-gradient(#3A2A18,#1E150B);color:var(--g1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.ph .vtag{position:absolute;right:12px;top:-13px;height:20px;line-height:20px;padding:0 8px;border-radius:10px;background:var(--hot);color:#fff;font-size:11px;font-weight:800}
+.ph .vtag::after{content:"";position:absolute;right:16px;bottom:-4px;border:4px solid transparent;border-bottom:0;border-top-color:var(--hot)}
+.ph .walc{margin:12px 10px 0;border-radius:16px;background:var(--s1);border:1px solid var(--ln)}
+.ph .walc .wh{display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 14px;border-bottom:1px solid var(--ln);font-size:15px}
+.ph .walc .wb{display:flex;align-items:center;gap:30px;padding:10px 14px 12px}
+.ph .walc .wn{display:flex;align-items:center;gap:6px;font-size:18px;line-height:22px;font-weight:700}
+.ph .walc .wk{font-size:12px;line-height:16px;color:var(--t2);margin-top:2px}
+.ph .walc .pill{margin-left:auto;height:32px;padding:0 18px;background:var(--hot);color:#fff;font-weight:700;font-size:14px}
 .ph .coin.s{width:14px;height:14px;font-size:8px;line-height:1}
 .ph .cl{display:flex;align-items:center;gap:6px;font-size:12px;line-height:16px;color:var(--t2)}   /* 金币小字行：图标和文字同一条中线，不靠 vertical-align 挪 */
 </style>
@@ -402,11 +420,11 @@ SCR.unlock=function(){var pk=[['100','','$0.99',''],['300','+60','$2.99','HOT'],
  '<div class="btn ghost" style="margin:12px 16px 0;height:46px;font-size:14px">'+ic('tv','width:19px;height:19px')+'Watch an ad · this scene free</div>'+
  '<div class="row small muted" style="padding:12px 18px 0;justify-content:space-between"><span>Auto-unlock next scene</span><span style="width:40px;height:24px;border-radius:12px;background:var(--g2);position:relative"><i style="position:absolute;right:2px;top:2px;width:20px;height:20px;border-radius:50%;background:#fff"></i></span></div></div>'+SB;};
 SCR.profile=function(){return '<div class="scr" style="padding-bottom:100px;background:radial-gradient(120% 40% at 30% 0,rgba(179,138,85,.22),transparent 70%)"><div class="row" style="padding:58px 16px 0;justify-content:flex-end;gap:18px"><span data-go="rewards" style="position:relative;color:var(--g1)">'+ic('gift','width:27px;height:27px')+'<i class="reddot"></i></span><span data-go="settings">'+ic('gear','width:25px;height:25px')+'</span></div>'+
- '<div style="padding:4px 16px 0;position:relative"><span class="pill" style="position:absolute;left:16px;top:-8px;background:var(--hot);color:#fff;font-size:12.5px;font-weight:700;height:26px;padding:0 11px;z-index:2"><span class="coin" style="width:15px;height:15px;font-size:9px">P</span>Get 20 bonus on first sign-in</span>'+
- '<div class="row" style="gap:14px;padding-top:24px"><img data-go="look" src="'+esc(F.sofia)+'" class="av" style="width:72px;height:72px;border:2px solid rgba(235,211,162,.6)"><div><div class="row" style="gap:6px;font-size:24px;font-weight:700">Sign in '+ic('back','transform:scaleX(-1);width:20px;height:20px')+'</div><div class="small muted row" style="gap:5px">ID: pH7x2Kq '+ic('copy','width:14px;height:14px')+'</div></div></div></div>'+
- '<div style="margin:18px 16px 0;padding:16px;border-radius:18px;background:var(--gg);color:var(--dk)"><div style="text-align:center;font-weight:800;font-size:17px">Become a VIP — the story never waits</div><div style="display:grid;grid-template-columns:repeat(3,1fr);margin:12px 0 14px;text-align:center;font-size:12px;font-weight:600">'+[['inf','Unlimited scenes'],['bolt','Skip the queue'],['hd','1080P HD']].map(function(x){return '<div><span style="display:inline-flex;width:36px;height:36px;border-radius:10px;background:rgba(26,20,12,.85);color:var(--g1);align-items:center;justify-content:center;margin-bottom:4px">'+ic(x[0],'width:20px;height:20px')+'</span><br>'+x[1]+'</div>';}).join('')+'</div><div data-go="topup" style="position:relative;height:46px;border-radius:23px;background:linear-gradient(#3A2A18,#1E150B);color:var(--g1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px">Activate<span style="position:absolute;right:10px;top:-11px;background:var(--hot);color:#fff;font-size:11px;border-radius:9px;padding:1px 8px">50% OFF</span></div></div>'+
- '<div class="card2" style="margin:12px 16px 0;padding:14px 16px"><div class="row" style="justify-content:space-between"><b style="font-size:15px">My Wallet</b><span class="chev">'+ic('back','transform:scaleX(-1);width:16px;height:16px')+'</span></div><div class="row" style="margin-top:12px;gap:30px"><div><div class="row" style="gap:6px;font-size:22px;font-weight:700"><span class="coin">P</span>0</div><div class="small muted">Coins</div></div><div><div class="row" style="gap:6px;font-size:22px;font-weight:700"><span class="coin">P</span>80</div><div class="small muted">Bonus</div></div><span class="pill" data-go="topup" style="margin-left:auto;height:38px;padding:0 20px;background:var(--hot);color:#fff;font-weight:700">Top up</span></div></div>'+
- '<div class="ttabs" style="margin:22px 0 12px"><span class="on">Playing</span><span>Saved</span><span>History</span></div>'+
+ '<div style="position:relative;padding:10px 16px 0"><span class="bub"><span class="coin s">P</span>Get 20 bonus on first sign-in</span>'+
+ '<div class="row" style="gap:12px"><img data-go="look" src="'+esc(F.sofia)+'" class="av" style="width:48px;height:48px;border:1.5px solid rgba(255,255,255,.28)"><div style="display:flex;flex-direction:column;gap:3px"><div class="row" style="gap:4px;font-size:19px;line-height:24px;font-weight:700">Sign in '+ic('back','transform:scaleX(-1);width:18px;height:18px')+'</div><div class="cl" style="gap:4px;font-size:12.5px">ID: pH7x2Kq '+ic('copy','width:13px;height:13px')+'</div></div></div></div>'+
+ '<div class="vipc"><svg class="vdeco" viewBox="0 0 60 64" aria-hidden="true"><path d="M2 2h18l10 30L40 2h18L30 62z"/></svg><div class="vt2">Become a VIP — the story never waits</div><div class="vperks">'+[['inf','Unlimited scenes'],['bolt','Skip the queue'],['hd','1080P HD']].map(function(x){return '<div><span>'+ic(x[0],'width:15px;height:15px')+'</span><b>'+x[1]+'</b></div>';}).join('')+'</div><div class="vact" data-go="topup">Activate<span class="vtag">50% OFF</span></div></div>'+
+ '<div class="walc"><div class="wh"><b>My Wallet</b><span class="chev">'+ic('back','transform:scaleX(-1);width:15px;height:15px')+'</span></div><div class="wb"><div><div class="wn"><span class="coin">P</span>0</div><div class="wk">Coins</div></div><div><div class="wn"><span class="coin">P</span>80</div><div class="wk">Bonus</div></div><span class="pill" data-go="topup">Top up</span></div></div>'+
+'<div class="ttabs" style="margin:16px 0 10px"><span class="on">Playing</span><span>Saved</span><span>History</span></div>'+
  '<div class="grid">'+[['liars','liars.jasper',1,12],['magnus','magnus.magnus',0,18],['villa','villa.jace',0,4]].map(function(x){var v=W[x[0]];return '<div class="card" data-go="'+(x[2]?'turn':'detail')+'"><div class="pst"><img src="'+esc(poster(x[0]))+'" alt=""><img src="'+esc(cav(x[1]))+'" alt="" style="position:absolute;left:6px;bottom:6px;width:26px;height:26px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.85)"></div><h4>'+esc(cap(v.title))+'</h4><div class="tags">'+(x[2]?'<b style="color:var(--hot)">Your turn</b>':'<b style="color:var(--g1)">Continue</b>')+'&nbsp; '+x[3]+' lines</div></div>';}).join('')+'</div></div>'+TB('profile')+SB;};
 SCR.settings=function(){return '<div class="scr" style="padding-bottom:40px"><div class="row" style="padding:60px 16px 12px;justify-content:space-between"><span data-go="profile">'+ic('back','width:26px;height:26px')+'</span><span style="font-size:17px;font-weight:700">Settings</span><span style="width:26px"></span></div>'+
  '<div class="card2" style="margin:4px 16px 0;padding:12px 14px" data-go="look"><div class="row"><img src="'+esc(F.sofia)+'" style="width:44px;height:56px;border-radius:8px;object-fit:cover"><div style="flex:1"><div class="kick" style="font-size:10px">HOW YOU APPEAR IN EVERY WORLD</div><div style="font-weight:600;margin-top:2px">Story heroine · Sofia</div><div class="small muted">Name: not set</div></div><span class="small" style="color:var(--g1)">Change ›</span></div></div>'+
@@ -570,10 +588,10 @@ var LIST=[
 ['我的','profile','我的','j01-ongoing',[
  ['[data-go="rewards"]','福利','签到和任务，红点表示今天还没签到'],
  ['[data-go="settings"]','设置','你的样子、语言、提醒、帮助'],
- ['.pill[style*="--hot"]','首次登录奖励','登录送赠币'],
+ ['.bub','首次登录奖励','气泡尖角指向登录：登录送赠币'],
  ['.row:has(> img.av)','头像和登录','头像是你在剧里的样子，点了更换；旁边是登录和 ID'],
- ['div[style*="border-radius:18px"]','VIP 卡','三项权益和开通按钮'],
- ['.card2@0','我的钱包','金币、赠币、充值'],
+ ['.vipc','VIP 卡','三项权益和开通按钮，按钮上是折扣角标'],
+ ['.walc','我的钱包','金币、赠币、充值'],
  ['.ttabs','在玩 / 收藏 / 看过','原来的「在追」并到这里'],
  ['.grid .card','在玩的剧','海报左下是你选的他；下面写「轮到你」或「继续」和聊了几句，点了接着玩'],
  ['.tb','底部导航','首页 / 推荐 / 我的']]],
