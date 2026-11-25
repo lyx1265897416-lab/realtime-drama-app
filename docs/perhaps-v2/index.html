@@ -423,12 +423,11 @@ SCR.search=function(){var tr=['liars','magnus','villa','kael','rafael','rian','l
  '<div class="sec"><h3 style="font-size:15px">Top picks for you</h3></div>'+['villa','milo','lena'].map(function(w){var v=W[w];return '<div class="row" data-go="detail" style="padding:6px 16px 10px"><img src="'+esc(poster(w))+'" style="width:52px;height:70px;border-radius:8px;object-fit:cover"><div style="min-width:0"><div style="font-weight:600">'+esc(cap(v.title))+'</div><div class="tags">'+tg(v)+'</div><div class="small muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:290px">'+esc(v.tagline)+'</div></div></div>';}).join('')+'</div>'+SB;};
 SCR.detail=function(){var rd=['Intro','1','2','3'];
  return '<div class="scr" style="padding-bottom:40px"><div style="position:relative;height:300px">'+full(L.hero,'center 22%')+'<div class="vg" style="background:linear-gradient(rgba(0,0,0,.35),transparent 30%,rgba(13,12,16,.6) 70%,var(--bg))"></div>'+
- '<div class="row" style="position:absolute;top:56px;left:14px;right:14px;justify-content:space-between"><span class="icbtn" data-go="home">'+ic('back','width:20px;height:20px')+'</span><span class="icbtn">'+ic('share','width:18px;height:18px')+'</span></div></div>'+
+ '<div class="row" style="position:absolute;top:56px;left:14px;right:14px;justify-content:space-between"><span class="icbtn" data-go="home">'+ic('back','width:20px;height:20px')+'</span><span class="row" style="gap:10px"><span class="icbtn">'+ic('star','width:19px;height:19px')+'</span><span class="icbtn">'+ic('share','width:18px;height:18px')+'</span></span></div></div>'+
  '<div style="padding:0 18px;margin-top:-58px;position:relative"><div class="kick">A DATING SHOW · THREE REAL · FOUR FAKE</div><div class="bb" style="font-size:40px;line-height:.95;margin:4px 0 8px">'+esc(L.title)+'</div>'+
  '<div class="row small muted" style="gap:14px;margin-bottom:10px;line-height:16px"><span class="cl" style="gap:4px">'+ic('star','width:14px;height:14px;fill:var(--g1);stroke:var(--g1)')+'<span>4.8</span></span><span class="cl" style="gap:4px">'+ic('play','width:12px;height:12px;fill:currentColor;stroke:none')+'<span>38.2K played</span></span><span>Dating show · Real or fake</span></div>'+
- '<div class="row" style="gap:10px"><div class="btn gold" data-go="look" style="flex:1">'+ic('play','width:16px;height:16px;fill:currentColor;stroke:none')+'Step into this world</div><div class="btn ghost" style="width:50px;padding:0">'+ic('star')+'</div></div>'+
- '<p style="font-size:14px;line-height:1.5;color:rgba(244,239,230,.86);margin:14px 0 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">'+esc(L.hook)+'</p><div class="small" style="color:var(--g1)">More</div>'+
- '<div class="card2" style="padding:12px 14px;margin-top:14px"><div class="kick" style="font-size:10.5px">THE RULE · THREE REAL, FOUR FAKE</div><div class="small muted" style="margin-top:4px;line-height:1.45">Three of the seven are millionaires. Four are faking it. Every vote you cast is read out loud — and whoever you take home, you live with.</div></div></div>'+
+ '<div class="btn gold" data-go="look" style="width:100%">'+ic('play','width:16px;height:16px;fill:currentColor;stroke:none')+'Step into this world</div>'+
+ '<p style="font-size:14px;line-height:1.5;color:rgba(244,239,230,.86);margin:14px 0 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">'+esc(L.hook)+'</p><div class="small" style="color:var(--g1)">More</div></div>'+
  '<div class="sec"><h3>Your story <span class="small muted" style="font-weight:500">· on Round 3</span></h3><a data-go="episodes">All rounds ›</a></div>'+
  '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:0 16px">'+rd.map(function(x,i){var cur=i===3;return '<div data-go="'+(cur?'turn':'play')+'" style="height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:'+(i?15:12.5)+'px;background:'+(cur?'rgba(235,211,162,.14)':'var(--s1)')+';color:'+(cur?'var(--g1)':'var(--tx)')+';border:1px solid '+(cur?'rgba(235,211,162,.5)':'transparent')+'">'+x+'</div>';}).join('')+'<div data-go="turn" style="height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(255,255,255,.22);color:var(--t2);font-size:12px">Next</div></div>'+
  '<div class="sec"><h3>Characters</h3></div><div class="chips" style="gap:10px">'+[['liars.wes','The sunny one'],['liars.jasper','The cold one']].map(function(c){var x=CAST[c[0]];return '<div style="flex:none;width:120px"><div style="height:150px;border-radius:12px;overflow:hidden"><img class="im" src="'+esc(cimg(c[0]))+'"></div><div class="bb" style="font-size:18px;margin-top:5px">'+esc(x.name)+'</div><div class="small muted">'+c[1]+'</div></div>';}).join('')+
@@ -620,13 +619,12 @@ var LIST18,LIST=[
  ['.tb','底部导航','首页 / 推荐 / 我的']]],
 ['进剧','detail','剧集详情','b01-world',[
  ['.icbtn[data-go="home"]','返回','回到上一页'],
- ['.icbtn@1','分享','分享这部剧'],
+ ['.icbtn@1','收藏','五角星，收藏后出现在「我的 · 收藏」'],
+ ['.icbtn@2','分享','分享这部剧'],
  ['div:has(> .bb) > .bb','剧名','标语和剧名'],
  ['.row.small','评分和热度','评分、玩过的人数、题材'],
  ['.btn.gold','走进这个世界','开始这部剧'],
- ['.btn.ghost','收藏','五角星，收藏后出现在「我的 · 收藏」'],
  ['p','简介','剧情简介，点「展开」看全文'],
- ['.card2','规则','这部剧的规则'],
  ['div[style*="repeat(5"]','你的故事','开场、第 1–3 轮，当前那轮金框；点哪轮回看哪轮，最后一格是下一轮'],
  ['.chips','角色','这部剧的人物'],
  ['.grid','相似推荐','三列海报']]],
