@@ -76,7 +76,7 @@ function fmt(t){t=+t||0;return Math.floor(t/60)+':'+String(Math.floor(t%60)).pad
 function drawCard(play){const s=D[cur]; if(!s)return; const keep=$('#v')&&$('#v').dataset.id===s.id?$('#v').currentTime:null;
   $('#main').innerHTML=`<div class="player"><video id="v" data-id="${s.id}" playsinline preload="auto" src="media/${s.id}.mp4" ${s.poster?`poster="media/${s.id}.jpg"`:''}></video><div class="cap" id="cap"></div><div class="end" id="end" hidden></div><button class="tap" id="tap"><i>${T[L].tap}</i></button></div>
   <div class="card"><h2>${esc(s.title[L]||s.title.en)}</h2><p class="hook">${esc(s.hook[L]||s.hook.en)}</p><div class="tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
-  <dl><dt>${T[L].his}</dt><dd>${esc(s.him.name)}${s.him.age?`, ${esc(s.him.age)}${T[L].age}`:''}${s.him.lib?` · #${esc([].concat(s.him.lib).join(' / #'))}`:''}</dd>${s.cost?`<dt>${T[L].cost}</dt><dd>${esc(s.cost)} credits</dd>`:''}</dl>
+  <dl><dt>${T[L].his}</dt><dd>${esc(s.him.name)}${s.him.age?`, ${esc(s.him.age)}${T[L].age}`:''}${(s.him.lib&&[].concat(s.him.lib).length)?` · #${esc([].concat(s.him.lib).join(' / #'))}`:''}</dd>${s.cost?`<dt>${T[L].cost}</dt><dd>${esc(s.cost)} credits</dd>`:''}</dl>
   <div class="script">${s.caps.map((c,i)=>`<button class="line" data-i="${i}"><span class="t">${fmt(c.s)}</span><span>${c.who?`<b>${esc(c.who)}</b> · `:''}${esc(c[L]||c.en)}</span></button>`).join('')}</div></div>`;
   const v=$('#v'),cap=$('#cap'),end=$('#end'),tap=$('#tap');
   end.innerHTML=`<p>${T[L].your}</p>`+s.options.map(o=>`<button class="opt">${esc(o[L]||o.en)}</button>`).join('')+`<button class="replay" id="rp">${T[L].replay}</button>`;
