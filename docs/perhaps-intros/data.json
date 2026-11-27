@@ -17,7 +17,7 @@
   "him": {
    "name": "Elias Ward",
    "age": 27,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
@@ -98,7 +98,7 @@
   "him": {
    "name": "Cole Brennan",
    "age": 25,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
@@ -186,7 +186,7 @@
   "him": {
    "name": "Dante Moreau",
    "age": 29,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
@@ -267,7 +267,7 @@
   "him": {
    "name": "Rafe Kader",
    "age": 28,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
@@ -348,7 +348,7 @@
   "him": {
    "name": "Noah Hale",
    "age": 26,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
@@ -422,7 +422,7 @@
   "him": {
    "name": "Julian Vance",
    "age": 30,
-   "lib": "none (batch-2 cast, generated)"
+   "lib": []
   },
   "options": [
    {
