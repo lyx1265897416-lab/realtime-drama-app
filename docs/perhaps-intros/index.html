@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Perhaps Intro 第四批</title>
+<title>Perhaps Intro 第五批</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
@@ -63,18 +63,18 @@ dt{color:var(--mute)} dd{margin:0}
   <section class="main" id="main"><div class="empty">加载中…</div></section>
 </div>
 <script>
-const T={zh:{sub:'第四批 · 强代入第一视角 · 紧张感与情绪 · 手只在必要时入画 · 两个选项 · 每部约 30 秒',his:'男主',voice:'',cost:'花费',script:'台词',your:'轮到你',replay:'重看',tap:'点击播放（有声）',age:'岁'},
-         en:{sub:'Batch 4 · immersive POV · real tension & emotion · hands only when needed · two choices · ~30 s',his:'Him',cost:'Cost',script:'Lines',your:'Your turn',replay:'Replay',tap:'Tap to play with sound',age:''}};
+const T={zh:{sub:'第五批 · 身份交代开场 · 无缝衔接 · 动作戏与仰视男主 · 全程英文 · 两个选项 · 每部约 30–36 秒',his:'男主',voice:'',cost:'花费',script:'台词',your:'轮到你',replay:'重看',tap:'点击播放（有声）',age:'岁'},
+         en:{sub:'Batch 5 · identity prelude · seamless continuity · action & low-angle POV · English only · two choices · 30–36 s',his:'Him',cost:'Cost',script:'Lines',your:'Your turn',replay:'Replay',tap:'Tap to play with sound',age:''}};
 let L=(location.hash==='#en')?'en':'zh', D=[], cur=0;
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function setLang(l){L=l;$('#l-zh').setAttribute('aria-pressed',l==='zh');$('#l-en').setAttribute('aria-pressed',l==='en');history.replaceState(null,'',l==='en'?'#en':'#zh');drawStrip();drawCard(false)}
 $('#l-zh').onclick=()=>setLang('zh');$('#l-en').onclick=()=>setLang('en');
 window.addEventListener('hashchange',()=>setLang(location.hash==='#en'?'en':'zh'));
-function drawStrip(){$('#sub').textContent=T[L].sub;$('#strip').innerHTML=D.map((s,i)=>`<button class="thumb" aria-current="${i===cur}" data-i="${i}" style="${s.poster?`background-image:url(media/${s.id}.jpg?v=b4)`:''}"><span><b>${esc(s.id[0].toUpperCase())}</b>${esc(s.title[L]||s.title.en)}</span></button>`).join('');
+function drawStrip(){$('#sub').textContent=T[L].sub;$('#strip').innerHTML=D.map((s,i)=>`<button class="thumb" aria-current="${i===cur}" data-i="${i}" style="${s.poster?`background-image:url(media/${s.id}.jpg?v=b5)`:''}"><span><b>${esc(s.id[0].toUpperCase())}</b>${esc(s.title[L]||s.title.en)}</span></button>`).join('');
   document.querySelectorAll('.thumb').forEach(b=>b.onclick=()=>{cur=+b.dataset.i;drawStrip();drawCard(true)})}
 function fmt(t){t=+t||0;return Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')}
 function drawCard(play){const s=D[cur]; if(!s)return; const keep=$('#v')&&$('#v').dataset.id===s.id?$('#v').currentTime:null;
-  $('#main').innerHTML=`<div class="player"><video id="v" data-id="${s.id}" playsinline preload="auto" src="media/${s.id}.mp4?v=b4" ${s.poster?`poster="media/${s.id}.jpg?v=b4"`:''}></video><div class="cap" id="cap"></div><div class="end" id="end" hidden></div><button class="tap" id="tap"><i>${T[L].tap}</i></button></div>
+  $('#main').innerHTML=`<div class="player"><video id="v" data-id="${s.id}" playsinline preload="auto" src="media/${s.id}.mp4?v=b5" ${s.poster?`poster="media/${s.id}.jpg?v=b5"`:''}></video><div class="cap" id="cap"></div><div class="end" id="end" hidden></div><button class="tap" id="tap"><i>${T[L].tap}</i></button></div>
   <div class="card"><h2>${esc(s.title[L]||s.title.en)}</h2><p class="hook">${esc(s.hook[L]||s.hook.en)}</p><div class="tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
   <dl><dt>${T[L].his}</dt><dd>${esc(s.him.name)}${s.him.age?`, ${esc(s.him.age)}${T[L].age}`:''}${(s.him.lib&&[].concat(s.him.lib).length)?` · #${esc([].concat(s.him.lib).join(' / #'))}`:''}</dd>${s.cost?`<dt>${T[L].cost}</dt><dd>${esc(s.cost)} credits</dd>`:''}</dl>
   <div class="script">${s.caps.map((c,i)=>`<button class="line" data-i="${i}"><span class="t">${fmt(c.s)}</span><span>${c.who?`<b>${esc(c.who)}</b> · `:''}${esc(c[L]||c.en)}</span></button>`).join('')}</div></div>`;

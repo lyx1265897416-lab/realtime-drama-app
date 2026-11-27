@@ -31,50 +31,50 @@
   ],
   "caps": [
    {
-    "s": 3.25,
-    "e": 4.9,
+    "s": 2.9,
+    "e": 4.4,
     "who": "ELIAS",
     "en": "Archive closes at ten.",
     "zh": "档案室十点就关了。"
    },
    {
-    "s": 6.55,
-    "e": 9.15,
+    "s": 6.2,
+    "e": 8.15,
     "who": "ELIAS",
     "en": "You're on my camera at twelve-fifty.",
     "zh": "十二点五十，你出现在我的监控里。"
    },
    {
-    "s": 10.1,
-    "e": 12.05,
+    "s": 10.98,
+    "e": 12.65,
     "who": "ME",
     "en": "I was just returning a book.",
     "zh": "我只是来还一本书。"
    },
    {
-    "s": 17.85,
-    "e": 19.6,
+    "s": 16.38,
+    "e": 17.95,
     "who": "ELIAS",
     "en": "You were returning my file.",
     "zh": "你是来还我的档案。"
    },
    {
-    "s": 20.2,
-    "e": 22.75,
+    "s": 19.15,
+    "e": 22.4,
     "who": "ELIAS",
     "en": "I could report you. Or you tell me who sent you.",
     "zh": "我可以举报你。或者，你告诉我是谁派你来的。"
    },
    {
-    "s": 23.05,
-    "e": 24.25,
+    "s": 22.52,
+    "e": 23.75,
     "who": "ME",
     "en": "You wouldn't believe me.",
     "zh": "说了你也不会信。"
    },
    {
-    "s": 25.95,
-    "e": 27.5,
+    "s": 25.2,
+    "e": 26.75,
     "who": "ELIAS",
     "en": "You have until I put this back.",
     "zh": "在我把它放回去之前，你想清楚。"
@@ -90,8 +90,8 @@
    "zh": "受罚席"
   },
   "hook": {
-   "en": "You benched the hockey captain in the final. Now he's backed you against the locker-room door - and he can feel your pulse.",
-   "zh": "决赛里你把冰球队长按上了替补席。现在他把你逼到更衣室门上——还摸到了你的心跳。"
+   "en": "He owns the ice. You benched him anyway. Now the arena is dark - and he can feel your pulse.",
+   "zh": "冰场是他的主场，你还是把他按上了替补席。现在全场熄灯——他摸到了你的心跳。"
   },
   "tags": [
    "campus / sports romance",
@@ -115,42 +115,42 @@
   ],
   "caps": [
    {
-    "s": 4.7,
-    "e": 6.5,
+    "s": 12.8,
+    "e": 14.4,
     "who": "COLE",
     "en": "You benched me in the third period.",
     "zh": "第三节你把我按在了替补席上。"
    },
    {
-    "s": 6.85,
-    "e": 8.57,
+    "s": 14.85,
+    "e": 16.61,
     "who": "ME",
     "en": "You failed the concussion check.",
     "zh": "你脑震荡检查没过。"
    },
    {
-    "s": 14.78,
-    "e": 19.55,
+    "s": 22.3,
+    "e": 26.09,
     "who": "COLE",
     "en": "Ask me anything. Name, date... your number.",
     "zh": "随便问。名字、日期……你的电话。"
    },
    {
-    "s": 23.3,
-    "e": 25.39,
+    "s": 27.53,
+    "e": 29.31,
     "who": "COLE",
     "en": "Your pulse is faster than mine.",
     "zh": "你的心跳比我还快。"
    },
    {
-    "s": 26.33,
-    "e": 29.11,
+    "s": 30.52,
+    "e": 33.23,
     "who": "COLE",
     "en": "Clear me, doc. One drink, just us.",
     "zh": "批准我吧，医生。就喝一杯，就我们俩。"
    }
   ],
-  "cost": 297.0,
+  "cost": 194.0,
   "poster": true
  },
  {
@@ -185,50 +185,50 @@
   ],
   "caps": [
    {
-    "s": 6.75,
-    "e": 9.95,
+    "s": 6.2,
+    "e": 9.6,
     "who": "DANTE",
     "en": "Most people who find that book leave through the back door.",
     "zh": "找到那本账的人，大多是从后门被抬出去的。"
    },
    {
-    "s": 12.6,
-    "e": 13.55,
+    "s": 12.5,
+    "e": 13.5,
     "who": "DANTE",
     "en": "You're still here.",
     "zh": "你还没走。"
    },
    {
-    "s": 13.8,
+    "s": 13.85,
     "e": 15.4,
     "who": "ME",
     "en": "I'm not leaving without it.",
     "zh": "不带上它，我不走。"
    },
    {
-    "s": 17.84,
-    "e": 19.3,
+    "s": 18.6,
+    "e": 19.95,
     "who": "DANTE",
     "en": "You wanted me to find you.",
     "zh": "你是想让我找到你。"
    },
    {
-    "s": 20.28,
-    "e": 24.1,
+    "s": 22.7,
+    "e": 25.15,
     "who": "DANTE",
     "en": "My father wants you gone by morning. I said I'd handle it.",
     "zh": "我父亲要你天亮前消失。我说，交给我处理。"
    },
    {
-    "s": 24.22,
-    "e": 25.15,
+    "s": 25.2,
+    "e": 26.05,
     "who": "ME",
     "en": "Handle me how?",
     "zh": "怎么处理我？"
    },
    {
-    "s": 26.75,
-    "e": 29.65,
+    "s": 27.85,
+    "e": 29.95,
     "who": "DANTE",
     "en": "So. Do you work for him, or for me?",
     "zh": "所以，你是替他做事，还是替我？"
@@ -244,8 +244,8 @@
    "zh": "贴身保护"
   },
   "hook": {
-   "en": "The power dies at the top of the tower. Out of the dark doorway comes your new bodyguard - and he puts himself between you and the windows.",
-   "zh": "顶层公寓突然断电。黑暗的门洞里走出你的新保镖，他一言不发，挡在你和窗户之间。"
+   "en": "The power dies. Your bodyguard fights his way to your door, finds you in the dark - and gets you out with the men right behind you.",
+   "zh": "整栋楼断电。你的保镖一路打到你门口，在黑暗里找到你，带着你从追兵眼皮底下撤离。"
   },
   "tags": [
    "bodyguard / suspense romance",
@@ -263,48 +263,41 @@
     "zh": "揪住他的衣领：“没有你我不走。”"
    },
    {
-    "en": "Hold his wrist: \"They're not here for me, Rafe. They're here for you.\"",
-    "zh": "抓住他的手腕：“他们不是冲我来的，Rafe，是冲你。”"
+    "en": "\"Tell me who sent them, Rafe. Now.\"",
+    "zh": "“告诉我是谁派来的，Rafe。现在就说。”"
    }
   ],
   "caps": [
    {
-    "s": 8.7,
-    "e": 10.9,
+    "s": 8.6,
+    "e": 9.79,
     "who": "RAFE",
-    "en": "Don't move. They're watching the windows.",
-    "zh": "别动。他们在盯着窗户。"
+    "en": "Are you hurt?",
+    "zh": "你受伤了吗？"
    },
    {
-    "s": 13.1,
-    "e": 14.75,
+    "s": 9.9,
+    "e": 11.71,
     "who": "ME",
-    "en": "Who's out there?",
-    "zh": "外面是谁？"
+    "en": "No. What's happening?",
+    "zh": "没有。到底怎么了？"
    },
    {
-    "s": 18.64,
-    "e": 20.95,
+    "s": 13.78,
+    "e": 15.57,
     "who": "RAFE",
-    "en": "Two on the stairs. One in the lift.",
-    "zh": "楼梯上两个，电梯里一个。"
+    "en": "Stay behind me. Don't let go.",
+    "zh": "跟在我后面。别松手。"
    },
    {
-    "s": 23.16,
-    "e": 26.03,
+    "s": 27.58,
+    "e": 31.17,
     "who": "RAFE",
-    "en": "Service door. Count to thirty, then run.",
-    "zh": "走员工通道。数到三十，然后跑。"
-   },
-   {
-    "s": 26.18,
-    "e": 29.73,
-    "who": "RAFE",
-    "en": "If I'm not behind you by thirty, don't come back for me.",
-    "zh": "数到三十我还没跟上来，就别回来找我。"
+    "en": "When I say go, you run. Don't look back for me.",
+    "zh": "我说走，你就跑。别回头找我。"
    }
   ],
-  "cost": 183.0,
+  "cost": 291.0,
   "poster": true
  },
  {
@@ -339,42 +332,42 @@
   ],
   "caps": [
    {
-    "s": 8.02,
-    "e": 10.1,
+    "s": 10.26,
+    "e": 11.94,
     "who": "NOAH",
     "en": "You still have him saved as 'Home'.",
     "zh": "你还把他存成“家”。"
    },
    {
-    "s": 10.1,
-    "e": 11.33,
+    "s": 11.94,
+    "e": 13.31,
     "who": "ME",
     "en": "I didn't answer him.",
     "zh": "我没回他。"
    },
    {
-    "s": 13.16,
-    "e": 15.35,
+    "s": 15.1,
+    "e": 17.21,
     "who": "NOAH",
     "en": "I know. I read the whole thread.",
     "zh": "我知道。整段聊天我都看完了。"
    },
    {
-    "s": 17.5,
-    "e": 20.19,
+    "s": 18.82,
+    "e": 22.09,
     "who": "NOAH",
     "en": "Three years. I've never once asked for your password.",
     "zh": "三年了。我一次都没问过你的密码。"
    },
    {
-    "s": 24.2,
-    "e": 28.29,
+    "s": 25.9,
+    "e": 29.05,
     "who": "NOAH",
     "en": "So answer him. Right now. While I watch.",
     "zh": "那就回他。现在。当着我的面。"
    }
   ],
-  "cost": 154.0,
+  "cost": 394.0,
   "poster": true
  },
  {
@@ -384,8 +377,8 @@
    "zh": "恶意收购"
   },
   "hook": {
-   "en": "The CEO who just bought your company stopped the elevator. He wants ten minutes - and you.",
-   "zh": "刚收购你公司的 CEO 让电梯停了。他要十分钟——还要你。"
+   "en": "You ran from the CEO who bought your company - straight into the elevator he controls.",
+   "zh": "你躲开那个收购了你公司的 CEO，一头钻进了他掌控的电梯。"
   },
   "tags": [
    "rivals / office romance",
@@ -409,42 +402,42 @@
   ],
   "caps": [
    {
-    "s": 5.84,
-    "e": 8.19,
+    "s": 11.0,
+    "e": 13.37,
     "who": "JULIAN",
     "en": "You've taken the stairs for six weeks.",
     "zh": "你已经走了六个星期的楼梯了。"
    },
    {
-    "s": 15.54,
-    "e": 17.84,
+    "s": 17.6,
+    "e": 20.18,
     "who": "JULIAN",
     "en": "Don't bother. I had maintenance stop it.",
     "zh": "别按了。是我让维修停的。"
    },
    {
-    "s": 17.84,
-    "e": 19.05,
+    "s": 20.56,
+    "e": 21.65,
     "who": "ME",
     "en": "You did what?",
     "zh": "你干了什么？"
    },
    {
-    "s": 21.0,
-    "e": 25.33,
+    "s": 24.96,
+    "e": 28.65,
     "who": "JULIAN",
     "en": "Ten minutes. Head of strategy, or clear out your desk.",
     "zh": "十分钟。当战略总监，或者收拾桌子走人。"
    },
    {
-    "s": 27.28,
-    "e": 29.95,
+    "s": 29.2,
+    "e": 31.59,
     "who": "JULIAN",
     "en": "I'd rather you hate me from the office next door.",
     "zh": "我宁可你在隔壁办公室恨我。"
    }
   ],
-  "cost": 340.0,
+  "cost": 318.0,
   "poster": true
  }
 ]
