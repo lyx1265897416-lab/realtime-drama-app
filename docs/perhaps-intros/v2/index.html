@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Perhaps Intro 第二批</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* 布局：左侧竖屏播放器（结尾弹三个选项），右侧当前剧集卡片；顶部一排海报切换。单一深色观影界面 */
+:root{
+  --bg:#0d0c10; --panel:#17151c; --line:#2a2731; --fg:#efe9df; --mute:#9a93a3; --gold:#d8b46a; --gold-ink:#1a1408;
+  --f-disp:"Instrument Serif",Georgia,"Songti SC",serif; --f-body:Inter,-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--f-body);font-size:14px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--f-disp);font-size:30px;letter-spacing:.02em;line-height:1}
+.brand em{color:var(--gold);font-style:italic}
+.sub{color:var(--mute);font-size:13px;margin-top:6px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--mute);padding:6px 14px;font:inherit;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--gold);color:var(--gold-ink);font-weight:600}
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.thumb{position:relative;aspect-ratio:9/14;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--panel) center/cover no-repeat;cursor:pointer;padding:0;color:var(--fg);text-align:left}
+.thumb[aria-current=true]{outline:2px solid var(--gold);outline-offset:2px}
+.thumb span{position:absolute;inset:auto 0 0 0;padding:22px 8px 7px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:12px;font-weight:600;line-height:1.25}
+.thumb b{display:block;color:var(--gold);font-size:10px;letter-spacing:.08em;font-weight:600}
+.main{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:28px;align-items:start}
+.player{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.player video{width:100%;height:100%;object-fit:cover;display:block}
+.cap{position:absolute;left:12px;right:12px;bottom:64px;text-align:center;font-size:15px;font-weight:500;text-shadow:0 1px 3px #000,0 0 10px rgba(0,0,0,.7);pointer-events:none}
+.cap small{display:block;color:var(--gold);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.end{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:18px 16px 22px;background:linear-gradient(transparent 35%,rgba(0,0,0,.82))}
+[hidden]{display:none!important}
+.end p{margin:0 0 2px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.06em}
+.opt{background:rgba(24,22,28,.82);border:1px solid rgba(216,180,106,.45);color:var(--fg);border-radius:12px;padding:11px 14px;font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.opt:hover,.opt:focus-visible{background:var(--gold);color:var(--gold-ink)}
+.replay{align-self:center;background:none;border:0;color:var(--mute);font:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
+.tap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);border:0;color:var(--fg);font:inherit;font-size:15px;cursor:pointer}
+.tap i{font-style:normal;border:1px solid var(--fg);border-radius:999px;padding:10px 20px}
+.card{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card h2{font-family:var(--f-disp);font-weight:400;font-size:40px;line-height:1.05;margin:0;text-wrap:balance}
+.hook{font-size:16px;margin:0}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--mute)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:13px}
+dt{color:var(--mute)} dd{margin:0}
+.script{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px;max-height:340px;overflow:auto}
+.line{display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:13px;background:none;border:0;color:var(--fg);text-align:left;padding:2px 0;font-family:inherit;cursor:pointer}
+.line .t{color:var(--mute);font-variant-numeric:tabular-nums}
+.line[data-on=true]{color:var(--gold)}
+.empty{color:var(--mute);padding:40px 0}
+@media (max-width:760px){.main{grid-template-columns:1fr}.strip{grid-template-columns:repeat(3,minmax(0,1fr))}.card h2{font-size:32px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="wrap">
+  <header>
+    <div><div class="brand">Perhaps <em>Intro</em></div><div class="sub" id="sub"></div></div>
+    <div class="lang" role="group" aria-label="Language"><button id="l-zh" aria-pressed="true">中文</button><button id="l-en" aria-pressed="false">EN</button></div>
+  </header>
+  <nav class="strip" id="strip"></nav>
+  <section class="main" id="main"><div class="empty">加载中…</div></section>
+</div>
+<script>
+const T={zh:{sub:'第二批 · 新选角 + 高级感场景 + 多镜头 + 配乐 · 每部约 30 秒 · 第一人称 · 结尾停在他出招',his:'男主',voice:'',cost:'花费',script:'台词',your:'轮到你',replay:'重看',tap:'点击播放（有声）',age:'岁'},
+         en:{sub:'Batch 2 · new cast, premium sets, multi-shot, scored · ~30 s · first person · ends on his move',his:'Him',cost:'Cost',script:'Lines',your:'Your turn',replay:'Replay',tap:'Tap to play with sound',age:''}};
+let L=(location.hash==='#en')?'en':'zh', D=[], cur=0;
+const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function setLang(l){L=l;$('#l-zh').setAttribute('aria-pressed',l==='zh');$('#l-en').setAttribute('aria-pressed',l==='en');history.replaceState(null,'',l==='en'?'#en':'#zh');drawStrip();drawCard(false)}
+$('#l-zh').onclick=()=>setLang('zh');$('#l-en').onclick=()=>setLang('en');
+window.addEventListener('hashchange',()=>setLang(location.hash==='#en'?'en':'zh'));
+function drawStrip(){$('#sub').textContent=T[L].sub;$('#strip').innerHTML=D.map((s,i)=>`<button class="thumb" aria-current="${i===cur}" data-i="${i}" style="${s.poster?`background-image:url(media/${s.id}.jpg)`:''}"><span><b>${esc(s.id[0].toUpperCase())}</b>${esc(s.title[L]||s.title.en)}</span></button>`).join('');
+  document.querySelectorAll('.thumb').forEach(b=>b.onclick=()=>{cur=+b.dataset.i;drawStrip();drawCard(true)})}
+function fmt(t){t=+t||0;return Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')}
+function drawCard(play){const s=D[cur]; if(!s)return; const keep=$('#v')&&$('#v').dataset.id===s.id?$('#v').currentTime:null;
+  $('#main').innerHTML=`<div class="player"><video id="v" data-id="${s.id}" playsinline preload="auto" src="media/${s.id}.mp4" ${s.poster?`poster="media/${s.id}.jpg"`:''}></video><div class="cap" id="cap"></div><div class="end" id="end" hidden></div><button class="tap" id="tap"><i>${T[L].tap}</i></button></div>
+  <div class="card"><h2>${esc(s.title[L]||s.title.en)}</h2><p class="hook">${esc(s.hook[L]||s.hook.en)}</p><div class="tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+  <dl><dt>${T[L].his}</dt><dd>${esc(s.him.name)}${s.him.age?`, ${esc(s.him.age)}${T[L].age}`:''}${(s.him.lib&&[].concat(s.him.lib).length)?` · #${esc([].concat(s.him.lib).join(' / #'))}`:''}</dd>${s.cost?`<dt>${T[L].cost}</dt><dd>${esc(s.cost)} credits</dd>`:''}</dl>
+  <div class="script">${s.caps.map((c,i)=>`<button class="line" data-i="${i}"><span class="t">${fmt(c.s)}</span><span>${c.who?`<b>${esc(c.who)}</b> · `:''}${esc(c[L]||c.en)}</span></button>`).join('')}</div></div>`;
+  const v=$('#v'),cap=$('#cap'),end=$('#end'),tap=$('#tap');
+  end.innerHTML=`<p>${T[L].your}</p>`+s.options.map(o=>`<button class="opt">${esc(o[L]||o.en)}</button>`).join('')+`<button class="replay" id="rp">${T[L].replay}</button>`;
+  end.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{end.querySelectorAll('.opt').forEach(x=>x.style.opacity=x===b?1:.35)});
+  $('#rp').onclick=()=>{end.hidden=true;v.currentTime=0;v.play()};
+  const go=()=>{tap.hidden=true;v.muted=false;v.play().catch(()=>{v.muted=true;v.play()})};
+  tap.onclick=go; v.onclick=()=>{if(v.paused)v.play();else v.pause()};
+  v.ontimeupdate=()=>{if(!end.hidden){cap.innerHTML='';return}const t=v.currentTime,i=s.caps.findIndex(c=>t>=c.s&&t<c.e),c=s.caps[i];
+    cap.innerHTML=c?`${c.who?`<small>${esc(c.who)}</small>`:''}${esc(c[L]||c.en)}`:'';
+    document.querySelectorAll('.line').forEach(el=>el.dataset.on=(+el.dataset.i===i))};
+  v.onended=()=>{cap.innerHTML='';end.hidden=false};
+  document.querySelectorAll('.line').forEach(el=>el.onclick=()=>{v.currentTime=s.caps[+el.dataset.i].s+.01;end.hidden=true;go()});
+  if(keep!=null){v.currentTime=keep}
+  if(play)go();
+}
+fetch('data.json').then(r=>r.json()).then(d=>{D=d;setLang(L)}).catch(()=>{$('#main').innerHTML='<div class="empty">data.json 没加载到</div>'});
+</script>
+
+</html>

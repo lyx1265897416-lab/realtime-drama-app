@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Perhaps Intro 第二批</title>
+<title>Perhaps Intro 第三批</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
@@ -63,8 +63,8 @@ dt{color:var(--mute)} dd{margin:0}
   <section class="main" id="main"><div class="empty">加载中…</div></section>
 </div>
 <script>
-const T={zh:{sub:'第二批 · 新选角 + 高级感场景 + 多镜头 + 配乐 · 每部约 30 秒 · 第一人称 · 结尾停在他出招',his:'男主',voice:'',cost:'花费',script:'台词',your:'轮到你',replay:'重看',tap:'点击播放（有声）',age:'岁'},
-         en:{sub:'Batch 2 · new cast, premium sets, multi-shot, scored · ~30 s · first person · ends on his move',his:'Him',cost:'Cost',script:'Lines',your:'Your turn',replay:'Replay',tap:'Tap to play with sound',age:''}};
+const T={zh:{sub:'第三批 · 空间和道具连贯 · 多场景 · 更多景别机位 · 每部约 30 秒 · 第一人称 · 结尾停在他出招',his:'男主',voice:'',cost:'花费',script:'台词',your:'轮到你',replay:'重看',tap:'点击播放（有声）',age:'岁'},
+         en:{sub:'Batch 3 · continuous space & props · multiple spaces · varied angles · ~30 s · first person · ends on his move',his:'Him',cost:'Cost',script:'Lines',your:'Your turn',replay:'Replay',tap:'Tap to play with sound',age:''}};
 let L=(location.hash==='#en')?'en':'zh', D=[], cur=0;
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function setLang(l){L=l;$('#l-zh').setAttribute('aria-pressed',l==='zh');$('#l-en').setAttribute('aria-pressed',l==='en');history.replaceState(null,'',l==='en'?'#en':'#zh');drawStrip();drawCard(false)}
