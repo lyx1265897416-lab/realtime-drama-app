@@ -1,5 +1,86 @@
 [
  {
+  "id": "a-after-hours",
+  "title": {
+   "en": "After Hours",
+   "zh": "闭馆之后"
+  },
+  "hook": {
+   "en": "After closing, you sneak his file back into the law-library archive. The student-body president was watching from the mezzanine.",
+   "zh": "闭馆后，你偷偷把他的档案放回法学院档案箱。学生会主席一直在夹层上看着你。"
+  },
+  "tags": [
+   "campus / dark academia romance",
+   "cold / possessive",
+   "law-school student-body president"
+  ],
+  "him": {
+   "name": "Elias Ward",
+   "age": 27,
+   "lib": "none (batch-2 cast, generated)"
+  },
+  "options": [
+   {
+    "en": "Tell him the truth: someone is setting him up.",
+    "zh": "说实话：有人在陷害他"
+   },
+   {
+    "en": "'Report me, then. I'll tell the board what's in it.'",
+    "zh": "“那你举报啊，我就告诉理事会里面写了什么”"
+   },
+   {
+    "en": "Snatch the file and run for the spiral stair.",
+    "zh": "抢回档案，往旋转楼梯跑"
+   }
+  ],
+  "caps": [
+   {
+    "s": 5.35,
+    "e": 9.2,
+    "who": "ELIAS",
+    "en": "Archive closes at ten. You're on my camera at twelve-fifty.",
+    "zh": "档案室十点就关了。十二点五十，你出现在我的监控里。"
+   },
+   {
+    "s": 9.3,
+    "e": 11.2,
+    "who": "ME",
+    "en": "I was just returning a book.",
+    "zh": "我只是来还一本书。"
+   },
+   {
+    "s": 13.25,
+    "e": 15.0,
+    "who": "ELIAS",
+    "en": "You were returning my file.",
+    "zh": "你是来还我的档案。"
+   },
+   {
+    "s": 19.2,
+    "e": 23.0,
+    "who": "ELIAS",
+    "en": "I could report you tonight. Or you tell me who sent you.",
+    "zh": "我今晚就能举报你。或者，你告诉我是谁派你来的。"
+   },
+   {
+    "s": 23.48,
+    "e": 24.73,
+    "who": "ME",
+    "en": "You wouldn't believe me.",
+    "zh": "说了你也不会信。"
+   },
+   {
+    "s": 25.08,
+    "e": 26.78,
+    "who": "ELIAS",
+    "en": "You have until I put this back.",
+    "zh": "在我把它放回去之前，你想清楚。"
+   }
+  ],
+  "cost": "",
+  "poster": true
+ },
+ {
   "id": "b-penalty-box",
   "title": {
    "en": "Penalty Box",
@@ -85,6 +166,323 @@
    }
   ],
   "cost": "",
+  "poster": true
+ },
+ {
+  "id": "c-blood-ledger",
+  "title": {
+   "en": "Blood Ledger",
+   "zh": "血账"
+  },
+  "hook": {
+   "en": "You're the auditor who found the family's second ledger. The heir comes down to the cellar - his father wants you gone, and he wants to know whose side you're on.",
+   "zh": "你是查出家族第二本账的审计师。继承人走下酒窖——他父亲要你消失，而他想知道你站在谁那边。"
+  },
+  "tags": [
+   "mafia romance",
+   "possessive / obsessive",
+   "crime-family heir"
+  ],
+  "him": {
+   "name": "Dante Moreau",
+   "age": 29,
+   "lib": "none (batch-2 cast, generated)"
+  },
+  "options": [
+   {
+    "en": "Take the glass: 'For you. But the ledger stays with me.'",
+    "zh": "接过酒杯：“替你。但账本归我。”"
+   },
+   {
+    "en": "'I work for whoever keeps me alive.'",
+    "zh": "“谁让我活着，我就替谁做事。”"
+   },
+   {
+    "en": "Ask what happened to the last auditor.",
+    "zh": "问他：上一个审计师怎么样了"
+   }
+  ],
+  "caps": [
+   {
+    "s": 5.3,
+    "e": 7.95,
+    "who": "DANTE",
+    "en": "Most people who find that book leave through the back door.",
+    "zh": "找到那本账的人，大多是从后门被抬出去的。"
+   },
+   {
+    "s": 8.2,
+    "e": 10.0,
+    "who": "ME",
+    "en": "I'm not leaving without it.",
+    "zh": "不带上它，我不走。"
+   },
+   {
+    "s": 12.05,
+    "e": 14.95,
+    "who": "DANTE",
+    "en": "You're still here. You wanted me to find you.",
+    "zh": "你还没走。你是想让我找到你。"
+   },
+   {
+    "s": 18.89,
+    "e": 23.1,
+    "who": "DANTE",
+    "en": "My father wants you gone by morning. I said I'd handle it.",
+    "zh": "我父亲要你天亮前消失。我说，交给我处理。"
+   },
+   {
+    "s": 23.57,
+    "e": 24.72,
+    "who": "ME",
+    "en": "Handle me how?",
+    "zh": "怎么处理我？"
+   },
+   {
+    "s": 25.17,
+    "e": 28.62,
+    "who": "DANTE",
+    "en": "So. Do you work for him, or for me?",
+    "zh": "所以，你是替他做事，还是替我？"
+   }
+  ],
+  "cost": "",
+  "poster": true
+ },
+ {
+  "id": "d-close-protection",
+  "title": {
+   "en": "Close Protection",
+   "zh": "贴身保护"
+  },
+  "hook": {
+   "en": "The power dies at the top of the tower. Your new bodyguard smothers your light, pulls you down, and counts the men coming for you.",
+   "zh": "顶层公寓突然断电。新来的保镖捂灭你的手电，把你按到沙发后面，数着来抓你的人。"
+  },
+  "tags": [
+   "bodyguard / suspense romance",
+   "protective / devoted",
+   "close-protection officer, cold outside, warm inside"
+  ],
+  "him": {
+   "name": "Rafe Kader",
+   "age": 28,
+   "lib": "none (batch-2 cast, generated)"
+  },
+  "options": [
+   {
+    "en": "Grab his collar: 'I'm not leaving without you.'",
+    "zh": "揪住他的衣领：“没有你我不走。”"
+   },
+   {
+    "en": "Press the keycard back into his hand: 'Then you run. I'll count.'",
+    "zh": "把门卡塞回他手里：“那你跑，我来数。”"
+   },
+   {
+    "en": "Hold on to his wrist: 'They're not here for me. They're here for you.'",
+    "zh": "抓住他的手腕：“他们不是冲我来的，是冲你。”"
+   }
+  ],
+  "caps": [
+   {
+    "s": 5.7,
+    "e": 7.81,
+    "who": "RAFE",
+    "en": "Don't. They're watching the windows.",
+    "zh": "别开。他们在盯着窗户。"
+   },
+   {
+    "s": 8.65,
+    "e": 9.83,
+    "who": "ME",
+    "en": "Who's out there?",
+    "zh": "外面是谁？"
+   },
+   {
+    "s": 12.22,
+    "e": 14.89,
+    "who": "RAFE",
+    "en": "Two on the stairs. One in the lift.",
+    "zh": "楼梯上两个，电梯里一个。"
+   },
+   {
+    "s": 19.38,
+    "e": 23.29,
+    "who": "RAFE",
+    "en": "Service door, end of the hall. Count to thirty, then run.",
+    "zh": "走廊尽头的员工通道。数到三十，然后跑。"
+   },
+   {
+    "s": 23.53,
+    "e": 24.73,
+    "who": "ME",
+    "en": "What about you?",
+    "zh": "那你呢？"
+   },
+   {
+    "s": 25.31,
+    "e": 28.91,
+    "who": "RAFE",
+    "en": "If I'm not behind you by thirty, don't come back for me.",
+    "zh": "数到三十我还没跟上来，就别回来找我。"
+   }
+  ],
+  "cost": 254.0,
+  "poster": true
+ },
+ {
+  "id": "e-seen-1142",
+  "title": {
+   "en": "Seen 11:42",
+   "zh": "已读 11:42"
+  },
+  "hook": {
+   "en": "Your ex texted at 11:42 last night. Your boyfriend of three years read every word - and now he wants to watch you answer.",
+   "zh": "前任昨晚 11:42 发来消息。交往三年的男友一个字不落全看完了——现在他要看着你回。"
+  },
+  "tags": [
+   "established couple / jealousy",
+   "jealous / hurt",
+   "easygoing boyfriend who is quietly serious"
+  ],
+  "him": {
+   "name": "Noah Hale",
+   "age": 26,
+   "lib": "none (batch-2 cast, generated)"
+  },
+  "options": [
+   {
+    "en": "Type it while he watches: 'I'm happy. Don't text me again.'",
+    "zh": "当着他的面打字：“我很好，别再联系我。”"
+   },
+   {
+    "en": "Put the phone in his hand: 'You read it all. You answer him.'",
+    "zh": "把手机塞回他手里：“你都看完了，你来回。”"
+   },
+   {
+    "en": "'He's not texting about us, Noah. It's about my sister.'",
+    "zh": "“他发消息不是为了我们，Noah。是因为我妹妹。”"
+   }
+  ],
+  "caps": [
+   {
+    "s": 7.28,
+    "e": 8.97,
+    "who": "NOAH",
+    "en": "You still have him saved as 'Home'.",
+    "zh": "你还把他存成“家”。"
+   },
+   {
+    "s": 9.62,
+    "e": 11.33,
+    "who": "ME",
+    "en": "I didn't answer him.",
+    "zh": "我没回他。"
+   },
+   {
+    "s": 11.88,
+    "e": 14.79,
+    "who": "NOAH",
+    "en": "I know. I read the whole thread.",
+    "zh": "我知道。整段聊天我都看完了。"
+   },
+   {
+    "s": 19.5,
+    "e": 22.37,
+    "who": "NOAH",
+    "en": "Three years. I've never once asked for your password.",
+    "zh": "三年了。我一次都没问过你的密码。"
+   },
+   {
+    "s": 24.28,
+    "e": 27.71,
+    "who": "NOAH",
+    "en": "So answer him. Right now. While I watch.",
+    "zh": "那就回他。现在。当着我的面。"
+   }
+  ],
+  "cost": 231.0,
+  "poster": true
+ },
+ {
+  "id": "f-hostile-takeover",
+  "title": {
+   "en": "Hostile Takeover",
+   "zh": "恶意收购"
+  },
+  "hook": {
+   "en": "The CEO who just bought your company stopped the elevator. He wants ten minutes - and you.",
+   "zh": "刚收购你公司的 CEO 让电梯停了。他要十分钟——还要你。"
+  },
+  "tags": [
+   "rivals / office romance",
+   "rival CEO who just acquired her firm",
+   "cold, in control, cares more than he admits"
+  ],
+  "him": {
+   "name": "Julian Vance",
+   "age": 30,
+   "lib": "none (batch-2 cast, generated)"
+  },
+  "options": [
+   {
+    "en": "Take the pen and sign - then name your price.",
+    "zh": "接过笔签字——然后开你的价"
+   },
+   {
+    "en": "Tear the contract in half in front of him.",
+    "zh": "当着他的面把合同撕成两半"
+   },
+   {
+    "en": "Push the pen back: 'Why me, Julian?'",
+    "zh": "把笔推回去：“为什么是我，Julian？”"
+   }
+  ],
+  "caps": [
+   {
+    "s": 5.58,
+    "e": 8.19,
+    "who": "JULIAN",
+    "en": "Don't bother. I had maintenance stop it.",
+    "zh": "别按了。是我让维修停的。"
+   },
+   {
+    "s": 8.69,
+    "e": 9.91,
+    "who": "ME",
+    "en": "You did what?",
+    "zh": "你干了什么？"
+   },
+   {
+    "s": 11.2,
+    "e": 14.61,
+    "who": "JULIAN",
+    "en": "Ten minutes. You've avoided me for six weeks.",
+    "zh": "十分钟。你躲了我六个星期。"
+   },
+   {
+    "s": 19.34,
+    "e": 22.08,
+    "who": "JULIAN",
+    "en": "Be my head of strategy. Or clear out your desk.",
+    "zh": "来当我的战略总监。要么收拾桌子走人。"
+   },
+   {
+    "s": 22.08,
+    "e": 23.33,
+    "who": "ME",
+    "en": "You could have emailed.",
+    "zh": "你发封邮件就行了。"
+   },
+   {
+    "s": 25.54,
+    "e": 27.99,
+    "who": "JULIAN",
+    "en": "I'd rather you hate me from the office next door.",
+    "zh": "我宁可你在隔壁办公室恨我。"
+   }
+  ],
+  "cost": 211.0,
   "poster": true
  }
 ]
